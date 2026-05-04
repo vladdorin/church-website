@@ -23,7 +23,7 @@ export default function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
           <span className="text-church-gold text-2xl">✦</span>
-          <span>Biserica Speranța</span>
+          <span>Biserica Momentum</span>
         </Link>
 
         {/* Desktop nav */}

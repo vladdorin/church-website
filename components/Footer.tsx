@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 font-bold text-white text-lg mb-3">
             <span className="text-church-gold text-xl">✦</span>
-            Biserica Speranța
+            Biserica Momentum
           </div>
           <p className="text-sm leading-relaxed">
             O comunitate vie în inima Bucureștiului.<br />
@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 text-center text-xs py-4 text-gray-500">
-        © {new Date().getFullYear()} Biserica Speranța. Toate drepturile rezervate.
+        © {new Date().getFullYear()} Biserica Momentum. Toate drepturile rezervate.
       </div>
     </footer>
   )

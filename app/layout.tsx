@@ -4,10 +4,10 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Biserica Speranța | București',
+  title: 'Biserica Momentum | București',
   description: 'O comunitate vie în inima orașului. Slujbe duminica la 10:00. Te așteptăm!',
   openGraph: {
-    title: 'Biserica Speranța | București',
+    title: 'Biserica Momentum | București',
     description: 'O comunitate vie în inima orașului.',
     type: 'website',
   },

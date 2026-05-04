@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Despre noi | Biserica Speranța',
+  title: 'Despre noi | Biserica Momentum',
   description: 'Cunoaște-i pe Andrei și Maria Popescu și povestea din spatele Bisericii Speranța.',
 }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact | Biserica Speranța',
+  title: 'Contact | Biserica Momentum',
   description: 'Conectează-te cu noi pe social media sau trimite-ne un mesaj.',
 }
 
@@ -107,7 +107,7 @@ export default function ConnectPage() {
               {[
                 { icon: '📘', label: 'Facebook', href: 'https://facebook.com/bisericasperanta', handle: '@bisericasperanta' },
                 { icon: '📸', label: 'Instagram', href: 'https://instagram.com/bisericasperanta', handle: '@bisericasperanta' },
-                { icon: '▶️',  label: 'YouTube',   href: 'https://youtube.com/@bisericasperanta', handle: 'Biserica Speranța' },
+                { icon: '▶️',  label: 'YouTube',   href: 'https://youtube.com/@bisericasperanta', handle: 'Biserica Momentum' },
               ].map(({ icon, label, href, handle }) => (
                 <a
                   key={label}

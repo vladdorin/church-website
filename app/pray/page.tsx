@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Rugăciune | Biserica Speranța',
+  title: 'Rugăciune | Biserica Momentum',
   description: 'Iată ce credem și pentru ce ne rugăm în legătură cu Bucureștiul.',
 }
 
@@ -72,7 +72,7 @@ export default function PrayPage() {
               {
                 nr: '04',
                 titlu: 'O biserică care servește',
-                desc: 'Ne rugăm ca Biserica Speranța să fie o binecuvântare concretă pentru cartierul și orașul nostru.',
+                desc: 'Ne rugăm ca Biserica Momentum să fie o binecuvântare concretă pentru cartierul și orașul nostru.',
               },
             ].map(({ nr, titlu, desc }) => (
               <div key={nr} className="card flex gap-4">

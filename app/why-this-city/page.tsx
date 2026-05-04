@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'De ce București? | Biserica Speranța',
+  title: 'De ce București? | Biserica Momentum',
   description: 'Povestea noastră cu Bucureștiul și motivul pentru care am ales să plantăm o biserică aici.',
 }
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Alătură-te | Biserica Speranța',
+  title: 'Alătură-te | Biserica Momentum',
   description: 'Completează cardul de conectare și vino la prima noastră întâlnire.',
 }
 
