@@ -1,41 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Montserrat:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    @apply bg-church-light text-church-navy font-sans;
-  }
-  h1, h2, h3 {
-    @apply font-serif;
-  }
+:root {
+  --blue: #1932af;
+  --red: #ef402b;
+  --cream: #fefdfa;
+  --dark-blue: #0f1052;
+  --light-blue: #b6d8fc;
 }
 
-@layer components {
-  .btn-primary {
-    @apply inline-block bg-church-gold text-white font-semibold px-8 py-3 rounded-full
-           hover:bg-yellow-600 transition-colors duration-200 text-center;
-  }
-  .btn-secondary {
-    @apply inline-block border-2 border-church-navy text-church-navy font-semibold px-8 py-3 rounded-full
-           hover:bg-church-navy hover:text-white transition-colors duration-200 text-center;
-  }
-  .btn-white {
-    @apply inline-block bg-white text-church-navy font-semibold px-8 py-3 rounded-full
-           hover:bg-church-warm transition-colors duration-200 text-center;
-  }
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold text-church-navy mb-4;
-  }
-  .section-subtitle {
-    @apply text-lg text-gray-600 mb-10 max-w-2xl mx-auto;
-  }
-  .card {
-    @apply bg-white rounded-2xl shadow-sm p-8 border border-church-warm;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--dark-blue);
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Climate Crisis', sans-serif;
 }
