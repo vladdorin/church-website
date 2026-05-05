@@ -44,6 +44,96 @@ function GhostNum({ num, light }: { num: string; light?: boolean }) {
   )
 }
 
+/* ── Folder / stacked-page cards (pure CSS sticky) ─────────── */
+const FOLDER_CARDS = [
+  {
+    titlu: 'Conectează-te',
+    sub: 'Construiește comunitatea',
+    desc: 'Distribuie vestea și aduce-ți prietenii. Fiecare persoană contează pentru Alba Iulia.',
+    bg: '#7b9aff', col: '#080c1e', mutedCol: 'rgba(8,12,30,0.55)',
+  },
+  {
+    titlu: 'Roagă-te',
+    sub: 'Stai alături de noi',
+    desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.',
+    bg: '#080c1e', col: '#f4f2ee', mutedCol: 'rgba(244,242,238,0.45)',
+  },
+  {
+    titlu: 'Implică-te',
+    sub: 'Pune-ți talentele la treabă',
+    desc: 'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.',
+    bg: '#f0ede8', col: '#080c1e', mutedCol: 'rgba(8,12,30,0.5)',
+  },
+]
+
+function FolderCards() {
+  const CARD_H  = 480   // px — height of each sticky card
+  const NAV_H   = 88    // px — fixed nav height (cards stick below nav)
+  // Container taller than 3× cards so scroll reveals each card sequentially
+  const WRAP_H  = CARD_H * 3.2
+
+  return (
+    <div style={{ position: 'relative', height: WRAP_H }}>
+      {FOLDER_CARDS.map(({ titlu, sub, desc, bg, col, mutedCol }, i) => (
+        <div
+          key={i}
+          style={{
+            position: 'sticky',
+            top: NAV_H,
+            height: CARD_H,
+            zIndex: i + 1,
+            background: bg,
+            /* rounded top corners only → looks like page sliding up from behind */
+            borderRadius: '28px 28px 0 0',
+            boxShadow: '0 -16px 64px rgba(0,0,0,0.18)',
+            overflow: 'hidden',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          {/* Subtle corner label — NOT prominent numbered page */}
+          <span style={{
+            position: 'absolute', top: 28, right: 36,
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 700,
+            fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: col, opacity: 0.2,
+          }}>{sub}</span>
+
+          {/* Content — two-col grid inside wrap-wide */}
+          <div className="wrap-wide" style={{ width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(40px,6vw,96px)', alignItems: 'center' }}>
+            <h3 style={{
+              fontFamily: "'Climate Crisis',sans-serif",
+              fontSize: 'clamp(2.8rem,6.5vw,6.5rem)',
+              color: col, lineHeight: 0.9,
+            }}>
+              {titlu.toUpperCase()}
+            </h3>
+            <p style={{
+              fontSize: 'clamp(14px,1.1vw,17px)',
+              color: col, opacity: 0.62,
+              fontWeight: 300, lineHeight: 1.9,
+              maxWidth: 400,
+            }}>
+              {desc}
+            </p>
+          </div>
+
+          {/* Decorative large ghost letter */}
+          <div style={{
+            position: 'absolute', right: '-2%', bottom: '-8%',
+            fontFamily: "'Climate Crisis',sans-serif",
+            fontSize: 'clamp(140px,20vw,240px)', lineHeight: 1,
+            color: col, opacity: 0.05,
+            pointerEvents: 'none', userSelect: 'none',
+          }}>
+            {titlu[0]}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 const T9: CSSProperties = {
   fontFamily: "'Climate Crisis',sans-serif",
   letterSpacing: '0.01em', lineHeight: 0.92, margin: '20px 0 32px',
@@ -164,64 +254,33 @@ export default function HomePage() {
       </section>
       <Diagonal to="#ffffff" flip />
 
-      {/* ═══════════ 03 — FĂ PARTE ═══════════ */}
-      <section className="page-section" style={{ background: '#ffffff', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      {/* ═══════════ 03 — VINO CU NOI ═══════════ */}
+      {/* Section intentionally has no bottom padding — FolderCards fills it */}
+      <section style={{ background: '#ffffff', paddingTop: 96, position: 'relative' }}>
         <GhostNum num="03" />
-        <div className="wrap-wide">
-          <RevealSection>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start', marginBottom: 64 }}>
-              <div>
-                <p className="sr sr-up label">ECHIPA</p>
-                <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-                  VINO<br />CU NOI.
-                </h2>
-              </div>
-              <div style={{ paddingTop: 8 }}>
-                <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36 }}>
-                  Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
-                </p>
-                <div className="sr sr-up sr-d2">
-                  <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
-                </div>
-              </div>
-            </div>
 
-            {/* 3 panouri editoriale */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, borderRadius: 24, overflow: 'hidden' }}>
-              {[
-                { nr: '01', titlu: 'Conectează-te', desc: 'Distribuie vestea și aduce-ți prietenii. Fiecare persoană contează pentru Alba Iulia.', bg: '#080c1e', col: 'white', accent: '#4a7fff' },
-                { nr: '02', titlu: 'Roagă-te', desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.', bg: '#1932af', col: 'white', accent: 'rgba(255,255,255,0.5)' },
-                { nr: '03', titlu: 'Implică-te', desc: 'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.', bg: '#f4f2ee', col: '#080c1e', accent: '#1932af' },
-              ].map(({ nr, titlu, desc, bg, col, accent }, i) => (
-                <div key={nr} className={`sr sr-up sr-d${i + 1}`} style={{
-                  background: bg, padding: '52px 40px',
-                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                  minHeight: 340, position: 'relative', overflow: 'hidden',
-                  borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                }}>
-                  {/* Număr ghost fundal */}
-                  <div style={{
-                    position: 'absolute', right: -12, bottom: -20,
-                    fontFamily: "'Climate Crisis',sans-serif",
-                    fontSize: 'clamp(100px,14vw,160px)', lineHeight: 1,
-                    color: accent, opacity: 0.13,
-                    pointerEvents: 'none', userSelect: 'none',
-                  }}>{nr}</div>
-                  {/* Top */}
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-                      <div style={{ width: 28, height: 2, background: accent, opacity: 0.7 }} />
-                      <span style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase', color: accent }}>{nr}</span>
-                    </div>
-                    <h3 style={{ fontFamily: "'Climate Crisis',sans-serif", fontSize: 'clamp(1.6rem,2.5vw,2.4rem)', color: col, lineHeight: 0.95 }}>{titlu}</h3>
-                  </div>
-                  {/* Bottom */}
-                  <p style={{ fontSize: 14, color: col, opacity: 0.6, fontWeight: 300, lineHeight: 1.85, maxWidth: 220, position: 'relative', zIndex: 1 }}>{desc}</p>
-                </div>
-              ))}
+        {/* ── Header row ── */}
+        <div className="wrap-wide" style={{ paddingBottom: 72 }}>
+          <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start' }}>
+            <div>
+              <p className="sr sr-up label">ECHIPA</p>
+              <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
+                VINO<br />CU NOI.
+              </h2>
+            </div>
+            <div style={{ paddingTop: 8 }}>
+              <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36 }}>
+                Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
+              </p>
+              <div className="sr sr-up sr-d2">
+                <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+              </div>
             </div>
           </RevealSection>
         </div>
+
+        {/* ── Folder cards — sticky stack, no wrap-wide so they go edge-to-edge ── */}
+        <FolderCards />
       </section>
       <Diagonal to="#f4f2ee" />
 

@@ -43,7 +43,7 @@ export default function Navigation() {
       }}>
 
         {/* ── LOGO ── */}
-        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0, marginLeft: -12}}>
+        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0}}>
           <Image
             src="/logo-horizontal.png"
             alt="Momentum"
