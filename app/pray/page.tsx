@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-export const runtime = 'edge'
 export const metadata: Metadata = {
   title: 'Rugăciune | Momentum · Alba Iulia',
   description: 'Stai alături de noi în rugăciune pentru Alba Iulia și pentru lansarea Momentum Church.',

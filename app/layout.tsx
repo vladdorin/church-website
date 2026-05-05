@@ -3,8 +3,6 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
-export const runtime = 'edge'
-
 export const metadata: Metadata = {
   title: 'Momentum | Alba Iulia',
   description: 'O comunitate condusă de Duhul Sfânt, în mișcare, pentru gloria lui Dumnezeu. Alba Iulia, România.',
