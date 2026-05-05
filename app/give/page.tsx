@@ -2,14 +2,14 @@
 import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
-const PRESET_AMOUNTS = [25, 50, 100, 200]
+const PRESET_AMOUNTS = [25, 50, 100, 250]
 
 function GiveForm() {
   const searchParams = useSearchParams()
   const success  = searchParams.get('success')
   const canceled = searchParams.get('canceled')
 
-  const [selected, setSelected] = useState<number | null>(50)
+  const [selected, setSelected] = useState<number | null>(100)
   const [custom, setCustom] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -23,7 +23,6 @@ function GiveForm() {
     }
     setError('')
     setLoading(true)
-
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
@@ -45,112 +44,113 @@ function GiveForm() {
 
   if (success) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center px-4">
-        <div className="card max-w-md w-full text-center py-12">
-          <div className="text-6xl mb-4">🙏</div>
-          <h2 className="text-2xl font-bold text-church-navy mb-3">Mulțumim din inimă!</h2>
-          <p className="text-gray-600 leading-relaxed">
-            Donația ta face o diferență reală. Vom folosi fiecare leu cu responsabilitate
-            pentru a construi o comunitate sănătoasă în București.
-          </p>
-          <a href="/give" className="btn-primary mt-6 inline-block">Donează din nou</a>
+      <section className="section" style={{background:'white'}}>
+        <div className="wrap" style={{display:'flex', justifyContent:'center'}}>
+          <div className="card" style={{maxWidth:480, width:'100%', textAlign:'center', padding:56}}>
+            <div style={{fontSize:64, marginBottom:16}}>🙏</div>
+            <h2 className="display" style={{fontSize:36, color:'#0a0f2c', marginBottom:12}}>MULȚUMIM DIN INIMĂ!</h2>
+            <p style={{color:'rgba(10,15,44,0.6)', lineHeight:1.8, fontWeight:300, marginBottom:32}}>
+              Donația ta face o diferență reală în Alba Iulia. Fiecare donație pe care o faci va fi dublată de ARC —
+              impactul tău este de două ori mai mare!
+            </p>
+            <a href="/give" className="btn btn-blue">Donează din nou</a>
+          </div>
         </div>
-      </div>
+      </section>
     )
   }
 
   if (canceled) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center px-4">
-        <div className="card max-w-md w-full text-center py-12">
-          <div className="text-6xl mb-4">👋</div>
-          <h2 className="text-2xl font-bold text-church-navy mb-3">Nicio problemă!</h2>
-          <p className="text-gray-600">Plata a fost anulată. Poți încerca oricând ești pregătit(ă).</p>
-          <a href="/give" className="btn-primary mt-6 inline-block">Încearcă din nou</a>
+      <section className="section" style={{background:'white'}}>
+        <div className="wrap" style={{display:'flex', justifyContent:'center'}}>
+          <div className="card" style={{maxWidth:480, width:'100%', textAlign:'center', padding:56}}>
+            <div style={{fontSize:64, marginBottom:16}}>👋</div>
+            <h2 className="display" style={{fontSize:36, color:'#0a0f2c', marginBottom:12}}>NICIO PROBLEMĂ!</h2>
+            <p style={{color:'rgba(10,15,44,0.6)', lineHeight:1.8, fontWeight:300, marginBottom:32}}>
+              Plata a fost anulată. Poți reveni oricând ești pregătit(ă).
+            </p>
+            <a href="/give" className="btn btn-blue">Încearcă din nou</a>
+          </div>
         </div>
-      </div>
+      </section>
     )
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-16">
+    <section className="section" style={{background:'white'}}>
+      <div className="wrap">
+        <div style={{maxWidth:560, margin:'0 auto'}}>
+          <div className="card" style={{padding:40}}>
+            <h2 className="display" style={{fontSize:32, color:'#0a0f2c', textAlign:'center', marginBottom:8}}>ALEGE SUMA</h2>
+            <p style={{color:'rgba(10,15,44,0.5)', textAlign:'center', fontSize:14, marginBottom:28, fontWeight:300}}>
+              Donația ta este procesată securizat prin Stripe. Fiecare $1 este dublat de ARC.
+            </p>
 
-      {/* CARD DONAȚIE */}
-      <div className="card">
-        <h2 className="text-2xl font-bold text-church-navy mb-2 text-center">Alege suma</h2>
-        <p className="text-gray-500 text-center text-sm mb-6">
-          Donația ta este procesată securizat prin Stripe.
-        </p>
+            <div style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:10, marginBottom:16}}>
+              {PRESET_AMOUNTS.map((amt) => (
+                <button key={amt} onClick={() => { setSelected(amt); setCustom('') }}
+                  style={{
+                    padding:'16px 8px', borderRadius:14, fontWeight:700, fontSize:18, cursor:'pointer',
+                    border: selected === amt && !custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                    background: selected === amt && !custom ? '#1932af' : 'white',
+                    color: selected === amt && !custom ? 'white' : '#0a0f2c',
+                    transition:'all 0.15s ease',
+                    transform: selected === amt && !custom ? 'scale(1.05)' : 'scale(1)',
+                  }}>
+                  {amt} <span style={{fontSize:12, fontWeight:400}}>RON</span>
+                </button>
+              ))}
+            </div>
 
-        {/* Sume preset */}
-        <div className="grid grid-cols-4 gap-3 mb-4">
-          {PRESET_AMOUNTS.map((amt) => (
-            <button
-              key={amt}
-              onClick={() => { setSelected(amt); setCustom('') }}
-              className={`py-4 rounded-xl font-bold text-lg border-2 transition-all ${
-                selected === amt && !custom
-                  ? 'border-church-gold bg-church-gold text-white scale-105'
-                  : 'border-gray-200 text-church-navy hover:border-church-gold'
-              }`}
-            >
-              {amt} <span className="text-sm font-normal">RON</span>
+            <div style={{marginBottom:20}}>
+              <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>
+                Sau introdu altă sumă (RON)
+              </label>
+              <div style={{position:'relative'}}>
+                <input type="number" min="5" max="50000" value={custom}
+                  onChange={(e) => { setCustom(e.target.value); setSelected(null) }}
+                  style={{
+                    width:'100%', border: custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                    borderRadius:14, padding:'14px 52px 14px 16px', fontSize:18, outline:'none',
+                    fontFamily:'Inter,sans-serif', transition:'border-color 0.15s ease'
+                  }}
+                  placeholder="ex: 150" />
+                <span style={{position:'absolute', right:16, top:'50%', transform:'translateY(-50%)', color:'rgba(10,15,44,0.4)', fontWeight:600}}>RON</span>
+              </div>
+            </div>
+
+            {error && (
+              <div style={{background:'#fff1f1', border:'1px solid #fecaca', color:'#dc2626', borderRadius:12, padding:'12px 16px', fontSize:14, marginBottom:16}}>
+                {error}
+              </div>
+            )}
+
+            <div style={{background:'#f8f9ff', borderRadius:14, padding:'14px 20px', display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:8}}>
+              <span style={{color:'rgba(10,15,44,0.6)', fontWeight:500}}>Donația ta</span>
+              <span className="display" style={{fontSize:28, color:'#0a0f2c'}}>{effectiveAmount ? `${effectiveAmount} RON` : '—'}</span>
+            </div>
+            <div style={{background:'#f0fdf4', border:'1px solid #bbf7d0', borderRadius:14, padding:'12px 20px', display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:24}}>
+              <span style={{color:'#16a34a', fontWeight:500, fontSize:13}}>+ Matched de ARC (până la $50K total)</span>
+              <span style={{color:'#16a34a', fontWeight:700}}>×2 impact</span>
+            </div>
+
+            <button onClick={handleDonate} disabled={loading || !effectiveAmount}
+              className="btn btn-blue"
+              style={{
+                width:'100%', fontSize:16, padding:'16px 32px', justifyContent:'center',
+                opacity: loading || !effectiveAmount ? 0.5 : 1,
+                cursor: loading || !effectiveAmount ? 'not-allowed' : 'pointer',
+              }}>
+              {loading ? '⏳ Se procesează...' : `Donează ${effectiveAmount ? effectiveAmount + ' RON' : ''}`}
             </button>
-          ))}
-        </div>
-
-        {/* Sumă custom */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Sau introdu altă sumă (RON)
-          </label>
-          <div className="relative">
-            <input
-              type="number"
-              min="5"
-              max="50000"
-              value={custom}
-              onChange={(e) => { setCustom(e.target.value); setSelected(null) }}
-              className={`w-full border-2 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-church-gold transition-colors ${
-                custom ? 'border-church-gold' : 'border-gray-200'
-              }`}
-              placeholder="ex: 75"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">RON</span>
+            <p style={{fontSize:12, textAlign:'center', color:'rgba(10,15,44,0.35)', marginTop:12}}>
+              🔒 Plată securizată prin Stripe · Cardul tău nu este stocat de noi
+            </p>
           </div>
         </div>
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm mb-4">
-            {error}
-          </div>
-        )}
-
-        {/* Sumă totală */}
-        <div className="bg-church-warm rounded-xl px-4 py-3 flex justify-between items-center mb-6">
-          <span className="text-gray-600 font-medium">Total donație</span>
-          <span className="text-2xl font-bold text-church-navy">
-            {effectiveAmount ? `${effectiveAmount} RON` : '—'}
-          </span>
-        </div>
-
-        <button
-          onClick={handleDonate}
-          disabled={loading || !effectiveAmount}
-          className={`w-full py-4 rounded-full font-bold text-lg transition-all ${
-            loading || !effectiveAmount
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-church-gold text-white hover:bg-yellow-600'
-          }`}
-        >
-          {loading ? '⏳ Se procesează...' : `Donează ${effectiveAmount ? effectiveAmount + ' RON' : ''} →`}
-        </button>
-
-        <p className="text-xs text-center text-gray-400 mt-3">
-          🔒 Plată securizată prin Stripe · Cardul tău nu este stocat de noi
-        </p>
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -158,74 +158,86 @@ export default function GivePage() {
   return (
     <>
       {/* HERO */}
-      <section className="bg-church-navy text-white py-20 text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <p className="text-church-gold font-semibold uppercase tracking-widest text-sm mb-3">Donează</p>
-          <h1 className="text-5xl font-bold mb-4">Investește în oameni</h1>
-          <p className="text-xl text-gray-300 mb-6">
-            Fiecare donație ajută la construirea unei comunități care schimbă vieți în București.
+      <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
+        <div className="wrap" style={{textAlign:'center'}}>
+          <p className="label" style={{color:'#b6d8fc'}}>Donează</p>
+          <h1 className="display" style={{fontSize:'clamp(3rem,9vw,7rem)', color:'white', marginBottom:24}}>
+            FII PARTE<br /><span style={{color:'#b6d8fc'}}>DIN CEVA ETERN</span>
+          </h1>
+          <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto 16px', fontWeight:300, lineHeight:1.7}}>
+            Ajută la construirea unei comunități care va schimba vieți în Alba Iulia.
+          </p>
+          <p style={{color:'#b6d8fc', fontWeight:700, fontSize:16}}>
+            ✦ Fiecare $1 donat este dublat de ARC — impactul tău este de 2× mai mare ✦
           </p>
         </div>
       </section>
 
-      {/* BUGET & VIZIUNE */}
-      <section className="py-16 max-w-5xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 text-center">
-          {[
-            { icon: '🎯', titlu: 'Obiectiv strângere', suma: '50.000 RON', desc: 'Buget de lansare pentru primul an' },
-            { icon: '✅', titlu: 'Strâns până acum',  suma: '12.500 RON', desc: '25% din obiectiv atins' },
-            { icon: '🏗️', titlu: 'La ce folosim banii', suma: '',         desc: 'Spațiu, echipamente, programe comunitate' },
-          ].map(({ icon, titlu, suma, desc }) => (
-            <div key={titlu} className="card text-center">
-              <div className="text-3xl mb-2">{icon}</div>
-              <div className="font-bold text-church-navy text-lg">{titlu}</div>
-              {suma && <div className="text-church-gold font-bold text-2xl my-1">{suma}</div>}
-              <div className="text-gray-500 text-sm">{desc}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Progres bar */}
-        <div className="card mb-16">
-          <div className="flex justify-between text-sm font-medium text-gray-600 mb-2">
-            <span>12.500 RON strânși</span>
-            <span>Obiectiv: 50.000 RON</span>
+      {/* OBIECTIV LANSARE */}
+      <section className="section" style={{background:'#f8f9ff'}}>
+        <div className="wrap">
+          <div style={{textAlign:'center', marginBottom:48}}>
+            <p className="label">Obiectivul de lansare</p>
+            <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
+              $100.000 TOTAL
+            </h2>
+            <p style={{color:'rgba(10,15,44,0.5)', maxWidth:560, margin:'0 auto', fontWeight:300}}>
+              Această investiție ne permite să lansăm puternic și să ajungem la oraș în mod eficient.
+            </p>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
-            <div className="bg-church-gold h-4 rounded-full" style={{ width: '25%' }} />
+          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:16, marginBottom:24}}>
+            {[
+              { suma:'$40.000', label:'Echipamente & Producție' },
+              { suma:'$20.000', label:'Chirie Spațiu' },
+              { suma:'$20.000', label:'Renovare & Amenajare' },
+              { suma:'$10.000', label:'Marketing' },
+            ].map(({ suma, label }) => (
+              <div key={label} className="card" style={{textAlign:'center', padding:28}}>
+                <div className="display" style={{fontSize:30, color:'#1932af', marginBottom:8}}>{suma}</div>
+                <div style={{color:'rgba(10,15,44,0.6)', fontSize:14}}>{label}</div>
+              </div>
+            ))}
           </div>
-          <p className="text-xs text-gray-400 mt-2 text-center">25% din obiectivul de lansare</p>
+          <div style={{
+            background:'linear-gradient(135deg,#0f1052,#080818)', borderRadius:24, padding:'48px 40px', textAlign:'center'
+          }}>
+            <div className="display" style={{fontSize:64, color:'#b6d8fc', marginBottom:8}}>$100.000</div>
+            <div style={{color:'rgba(255,255,255,0.7)', fontSize:18, marginBottom:16}}>Obiectiv total de lansare</div>
+            <p style={{color:'rgba(255,255,255,0.45)', maxWidth:560, margin:'0 auto', fontSize:14, fontWeight:300, lineHeight:1.8}}>
+              Credem că împreună putem construi o plantă de biserică autosuficientă. Fiecare $1
+              pe care îl dai va fi dublat de ARC, dublând impactul tău până la $50.000.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* FORMULAR DONAȚIE */}
-      <Suspense fallback={<div className="py-16 text-center text-gray-400">Se încarcă...</div>}>
+      <Suspense fallback={
+        <div style={{padding:'64px 24px', textAlign:'center', color:'rgba(10,15,44,0.4)'}}>Se încarcă...</div>
+      }>
         <GiveForm />
       </Suspense>
 
-      {/* DE CE SĂ DONEZI */}
-      <section className="bg-church-warm py-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="section-title text-center">Cum sunt folosiți banii</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+      {/* ALTE MODURI */}
+      <section className="section" style={{background:'#f8f9ff'}}>
+        <div className="wrap" style={{textAlign:'center'}}>
+          <p className="label">Mai mult decât bani</p>
+          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:48}}>
+            ALTE MODURI DE A SUSȚINE
+          </h2>
+          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:20}}>
             {[
-              { procent: '40%', label: 'Spațiu & infrastructură', desc: 'Chirie, dotare sală, sistem audio-video' },
-              { procent: '30%', label: 'Programe comunitate',     desc: 'Evenimente, grupuri mici, programe pentru copii' },
-              { procent: '20%', label: 'Comunicare',              desc: 'Website, social media, materiale tipărite' },
-              { procent: '10%', label: 'Misiune locală',          desc: 'Ajutor pentru familii în dificultate din cartier' },
-            ].map(({ procent, label, desc }) => (
-              <div key={label} className="card flex gap-4 items-start">
-                <span className="text-church-gold font-bold text-2xl flex-shrink-0">{procent}</span>
-                <div>
-                  <div className="font-semibold text-church-navy">{label}</div>
-                  <div className="text-gray-500 text-sm">{desc}</div>
-                </div>
+              { icon:'🙏', titlu:'Roagă-te', desc:'Rugăciunea ta este cea mai valoroasă contribuție pentru lansarea Momentum.' },
+              { icon:'👥', titlu:'Spune altora', desc:'Distribuie vestea despre Momentum în cercul tău de prieteni și familie.' },
+              { icon:'🤝', titlu:'Implică-te', desc:'Vino în echipă și contribuie cu talentele tale la construirea comunității.' },
+            ].map(({ icon, titlu, desc }) => (
+              <div key={titlu} className="card" style={{textAlign:'center', padding:36}}>
+                <div style={{fontSize:40, marginBottom:16}}>{icon}</div>
+                <h3 className="display" style={{fontSize:22, color:'#0a0f2c', marginBottom:10}}>{titlu}</h3>
+                <p style={{color:'rgba(10,15,44,0.55)', fontSize:14, lineHeight:1.7, fontWeight:300}}>{desc}</p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-center text-gray-400 mt-6">
-            Publicăm rapoarte financiare trimestriale pentru transparență deplină față de donatori.
-          </p>
         </div>
       </section>
     </>

@@ -1,74 +1,63 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="bg-church-navy text-gray-300 mt-20">
-      <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <footer style={{background:'#0a0f2c', color:'white', marginTop:'auto'}}>
+      <div className="wrap" style={{padding:'72px 24px 40px'}}>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
 
-        {/* Brand */}
-        <div>
-          <div className="flex items-center gap-2 font-bold text-white text-lg mb-3">
-            <span className="text-church-gold text-xl">✦</span>
-            Biserica Momentum
+          {/* Brand */}
+          <div style={{gridColumn:'span 2'}}>
+            <Image src="/logo-horizontal.png" alt="Momentum" width={160} height={36} style={{height:36, width:'auto', marginBottom:20}} />
+            <p style={{color:'rgba(255,255,255,0.45)', fontSize:14, lineHeight:1.7, maxWidth:260}}>
+              O comunitate condusă de Duhul Sfânt,<br/>
+              în mișcare, pentru gloria lui Dumnezeu.<br/>
+              Alba Iulia, România.
+            </p>
+            <div style={{display:'flex', gap:10, marginTop:20}}>
+              {[['FB','https://facebook.com'],['IG','https://instagram.com'],['YT','https://youtube.com']].map(([label, href]) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{
+                  width:36, height:36, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.2)',
+                  display:'flex', alignItems:'center', justifyContent:'center',
+                  fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.5)', textDecoration:'none'}}>
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
-          <p className="text-sm leading-relaxed">
-            O comunitate vie în inima Bucureștiului.<br />
-            Te așteptăm cu drag duminica la 10:00.
-          </p>
-        </div>
 
-        {/* Linkuri rapide */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Pagini</h3>
-          <ul className="space-y-2 text-sm">
-            {[
-              ['/join',          'Alătură-te'],
-              ['/give',          'Donează'],
-              ['/pray',          'Rugăciune'],
-              ['/about',         'Despre noi'],
-              ['/why-this-city', 'De ce București?'],
-              ['/connect',       'Contact'],
-            ].map(([href, label]) => (
-              <li key={href}>
-                <Link href={href} className="hover:text-church-gold transition-colors">
+          {/* Pagini */}
+          <div>
+            <p style={{fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20}}>Pagini</p>
+            <div style={{display:'flex', flexDirection:'column', gap:12}}>
+              {[['/about','Cine suntem?'],['/misiunea-noastra','Misiunea noastră'],['/pray','Rugăciune'],['/join','Alătură-te'],['/give','Donează'],['/connect','Contact']].map(([href, label]) => (
+                <Link key={href} href={href} style={{color:'rgba(255,255,255,0.55)', fontSize:14, textDecoration:'none'}}>
                   {label}
                 </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Contact */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Găsește-ne</h3>
-          <ul className="space-y-2 text-sm">
-            <li>📍 Strada Exemplu 10, București</li>
-            <li>🕙 Duminică, 10:00</li>
-            <li>
-              <a href="mailto:contact@bisericasperanta.ro" className="hover:text-church-gold transition-colors">
-                ✉ contact@bisericasperanta.ro
+          {/* Contact */}
+          <div>
+            <p style={{fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20}}>Contact</p>
+            <div style={{display:'flex', flexDirection:'column', gap:12, fontSize:14, color:'rgba(255,255,255,0.55)'}}>
+              <span>📍 Alba Iulia, România</span>
+              <a href="mailto:biserica.momentum@gmail.com" style={{color:'rgba(255,255,255,0.55)', textDecoration:'none'}}>
+                biserica.momentum@gmail.com
               </a>
-            </li>
-          </ul>
-          <div className="flex gap-4 mt-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-               className="hover:text-church-gold transition-colors text-lg" aria-label="Facebook">
-              f
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-               className="hover:text-church-gold transition-colors text-lg" aria-label="Instagram">
-              IG
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-               className="hover:text-church-gold transition-colors text-lg" aria-label="YouTube">
-              ▶
-            </a>
+              <a href="https://www.bisericamomentum.ro" style={{color:'rgba(255,255,255,0.55)', textDecoration:'none'}}>
+                www.bisericamomentum.ro
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="border-t border-white/10 text-center text-xs py-4 text-gray-500">
-        © {new Date().getFullYear()} Biserica Momentum. Toate drepturile rezervate.
+        <div style={{display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:12, paddingTop:32, fontSize:12, color:'rgba(255,255,255,0.25)'}}>
+          <span>© {new Date().getFullYear()} Biserica Momentum · Alba Iulia, România</span>
+          <span>A Spirit-led community on the move, for the glory of God.</span>
+        </div>
       </div>
     </footer>
   )

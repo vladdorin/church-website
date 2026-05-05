@@ -1,25 +1,273 @@
-@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Montserrat:wght@400;700&display=swap');
+/* Montserrat + Climate Crisis pentru display — TREBUIE să fie primul @import */
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── DESIGN TOKENS ── */
 :root {
-  --blue: #1932af;
-  --red: #ef402b;
-  --cream: #fefdfa;
-  --dark-blue: #0f1052;
-  --light-blue: #b6d8fc;
+  --blue:      #1932af;
+  --blue-dark: #1228a0;
+  --blue-soft: #e8efff;
+  --navy:      #080c1e;
+  --white:     #ffffff;
+  --cream:     #f4f2ee;
+  --cream2:    #faf9f7;
+  --gray:      #6b7280;
+  --border:    rgba(10,15,44,0.10);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+
+  /* Font weights — folosite consistent în tot site-ul */
+  --fw-light:     300;  /* texte lungi, descrieri secundare */
+  --fw-regular:   400;  /* body text normal */
+  --fw-medium:    500;  /* paragrafe principale */
+  --fw-semibold:  600;  /* nav links, subtitluri */
+  --fw-bold:      700;  /* labels, butoane, highlights */
+  --fw-extrabold: 800;  /* titluri de secțiune, emphasis */
+  --fw-black:     900;  /* countdown, hero numbers */
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* ── BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── CUSTOM CURSOR ── */
+*, *::before, *::after {
+  cursor: url('/cursor.png') 16 16, auto !important;
+}
+a, a *, button, button *, .btn, .btn *,
+[role="button"], [role="button"] *,
+select, input, textarea, label,
+nav a, nav a * {
+  cursor: url('/cursor-pointer.png') 16 16, pointer !important;
 }
 
 body {
-  background-color: var(--cream);
-  color: var(--dark-blue);
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--white);
+  color: var(--navy);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-h1, h2, h3 {
-  font-family: 'Climate Crisis', sans-serif;
+/* Paragrafe și text curent — 400/500 */
+p    { font-weight: 400; line-height: 1.75; }
+li   { font-weight: 400; }
+
+/* ── DISPLAY (Climate Crisis — titluri mari) ── */
+.display {
+  font-family: 'Climate Crisis', sans-serif;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+}
+.display-ghost {
+  font-family: 'Climate Crisis', sans-serif;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
+}
+.display-xl  { font-size: clamp(4rem,   12vw, 10rem); }
+.display-lg  { font-size: clamp(3rem,    9vw,  7rem); }
+.display-md  { font-size: clamp(2.2rem,  6vw,  5rem); }
+.display-sm  { font-size: clamp(1.8rem,  4vw,  3rem); }
+
+/* ── LAYOUT ── */
+.section   { padding: 100px 0; }
+.section-sm{ padding: 64px 0; }
+.wrap      { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.wrap-wide { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
+
+/* ── LABEL — 700 Bold, uppercase mic ── */
+.label {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+.label-light {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 16px;
+}
+
+/* ── BUTTONS — 800 ExtraBold ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 14px 32px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, letter-spacing 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-blue  { background: var(--blue); color: white; border-color: var(--blue); }
+.btn-blue:hover  { background: var(--blue-dark); border-color: var(--blue-dark); letter-spacing: 0.17em; box-shadow: 0 8px 24px rgba(25,50,175,0.35); }
+.btn-dark  { background: var(--navy); color: white; border-color: var(--navy); }
+.btn-dark:hover  { background: #111629; border-color: #111629; letter-spacing: 0.17em; }
+.btn-white { background: white; color: var(--navy); border-color: white; }
+.btn-white:hover { background: white; color: var(--navy); border-color: white; letter-spacing: 0.17em; }
+.btn-outline-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline-white:hover { background: white; color: var(--navy); border-color: white; letter-spacing: 0.17em; }
+.btn-outline-blue  { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+.btn-outline-blue:hover  { background: var(--blue); color: white; letter-spacing: 0.17em; }
+.btn-navy  { background: var(--navy); color: white; border: 1.5px solid rgba(255,255,255,0.45); }
+.btn-navy:hover  { background: white; color: var(--navy); border-color: white; letter-spacing: 0.17em; }
+
+/* ── DONATE BUTTON — with rotating arrow ── */
+.btn-donate {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #1932af;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  margin-left: 16px;
+  transition: background 0.2s ease, letter-spacing 0.35s ease;
+}
+.btn-donate:hover { background: #1228a0; letter-spacing: 0.16em; }
+.btn-donate .donate-arrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: -2px;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-donate:hover .donate-arrow { transform: rotate(330deg); }
+
+/* ── CARDS — body 400, titluri 600 ── */
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card:hover { box-shadow: 0 8px 40px rgba(10,15,44,0.07); transform: translateY(-2px); }
+
+/* ── NAV — 600 SemiBold ── */
+.nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.nav-link:hover  { color: white; background: rgba(255,255,255,0.08); }
+.nav-link.active { color: white; }
+
+/* ── DIVIDERS ── */
+.divider       { border: none; border-top: 1px solid rgba(10,15,44,0.1); }
+.divider-light { border: none; border-top: 1px solid rgba(255,255,255,0.1); }
+
+/* ── SCROLL REVEAL ── */
+.sr { opacity: 0; }
+.sr.sr-visible { opacity: 1; }
+.sr-up    { transform: translateY(52px); transition: opacity 0.82s ease, transform 0.82s ease; }
+.sr-up.sr-visible    { transform: translateY(0); }
+.sr-left  { transform: translateX(-60px); transition: opacity 0.82s ease, transform 0.82s ease; }
+.sr-left.sr-visible  { transform: translateX(0); }
+.sr-right { transform: translateX(60px);  transition: opacity 0.82s ease, transform 0.82s ease; }
+.sr-right.sr-visible { transform: translateX(0); }
+.sr-scale { transform: scale(0.92); transition: opacity 0.82s ease, transform 0.82s ease; }
+.sr-scale.sr-visible { transform: scale(1); }
+.sr-d1 { transition-delay: 0.12s; }
+.sr-d2 { transition-delay: 0.27s; }
+.sr-d3 { transition-delay: 0.44s; }
+.sr-d4 { transition-delay: 0.62s; }
+
+/* ── ANIMATIONS ── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.animate-fade-up { animation: fadeUp 0.7s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(25,50,175,0.25); border-radius: 99px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 767px) {
+  .section    { padding: 72px 0; }
+  .section-sm { padding: 48px 0; }
+  .wrap, .wrap-wide { padding: 0 20px; }
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .display-ghost { -webkit-text-stroke-width: 1.5px; }
+
+  /* ── PAGE SECTIONS ── */
+  .page-section { padding: 64px 0 !important; }
+
+  /* ── GHOST NUMBERS — ascunse pe mobile ── */
+  .ghost-num { display: none !important; }
+
+  /* ── 3-coloane → 1 coloană ── */
+  [style*="repeat(3"] { grid-template-columns: 1fr !important; }
+
+  /* ── GAP redus când gridurile devin 1 coloană ── */
+  [style*="gap: 80px"], [style*="gap: 80"] { gap: 40px !important; }
+
+  /* ── PHOTO CARD — proporție mai mică pe telefon ── */
+  .photo-card-wrap { aspect-ratio: 4/3 !important; max-height: 300px !important; }
+
+  /* ── RUGĂCIUNE — text înainte de lista de rugăciuni ── */
+  .prayer-text-col { order: 1; }
+  .prayer-list-col { order: 2; }
+
+  /* ── CTA FINAL — butonul și textul stivuite ── */
+  .cta-row { flex-direction: column !important; align-items: flex-start !important; }
+
+  /* ── GHOST TEXT "MOMENTUM" ascuns pe mobile ── */
+  .cta-ghost { display: none !important; }
+
+  /* ── COUNTDOWN bottom row — stivuit ── */
+  .countdown-bottom { flex-direction: column !important; gap: 24px !important; }
 }

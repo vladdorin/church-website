@@ -1,147 +1,166 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact | Biserica Momentum',
-  description: 'Conectează-te cu noi pe social media sau trimite-ne un mesaj.',
+  title: 'Contact | Momentum · Alba Iulia',
+  description: 'Conectează-te cu noi — biserica.momentum@gmail.com · Alba Iulia, România',
 }
 
 export default function ConnectPage() {
   return (
     <>
       {/* HERO */}
-      <section className="bg-church-navy text-white py-20 text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <p className="text-church-gold font-semibold uppercase tracking-widest text-sm mb-3">Contact</p>
-          <h1 className="text-5xl font-bold mb-4">Hai să vorbim</h1>
-          <p className="text-xl text-gray-300">
-            Suntem oameni reali, cu telefoane reale. Nu ezita să ne contactezi.
+      <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
+        <div className="wrap" style={{textAlign:'center'}}>
+          <p className="label" style={{color:'#b6d8fc'}}>Contact</p>
+          <h1 className="display" style={{fontSize:'clamp(3rem,9vw,7rem)', color:'white', marginBottom:24}}>
+            HAI SĂ<br /><span style={{color:'#b6d8fc'}}>VORBIM</span>
+          </h1>
+          <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
+            Suntem oameni reali și suntem bucuroși să auzim de la tine.
           </p>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+      {/* MAIN CONTENT */}
+      <section className="section" style={{background:'white'}}>
+        <div className="wrap">
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'start'}}>
 
-        {/* FORMULAR */}
-        <div>
-          <h2 className="text-2xl font-bold text-church-navy mb-6">Trimite-ne un mesaj</h2>
-          <form className="space-y-5" action="mailto:contact@bisericasperanta.ro" method="GET">
+            {/* FORMULAR */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Nume complet</label>
-              <input
-                type="text"
-                name="name"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-church-gold bg-white"
-                placeholder="Ion Ionescu"
-                required
-              />
+              <p className="label">Mesaj direct</p>
+              <h2 className="display" style={{fontSize:'clamp(2rem,4vw,3rem)', color:'#0a0f2c', marginBottom:32}}>
+                TRIMITE-NE UN MESAJ
+              </h2>
+              <form style={{display:'flex', flexDirection:'column', gap:16}} action="mailto:biserica.momentum@gmail.com" method="GET">
+                <div>
+                  <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Nume complet</label>
+                  <input type="text" name="name" required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
+                    placeholder="Ion Ionescu" />
+                </div>
+                <div>
+                  <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Email</label>
+                  <input type="email" name="email" required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
+                    placeholder="ion@exemplu.ro" />
+                </div>
+                <div>
+                  <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Subiect</label>
+                  <select name="subject"
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', background:'white', boxSizing:'border-box'}}>
+                    <option>Vreau să mă alătur</option>
+                    <option>Cerere de rugăciune</option>
+                    <option>Vreau să susțin financiar</option>
+                    <option>Parteneriat / colaborare</option>
+                    <option>Întrebare generală</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Mesaj</label>
+                  <textarea name="body" rows={5} required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', resize:'none', boxSizing:'border-box'}}
+                    placeholder="Scrie mesajul tău aici..." />
+                </div>
+                <button type="submit" className="btn btn-blue" style={{justifyContent:'center', fontSize:15}}>
+                  Trimite mesajul
+                </button>
+              </form>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-church-gold bg-white"
-                placeholder="ion@exemplu.ro"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Subiect</label>
-              <select
-                name="subject"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-church-gold bg-white"
-              >
-                <option>Vreau să aflu mai multe</option>
-                <option>Cerere de rugăciune</option>
-                <option>Întrebare generală</option>
-                <option>Parteneriat / colaborare</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Mesaj</label>
-              <textarea
-                name="body"
-                rows={5}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-church-gold bg-white resize-none"
-                placeholder="Scrie mesajul tău aici..."
-                required
-              />
-            </div>
-            <button type="submit" className="btn-primary w-full">
-              Trimite mesajul →
-            </button>
-          </form>
-        </div>
 
-        {/* INFO + SOCIAL */}
-        <div className="space-y-8">
-          <div>
-            <h2 className="text-2xl font-bold text-church-navy mb-4">Găsește-ne</h2>
-            <ul className="space-y-3 text-gray-700">
-              <li className="flex items-start gap-3">
-                <span className="text-xl mt-0.5">📍</span>
-                <span>Strada Exemplu 10, Sector 1<br />București, 010000</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-xl">🕙</span>
-                <span>Duminică · 10:00</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-xl">✉️</span>
-                <a href="mailto:contact@bisericasperanta.ro" className="text-church-blue underline">
-                  contact@bisericasperanta.ro
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="text-xl">📞</span>
-                <a href="tel:+40712345678" className="text-church-blue underline">
-                  +40 712 345 678
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold text-church-navy mb-4">Social media</h3>
-            <div className="flex flex-col gap-3">
-              {[
-                { icon: '📘', label: 'Facebook', href: 'https://facebook.com/bisericasperanta', handle: '@bisericasperanta' },
-                { icon: '📸', label: 'Instagram', href: 'https://instagram.com/bisericasperanta', handle: '@bisericasperanta' },
-                { icon: '▶️',  label: 'YouTube',   href: 'https://youtube.com/@bisericasperanta', handle: 'Biserica Momentum' },
-              ].map(({ icon, label, href, handle }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 card hover:shadow-md transition-shadow py-4"
-                >
-                  <span className="text-2xl">{icon}</span>
-                  <div>
-                    <div className="font-semibold text-church-navy">{label}</div>
-                    <div className="text-sm text-gray-500">{handle}</div>
+            {/* INFO + SOCIAL */}
+            <div>
+              <div style={{marginBottom:40}}>
+                <p className="label">Găsește-ne</p>
+                <h2 className="display" style={{fontSize:'clamp(2rem,4vw,3rem)', color:'#0a0f2c', marginBottom:24}}>
+                  SUNTEM AICI
+                </h2>
+                <div style={{display:'flex', flexDirection:'column', gap:16}}>
+                  <div style={{display:'flex', gap:16, alignItems:'flex-start'}}>
+                    <span style={{fontSize:22, marginTop:2}}>📍</span>
+                    <div>
+                      <div style={{fontWeight:600, color:'#0a0f2c', marginBottom:2}}>Locație</div>
+                      <div style={{color:'rgba(10,15,44,0.6)', fontWeight:300}}>Alba Iulia, România</div>
+                    </div>
                   </div>
-                </a>
-              ))}
+                  <div style={{display:'flex', gap:16, alignItems:'flex-start'}}>
+                    <span style={{fontSize:22, marginTop:2}}>✉️</span>
+                    <div>
+                      <div style={{fontWeight:600, color:'#0a0f2c', marginBottom:2}}>Email</div>
+                      <a href="mailto:biserica.momentum@gmail.com"
+                        style={{color:'#1932af', textDecoration:'none', fontWeight:300}}>
+                        biserica.momentum@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <div style={{display:'flex', gap:16, alignItems:'flex-start'}}>
+                    <span style={{fontSize:22, marginTop:2}}>🌐</span>
+                    <div>
+                      <div style={{fontWeight:600, color:'#0a0f2c', marginBottom:2}}>Website</div>
+                      <a href="https://www.bisericamomentum.ro"
+                        style={{color:'#1932af', textDecoration:'none', fontWeight:300}}>
+                        www.bisericamomentum.ro
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{marginBottom:40}}>
+                <p className="label">Social media</p>
+                <div style={{display:'flex', flexDirection:'column', gap:12}}>
+                  {[
+                    { icon:'📘', label:'Facebook',  href:'https://facebook.com/bisericamomentum',  handle:'@bisericamomentum' },
+                    { icon:'📸', label:'Instagram', href:'https://instagram.com/bisericamomentum', handle:'@bisericamomentum' },
+                    { icon:'▶️',  label:'YouTube',   href:'https://youtube.com/@bisericamomentum',  handle:'Biserica Momentum' },
+                  ].map(({ icon, label, href, handle }) => (
+                    <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                      className="card"
+                      style={{display:'flex', alignItems:'center', gap:16, padding:'16px 20px', textDecoration:'none', transition:'all 0.2s ease'}}>
+                      <span style={{fontSize:24}}>{icon}</span>
+                      <div>
+                        <div style={{fontWeight:600, color:'#0a0f2c', fontSize:15}}>{label}</div>
+                        <div style={{fontSize:13, color:'rgba(10,15,44,0.5)', fontWeight:300}}>{handle}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{background:'#f8f9ff', border:'1px solid rgba(10,15,44,0.1)', borderRadius:20, padding:28, textAlign:'center'}}>
+                <p style={{fontWeight:700, color:'#0a0f2c', marginBottom:4, fontSize:15}}>📧 Rămâi la curent</p>
+                <p style={{fontSize:13, color:'rgba(10,15,44,0.5)', fontWeight:300, marginBottom:16}}>
+                  Abonează-te pentru noutăți despre lansare
+                </p>
+                <form style={{display:'flex', gap:8}}>
+                  <input type="email" placeholder="email@tau.ro"
+                    style={{flex:1, border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'10px 14px', fontSize:14, outline:'none', fontFamily:'Inter,sans-serif'}} />
+                  <button type="submit"
+                    style={{background:'#1932af', color:'white', border:'none', borderRadius:12, padding:'10px 16px', fontSize:14, fontWeight:600, cursor:'pointer'}}>
+                    OK
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="card bg-church-gold/10 border-church-gold/30 text-center">
-            <p className="font-semibold text-church-navy mb-1">📧 Rămâi la curent</p>
-            <p className="text-sm text-gray-600 mb-3">Abonează-te pentru noutăți și anunțuri</p>
-            <form className="flex gap-2">
-              <input
-                type="email"
-                placeholder="email@tau.ro"
-                className="flex-1 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-church-gold"
-              />
-              <button type="submit" className="bg-church-gold text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-yellow-600 transition-colors">
-                OK
-              </button>
-            </form>
+      {/* CTA FINAL */}
+      <section style={{background:'#0a0f2c', padding:'64px 0'}}>
+        <div className="wrap" style={{textAlign:'center'}}>
+          <p className="display" style={{fontSize:'clamp(1.5rem,4vw,3rem)', color:'white', marginBottom:8}}>
+            NU EȘTI SINGUR(Ă).
+          </p>
+          <p style={{color:'rgba(255,255,255,0.45)', fontWeight:300, marginBottom:32}}>
+            Există o comunitate care te așteaptă în Alba Iulia.
+          </p>
+          <div style={{display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center'}}>
+            <a href="/join" className="btn btn-white">Alătură-te</a>
+            <a href="/pray" className="btn btn-outline-white">Rugăciune</a>
           </div>
         </div>
-      </div>
+      </section>
     </>
   )
 }

@@ -25,7 +25,7 @@ export async function POST(request: Request) {
           price_data: {
             currency: 'ron',
             product_data: {
-              name: 'Donație – Biserica Momentum',
+              name: 'Donație – Biserica Speranța',
               description: 'Mulțumim! Donația ta ajută la construirea comunității.',
             },
             unit_amount: Math.round(amount * 100), // Stripe folosește bani (cenți/bani)
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       // Dezactivează salvarea metodei de plată pentru donații simple
       payment_intent_data: {
         metadata: {
-          church: 'Biserica Momentum',
+          church: 'Biserica Speranța',
           amount_ron: amount.toString(),
         },
       },

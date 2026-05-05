@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Montserrat:wght@400;700&display=swap');
+
+:root {
+  --blue: #1932af;
+  --red: #ef402b;
+  --cream: #fefdfa;
+  --dark-blue: #0f1052;
+  --light-blue: #b6d8fc;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--dark-blue);
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Climate Crisis', sans-serif;
+}

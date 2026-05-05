@@ -1,78 +1,142 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const links = [
-  { href: '/',               label: 'Acasă' },
-  { href: '/join',           label: 'Alătură-te' },
-  { href: '/give',           label: 'Donează' },
-  { href: '/pray',           label: 'Rugăciune' },
-  { href: '/about',          label: 'Despre noi' },
-  { href: '/why-this-city',  label: 'De ce București?' },
-  { href: '/connect',        label: 'Contact' },
+  { href: '/about',            label: 'Cine suntem?' },
+  { href: '/misiunea-noastra', label: 'Misiunea noastră' },
+  { href: '/pray',             label: 'Rugăciune' },
+  { href: '/join',             label: 'Alătură-te' },
+  { href: '/connect',          label: 'Contact' },
 ]
 
 export default function Navigation() {
-  const [open, setOpen] = useState(false)
-  const pathname = usePathname()
+  const [open, setOpen]       = useState(false)
+  const [mobile, setMobile]   = useState(false)
+  const pathname              = usePathname()
+
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 900)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // Închide meniul când schimbă pagina
+  useEffect(() => { setOpen(false) }, [pathname])
 
   return (
-    <header className="bg-church-navy text-white sticky top-0 z-50 shadow-lg">
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
-          <span className="text-church-gold text-2xl">✦</span>
-          <span>Biserica Momentum</span>
+    <header style={{
+      background: '#080c1e',
+      position: 'sticky',
+      top: 0,
+      zIndex: 50,
+      borderBottom: '1px solid rgba(255,255,255,0.07)',
+    }}>
+      <div className="wrap-wide" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 88,
+      }}>
+
+        {/* ── LOGO ── */}
+        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0}}>
+          <Image
+            src="/logo-horizontal.png"
+            alt="Momentum"
+            width={260} height={60}
+            style={{height:220, width:'auto'}}
+            priority
+          />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
-          {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                pathname === href
-                  ? 'bg-church-gold text-white'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {label}
+        {/* ── DESKTOP NAV ── */}
+        {!mobile && (
+          <nav style={{display:'flex', alignItems:'center', gap:4}}>
+            {links.map(({ href, label }) => (
+              <Link key={href} href={href}
+                className={`nav-link${pathname === href ? ' active' : ''}`}>
+                {label}
+              </Link>
+            ))}
+            <Link href="/give" className="btn-donate">
+              <span>Donează</span>
+              <span className="donate-arrow">→</span>
             </Link>
-          ))}
-        </nav>
+          </nav>
+        )}
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 rounded-lg hover:bg-white/10"
-          onClick={() => setOpen(!open)}
-          aria-label="Meniu"
-        >
-          <div className={`w-5 h-0.5 bg-white transition-all mb-1 ${open ? 'rotate-45 translate-y-1.5' : ''}`} />
-          <div className={`w-5 h-0.5 bg-white transition-all mb-1 ${open ? 'opacity-0' : ''}`} />
-          <div className={`w-5 h-0.5 bg-white transition-all ${open ? '-rotate-45 -translate-y-1.5' : ''}`} />
-        </button>
+        {/* ── HAMBURGER ── */}
+        {mobile && (
+          <button
+            onClick={() => setOpen(o => !o)}
+            aria-label="Meniu"
+            style={{
+              background:'transparent', border:'none',
+              cursor:'pointer', padding:10,
+              display:'flex', flexDirection:'column',
+              gap:5, alignItems:'center', justifyContent:'center',
+            }}
+          >
+            <span style={{
+              display:'block', width:24, height:2, background:'white',
+              transition:'all 0.25s ease',
+              transform: open ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+            }} />
+            <span style={{
+              display:'block', width:24, height:2, background:'white',
+              transition:'all 0.25s ease',
+              opacity: open ? 0 : 1,
+            }} />
+            <span style={{
+              display:'block', width:24, height:2, background:'white',
+              transition:'all 0.25s ease',
+              transform: open ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+            }} />
+          </button>
+        )}
       </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <nav className="md:hidden bg-church-blue px-4 pb-4 flex flex-col gap-1">
+      {/* ── MOBILE DROPDOWN ── */}
+      {mobile && open && (
+        <div style={{
+          background:'#080c1e',
+          borderTop:'1px solid rgba(255,255,255,0.07)',
+          padding:'16px 24px 24px',
+        }}>
           {links.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
+            <Link key={href} href={href}
               onClick={() => setOpen(false)}
-              className={`px-4 py-3 rounded-lg text-sm font-medium ${
-                pathname === href
-                  ? 'bg-church-gold text-white'
-                  : 'text-gray-200 hover:bg-white/10'
-              }`}
-            >
+              style={{
+                display:'block',
+                fontFamily:"'Montserrat', sans-serif",
+                fontSize:16, fontWeight:600,
+                color: pathname === href ? 'white' : 'rgba(255,255,255,0.7)',
+                padding:'14px 16px',
+                borderRadius:10,
+                textDecoration:'none',
+                borderBottom:'1px solid rgba(255,255,255,0.05)',
+              }}>
               {label}
             </Link>
           ))}
-        </nav>
+          <Link href="/give" onClick={() => setOpen(false)}
+            style={{
+              display:'block', marginTop:16,
+              background:'#1932af', color:'white',
+              textAlign:'center',
+              fontFamily:"'Montserrat', sans-serif",
+              fontSize:14, fontWeight:700,
+              letterSpacing:'0.08em', textTransform:'uppercase',
+              padding:'15px 24px', borderRadius:999,
+              textDecoration:'none',
+            }}>
+            Donează →
+          </Link>
+        </div>
       )}
     </header>
   )

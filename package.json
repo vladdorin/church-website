@@ -11,14 +11,14 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^4.0.0",
-    "next": "^15.5.15",
+    "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "stripe": "^16.0.0"
+    "stripe": "^16.0.0",
+    "@stripe/stripe-js": "^4.0.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.16",
+    "@cloudflare/next-on-pages": "^1.13.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

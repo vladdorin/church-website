@@ -2,23 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'De ce Alba Iulia? | Momentum',
-  description: 'De ce am ales Alba Iulia și ce vedem în acest oraș special.',
+  title: 'Misiunea noastră | Momentum · Alba Iulia',
+  description: 'De ce Alba Iulia, ce vedem în acest oraș și care este misiunea Momentum Church.',
 }
 
-export default function WhyThisCityPage() {
+export default function MisiuneaNoastraPage() {
   return (
     <>
       {/* HERO */}
       <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label" style={{color:'#b6d8fc'}}>De ce Alba Iulia?</p>
+          <p className="label" style={{color:'#b6d8fc'}}>Misiunea noastră</p>
           <h1 className="display" style={{fontSize:'clamp(2.5rem,8vw,6.5rem)', color:'white', marginBottom:24, lineHeight:1}}>
-            UN ORAȘ CU<br />ISTORIE,<br /><span style={{color:'#b6d8fc'}}>UN VIITOR<br />DE CONSTRUIT</span>
+            UN ORAȘ CU ISTORIE,<br /><span style={{color:'#b6d8fc'}}>UN VIITOR<br />DE CONSTRUIT</span>
           </h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:560, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
-            Alba Iulia e un loc bogat în identitate și semnificație națională.
-            Trecutul este onorat — dar viitorul este încă în formare.
+            De ce Alba Iulia? De ce acum? Și ce credem că Dumnezeu vrea să facă în acest loc.
           </p>
         </div>
       </section>
@@ -88,34 +87,88 @@ export default function WhyThisCityPage() {
         </div>
       </section>
 
-      {/* NEVOIA */}
-      <section className="section" style={{background:'#f8f9ff'}}>
+      {/* CE VEDEM ÎN ALBA IULIA */}
+      <section className="section" style={{background:'#f4f2ee'}}>
+        <div className="wrap">
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}}>
+            <div>
+              <p className="label">Nevoia reală</p>
+              <h2 className="display" style={{fontSize:'clamp(2rem,5vw,3.5rem)', color:'#0a0f2c', marginBottom:24}}>
+                CE VEDEM ÎN<br />ALBA IULIA
+              </h2>
+              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
+                O generație în creștere este deconectată de credință. Familiile caută valori și direcție.
+                Mulți oameni se identifică drept creștini, dar nu participă activ la viața unei comunități.
+              </p>
+              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
+                Peste 85–90% din populație se identifică drept creștin, dar doar o mică parte participă
+                activ la o biserică. Mulți văd religia ca o tradiție, nu o relație personală cu Dumnezeu.
+              </p>
+              <p style={{color:'#0a0f2c', lineHeight:1.8, fontWeight:600, fontStyle:'italic'}}>
+                „În spatele acestor numere sunt oameni reali, care caută scop, speranță și apartenența."
+              </p>
+            </div>
+            <div style={{display:'flex', flexDirection:'column', gap:16}}>
+              {[
+                { icon:'🎓', stat:'18–20%', desc:'din populație are vârsta școlară (0–18 ani)' },
+                { icon:'✝️', stat:'85–90%', desc:'se identifică drept creștini — dar puțini merg la biserică' },
+                { icon:'🔌', stat:'Mulți', desc:'văd credința ca tradiție, nu ca relație vie cu Dumnezeu' },
+              ].map(({ icon, stat, desc }) => (
+                <div key={stat} className="card" style={{display:'flex', gap:20, alignItems:'center', padding:24}}>
+                  <span style={{fontSize:32}}>{icon}</span>
+                  <div>
+                    <div className="display" style={{fontSize:28, color:'#1932af'}}>{stat}</div>
+                    <div style={{color:'rgba(10,15,44,0.6)', fontSize:14, fontWeight:300}}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROBLEMA & OPORTUNITATEA */}
+      <section className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label">Nevoia reală</p>
-          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
-            ÎN SPATELE CIFRELOR
+          <p className="label">Context</p>
+          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:48}}>
+            PROBLEMA ȘI OPORTUNITATEA
           </h2>
-          <p style={{color:'rgba(10,15,44,0.5)', maxWidth:520, margin:'0 auto 48px', fontWeight:300}}>
-            Sunt oameni reali care caută scop, speranță și apartenență.
-          </p>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px, 1fr))', gap:20}}>
-            {[
-              { icon:'📡', titlu:'O generație deconectată', desc:'O generație în creștere s-a îndepărtat de credință și nu mai găsește relevanță în biserica tradițională.' },
-              { icon:'🧭', titlu:'Familii fără direcție', desc:'Familiile caută valori și direcție, dar nu găsesc o comunitate care să vorbească pe limba lor.' },
-              { icon:'✝️', titlu:'Creștin în act, nu în trăire', desc:'Mulți se identifică drept creștini, dar trăiesc religia ca tradiție, nu ca relație vie cu Dumnezeu.' },
-            ].map(({ icon, titlu, desc }) => (
-              <div key={titlu} className="card" style={{textAlign:'center', padding:36}}>
-                <div style={{fontSize:40, marginBottom:16}}>{icon}</div>
-                <h3 className="display" style={{fontSize:22, color:'#0a0f2c', marginBottom:10}}>{titlu}</h3>
-                <p style={{color:'rgba(10,15,44,0.6)', fontSize:14, lineHeight:1.7, fontWeight:300}}>{desc}</p>
-              </div>
-            ))}
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:20, textAlign:'left'}}>
+            <div className="card" style={{borderLeft:'4px solid #ef4444', padding:32}}>
+              <h3 style={{fontWeight:800, fontSize:18, color:'#0a0f2c', marginBottom:20}}>Problema</h3>
+              {[
+                'Biserica tradițională pare irelevantă',
+                'Credința este văzută ca depășită',
+                'Oamenii sunt deconectați spiritual',
+                'Tinerii pleacă din comunități de credință',
+              ].map((p) => (
+                <div key={p} style={{display:'flex', gap:12, alignItems:'flex-start', marginBottom:12}}>
+                  <span style={{color:'#ef4444', fontWeight:700, flexShrink:0}}>›</span>
+                  <span style={{color:'rgba(10,15,44,0.7)', fontWeight:400, fontSize:15}}>{p}</span>
+                </div>
+              ))}
+            </div>
+            <div className="card" style={{borderLeft:'4px solid #1932af', padding:32}}>
+              <h3 style={{fontWeight:800, fontSize:18, color:'#0a0f2c', marginBottom:20}}>Oportunitatea</h3>
+              {[
+                'Oamenii sunt deschiși la o credință autentică',
+                'O nouă generație caută ceva real',
+                'Alba Iulia e un centru universitar în creștere',
+                'Biserica potrivită îi poate atinge pe toți',
+              ].map((p) => (
+                <div key={p} style={{display:'flex', gap:12, alignItems:'flex-start', marginBottom:12}}>
+                  <span style={{color:'#1932af', fontWeight:700, flexShrink:0}}>›</span>
+                  <span style={{color:'rgba(10,15,44,0.7)', fontWeight:400, fontSize:15}}>{p}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* DE CE ACUM */}
-      <section className="section" style={{background:'white'}}>
+      <section className="section" style={{background:'#f4f2ee'}}>
         <div className="wrap">
           <div style={{
             background:'linear-gradient(135deg,#0f1052,#1932af)',
@@ -138,7 +191,7 @@ export default function WhyThisCityPage() {
       </section>
 
       {/* CTA */}
-      <section className="section" style={{background:'#f8f9ff', textAlign:'center'}}>
+      <section className="section" style={{background:'white', textAlign:'center'}}>
         <div className="wrap">
           <p className="label">Fă parte din asta</p>
           <h2 className="display" style={{fontSize:'clamp(2.5rem,7vw,6rem)', color:'#0a0f2c', marginBottom:16}}>

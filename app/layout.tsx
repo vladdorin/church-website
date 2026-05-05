@@ -4,27 +4,22 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Biserica Momentum | București',
-  description: 'O comunitate vie în inima orașului. Slujbe duminica la 10:00. Te așteptăm!',
+  title: 'Momentum | Alba Iulia',
+  description: 'O comunitate condusă de Duhul Sfânt, în mișcare, pentru gloria lui Dumnezeu. Alba Iulia, România.',
+  icons: { icon: '/logo-icon.png', apple: '/logo-icon.png' },
   openGraph: {
-    title: 'Biserica Momentum | București',
-    description: 'O comunitate vie în inima orașului.',
+    title: 'Momentum | Alba Iulia',
+    description: 'O comunitate condusă de Duhul Sfânt, în mișcare, pentru gloria lui Dumnezeu.',
     type: 'website',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ro">
       <body className="min-h-screen flex flex-col">
         <Navigation />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
