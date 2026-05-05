@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+export const runtime = 'edge'
 export const metadata: Metadata = {
   title: 'Alătură-te | Momentum · Alba Iulia',
   description: 'Completează cardul de conectare și fă parte din echipa Momentum.',

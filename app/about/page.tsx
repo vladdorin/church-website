@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 
+export const runtime = 'edge'
 export const metadata: Metadata = {
   title: 'Despre noi | Momentum · Alba Iulia',
   description: 'Povestea lui John și Voichi Dura și a Bisericii Momentum din Alba Iulia.',

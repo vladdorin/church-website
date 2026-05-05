@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+export const runtime = 'edge'
 export const metadata: Metadata = {
   title: 'Contact | Momentum · Alba Iulia',
   description: 'Conectează-te cu noi — biserica.momentum@gmail.com · Alba Iulia, România',
