@@ -82,13 +82,13 @@ li   { font-weight: 400; }
 .wrap      { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
 .wrap-wide { max-width: 1400px; margin: 0 auto; padding: 0 32px; }
 
-/* ── LABEL — 700 Bold, uppercase mic ── */
+/* ── LABEL — 800 ExtraBold, mai vizibil ── */
 .label {
   display: inline-block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--blue);
   margin-bottom: 16px;
@@ -96,11 +96,11 @@ li   { font-weight: 400; }
 .label-light {
   display: inline-block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.55);
   margin-bottom: 16px;
 }
 
@@ -190,6 +190,16 @@ li   { font-weight: 400; }
 }
 .nav-link:hover  { color: white; background: rgba(255,255,255,0.08); }
 .nav-link.active { color: white; }
+
+/* ── FOOTER SOCIAL ICONS ── */
+.footer-social {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.footer-social:hover { color: white; border-color: rgba(255,255,255,0.55); }
 
 /* ── DIVIDERS ── */
 .divider       { border: none; border-top: 1px solid rgba(10,15,44,0.1); }

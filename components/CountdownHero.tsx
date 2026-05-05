@@ -59,13 +59,13 @@ export default function CountdownHero() {
   const COLON: React.CSSProperties = {
     fontFamily: "'Montserrat', sans-serif",
     fontWeight: 900,
-    lineHeight: 0.88,
+    lineHeight: 1,
     color: 'rgba(255,255,255,0.13)',
     fontSize: 'clamp(2.5rem, 6.5vw, 7rem)',
     flexShrink: 0,
     paddingLeft: 'clamp(8px, 2vw, 28px)',
     paddingRight: 'clamp(8px, 2vw, 28px)',
-    paddingBottom: 10,
+    paddingBottom: 0,           /* fix: aliniat cu cifrele */
   }
 
   const UNIT_LABEL: React.CSSProperties = {
@@ -82,13 +82,13 @@ export default function CountdownHero() {
   return (
     <section style={{
       background: '#080c1e',
-      minHeight: '100vh',
+      minHeight: 'calc(100vh - 88px)',   /* înălțime = viewport minus nav */
       display: 'flex',
       flexDirection: 'column',
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Background image — cetatea Alba Iulia */}
+      {/* Background image */}
       <div style={{
         position: 'absolute', inset: 0,
         backgroundImage: "url('/hero-cetate.jpg')",
@@ -98,32 +98,26 @@ export default function CountdownHero() {
         opacity: 0.22,
         pointerEvents: 'none',
       }} />
-      {/* Overlay gradient peste imagine */}
+      {/* Overlay gradient */}
       <div style={{
         position: 'absolute', inset: 0,
         background: 'linear-gradient(to bottom, rgba(8,12,30,0.45) 0%, rgba(8,12,30,0.15) 50%, rgba(8,12,30,0.75) 100%)',
         pointerEvents: 'none',
       }} />
 
-      {/* ── COLT STÂNGA SUS ── */}
-      <p style={{
-        position: 'absolute', top: 32, left: 32,
-        fontSize: 11, fontWeight: 700, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)',
-        zIndex: 2,
+      {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
+      <div className="wrap-wide" style={{
+        position: 'absolute', top: 28, left: 0, right: 0,
+        zIndex: 2, display: 'flex', justifyContent: 'space-between',
+        alignItems: 'center',
       }}>
-        Alba Iulia, România
-      </p>
-
-      {/* ── COLT DREAPTA SUS ── */}
-      <p style={{
-        position: 'absolute', top: 32, right: 32,
-        fontSize: 11, fontWeight: 700, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)',
-        zIndex: 2,
-      }}>
-        4 Octombrie 2026 · 10:00
-      </p>
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
+          Alba Iulia, România
+        </p>
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
+          4 Octombrie 2026 · 10:00
+        </p>
+      </div>
 
       {/* ── CENTRU ── */}
       <div style={{
@@ -134,10 +128,9 @@ export default function CountdownHero() {
         justifyContent: 'center',
         position: 'relative',
         zIndex: 1,
-        padding: '100px 32px 32px',
+        padding: '60px 32px 24px',
       }}>
-
-        {/* Label mare */}
+        {/* Label */}
         <p style={{
           fontFamily: "'Climate Crisis', sans-serif",
           fontSize: 'clamp(1rem, 2.2vw, 2rem)',
@@ -145,35 +138,28 @@ export default function CountdownHero() {
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.5)',
           textAlign: 'center',
-          marginBottom: 48,
+          marginBottom: 40,
         }}>
           Prima duminică · Lansare oficială
         </p>
 
-        {/* ── NUMERE ── */}
+        {/* ── NUMERE — colonul centrat vertical ── */}
         <div style={{
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',       /* fix: centrat, nu flex-end */
           justifyContent: 'center',
           flexWrap: 'nowrap',
         }}>
-          {/* ZILE */}
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{t.zile}</span>
             <span style={UNIT_LABEL}>Zile</span>
           </div>
-
           <span style={COLON}>:</span>
-
-          {/* ORE */}
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.ore).padStart(2,'0')}</span>
             <span style={UNIT_LABEL}>Ore</span>
           </div>
-
           <span style={COLON}>:</span>
-
-          {/* MINUTE */}
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.min).padStart(2,'0')}</span>
             <span style={UNIT_LABEL}>Minute</span>
@@ -184,7 +170,7 @@ export default function CountdownHero() {
       {/* ── BOTTOM ROW ── */}
       <div className="countdown-bottom" style={{
         position: 'relative', zIndex: 1,
-        padding: '28px 32px 44px',
+        padding: '24px 32px 36px',
         borderTop: '1px solid rgba(255,255,255,0.07)',
         display: 'flex', alignItems: 'center',
         justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,

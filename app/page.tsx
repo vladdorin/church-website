@@ -109,7 +109,7 @@ export default function HomePage() {
                   padding: '32px 28px',
                 }}>
                   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                    <div style={{ width: 32, height: 2, background: '#1932af', flexShrink: 0 }} />
+                    <div style={{ width: 32, height: 2, background: 'rgba(255,255,255,0.5)', flexShrink: 0 }} />
                     <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>
                       Pastori · Momentum Church
                     </p>
