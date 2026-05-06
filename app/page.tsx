@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, ReactNode, CSSProperties } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import CountdownHero from '@/components/CountdownHero'
+import { FundraiserCompact } from '@/components/FundraiserBar'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
 function RevealSection({ children, style, className }: {
@@ -160,10 +161,10 @@ export default function HomePage() {
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.6)', fontWeight: 300, maxWidth: 420, marginBottom: 12 }}>
-                Momentum Church a fost fondată de John și Voichi Dura — un cuplu care a ales să rămână în Alba Iulia și să construiască ceva durabil.
+                Biserica Momentum a fost fondată de John și Voichi Dura. Ei poartă o chemare pentru generația tânără a Albei Iulia și au decis să facă ceva în privința asta.
               </p>
               <p className="sr sr-up sr-d2" style={{ fontSize: 15, lineHeight: 1.9, color: 'rgba(8,12,30,0.45)', fontWeight: 300, maxWidth: 420, marginBottom: 36, fontStyle: 'italic' }}>
-                „Nu am vrut să construim o altă biserică tradițională. Am vrut să construim un acasă."
+                „Nu am vrut să construim o altă biserică tradițională. Am vrut să construim o comunitate în care fiecare să se simtă acasă."
               </p>
               <div className="sr sr-up sr-d3">
                 <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
@@ -192,7 +193,7 @@ export default function HomePage() {
                   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                     <div style={{ width: 32, height: 2, background: 'rgba(255,255,255,0.5)', flexShrink: 0 }} />
                     <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>
-                      Pastori · Momentum Church
+                      Pastori · Biserica Momentum
                     </p>
                   </div>
                 </div>
@@ -275,22 +276,27 @@ export default function HomePage() {
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#0d1020" flip />
+      <Diagonal to="#0b1628" flip />
 
       {/* ═══════════ 05 — DONAȚII ═══════════ */}
-      <section className="page-section" style={{ background: '#0d1020', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+      <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="05" light />
         <div className="wrap-wide">
-          <RevealSection style={{ maxWidth: 680 }}>
-            <p className="sr sr-up label-light">DONEAZĂ</p>
-            <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-              DEVINO<br />PARTENER.
-            </h2>
-            <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36 }}>
-              Fiecare donație pe care o faci va fi dublată de ARC până la $50.000.
-            </p>
-            <div className="sr sr-up sr-d3">
-              <Link href="/give" className="btn btn-white">Susține lansarea</Link>
+          <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+            <div>
+              <p className="sr sr-up label-light">SUSȚINE LANSAREA</p>
+              <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
+                DEVINO<br />PARTENER.
+              </h2>
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 36 }}>
+                Fiecare donație pe care o faci va fi dublată de ARC până la $50.000.
+              </p>
+              <div className="sr sr-up sr-d3">
+                <Link href="/give" className="btn btn-white">Donează</Link>
+              </div>
+            </div>
+            <div className="sr sr-right sr-d1">
+              <FundraiserCompact variant="side" />
             </div>
           </RevealSection>
         </div>
@@ -307,18 +313,15 @@ export default function HomePage() {
         }}>MOMENTUM</div>
         <div className="wrap-wide" style={{ position: 'relative', zIndex: 1 }}>
           <RevealSection>
-            <p className="sr sr-up label-light">Fă parte din asta</p>
             <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2.5rem,7vw,7rem)', color: 'white', marginBottom: 48 }}>
               MOMENTUL<br />
               <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>E ACUM.</span>
             </h2>
-            <div className="sr sr-up sr-d2 cta-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
-              <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.45)', maxWidth: 380, lineHeight: 1.8, fontWeight: 300 }}>
-                Fie că vrei să vii, să te rogi, să te implici sau să susții financiar — există un loc pentru tine în Momentum.
-              </p>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <Link href="/connect" className="btn btn-navy">Contactează-ne</Link>
-              </div>
+            <p className="sr sr-up sr-d2" style={{ fontSize: 17, color: 'rgba(255,255,255,0.45)', maxWidth: 420, lineHeight: 1.8, fontWeight: 300, marginBottom: 36 }}>
+              Fie că vrei să vii, să te rogi, să te implici sau să susții financiar — există un loc pentru tine în Momentum.
+            </p>
+            <div className="sr sr-up sr-d3">
+              <Link href="/connect" className="btn btn-navy">Contactează-ne</Link>
             </div>
           </RevealSection>
         </div>

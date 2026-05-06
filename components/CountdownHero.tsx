@@ -107,9 +107,10 @@ export default function CountdownHero() {
 
       {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
       <div className="wrap-wide" style={{
-        position: 'absolute', top: 28, left: 0, right: 0,
-        zIndex: 2, display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center',
+  	position: 'absolute', top: 28, left: 0, right: 0,
+  	zIndex: 2, padding: '0 0px',
+  	display: 'flex', justifyContent: 'space-between',
+  	alignItems: 'center',
       }}>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
           Alba Iulia, România
@@ -140,7 +141,7 @@ export default function CountdownHero() {
           textAlign: 'center',
           marginBottom: 40,
         }}>
-          Prima duminică · Lansare oficială
+          Lansarea oficială · Prima duminică
         </p>
 
         {/* ── NUMERE — colonul centrat vertical ── */}
@@ -168,39 +169,39 @@ export default function CountdownHero() {
       </div>
 
       {/* ── BOTTOM ROW ── */}
-      <div className="countdown-bottom" style={{
-        position: 'relative', zIndex: 1,
-        padding: '24px 32px 36px',
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        display: 'flex', alignItems: 'center',
-        justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,
-      }}>
-        <p style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 500,
-          fontSize: 'clamp(13px, 1.1vw, 15px)',
-          color: 'rgba(255,255,255,0.55)',
-          maxWidth: 680,
-          lineHeight: 1.9,
-          letterSpacing: '0.01em',
-          whiteSpace: 'pre-line',
+      <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+        <div className="wrap-wide" style={{
+          padding: '24px 0 36px',
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,
         }}>
-          {displayed}
-          {!done && (
-            <span style={{
-              display: 'inline-block',
-              width: 2,
-              height: '1.1em',
-              background: '#1932af',
-              marginLeft: 3,
-              verticalAlign: 'text-bottom',
-              animation: 'blink 1s step-end infinite',
-            }} />
-          )}
-        </p>
-        <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
-          <Link href="/join" className="btn btn-navy">Alătură-te</Link>
-          <Link href="/about" className="btn btn-outline-white">Povestea noastră</Link>
+          <p style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 500,
+            fontSize: 'clamp(13px, 1.1vw, 15px)',
+            color: 'rgba(255,255,255,0.55)',
+            maxWidth: 680,
+            lineHeight: 1.9,
+            letterSpacing: '0.01em',
+            whiteSpace: 'pre-line',
+          }}>
+            {displayed}
+            {!done && (
+              <span style={{
+                display: 'inline-block',
+                width: 2,
+                height: '1.1em',
+                background: '#1932af',
+                marginLeft: 3,
+                verticalAlign: 'text-bottom',
+                animation: 'blink 1s step-end infinite',
+              }} />
+            )}
+          </p>
+          <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+            <Link href="/join" className="btn btn-navy">Alătură-te</Link>
+            <Link href="/about" className="btn btn-outline-white">Povestea noastră</Link>
+          </div>
         </div>
       </div>
 

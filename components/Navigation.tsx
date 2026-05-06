@@ -40,15 +40,16 @@ export default function Navigation() {
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 88,
+ 	padding: '0 0px',
       }}>
 
         {/* ── LOGO ── */}
-        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0}}>
+        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0, marginLeft: -15}}>
           <Image
             src="/logo-horizontal.png"
             alt="Momentum"
             width={260} height={60}
-            style={{height:220, width:'auto'}}
+            style={{height:260, width:'auto'}}
             priority
           />
         </Link>

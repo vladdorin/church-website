@@ -62,7 +62,7 @@ export default function Footer() {
       </div>
 
       {/* ── Conținut ── */}
-      <div className="wrap" style={{ padding:'72px 24px 48px', position:'relative', zIndex:1 }}>
+      <div className="wrap-wide" style={{ paddingTop:'72px', paddingBottom:'48px', position:'relative', zIndex:1 }}>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
 
           {/* Brand */}

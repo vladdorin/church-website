@@ -1,6 +1,7 @@
 'use client'
 import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { FundraiserFull } from '@/components/FundraiserBar'
 
 const PRESET_AMOUNTS = [25, 50, 100, 250]
 
@@ -176,38 +177,16 @@ export default function GivePage() {
       {/* OBIECTIV LANSARE */}
       <section className="section" style={{background:'#f8f9ff'}}>
         <div className="wrap">
-          <div style={{textAlign:'center', marginBottom:48}}>
+          <div style={{textAlign:'center', marginBottom:40}}>
             <p className="label">Obiectivul de lansare</p>
             <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
-              $100.000 TOTAL
+              PROGRESUL NOSTRU
             </h2>
             <p style={{color:'rgba(10,15,44,0.5)', maxWidth:560, margin:'0 auto', fontWeight:300}}>
-              Această investiție ne permite să lansăm puternic și să ajungem la oraș în mod eficient.
+              Urmărește în timp real cât am strâns împreună pentru lansarea Momentum în Alba Iulia.
             </p>
           </div>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:16, marginBottom:24}}>
-            {[
-              { suma:'$40.000', label:'Echipamente & Producție' },
-              { suma:'$20.000', label:'Chirie Spațiu' },
-              { suma:'$20.000', label:'Renovare & Amenajare' },
-              { suma:'$10.000', label:'Marketing' },
-            ].map(({ suma, label }) => (
-              <div key={label} className="card" style={{textAlign:'center', padding:28}}>
-                <div className="display" style={{fontSize:30, color:'#1932af', marginBottom:8}}>{suma}</div>
-                <div style={{color:'rgba(10,15,44,0.6)', fontSize:14}}>{label}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{
-            background:'linear-gradient(135deg,#0f1052,#080818)', borderRadius:24, padding:'48px 40px', textAlign:'center'
-          }}>
-            <div className="display" style={{fontSize:64, color:'#b6d8fc', marginBottom:8}}>$100.000</div>
-            <div style={{color:'rgba(255,255,255,0.7)', fontSize:18, marginBottom:16}}>Obiectiv total de lansare</div>
-            <p style={{color:'rgba(255,255,255,0.45)', maxWidth:560, margin:'0 auto', fontSize:14, fontWeight:300, lineHeight:1.8}}>
-              Credem că împreună putem construi o plantă de biserică autosuficientă. Fiecare $1
-              pe care îl dai va fi dublat de ARC, dublând impactul tău până la $50.000.
-            </p>
-          </div>
+          <FundraiserFull />
         </div>
       </section>
 
