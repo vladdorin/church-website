@@ -108,7 +108,7 @@ export default function CountdownHero() {
       {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
       <div className="wrap-wide" style={{
   	position: 'absolute', top: 28, left: 0, right: 0,
-  	zIndex: 2, padding: '0 10px',
+  	zIndex: 2, padding: '0 32px',
   	display: 'flex', justifyContent: 'space-between',
   	alignItems: 'center',
       }}>

@@ -62,14 +62,21 @@ const STACK_INIT = [
 function StackedCards() {
   const ref = useRef<HTMLDivElement>(null)
   const [p, setP] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return
     const onScroll = () => {
       const el = ref.current; if (!el) return
       const rect = el.getBoundingClientRect()
       const vh   = window.innerHeight
-      // Animation starts as cards enter viewport (top at 90% vh)
-      // Animation ENDS when card top reaches 55% vh — while header above is still pinned/visible
       const start = vh * 0.9
       const end   = vh * 0.55
       const raw   = (start - rect.top) / (start - end)
@@ -78,11 +85,47 @@ function StackedCards() {
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [isMobile])
 
   const ep   = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2
   const lerp = (a: number, b: number) => a + (b - a) * ep
 
+  // ── MOBILE: carduri stivuite vertical, fiecare vizibil complet ──
+  if (isMobile) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => (
+          <div key={i} style={{
+            background: bg,
+            padding: '28px 28px 32px',
+            display: 'flex', flexDirection: 'column', gap: 12,
+            borderRadius: 20, position: 'relative', overflow: 'hidden',
+          }}>
+            <div style={{
+              position: 'absolute', right: -8, bottom: -16,
+              fontFamily: "'Climate Crisis',sans-serif",
+              fontSize: 120, lineHeight: 1,
+              color: col, opacity: 0.07,
+              pointerEvents: 'none', userSelect: 'none',
+            }}>{titlu[0]}</div>
+            <h3 style={{
+              fontFamily: "'Climate Crisis',sans-serif",
+              fontSize: '1.35rem',
+              color: col, lineHeight: 1.1,
+              position: 'relative', zIndex: 1, margin: 0,
+            }}>{titlu.toUpperCase()}</h3>
+            <p style={{
+              fontSize: 14, color: col, opacity: 0.6,
+              fontWeight: 300, lineHeight: 1.75, margin: 0,
+              position: 'relative', zIndex: 1,
+            }}>{desc}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  // ── DESKTOP: animatie fan-out, carduri compacte ──
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, borderRadius: 24, overflow: 'hidden' }}>
       {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => {
@@ -90,15 +133,15 @@ function StackedCards() {
         return (
           <div key={i} style={{
             background: bg,
-            padding: 'clamp(36px,4vw,52px) clamp(28px,3.5vw,44px)',
-            display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-            minHeight: 360, position: 'relative', overflow: 'hidden',
+            padding: 'clamp(32px,3.5vw,44px) clamp(28px,3.5vw,44px)',
+            display: 'flex', flexDirection: 'column',
+            justifyContent: 'flex-start', gap: 16,
+            position: 'relative', overflow: 'hidden',
             borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
             transform: `translateX(${lerp(tx, 0)}%) rotate(${lerp(rot, 0)}deg) scale(${lerp(sc, 1)})`,
             zIndex: z,
             willChange: 'transform',
           }}>
-            {/* Ghost first letter */}
             <div style={{
               position: 'absolute', right: -8, bottom: -20,
               fontFamily: "'Climate Crisis',sans-serif",
@@ -106,14 +149,12 @@ function StackedCards() {
               color: col, opacity: 0.07,
               pointerEvents: 'none', userSelect: 'none',
             }}>{titlu[0]}</div>
-            {/* Title */}
             <h3 style={{
               fontFamily: "'Climate Crisis',sans-serif",
               fontSize: 'clamp(1rem,1.5vw,1.5rem)',
               color: col, lineHeight: 1.1, position: 'relative', zIndex: 1,
               whiteSpace: 'nowrap',
             }}>{titlu.toUpperCase()}</h3>
-            {/* Description */}
             <p style={{
               fontSize: 14, color: col, opacity: 0.58,
               fontWeight: 300, lineHeight: 1.85, maxWidth: 240,
@@ -139,7 +180,7 @@ export default function HomePage() {
 
       {/* ── TICKER ── */}
       <div style={{ background: '#1932af', padding: '14px 0', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', animation: 'ticker 30s linear infinite', whiteSpace: 'nowrap' }}>
+        <div style={{ display: 'flex', animation: 'ticker 20s linear infinite', whiteSpace: 'nowrap' }}>
           {Array(10).fill(null).map((_, i) => (
             <span key={i} style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', flexShrink: 0 }}>
               &nbsp;·&nbsp; O biserică în Alba Iulia pentru toată lumea &nbsp;·&nbsp; Ești binevenit așa cum ești
@@ -177,7 +218,7 @@ export default function HomePage() {
               <div className="photo-card-wrap" style={{
                 aspectRatio: '4/5', maxHeight: 500,
                 background: 'linear-gradient(160deg,#1932af 0%,#080c1e 100%)',
-                borderRadius: 28, display: 'flex', alignItems: 'center',
+                borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', position: 'relative', overflow: 'hidden',
               }}>
                 <Image
@@ -213,76 +254,123 @@ export default function HomePage() {
 
       {/* ═══════════ 02 — MISIUNEA NOASTRĂ ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="02" light />
+        <div className="ghost-num" style={{
+  	position: 'absolute', left: '-3%', top: '50%', transform: 'translateY(-50%)',
+  	fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
+  	fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
+  	color: 'rgba(255,255,255,0.05)',
+  	pointerEvents: 'none', userSelect: 'none',
+	}}>02</div>
         <div className="wrap-wide">
-          <RevealSection style={{ maxWidth: 680 }}>
+          <RevealSection style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
             <p className="sr sr-up label-light">MISIUNEA NOASTRĂ</p>
             <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
               DE CE EXISTĂ<br />MOMENTUM?
             </h2>
-            <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36 }}>
+            <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
               Existăm pentru a construi o comunitate dătătoare de viață în Alba Iulia — un loc unde oamenii Îl întâlnesc pe Dumnezeu, cresc în comunitate autentică și trăiesc scopul dat de El.
             </p>
-            <div className="sr sr-up sr-d3">
+            <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Link href="/misiunea-noastra" className="btn btn-white">Descoperă misiunea</Link>
             </div>
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#ffffff" flip />
 
-      {/* ═══════════ 03 — VINO CU NOI ═══════════ */}
-      <section style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96, position: 'relative' }}>
-        <GhostNum num="03" />
+{/* ═══════════ 03 — VINO CU NOI ═══════════ */}
+      <section style={{ background: '#ffffff', position: 'relative' }}>
 
-        {/* ── Header row — sticky so it stays visible while cards fan out ── */}
-        <div style={{ position: 'sticky', top: 88, zIndex: 10, background: '#ffffff', paddingBottom: 48 }}>
-          <div className="wrap-wide">
-            <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start' }}>
-              <div>
-                <p className="sr sr-up label">ECHIPA</p>
-                <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-                  VINO<br />CU NOI.
-                </h2>
-              </div>
-              <div style={{ paddingTop: 8 }}>
-                <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36 }}>
-                  Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
-                </p>
-                <div className="sr sr-up sr-d2">
-                  <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+        {/* Un singur container sticky — prinde header + carduri împreună */}
+        <div style={{
+          position: 'sticky', top: 88,
+          height: 'calc(100vh - 88px)',
+          overflow: 'hidden',
+          display: 'flex', flexDirection: 'column',
+          background: '#ffffff',
+        }}>
+
+          {/* Ghost 03 */}
+          <div style={{
+            position: 'absolute', right: '-2%', top: '50%', transform: 'translateY(-50%)',
+            fontFamily: "'Montserrat',sans-serif", fontWeight: 900,
+            fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
+            color: 'rgba(8,12,30,0.05)',
+            pointerEvents: 'none', userSelect: 'none',
+          }}>03</div>
+
+          {/* Header content */}
+          <div style={{ paddingTop: 48, paddingBottom: 40, position: 'relative', zIndex: 1 }}>
+            <div className="wrap-wide">
+              <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                <div>
+                  <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e', whiteSpace: 'nowrap' }}>
+                    VINO CU NOI.
+                  </h2>
+                  <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
+                    Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
+                  </p>
+                  <div className="sr sr-up sr-d2">
+                    <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+                  </div>
                 </div>
-              </div>
-            </RevealSection>
+                <div className="sr sr-right sr-d1" style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ width: '100%', maxWidth: 380, aspectRatio: '7/5', borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', overflow: 'hidden', position: 'relative' }}>
+                    <Image src="/echipa.jpg" alt="Echipa Momentum" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                  </div>
+                </div>
+              </RevealSection>
+            </div>
           </div>
-        </div>
 
-        {/* ── StackedCards fan-out animation ── */}
-        <div className="wrap-wide">
-          <StackedCards />
+          {/* Carduri — rămân vizibile cât timp scrollezi prin secțiune */}
+          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+            <div className="wrap-wide">
+              <StackedCards />
+            </div>
+          </div>
+
         </div>
       </section>
-      <Diagonal to="#f4f2ee" />
 
       {/* ═══════════ 04 — RUGĂCIUNE ═══════════ */}
       <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="04" />
         <div className="wrap-wide">
-          <RevealSection style={{ maxWidth: 680 }}>
-            <p className="sr sr-up label">RUGĂCIUNE</p>
-            <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-              AI NEVOIE<br />DE<br />RUGĂCIUNE?
-            </h2>
-            <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36 }}>
-              Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
-            </p>
-            <div className="sr sr-up sr-d3">
-              <Link href="/pray" className="btn btn-dark">Stai alături</Link>
+          <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+
+            {/* Left: poza */}
+            <div className="sr sr-left sr-d1">
+              <div style={{
+                aspectRatio: '4/5', maxHeight: 500,
+                borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
+                position: 'relative', overflow: 'hidden',
+              }}>
+                <Image
+                  src="/rugaciune.jpg"
+                  alt="Rugăciune"
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                />
+              </div>
             </div>
+
+            {/* Right: text aliniat dreapta */}
+            <div style={{ textAlign: 'right' }}>
+              <p className="sr sr-up label">RUGĂCIUNE</p>
+              <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
+                AI NEVOIE<br />DE<br />RUGĂCIUNE?
+              </h2>
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
+                Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
+              </p>
+              <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Link href="/pray" className="btn btn-dark">Stai alături</Link>
+              </div>
+            </div>
+
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#0b1628" flip />
 
       {/* ═══════════ 05 — DONAȚII ═══════════ */}
       <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
