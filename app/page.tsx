@@ -371,7 +371,6 @@ export default function HomePage() {
 
             {/* Right: text aliniat dreapta */}
             <div style={{ textAlign: 'right' }}>
-              <p className="sr sr-up label">RUGĂCIUNE</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
                 AI NEVOIE<br />DE<br />RUGĂCIUNE?
               </h2>
