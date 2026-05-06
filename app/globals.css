@@ -269,14 +269,13 @@ li   { font-weight: 400; }
   /* ── GAP redus când gridurile devin 1 coloană ── */
   [style*="gap: 80px"], [style*="gap: 80"] { gap: 40px !important; }
 
-  /* ── PHOTO CARD — integrat frumos sub text, dar mai mic pe mobile ── */
+  /* ── PHOTO CARD — integrat frumos sub text ── */
   .photo-card-wrap {
     aspect-ratio: 4/5 !important;
-    height: auto !important;
     max-height: none !important;
-    width: min(82vw, 320px) !important;
-    margin: 4px auto 0 !important;
     border-radius: 16px !important;
+    width: 100% !important;
+    margin-top: 8px !important;
   }
 
   /* ── FOTO col — fără animație translateX care taie din ecran ── */
@@ -287,7 +286,7 @@ li   { font-weight: 400; }
   .footer-brand { grid-column: span 1 !important; }
 
   /* ── BUTON DUPĂ VIZUAL — desktop ascunde mobile-after, mobile ascunde desktop ── */
-  .btn-mobile-after { display: block !important; margin-top: 8px; text-align: left; }
+  .btn-mobile-after { display: block !important; margin-top: 8px; }
   .btn-desktop { display: none !important; }
 
   /* ── RUGĂCIUNE — text înainte de lista de rugăciuni ── */
@@ -304,49 +303,58 @@ li   { font-weight: 400; }
   .countdown-bottom { flex-direction: column !important; gap: 24px !important; }
 }
 
-/* ── MOBILE ORDER FOR IMAGE SECTIONS ON LANDING ── */
+
+/* ── SECTION 03 RESPONSIVE FIX ── */
+@media (min-width: 768px) {
+  .join-mobile-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .join-image-col {
+    display: flex !important;
+  }
+
+  .join-mobile-button {
+    display: none !important;
+  }
+}
+
 @media (max-width: 767px) {
   .join-sticky {
     position: relative !important;
     top: auto !important;
     height: auto !important;
+    min-height: 0 !important;
     overflow: visible !important;
   }
 
   .join-mobile-grid {
-    align-items: stretch !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .join-text-col {
+    order: 1;
   }
 
   .join-image-col {
     order: 2;
+    display: flex !important;
     justify-content: center !important;
+    width: 100% !important;
   }
 
-  .join-photo-wrap {
-    width: min(82vw, 320px) !important;
+  .join-image-col .join-photo-wrap {
+    width: 85% !important;
     max-width: 320px !important;
     aspect-ratio: 7 / 5 !important;
-    margin: 4px auto 0 !important;
+    margin: 0 auto !important;
   }
 
-  .prayer-mobile-grid {
-    align-items: stretch !important;
-  }
-
-  .prayer-text-col {
-    order: 1;
-    text-align: left !important;
-  }
-
-  .prayer-text-col p {
-    margin-left: 0 !important;
-  }
-
-  .prayer-image-col {
-    order: 2;
-  }
-
-  .prayer-button-col {
+  .join-mobile-button {
     order: 3;
+    display: block !important;
+    margin-top: 0 !important;
   }
 }
