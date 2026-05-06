@@ -1,4 +1,4 @@
-# 🏛️ Biserica Speranța — Website
+# 🏛️ Biserica Momentum — Website
 
 Site-ul oficial al Bisericii Speranța, construit cu Next.js 14 și publicat pe Cloudflare Pages.
 
