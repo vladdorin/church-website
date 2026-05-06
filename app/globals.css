@@ -269,13 +269,14 @@ li   { font-weight: 400; }
   /* ── GAP redus când gridurile devin 1 coloană ── */
   [style*="gap: 80px"], [style*="gap: 80"] { gap: 40px !important; }
 
-  /* ── PHOTO CARD — integrat frumos sub text ── */
+  /* ── PHOTO CARD — integrat frumos sub text, dar mai mic pe mobile ── */
   .photo-card-wrap {
     aspect-ratio: 4/5 !important;
+    height: auto !important;
     max-height: none !important;
+    width: min(82vw, 320px) !important;
+    margin: 4px auto 0 !important;
     border-radius: 16px !important;
-    width: 100% !important;
-    margin-top: 8px !important;
   }
 
   /* ── FOTO col — fără animație translateX care taie din ecran ── */
@@ -286,7 +287,7 @@ li   { font-weight: 400; }
   .footer-brand { grid-column: span 1 !important; }
 
   /* ── BUTON DUPĂ VIZUAL — desktop ascunde mobile-after, mobile ascunde desktop ── */
-  .btn-mobile-after { display: block !important; margin-top: 8px; }
+  .btn-mobile-after { display: block !important; margin-top: 8px; text-align: left; }
   .btn-desktop { display: none !important; }
 
   /* ── RUGĂCIUNE — text înainte de lista de rugăciuni ── */
@@ -301,4 +302,51 @@ li   { font-weight: 400; }
 
   /* ── COUNTDOWN bottom row — stivuit ── */
   .countdown-bottom { flex-direction: column !important; gap: 24px !important; }
+}
+
+/* ── MOBILE ORDER FOR IMAGE SECTIONS ON LANDING ── */
+@media (max-width: 767px) {
+  .join-sticky {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .join-mobile-grid {
+    align-items: stretch !important;
+  }
+
+  .join-image-col {
+    order: 2;
+    justify-content: center !important;
+  }
+
+  .join-photo-wrap {
+    width: min(82vw, 320px) !important;
+    max-width: 320px !important;
+    aspect-ratio: 7 / 5 !important;
+    margin: 4px auto 0 !important;
+  }
+
+  .prayer-mobile-grid {
+    align-items: stretch !important;
+  }
+
+  .prayer-text-col {
+    order: 1;
+    text-align: left !important;
+  }
+
+  .prayer-text-col p {
+    margin-left: 0 !important;
+  }
+
+  .prayer-image-col {
+    order: 2;
+  }
+
+  .prayer-button-col {
+    order: 3;
+  }
 }

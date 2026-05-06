@@ -281,7 +281,7 @@ export default function HomePage() {
       <section style={{ background: '#ffffff', position: 'relative' }}>
 
         {/* Un singur container sticky — prinde header + carduri împreună */}
-        <div style={{
+        <div className="join-sticky" style={{
           position: 'sticky', top: 88,
           height: 'calc(100vh - 88px)',
           overflow: 'hidden',
@@ -301,7 +301,7 @@ export default function HomePage() {
           {/* Header content */}
           <div style={{ paddingTop: 48, paddingBottom: 40, position: 'relative', zIndex: 1 }}>
             <div className="wrap-wide">
-              <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+              <RevealSection className="grid-2col join-mobile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
                 <div>
                   <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e', whiteSpace: 'nowrap' }}>
                     VINO CU NOI.
@@ -309,14 +309,18 @@ export default function HomePage() {
                   <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
                     Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
                   </p>
-                  <div className="sr sr-up sr-d2">
+                  
+                <div className="sr sr-right sr-d1 join-image-col" style={{ display: 'flex', alignItems: 'center' }}>
+                  <div className="join-photo-wrap" style={{ width: '100%', maxWidth: 380, aspectRatio: '7/5', borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', overflow: 'hidden', position: 'relative' }}>
+                    <Image src="/echipa.jpg" alt="Echipa Momentum" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                  </div>
+                </div>
+		<div className="sr sr-up sr-d2 btn-desktop">
                     <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
                   </div>
                 </div>
-                <div className="sr sr-right sr-d1" style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ width: '100%', maxWidth: 380, aspectRatio: '7/5', borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', overflow: 'hidden', position: 'relative' }}>
-                    <Image src="/echipa.jpg" alt="Echipa Momentum" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
-                  </div>
+		<div className="btn-mobile-after">
+                  <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
                 </div>
               </RevealSection>
             </div>
@@ -329,6 +333,9 @@ export default function HomePage() {
             </div>
           </div>
 
+	
+
+
         </div>
       </section>
 
@@ -336,11 +343,11 @@ export default function HomePage() {
       <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="04" />
         <div className="wrap-wide">
-          <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+          <RevealSection className="grid-2col prayer-mobile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
 
             {/* Left: poza */}
-            <div className="sr sr-left sr-d1">
-              <div style={{
+            <div className="sr sr-left sr-d1 prayer-image-col">
+              <div className="photo-card-wrap" style={{
                 aspectRatio: '4/5', maxHeight: 500,
                 borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
                 position: 'relative', overflow: 'hidden',
@@ -355,7 +362,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: text aliniat dreapta */}
-            <div style={{ textAlign: 'right' }}>
+            <div className="prayer-text-col" style={{ textAlign: 'right' }}>
               <p className="sr sr-up label">RUGĂCIUNE</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
                 AI NEVOIE<br />DE<br />RUGĂCIUNE?
@@ -363,9 +370,13 @@ export default function HomePage() {
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
                 Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
               </p>
-              <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <div className="sr sr-up sr-d3 btn-desktop" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Link href="/pray" className="btn btn-dark">Stai alături</Link>
               </div>
+            </div>
+
+            <div className="btn-mobile-after prayer-button-col">
+              <Link href="/pray" className="btn btn-dark">Stai alături</Link>
             </div>
 
           </RevealSection>
