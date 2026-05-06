@@ -40,7 +40,7 @@ export default function Navigation() {
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 88,
- 	padding: '0 0px',
+ 	padding: '0 10px',
       }}>
 
         {/* ── LOGO ── */}

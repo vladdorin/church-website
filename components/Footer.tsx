@@ -42,13 +42,13 @@ export default function Footer() {
       {/* ── Logo gigant în fundal ── */}
       <div style={{
         position: 'absolute',
-        bottom: 52,
+        bottom:0,
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '86vw',
+        width: '100vw',
         maxWidth: 1100,
         minWidth: 320,
-        height: '260px',
+        height: '550px',
         opacity: 0.12,
         pointerEvents: 'none',
         userSelect: 'none',
@@ -63,10 +63,10 @@ export default function Footer() {
 
       {/* ── Conținut ── */}
       <div className="wrap-wide" style={{ paddingTop:'72px', paddingBottom:'48px', position:'relative', zIndex:1 }}>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
+        <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
 
           {/* Brand */}
-          <div style={{ gridColumn:'span 2' }}>
+          <div className="footer-brand" style={{ gridColumn:'span 2' }}>
             <p style={{ color:'rgba(255,255,255,0.45)', fontSize:14, lineHeight:1.7, maxWidth:420 }}>
               O comunitate condusă de Duhul Sfânt,<br/>
               în mișcare, pentru gloria lui Dumnezeu.

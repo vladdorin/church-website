@@ -108,7 +108,7 @@ export default function CountdownHero() {
       {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
       <div className="wrap-wide" style={{
   	position: 'absolute', top: 28, left: 0, right: 0,
-  	zIndex: 2, padding: '0 0px',
+  	zIndex: 2, padding: '0 10px',
   	display: 'flex', justifyContent: 'space-between',
   	alignItems: 'center',
       }}>
@@ -171,7 +171,7 @@ export default function CountdownHero() {
       {/* ── BOTTOM ROW ── */}
       <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
         <div className="wrap-wide" style={{
-          padding: '24px 0 36px',
+          paddingTop: '24px', paddingBottom: '36px',
           display: 'flex', alignItems: 'center',
           justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,
         }}>

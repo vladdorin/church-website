@@ -245,12 +245,16 @@ li   { font-weight: 400; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: rgba(25,50,175,0.25); border-radius: 99px; }
 
+/* ── BUTON MOBIL — ascuns pe desktop ── */
+.btn-mobile-after { display: none; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 767px) {
   .section    { padding: 72px 0; }
   .section-sm { padding: 48px 0; }
   .wrap, .wrap-wide { padding: 0 20px; }
   [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  .grid-2col { grid-template-columns: 1fr !important; }
   .display-ghost { -webkit-text-stroke-width: 1.5px; }
 
   /* ── PAGE SECTIONS ── */
@@ -265,8 +269,25 @@ li   { font-weight: 400; }
   /* ── GAP redus când gridurile devin 1 coloană ── */
   [style*="gap: 80px"], [style*="gap: 80"] { gap: 40px !important; }
 
-  /* ── PHOTO CARD — proporție mai mică pe telefon ── */
-  .photo-card-wrap { aspect-ratio: 4/3 !important; max-height: 300px !important; }
+  /* ── PHOTO CARD — integrat frumos sub text ── */
+  .photo-card-wrap {
+    aspect-ratio: 4/5 !important;
+    max-height: none !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    margin-top: 8px !important;
+  }
+
+  /* ── FOTO col — fără animație translateX care taie din ecran ── */
+  .sr-right { transform: translateY(24px) !important; }
+
+  /* ── FOOTER — 1 coloană pe mobile ── */
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .footer-brand { grid-column: span 1 !important; }
+
+  /* ── BUTON DUPĂ VIZUAL — desktop ascunde mobile-after, mobile ascunde desktop ── */
+  .btn-mobile-after { display: block !important; margin-top: 8px; }
+  .btn-desktop { display: none !important; }
 
   /* ── RUGĂCIUNE — text înainte de lista de rugăciuni ── */
   .prayer-text-col { order: 1; }
