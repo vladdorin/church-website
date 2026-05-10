@@ -12,9 +12,8 @@ export default function PrayPage() {
       {/* HERO */}
       <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label" style={{color:'#b6d8fc'}}>Rugăciune</p>
-          <h1 className="display" style={{fontSize:'clamp(3rem,9vw,7rem)', color:'white', marginBottom:24}}>
-            STAI<br /><span style={{color:'#b6d8fc'}}>ALĂTURI DE NOI</span>
+          <h1 className="display" style={{fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24}}>
+            STAI ALĂTURI<span style={{color:'#b6d8fc'}}> <br />DE NOI</span>
           </h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             Rugăciunea este motorul din spatele a tot ce facem.<br />
@@ -26,9 +25,8 @@ export default function PrayPage() {
       {/* PENTRU CE NE RUGĂM */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label">Rugăciunile noastre</p>
-          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
-            PENTRU CE NE RUGĂM
+          <h2 className="display" style={{fontSize:'clamp(2rem,3.5vw,4rem)', color:'#0a0f2c', marginBottom:12, lineHeight: 1 }}>
+            MOTIVELE NOASTRE DE RUGĂCIUNE
           </h2>
           <p style={{color:'rgba(10,15,44,0.5)', maxWidth:480, margin:'0 auto 56px', fontWeight:300}}>
             Iată pentru ce ne rugăm zilnic. Te invităm să te alături.
@@ -55,12 +53,10 @@ export default function PrayPage() {
       {/* CTA */}
       <section style={{background:'linear-gradient(135deg,#0f1052,#080818)', padding:'100px 0'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <div style={{fontSize:56, marginBottom:16}}>🙏</div>
-          <p className="label" style={{color:'#b6d8fc'}}>Cerere personală</p>
-          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:16}}>
-            AI O CERERE DE RUGĂCIUNE?
+          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:16, lineHeight: 1 }}>
+            AI O NEVOIE PERSONALĂ DE RUGĂCIUNE?
           </h2>
-          <p style={{color:'rgba(255,255,255,0.55)', maxWidth:480, margin:'0 auto 40px', fontWeight:300, lineHeight:1.8}}>
+          <p style={{color:'rgba(255,255,255,0.55)', maxWidth:380, margin:'0 auto 40px', fontWeight:300, lineHeight:1.8}}>
             Echipa noastră se va ruga personal pentru tine. Nu ești singur(ă).
           </p>
           <Link href="/connect" className="btn btn-white">Trimite cererea ta</Link>
