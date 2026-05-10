@@ -241,9 +241,33 @@ li   { font-weight: 400; }
 .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
 .animate-fade-in { animation: fadeIn 0.5s ease forwards; }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: rgba(25,50,175,0.25); border-radius: 99px; }
+/* ── SCROLLBAR MODERN (dark track + light thumb) ── */
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2fe #0f1052; /* thumb deschis + track închis */
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f1052; /* navy închis din brand */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dbeafe, #a5b4fc); /* deschis, elegant */
+  border-radius: 999px;
+  border: 2px solid #0f1052; /* creează spacing clean */
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffffff, #c7d2fe);
+}
 
 /* ── BUTON MOBIL — ascuns pe desktop ── */
 .btn-mobile-after { display: none; }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Misiunea noastră | Momentum · Alba Iulia',
@@ -13,88 +14,225 @@ export default function MisiuneaNoastraPage() {
       <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <p className="label" style={{color:'#b6d8fc'}}>Misiunea noastră</p>
-          <h1 className="display" style={{fontSize:'clamp(2.5rem,8vw,6.5rem)', color:'white', marginBottom:24, lineHeight:1}}>
+          <h1 className="display" style={{fontSize:'clamp(2.5rem,5vw,6.5rem)', color:'white', marginBottom:24, lineHeight:1}}>
             UN ORAȘ CU ISTORIE,<br /><span style={{color:'#b6d8fc'}}>UN VIITOR<br />DE CONSTRUIT</span>
           </h1>
-          <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:560, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
+          <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:850, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             De ce Alba Iulia? De ce acum? Și ce credem că Dumnezeu vrea să facă în acest loc.
           </p>
         </div>
       </section>
 
       {/* DESPRE ORAȘ */}
-      <section className="section" style={{background:'white'}}>
-        <div className="wrap">
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}}>
-            <div>
-              <p className="label">Orașul</p>
-              <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:24}}>
-                ALBA IULIA,<br />ROMÂNIA
-              </h2>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
-                Un oraș bogat în istorie, identitate și semnificație națională. Un loc unde trecutul
-                este onorat, dar viitorul este încă în construcție.
-              </p>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300}}>
-                Cu aproximativ 70.000 de locuitori, o comunitate locală în creștere de familii și tineri,
-                și un rol cultural și spiritual de referință în România — Alba Iulia este locul perfect
-                pentru a construi ceva nou și durabil.
-              </p>
-            </div>
-            <div style={{display:'flex', flexDirection:'column', gap:16}}>
-              {[
-                { icon:'🏙️', stat:'~70.000', desc:'locuitori în Alba Iulia' },
-                { icon:'👨‍👩‍👧', stat:'În creștere', desc:'comunitate de familii și tineri' },
-                { icon:'🇷🇴', stat:'Reper', desc:'cultural și spiritual în România' },
-                { icon:'🎓', stat:'Universitar', desc:'centru academic regional important' },
-              ].map(({ icon, stat, desc }) => (
-                <div key={stat} className="card" style={{display:'flex', gap:20, alignItems:'center', padding:24}}>
-                  <span style={{fontSize:32}}>{icon}</span>
-                  <div>
-                    <div className="display" style={{fontSize:26, color:'#0a0f2c'}}>{stat}</div>
-                    <div style={{color:'rgba(10,15,44,0.5)', fontSize:14, fontWeight:300}}>{desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+<section className="section" style={{ background: 'white' }}>
+  <div className="wrap">
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 64,
+        alignItems: 'center',
+      }}
+    >
+      
+      {/* LEFT */}
+      <div>
+        <p className="label">Orașul</p>
 
-      {/* SEMNIFICAȚIE ISTORICĂ */}
-      <section style={{background:'#0a0f2c', padding:'80px 0'}}>
-        <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label" style={{color:'#b6d8fc'}}>Semnificație</p>
-          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:32}}>
-            UN LOC CU GREUTATE
-          </h2>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:20}}>
-            {[
-              { icon:'⚔️', titlu:'Cetatea Albă', desc:'Alba Iulia găzduiește una dintre cele mai impresionante cetăți medievale din Europa.' },
-              { icon:'🇷🇴', titlu:'Unirea din 1918', desc:'Locul unde s-a semnat Unirea cea Mare — inima simbolică a României.' },
-              { icon:'⛪', titlu:'Moștenire creștină', desc:'Oraș cu rădăcini creștine adânci, gata să primească o comunitate de credință vie.' },
-            ].map(({ icon, titlu, desc }) => (
-              <div key={titlu} style={{
-                background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)',
-                borderRadius:20, padding:32, textAlign:'center'
-              }}>
-                <div style={{fontSize:40, marginBottom:16}}>{icon}</div>
-                <h3 className="display" style={{fontSize:22, color:'white', marginBottom:10}}>{titlu}</h3>
-                <p style={{color:'rgba(255,255,255,0.5)', fontSize:14, lineHeight:1.7, fontWeight:300}}>{desc}</p>
-              </div>
-            ))}
+        <h2
+          className="display"
+          style={{
+            fontSize: 'clamp(2rem,5vw,3.5rem)',
+            color: '#0a0f2c',
+            marginBottom: 24,
+          }}
+        >
+          ALBA IULIA,<br />ROMÂNIA
+        </h2>
+
+        <p
+          style={{
+            color: 'rgba(10,15,44,0.65)',
+            lineHeight: 1.8,
+            fontWeight: 300,
+            marginBottom: 16,
+          }}
+        >
+          Un oraș bogat în istorie, identitate și semnificație națională. Un loc unde trecutul
+          este onorat, dar viitorul este încă în construcție.
+        </p>
+
+        <p
+          style={{
+            color: 'rgba(10,15,44,0.65)',
+            lineHeight: 1.8,
+            fontWeight: 300,
+          }}
+        >
+          Cu aproximativ 70.000 de locuitori, o comunitate locală în creștere de familii și tineri,
+          și un rol cultural și spiritual de referință în România — Alba Iulia este locul perfect
+          pentru a construi ceva nou și durabil.
+        </p>
+      </div>
+
+{/* RIGHT: PHOTO */}
+<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+  <div
+    className="photo-card-wrap"
+    style={{
+      width: '100%',          // 🔥 important
+      maxWidth: 400,          // controlezi cât de mare e
+      height: 280,
+      borderRadius: 0,
+      clipPath:
+        'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
+      position: 'relative',
+      overflow: 'hidden',
+      background: '#0f1052',
+    }}
+  >
+    <Image
+      src="/alba-iulia.jpg"
+      alt="Alba Iulia"
+      fill
+      style={{
+        objectFit: 'cover',
+        objectPosition: 'center',
+      }}
+    />
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+     {/* DE CE ALBA IULIA */}
+<section style={{ background: '#0a0f2c', padding: '110px 0' }}>
+  <div className="wrap">
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '0.9fr 1.1fr',
+        gap: 72,
+        alignItems: 'start',
+      }}
+    >
+      <div>
+        <p className="label" style={{ color: '#b6d8fc' }}>
+          De ce Alba Iulia?
+        </p>
+
+        <h2
+          className="display"
+          style={{
+            fontSize: 'clamp(2.4rem,4.2vw,4.8rem)',
+            color: 'white',
+            lineHeight: 1,
+            marginBottom: 28,
+          }}
+        >
+          UN ORAȘ CU<br />RĂDĂCINI.<br />OAMENI CU<br />VIITOR.
+        </h2>
+
+        <p
+          style={{
+            color: 'rgba(255,255,255,0.58)',
+            fontSize: 17,
+            lineHeight: 1.8,
+            fontWeight: 300,
+            maxWidth: 520,
+          }}
+        >
+          Alba Iulia este un oraș cu memorie, identitate și simbol național.
+          Dar dincolo de istorie, vedem oameni reali: familii, tineri,
+          studenți și copii care au nevoie de speranță, comunitate și direcție.
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gap: 18 }}>
+        {[
+          {
+            nr: '01',
+            titlu: 'Un oraș strategic',
+            desc:
+              'Alba Iulia este un centru regional în creștere, cu familii tinere, școli, universitate și o comunitate care se dezvoltă constant.',
+          },
+          {
+            nr: '02',
+            titlu: 'O generație care caută sens',
+            desc:
+              'Mulți tineri cresc într-un context religios, dar fără o legătură vie cu Dumnezeu sau cu o comunitate autentică de credință.',
+          },
+          {
+            nr: '03',
+            titlu: 'O nevoie de comunitate reală',
+            desc:
+              'Vrem să construim o biserică în care oamenii sunt cunoscuți, primiți, formați și trimiși să trăiască cu scop în orașul lor.',
+          },
+        ].map(({ nr, titlu, desc }) => (
+          <div
+            key={nr}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '72px 1fr',
+              gap: 24,
+              padding: '28px 0',
+              borderTop: '1px solid rgba(255,255,255,0.14)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 900,
+                fontSize: 18,
+                color: '#b6d8fc',
+                letterSpacing: '0.08em',
+              }}
+            >
+              {nr}
+            </div>
+
+            <div>
+              <h3
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 'clamp(1.35rem,2vw,2rem)',
+                  lineHeight: 1.05,
+                  letterSpacing: '-0.04em',
+                  color: 'white',
+                  marginBottom: 10,
+                }}
+              >
+                {titlu}
+              </h3>
+
+              <p
+                style={{
+                  color: 'rgba(255,255,255,0.56)',
+                  fontSize: 15.5,
+                  lineHeight: 1.75,
+                  fontWeight: 300,
+                  maxWidth: 640,
+                }}
+              >
+                {desc}
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        ))}        
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* CE VEDEM ÎN ALBA IULIA */}
       <section className="section" style={{background:'#f4f2ee'}}>
         <div className="wrap">
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}}>
             <div>
-              <p className="label">Nevoia reală</p>
               <h2 className="display" style={{fontSize:'clamp(2rem,5vw,3.5rem)', color:'#0a0f2c', marginBottom:24}}>
-                CE VEDEM ÎN<br />ALBA IULIA
+                NEVOIA PE CARE O VEDEM ÎN<br />ALBA IULIA
               </h2>
               <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
                 O generație în creștere este deconectată de credință. Familiile caută valori și direcție.
@@ -110,14 +248,25 @@ export default function MisiuneaNoastraPage() {
             </div>
             <div style={{display:'flex', flexDirection:'column', gap:16}}>
               {[
-                { icon:'🎓', stat:'18–20%', desc:'din populație are vârsta școlară (0–18 ani)' },
-                { icon:'✝️', stat:'85–90%', desc:'se identifică drept creștini — dar puțini merg la biserică' },
-                { icon:'🔌', stat:'Mulți', desc:'văd credința ca tradiție, nu ca relație vie cu Dumnezeu' },
+                {  stat:'18–20% din populație are vârsta școlară (0-18 ani)'},
+                {  stat:'85–90% din populație se identifică ca și creștini' },
+                {  stat:'Un procent în creștere de oameni sunt deconectați de la credință'},
               ].map(({ icon, stat, desc }) => (
                 <div key={stat} className="card" style={{display:'flex', gap:20, alignItems:'center', padding:24}}>
                   <span style={{fontSize:32}}>{icon}</span>
                   <div>
-                    <div className="display" style={{fontSize:28, color:'#1932af'}}>{stat}</div>
+                    <div
+  style={{
+    fontFamily: "'Montserrat', sans-serif",
+    fontWeight: 900,
+    fontSize: 'clamp(1.2rem, 1.6vw, 1.6rem)',
+    lineHeight: 1.2,
+    letterSpacing: '-0.02em',
+    color: '#1932af',
+  }}
+>
+  {stat}
+</div>
                     <div style={{color:'rgba(10,15,44,0.6)', fontSize:14, fontWeight:300}}>{desc}</div>
                   </div>
                 </div>
@@ -174,8 +323,7 @@ export default function MisiuneaNoastraPage() {
             background:'linear-gradient(135deg,#0f1052,#1932af)',
             borderRadius:32, padding:'64px 48px', textAlign:'center', maxWidth:800, margin:'0 auto'
           }}>
-            <div style={{fontSize:56, marginBottom:16}}>🚀</div>
-            <p className="label" style={{color:'#b6d8fc'}}>De ce acum?</p>
+            
             <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:20}}>
               MOMENTUL E ACUM
             </h2>

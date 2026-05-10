@@ -17,13 +17,10 @@ export default function AboutPage() {
           <h1 className="display" style={{fontSize:'clamp(2.2rem,6vw,5rem)', color:'white', marginBottom:24}}>
             POVESTEA<br /><span style={{color:'#b6d8fc'}}>NOASTRĂ</span>
           </h1>
-          <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:560, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
-            Nu am vrut să construim o altă biserică.<br />Am vrut să construim un acasă.
-          </p>
         </div>
       </section>
 
-      {/* PASTORI */}
+      {/* PASTORII */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap">
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}} className="grid-1col-md-2col">
@@ -33,7 +30,7 @@ export default function AboutPage() {
                 JOHN &amp;<br />VOICHI DURA
               </h2>
               <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, marginBottom:16, fontWeight:300, fontSize:16}}>
-                Momentum Church a fost fondată de John și Voichi Dura, care, împreună
+                Biserica Momentum a fost fondată de John și Voichi Dura, care, împreună
                 cu un grup pasionat de tineri, au pus bazele unei comunități de credință
                 în creștere în Alba Iulia.
               </p>
@@ -54,7 +51,7 @@ export default function AboutPage() {
               }}>
                 <Image
                   src="/john-voichi.jpg"
-                  alt="John și Voichi Dura — Pastori Momentum Church"
+                  alt="John și Voichi Dura — Pastori Biserica Momentum"
                   fill
                   style={{ objectFit:'cover', objectPosition:'center top' }}
                 />
@@ -64,7 +61,7 @@ export default function AboutPage() {
                   padding:'28px 24px',
                 }}>
                   <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.55)' }}>
-                    Pastori · Momentum Church · Alba Iulia
+                    Pastori · Biserica Momentum
                   </p>
                 </div>
               </div>
@@ -72,7 +69,7 @@ export default function AboutPage() {
                 position:'absolute', bottom:-16, right:-16, background:'#1932af', color:'white',
                 borderRadius:16, padding:'12px 20px', fontSize:13, fontWeight:700
               }}>
-                Alba Iulia, România 📍
+                Alba Iulia, România
               </div>
             </div>
           </div>
@@ -83,8 +80,8 @@ export default function AboutPage() {
       <section style={{background:'#0a0f2c', padding:'80px 0'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <p className="display" style={{fontSize:'clamp(1.4rem,3.5vw,2.8rem)', color:'white', maxWidth:800, margin:'0 auto', lineHeight:1.2}}>
-            „NU AM VRUT DOAR SĂ CONSTRUIM O BISERICĂ.
-            <span style={{color:'#b6d8fc'}}> AM VRUT SĂ CONSTRUIM UN ACASĂ."</span>
+            „NU VREM DOAR SĂ CONSTRUIM O BISERICĂ.
+            <span style={{color:'#b6d8fc'}}> VREM SĂ CONSTRUIM UN LOC UNDE TOATĂ LUMEA SE SIMTE ACASĂ."</span>
           </p>
           <p style={{color:'rgba(255,255,255,0.4)', marginTop:24, fontSize:14, fontWeight:500, letterSpacing:'0.1em'}}>
             — John Dura, Pastor
@@ -92,41 +89,96 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* O BISERICĂ CARE ESTE */}
-      <section className="section" style={{background:'#f8f9ff'}}>
-        <div className="wrap">
-          <p className="label" style={{textAlign:'center'}}>Identitatea noastră</p>
-          <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,3rem)', color:'#0a0f2c', textAlign:'center', marginBottom:48}}>
-            O BISERICĂ CARE ESTE...
-          </h2>
-          <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:2, borderRadius:24, overflow:'hidden', border:'1px solid rgba(10,15,44,0.1)'}}>
-            {[
-              { nr:'1.', titlu:'Autentică,', sub:'nu religioasă' },
-              { nr:'2.', titlu:'Relevantă,', sub:'nu depășită' },
-              { nr:'3.', titlu:'Plină de viață,', sub:'nu de rutină' },
-            ].map(({ nr, titlu, sub }, i) => (
-              <div key={nr} style={{
-                background:'white', padding:'48px 32px', textAlign:'center',
-                borderLeft: i > 0 ? '1px solid rgba(10,15,44,0.08)' : 'none'
-              }}>
-                <div className="display" style={{fontSize:56, color:'#1932af', marginBottom:8}}>{nr}</div>
-                <div className="display" style={{fontSize:28, color:'#0a0f2c'}}>{titlu}</div>
-                <div style={{color:'rgba(10,15,44,0.4)', marginTop:4, fontWeight:300}}>{sub}</div>
-              </div>
-            ))}
+     {/* NE DORIM O BISERICĂ */}
+<section className="section" style={{ background: '#f8f9ff' }}>
+  <div className="wrap">
+    <p className="label" style={{ textAlign: 'center' }}>
+      Identitatea noastră
+    </p>
+
+    <h2
+      style={{
+        fontFamily: "'Montserrat', sans-serif",
+        fontWeight: 900,
+        fontSize: 'clamp(2rem, 2.4vw, 4.6rem)',
+        lineHeight: 1.02,
+        letterSpacing: '-0.055em',
+        color: '#0a0f2c',
+        textAlign: 'center',
+        margin: '0 auto 56px',
+        maxWidth: 950,
+        textTransform: 'uppercase',
+      }}
+    >
+      NE DORIM SĂ CONSTRUIM O BISERICĂ DĂTĂTOARE DE VIAȚĂ UNDE OAMENII SĂ ÎL
+      ÎNTÂLNEASCĂ PE DUMNEZEU, SĂ CRESCĂ ÎNTR-O COMUNITATE AUTENTICĂ ȘI SĂ
+      TRĂIASCĂ ÎN SCOPUL PE CARE DUMNEZEU ÎL ARE PENTRU EI.
+    </h2>
+
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 16,
+      }}
+    >
+      {[
+        { nr: '1.', titlu: 'O biserică pentru generația tânără' },
+        { nr: '2.', titlu: 'O biserică pentru familii' },
+        { nr: '3.', titlu: 'O biserică care să construiască scop' },
+      ].map(({ nr, titlu }) => (
+        <div
+          key={nr}
+          style={{
+            background: '#ffffff',
+            padding: '52px 34px',
+            textAlign: 'center',
+            borderRadius: 28,
+            border: '1px solid rgba(10,15,44,0.08)',
+            boxShadow: '0 14px 40px rgba(10,15,44,0.04)',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: 64,
+              lineHeight: 1,
+              color: '#1932af',
+              marginBottom: 18,
+              letterSpacing: '-0.06em',
+            }}
+          >
+            {nr}
+          </div>
+
+          <div
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(1.2rem, 1.1vw, 2rem)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.045em',
+              color: '#0a0f2c',
+            }}
+          >
+            {titlu}
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* VIZIUNEA */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap">
-          <p className="label" style={{textAlign:'center'}}>Viziunea</p>
+          <p className="label" style={{textAlign:'center'}}>Viziunea Noastră</p>
           <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,3rem)', color:'#0a0f2c', textAlign:'center', marginBottom:12}}>
             VREM SĂ FIM O COMUNITATE...
           </h2>
           <p style={{color:'rgba(10,15,44,0.5)', textAlign:'center', maxWidth:560, margin:'0 auto 48px', fontWeight:300}}>
-            Iată viziunea care ne ghidează fiecare pas.
+
           </p>
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:20}}>
             {[
@@ -136,7 +188,7 @@ export default function AboutPage() {
               'Care trezește creativitatea, încurajând darurile și potențialul pus de Dumnezeu în fiecare om',
               'Care ajunge la tineri într-un mod practic, autentic și plin de iubire',
               'Cu o conducere care împuternicește fiecare credincios să fie martor al lui Hristos în viața de zi cu zi',
-              'Un loc unde copiii sunt iubiți și formați cu grijă, înțelepciune și pasiune ca să-L cunoască pe Isus',
+              'Unde copiii sunt iubiți și formați cu grijă, înțelepciune și pasiune ca să-L cunoască pe Isus',
               'Care crește împreună, unde fiecare membru este învățat, sprijinit și încurajat să devină matur și activ',
             ].map((text, i) => (
               <div key={i} className="card" style={{display:'flex', gap:16, alignItems:'flex-start'}}>
@@ -157,7 +209,7 @@ export default function AboutPage() {
           }}>
             <p className="label" style={{color:'#b6d8fc'}}>Parteneriat oficial</p>
             <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,2.8rem)', color:'white', marginBottom:16}}>
-              ÎN PARTENERIAT CU ARC
+              SUNTEM PARTENERI CU ARC
             </h2>
             <p style={{color:'rgba(255,255,255,0.55)', maxWidth:640, margin:'0 auto 24px', lineHeight:1.8, fontWeight:300}}>
               The Association of Related Churches (ARC) este o organizație globală care a ajutat
@@ -179,7 +231,7 @@ export default function AboutPage() {
           <h2 className="display" style={{fontSize:'clamp(1.8rem,5vw,4.5rem)', color:'#0a0f2c', marginBottom:16}}>
             MOMENTUL E ACUM.
           </h2>
-          <p style={{color:'rgba(10,15,44,0.5)', maxWidth:480, margin:'0 auto 40px', fontWeight:300, fontSize:17}}>
+          <p style={{color:'rgba(10,15,44,0.5)', maxWidth:550, margin:'0 auto 40px', fontWeight:300, fontSize:17}}>
             Suntem la început. Acum e momentul perfect să te alături.
           </p>
           <div style={{display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center'}}>
