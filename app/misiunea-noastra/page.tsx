@@ -227,54 +227,112 @@ export default function MisiuneaNoastraPage() {
 </section>
 
       {/* CE VEDEM ÎN ALBA IULIA */}
-      <section className="section" style={{background:'#f4f2ee'}}>
-        <div className="wrap">
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}}>
-            <div>
-              <h2 className="display" style={{fontSize:'clamp(2rem,5vw,3.5rem)', color:'#0a0f2c', marginBottom:24}}>
-                NEVOIA PE CARE O VEDEM ÎN<br />ALBA IULIA
-              </h2>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
-                O generație în creștere este deconectată de credință. Familiile caută valori și direcție.
-                Mulți oameni se identifică drept creștini, dar nu participă activ la viața unei comunități.
-              </p>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, marginBottom:16}}>
-                Peste 85–90% din populație se identifică drept creștin, dar doar o mică parte participă
-                activ la o biserică. Mulți văd religia ca o tradiție, nu o relație personală cu Dumnezeu.
-              </p>
-              <p style={{color:'#0a0f2c', lineHeight:1.8, fontWeight:600, fontStyle:'italic'}}>
-                „În spatele acestor numere sunt oameni reali, care caută scop, speranță și apartenența."
-              </p>
+<section className="section" style={{ background: '#f4f2ee' }}>
+  <div className="wrap">
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 64,
+        alignItems: 'center',
+      }}
+    >
+      <div>
+        <h2
+          className="display"
+          style={{
+            fontSize: 'clamp(2rem,5vw,3.5rem)',
+            color: '#0a0f2c',
+            marginBottom: 24,
+          }}
+        >
+          NEVOIA PE CARE O VEDEM ÎN<br />ALBA IULIA
+        </h2>
+
+        <p
+          style={{
+            color: 'rgba(10,15,44,0.65)',
+            lineHeight: 1.8,
+            fontWeight: 300,
+            marginBottom: 16,
+          }}
+        >
+          O generație în creștere este deconectată de credință. Familiile caută
+          valori și direcție. Mulți oameni se identifică drept creștini, dar nu
+          participă activ la viața unei comunități.
+        </p>
+
+        <p
+          style={{
+            color: 'rgba(10,15,44,0.65)',
+            lineHeight: 1.8,
+            fontWeight: 300,
+            marginBottom: 16,
+          }}
+        >
+          Peste 85–90% din populație se identifică drept creștin, dar doar o mică
+          parte participă activ la o biserică. Mulți văd religia ca o tradiție, nu
+          o relație personală cu Dumnezeu.
+        </p>
+
+        <p
+          style={{
+            color: '#0a0f2c',
+            lineHeight: 1.8,
+            fontWeight: 600,
+            fontStyle: 'italic',
+          }}
+        >
+          „În spatele acestor numere sunt oameni reali, care caută scop, speranță
+          și apartenență.”
+        </p>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {[
+          { stat:'18–20% din populație are vârsta școlară (0-18 ani)'},
+	  { stat:'85–90% din populație se identifică ca și creștini' }, 
+	  { stat:'Un procent în creștere de oameni sunt deconectați de la credință'},
+        ].map(({ stat, desc }) => (
+          <div
+            key={stat}
+            className="card"
+            style={{
+              padding: 30,
+              borderRadius: 24,
+              background: 'white',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 900,
+                fontSize: 'clamp(1.25rem, 1.7vw, 1.75rem)',
+                lineHeight: 1.15,
+                letterSpacing: '-0.035em',
+                color: '#1932af',
+                marginBottom: 10,
+              }}
+            >
+              {stat}
             </div>
-            <div style={{display:'flex', flexDirection:'column', gap:16}}>
-              {[
-                {  stat:'18–20% din populație are vârsta școlară (0-18 ani)'},
-                {  stat:'85–90% din populație se identifică ca și creștini' },
-                {  stat:'Un procent în creștere de oameni sunt deconectați de la credință'},
-              ].map(({ icon, stat, desc }) => (
-                <div key={stat} className="card" style={{display:'flex', gap:20, alignItems:'center', padding:24}}>
-                  <span style={{fontSize:32}}>{icon}</span>
-                  <div>
-                    <div
-  style={{
-    fontFamily: "'Montserrat', sans-serif",
-    fontWeight: 900,
-    fontSize: 'clamp(1.2rem, 1.6vw, 1.6rem)',
-    lineHeight: 1.2,
-    letterSpacing: '-0.02em',
-    color: '#1932af',
-  }}
->
-  {stat}
-</div>
-                    <div style={{color:'rgba(10,15,44,0.6)', fontSize:14, fontWeight:300}}>{desc}</div>
-                  </div>
-                </div>
-              ))}
+
+            <div
+              style={{
+                color: 'rgba(10,15,44,0.62)',
+                fontSize: 15,
+                lineHeight: 1.65,
+                fontWeight: 300,
+              }}
+            >
+              {desc}
             </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* PROBLEMA & OPORTUNITATEA */}
       <section className="section" style={{background:'white'}}>
