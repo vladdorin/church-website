@@ -32,7 +32,7 @@ export default function JoinPage() {
               { titlu:'Roagă-te', desc:'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.' },
               { titlu:'Implică-te', desc:'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.' },
               { titlu:'Donează', desc:'Fii parte din construirea a ceva etern. Fiecare contribuție este dublată de ARC.' },
-            ].map(({ icon, titlu, desc }) => (
+            ].map(({ titlu, desc }) => (
               <div key={titlu} className="card" style={{textAlign:'center', padding:36}}>
                 <h3 className="display" style={{
     fontSize: 'clamp(16px, 2vw, 20px)',
