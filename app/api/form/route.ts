@@ -9,8 +9,7 @@ export async function POST(req: Request) {
     await fetch(process.env.GOOGLE_SCRIPT_URL!, {
   method: 'POST',
   body: JSON.stringify(data),
-  }),
-})
+  })
 
     // 🔹 Config email (Gmail App Password)
     const transporter = nodemailer.createTransport({
