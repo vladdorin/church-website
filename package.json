@@ -11,6 +11,7 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+    "@react-email/render": "^2.0.8",
     "@stripe/stripe-js": "^4.0.0",
     "next": "14.2.5",
     "nodemailer": "^8.0.7",
