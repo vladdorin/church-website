@@ -89,7 +89,14 @@ export default function Footer() {
           <div>
             <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>Contact</p>
             <div style={{ display:'flex', flexDirection:'column', gap:12, fontSize:14, color:'rgba(255,255,255,0.55)' }}>
-              <span>Alba Iulia, România</span>
+              <a
+  href="https://www.google.com/maps/search/?api=1&query=Alba+Iulia+Romania"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}
+>
+  Alba Iulia, România
+</a>
               <a href="mailto:biserica.momentum@gmail.com" style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}>
                 biserica.momentum@gmail.com
               </a>

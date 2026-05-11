@@ -25,7 +25,7 @@ export default function PrayPage() {
       {/* PENTRU CE NE RUGĂM */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <h2 className="display" style={{fontSize:'clamp(2rem,3.5vw,4rem)', color:'#0a0f2c', marginBottom:12, lineHeight: 1 }}>
+          <h2 className="display" style={{fontSize:'clamp(2rem,3.5vw,4rem)', color:'#0a0f2c', marginBottom:12, lineHeight: 1.05, maxWidth:850, margin:'0 auto 40px'}}>
             MOTIVELE NOASTRE DE RUGĂCIUNE
           </h2>
           <p style={{color:'rgba(10,15,44,0.5)', maxWidth:480, margin:'0 auto 56px', fontWeight:300}}>
@@ -53,7 +53,7 @@ export default function PrayPage() {
       {/* CTA */}
       <section style={{background:'linear-gradient(135deg,#0f1052,#080818)', padding:'100px 0'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:16, lineHeight: 1 }}>
+          <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:16, lineHeight: 1.05 }}>
             AI O NEVOIE PERSONALĂ DE RUGĂCIUNE?
           </h2>
           <p style={{color:'rgba(255,255,255,0.55)', maxWidth:380, margin:'0 auto 40px', fontWeight:300, lineHeight:1.8}}>
