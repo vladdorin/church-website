@@ -907,47 +907,29 @@ html {
   }
 }
 
-
-
-
-
-.hero-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-
-  color: rgba(255,255,255,0.6);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* MOBILE FIX */
-@media (max-width: 768px) {
-  .hero-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-
-    font-size: 11px;
-  }
-}
-
 @media (max-width: 768px) {
   .hero-launch-meta {
-    top: 34px !important;
-    padding: 0 28px !important;
     align-items: flex-start !important;
-    gap: 28px !important;
+    padding: 0 28px !important;
   }
 
   .hero-launch-meta p {
-    line-height: 1.65 !important;
     margin: 0 !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-launch-date {
+    text-align: right !important;
   }
 
   .hero-launch-date span {
     display: block;
+  }
+
+  .count-separator {
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+    transform: translateY(-16px);
   }
 }

@@ -106,7 +106,7 @@ export default function CountdownHero() {
       }} />
 
       {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
-      <div className="wrap-wide hero-launch-meta" style={{
+      <div className="wrap-wide" style={{
   	position: 'absolute', top: 28, left: 0, right: 0,
   	zIndex: 2, padding: '0 32px',
   	display: 'flex', justifyContent: 'space-between',
@@ -115,9 +115,9 @@ export default function CountdownHero() {
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
           Alba Iulia, România
         </p>
-        <p className="hero-launch-date" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
-  <span>4 Octombrie 2026 </span>
-</p>
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
+          4 Octombrie 2026
+        </p>
       </div>
 
       {/* ── CENTRU ── */}
@@ -155,12 +155,12 @@ export default function CountdownHero() {
             <span style={NUM}>{t.zile}</span>
             <span style={UNIT_LABEL}>Zile</span>
           </div>
-          <span style={COLON}>:</span>
+          <span className="count-separator" style={COLON}>:</span>
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.ore).padStart(2,'0')}</span>
             <span style={UNIT_LABEL}>Ore</span>
           </div>
-          <span style={COLON}>:</span>
+          <span className="count-separator" style={COLON}>:</span>
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.min).padStart(2,'0')}</span>
             <span style={UNIT_LABEL}>Minute</span>
@@ -170,7 +170,7 @@ export default function CountdownHero() {
 
       {/* ── BOTTOM ROW ── */}
       <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-        <div className="wrap-wide" style={{
+        <div className="wrap-wide hero-launch-meta" style={{
           paddingTop: '24px', paddingBottom: '36px',
           display: 'flex', alignItems: 'center',
           justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,
