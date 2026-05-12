@@ -106,7 +106,7 @@ export default function CountdownHero() {
       }} />
 
       {/* ── COLȚURI — aliniate cu nav prin wrap-wide ── */}
-      <div className="wrap-wide" style={{
+      <div className="wrap-wide hero-launch-meta" style={{
   	position: 'absolute', top: 28, left: 0, right: 0,
   	zIndex: 2, padding: '0 32px',
   	display: 'flex', justifyContent: 'space-between',
@@ -115,9 +115,9 @@ export default function CountdownHero() {
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
           Alba Iulia, România
         </p>
-        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
-          4 Octombrie 2026 · 10:00
-        </p>
+        <p className="hero-launch-date" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
+  <span>4 Octombrie 2026 ·</span> <span>10:00</span>
+</p>
       </div>
 
       {/* ── CENTRU ── */}

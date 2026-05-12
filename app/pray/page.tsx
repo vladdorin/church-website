@@ -31,6 +31,7 @@ export default function PrayPage() {
           <p style={{color:'rgba(10,15,44,0.5)', maxWidth:480, margin:'0 auto 56px', fontWeight:300}}>
             Iată pentru ce ne rugăm zilnic. Te invităm să te alături.
           </p>
+
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px, 1fr))', gap:20, textAlign:'left'}}>
             {[
               { nr:'01', titlu:'O generație cu scop', desc:'Ne rugăm ca tinerii din Alba Iulia să descopere scopul dat de Dumnezeu și să trăiască o credință autentică.' },
@@ -38,11 +39,12 @@ export default function PrayPage() {
               { nr:'03', titlu:'Lansarea Momentum', desc:'Ne rugăm ca Dumnezeu să pregătească inimile oamenilor și să aducă la noi exact pe cine trebuie în octombrie 2026.' },
               { nr:'04', titlu:'Resurse și susținători', desc:'Ne rugăm pentru parteneri care să creadă în viziune și să susțină financiar construirea acestei comunități.' },
             ].map(({ nr, titlu, desc }) => (
-              <div key={nr} className="card" style={{display:'flex', gap:20, padding:28}}>
-                <span className="display" style={{fontSize:36, color:'#1932af', flexShrink:0, lineHeight:1}}>{nr}</span>
-                <div>
-                  <h3 style={{fontWeight:700, fontSize:16, color:'#0a0f2c', marginBottom:8}}>{titlu}</h3>
-                  <p style={{color:'rgba(10,15,44,0.6)', fontSize:14, lineHeight:1.8, fontWeight:300}}>{desc}</p>
+              <div key={nr} className="prayer-card">
+                <span className="display prayer-number">{nr}</span>
+
+                <div className="prayer-content">
+                  <h3 className="prayer-title">{titlu}</h3>
+                  <p className="prayer-text">{desc}</p>
                 </div>
               </div>
             ))}
@@ -62,6 +64,8 @@ export default function PrayPage() {
           <Link href="/connect" className="btn btn-white">Trimite cererea ta</Link>
         </div>
       </section>
+
+      
     </>
   )
 }

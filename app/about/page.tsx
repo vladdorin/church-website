@@ -13,8 +13,7 @@ export default function AboutPage() {
       {/* HERO */}
       <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <p className="label" style={{color:'#b6d8fc'}}>Despre noi</p>
-          <h1 className="display" style={{fontSize:'clamp(2.2rem,6vw,5rem)', color:'white', marginBottom:24}}>
+          <h1 className="display" style={{fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24}}>
             POVESTEA<br /><span style={{color:'#b6d8fc'}}>NOASTRĂ</span>
           </h1>
         </div>
@@ -89,83 +88,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-     {/* NE DORIM O BISERICĂ */}
-<section className="section" style={{ background: '#f8f9ff' }}>
+{/* NE DORIM O BISERICĂ */}
+<section className="identity-section">
   <div className="wrap">
-    <p className="label" style={{ textAlign: 'center' }}>
-      Identitatea noastră
-    </p>
+    <div className="identity-layout">
+      <div>
+        <p className="label identity-label">Identitatea noastră</p>
 
-    <h2
-      style={{
-        fontFamily: "'Montserrat', sans-serif",
-        fontWeight: 900,
-        fontSize: 'clamp(2rem, 2.4vw, 4.6rem)',
-        lineHeight: 1.02,
-        letterSpacing: '-0.055em',
-        color: '#0a0f2c',
-        textAlign: 'center',
-        margin: '0 auto 56px',
-        maxWidth: 950,
-        textTransform: 'uppercase',
-      }}
-    >
-      NE DORIM SĂ CONSTRUIM O BISERICĂ DĂTĂTOARE DE VIAȚĂ UNDE OAMENII SĂ ÎL
-      ÎNTÂLNEASCĂ PE DUMNEZEU, SĂ CRESCĂ ÎNTR-O COMUNITATE AUTENTICĂ ȘI SĂ
-      TRĂIASCĂ ÎN SCOPUL PE CARE DUMNEZEU ÎL ARE PENTRU EI.
-    </h2>
+        <h2 className="identity-title">
+          Construim o comunitate vie, autentică și relevantă.
+        </h2>
 
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 16,
-      }}
-    >
-      {[
-        { nr: '1.', titlu: 'O biserică pentru generația tânără' },
-        { nr: '2.', titlu: 'O biserică pentru familii' },
-        { nr: '3.', titlu: 'O biserică care să construiască scop' },
-      ].map(({ nr, titlu }) => (
-        <div
-          key={nr}
-          style={{
-            background: '#ffffff',
-            padding: '52px 34px',
-            textAlign: 'center',
-            borderRadius: 28,
-            border: '1px solid rgba(10,15,44,0.08)',
-            boxShadow: '0 14px 40px rgba(10,15,44,0.04)',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: 64,
-              lineHeight: 1,
-              color: '#1932af',
-              marginBottom: 18,
-              letterSpacing: '-0.06em',
-            }}
-          >
-            {nr}
+        <p className="identity-text">
+          Un loc unde oamenii Îl întâlnesc pe Dumnezeu, cresc într-o comunitate reală
+          și trăiesc scopul pe care El îl are pentru ei.
+        </p>
+      </div>
+
+      <div className="identity-cards">
+        {[
+          { nr: '01', titlu: 'Pentru generația tânără', desc: 'Un spațiu viu, curajos și relevant pentru tinerii din Alba Iulia.' },
+          { nr: '02', titlu: 'Pentru familii', desc: 'O comunitate care întărește relațiile, valorile și credința de acasă.' },
+          { nr: '03', titlu: 'Pentru scop', desc: 'Un loc unde fiecare om își descoperă darurile și chemarea.' },
+        ].map(({ nr, titlu, desc }) => (
+          <div key={nr} className="identity-card">
+            <span>{nr}</span>
+            <div>
+              <h3>{titlu}</h3>
+              <p>{desc}</p>
+            </div>
           </div>
-
-          <div
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(1.2rem, 1.1vw, 2rem)',
-              lineHeight: 1.15,
-              letterSpacing: '-0.045em',
-              color: '#0a0f2c',
-            }}
-          >
-            {titlu}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -174,8 +128,8 @@ export default function AboutPage() {
       <section className="section" style={{background:'white'}}>
         <div className="wrap">
           <p className="label" style={{textAlign:'center'}}>Viziunea Noastră</p>
-          <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,3rem)', color:'#0a0f2c', textAlign:'center', marginBottom:12}}>
-            VREM SĂ FIM O COMUNITATE...
+          <h2 className="display vision-title">
+            VREM SĂ FIM O BISERICĂ
           </h2>
           <p style={{color:'rgba(10,15,44,0.5)', textAlign:'center', maxWidth:560, margin:'0 auto 48px', fontWeight:300}}>
 
@@ -190,18 +144,23 @@ export default function AboutPage() {
               'Cu o conducere care împuternicește fiecare credincios să fie martor al lui Hristos în viața de zi cu zi',
               'Unde copiii sunt iubiți și formați cu grijă, înțelepciune și pasiune ca să-L cunoască pe Isus',
               'Care crește împreună, unde fiecare membru este învățat, sprijinit și încurajat să devină matur și activ',
-            ].map((text, i) => (
-              <div key={i} className="card" style={{display:'flex', gap:16, alignItems:'flex-start'}}>
-                <span style={{color:'#1932af', fontWeight:700, fontSize:20, flexShrink:0, marginTop:2}}>›</span>
-                <p style={{color:'rgba(10,15,44,0.7)', lineHeight:1.7, fontSize:15, fontWeight:300}}>{text}</p>
-              </div>
-            ))}
+            ].map((text, index) => (
+  <div key={text} className="vision-card">
+    <div className="vision-index">
+      {String(index + 1).padStart(2, '0')}
+    </div>
+
+    <div className="vision-arrow">›</div>
+
+    <p className="vision-text">{text}</p>
+  </div>
+))}
           </div>
         </div>
       </section>
 
       {/* ARC */}
-      <section style={{background:'#0f1052', padding:'80px 0'}}>
+      <section className="arc-section" style={{ padding:'120px 0' }}>
         <div className="wrap">
           <div style={{
             background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.1)',
@@ -219,7 +178,9 @@ export default function AboutPage() {
             <p style={{color:'#b6d8fc', fontWeight:700, fontSize:16, marginBottom:32}}>
               ✦ Fiecare donație pe care o faci va fi dublată de ARC până la $50.000 ✦
             </p>
-            <Link href="/give" className="btn btn-white">Susține lansarea</Link>
+            <Link href="/give" className="arc-btn">
+  <span>Susține lansarea</span>
+</Link>
           </div>
         </div>
       </section>

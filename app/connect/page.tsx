@@ -1,12 +1,13 @@
 'use client'
 
-
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa'
 import { HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi'
 import Link from 'next/link'
-
+import { useState } from 'react'
 
 export default function ConnectPage() {
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
   return (
     <>
       {/* HERO */}
@@ -24,108 +25,153 @@ export default function ConnectPage() {
       {/* MAIN CONTENT */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap">
-          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'start'}}>
+          <div className="connect-grid" style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'start'}}>
 
             {/* FORMULAR */}
             <div>
               <h2
-  className="display"
-  style={{
-    fontSize: 'clamp(2rem, 2.2vw, 3rem)',
-    color: '#0a0f2c',
-    marginBottom: 32,
-    whiteSpace: 'nowrap',
-  }}
->
-  LASĂ-NE UN MESAJ
-</h2>
+                className="display"
+                style={{
+                  fontSize: 'clamp(2rem, 2.2vw, 3rem)',
+                  color: '#0a0f2c',
+                  marginBottom: 32,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                LASĂ-NE UN MESAJ
+              </h2>
+
               <form
-  style={{
-    display:'flex',
-    flexDirection:'column',
-    gap:18,
-    paddingBottom:40
-  }}
-  onSubmit={async (e) => {
-    e.preventDefault()
+                style={{
+                  display:'flex',
+                  flexDirection:'column',
+                  gap:18,
+                  paddingBottom:40
+                }}
+                onSubmit={async (e) => {
+                  e.preventDefault()
+                  if (submitStatus === 'loading') return
 
-    const form = e.currentTarget
-    const formData = new FormData(form)
+                  setSubmitStatus('loading')
 
-    const res = await fetch('/api/form', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        formType: 'Contact',
-        name: formData.get('name'),
-        email: formData.get('email'),
-        subject: formData.get('subject'),
-        message: formData.get('message'),
-        extra: {
-          privacy: formData.get('privacy') === 'on',
-        },
-      }),
-    })
+                  const form = e.currentTarget
+                  const formData = new FormData(form)
 
-    if (res.ok) {
-      form.reset()
-      alert('Mesaj trimis cu succes!')
-    } else {
-      alert('A apărut o eroare. Încearcă din nou.')
-    }
-  }}
->
-  <div>
-    <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Nume *</label>
-    <input type="text" name="name" required
-      style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
-      placeholder="Ion Ionescu" />
-  </div>
+                  try {
+  const request = fetch('/api/form', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      formType: 'Alătură-te',
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      subject: formData.get('implicare'),
+      message: formData.get('message'),
+      extra: {
+        sursa: formData.get('sursa'),
+        privacy: formData.get('privacy') === 'on',
+      },
+    }),
+  })
 
-  <div>
-    <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Email *</label>
-    <input type="email" name="email" required
-      style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
-      placeholder="ion@exemplu.ro" />
-  </div>
+  setTimeout(() => {
+    form.reset()
+    setSubmitStatus('success')
+  }, 700)
 
-  <div>
-    <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Subiect</label>
-    <select name="subject"
-      style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', background:'white', boxSizing:'border-box'}}>
-      <option>Vreau să mă alătur echipei</option>
-      <option>Am un motiv de rugăciune</option>
-      <option>Vreau să susțin financiar</option>
-      <option>Sunt interesat de un parteneriat / colaborare</option>
-      <option>Altă întrebare</option>
-    </select>
-  </div>
+  const res = await request
 
-  <div>
-    <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Mesaj *</label>
-    <textarea name="message" rows={5} required
-      style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', resize:'none', boxSizing:'border-box'}}
-      placeholder="Scrie mesajul tău aici..." />
-  </div>
+  if (!res.ok) {
+    setSubmitStatus('error')
+    return
+  }
 
-  <div style={{ marginTop: 4 }}>
-    <label style={{display:'flex', alignItems:'flex-start', gap:10, fontSize:13, color:'rgba(10,15,44,0.65)', lineHeight:1.5, cursor:'pointer', marginTop: 40, marginBottom: 10 }}>
-      <input type="checkbox" name="privacy" required style={{marginTop:3, width:16, height:16, accentColor:'#1932af', flexShrink:0}} />
-      <span>
-        Sunt de acord cu{' '}
-        <Link href="/politica-de-confidentialitate" style={{color:'#1932af', fontWeight:600, textDecoration:'underline'}}>
-          Politica de confidențialitate
-        </Link>
-        .
-      </span>
-    </label>
-  </div>
+  setTimeout(() => setSubmitStatus('idle'), 3000)
+} catch {
+  setSubmitStatus('error')
+  setTimeout(() => setSubmitStatus('idle'), 3000)
+}
+                }}
+              >
+                <div>
+                  <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Nume *</label>
+                  <input type="text" name="name" required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
+                    placeholder="Ion Ionescu" />
+                </div>
 
-  <button type="submit" className="btn btn-blue" style={{justifyContent:'center', fontSize:15}}>
-    Trimite mesajul
-  </button>
-</form>
+                <div>
+                  <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Email *</label>
+                  <input type="email" name="email" required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', boxSizing:'border-box'}}
+                    placeholder="ion@exemplu.ro" />
+                </div>
+
+                <div>
+                  <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Subiect</label>
+                  <select name="subject"
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', background:'white', boxSizing:'border-box'}}>
+                    <option>Vreau să mă alătur echipei</option>
+                    <option>Am un motiv de rugăciune</option>
+                    <option>Vreau să susțin financiar</option>
+                    <option>Sunt interesat de un parteneriat / colaborare</option>
+                    <option>Altă întrebare</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label style={{display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Mesaj *</label>
+                  <textarea name="message" rows={5} required
+                    style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', resize:'none', boxSizing:'border-box'}}
+                    placeholder="Scrie mesajul tău aici..." />
+                </div>
+
+                <div style={{ marginTop: 4 }}>
+                  <label style={{display:'flex', alignItems:'flex-start', gap:10, fontSize:13, color:'rgba(10,15,44,0.65)', lineHeight:1.5, cursor:'pointer', marginTop: 40, marginBottom: 10 }}>
+                    <input type="checkbox" name="privacy" required style={{marginTop:3, width:16, height:16, accentColor:'#1932af', flexShrink:0}} />
+                    <span>
+                      Sunt de acord cu{' '}
+                      <Link href="/politica-de-confidentialitate" style={{color:'#1932af', fontWeight:600, textDecoration:'underline'}}>
+                        Politica de confidențialitate
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-blue"
+                  disabled={submitStatus === 'loading'}
+                  style={{
+                    justifyContent:'center',
+                    fontSize:15,
+                    transition:'all 0.25s ease',
+                    background:
+                      submitStatus === 'success'
+                        ? '#16a34a'
+                        : submitStatus === 'error'
+                        ? '#dc2626'
+                        : submitStatus === 'loading'
+                        ? '#64748b'
+                        : undefined,
+                    transform: submitStatus === 'success' ? 'scale(1.03)' : 'scale(1)',
+                    opacity: submitStatus === 'loading' ? 0.85 : 1,
+                  }}
+                >
+                  {submitStatus === 'loading'
+                    ? 'Se trimite...'
+                    : submitStatus === 'success'
+                    ? 'Mesaj trimis ✓'
+                    : submitStatus === 'error'
+                    ? 'Eroare. Încearcă din nou'
+                    : 'Trimite mesajul'}
+                </button>
+              </form>
             </div>
+
+        
 
             {/* INFO + SOCIAL */}
             <div>
@@ -247,6 +293,16 @@ export default function ConnectPage() {
           </p>
         </div>
       </section>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .connect-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+        }
+      `}</style>
+
     </>
   )
 }

@@ -396,30 +396,189 @@ export default function GivePage() {
         <GiveForm />
       </Suspense>
 
-      <section className="section" style={{ background: '#f8f9ff' }}>
-        <div className="wrap" style={{ textAlign: 'center' }}>
-          <h2 className="display" style={{ fontSize: 'clamp(2rem,5vw,4rem)', color: '#0a0f2c', marginBottom: 48 }}>
-            ALTE MODURI DE A NE SUSȚINE
-          </h2>
+      <section className="section support-section">
+  <div className="wrap" style={{ textAlign: 'center' }}>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 }}>
-            {[
-              { titlu: 'Roagă-te', desc: 'Rugăciunea ta este cea mai valoroasă contribuție pentru lansarea Momentum.' },
-              { titlu: 'Spune altora', desc: 'Vorbește despre Biserica Momentum în cercul tău de prieteni și familie.' },
-              { titlu: 'Implică-te', desc: 'Vino în echipă și contribuie cu talentele tale la construirea comunității.' },
-            ].map(({ titlu, desc }) => (
-              <div key={titlu} className="card" style={{ textAlign: 'center', padding: 36 }}>
-                <h3 className="display" style={{ fontSize: 22, color: '#0a0f2c', marginBottom: 10 }}>
-                  {titlu}
-                </h3>
-                <p style={{ color: 'rgba(10,15,44,0.55)', fontSize: 14, lineHeight: 1.7, fontWeight: 300 }}>
-                  {desc}
-                </p>
-              </div>
-            ))}
-          </div>
+    <h2 className="display support-title" style={{ textAlign: 'center', maxWidth: 1000 }}>
+      ALTE MODURI DE A NE SUSȚINE
+    </h2>
+
+    <p className="support-subtitle">
+      Poți face parte din povestea Momentum prin rugăciune, oameni și implicare.
+    </p>
+
+    <div className="support-grid">
+      {[
+        { nr: '01', titlu: 'Roagă-te', desc: 'Rugăciunea ta este cea mai valoroasă contribuție pentru lansarea Momentum.' },
+        { nr: '02', titlu: 'Spune altora', desc: 'Vorbește despre Biserica Momentum în cercul tău de prieteni și familie.' },
+        { nr: '03', titlu: 'Implică-te', desc: 'Vino în echipă și contribuie cu talentele tale la construirea comunității.' },
+      ].map(({ nr, titlu, desc }) => (
+        <div key={titlu} className="support-card">
+          <div className="support-number">{nr}</div>
+          <div className="support-orb" />
+          <h3 className="display support-card-title">{titlu}</h3>
+          <p className="support-card-desc">{desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+
+  <style jsx>{`
+    .support-section {
+      background:
+        radial-gradient(circle at top left, rgba(182,216,252,0.45), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(25,50,175,0.18), transparent 30%),
+        #f8f9ff;
+      overflow: hidden;
+    }
+
+    .support-label {
+      margin-bottom: 14px;
+      color: #1932af;
+    }
+
+    .support-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      color: #0a0f2c;
+      max-width: 920px;
+      margin: 0 auto 16px;
+      line-height: 0.9;
+    }
+
+    .support-subtitle {
+      color: rgba(10,15,44,0.55);
+      max-width: 620px;
+      margin: 0 auto 52px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .support-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      padding: 34px;
+      border-radius: 34px;
+      text-align: left;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(25,50,175,0.12);
+      box-shadow: 0 30px 80px rgba(10,15,44,0.09);
+      backdrop-filter: blur(18px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .support-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+      box-shadow: 0 40px 100px rgba(25,50,175,0.18);
+    }
+
+    .support-number {
+      font-size: 13px;
+      font-weight: 900;
+      color: white;
+      background: #1932af;
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 44px;
+      box-shadow: 0 18px 36px rgba(25,50,175,0.28);
+    }
+
+    .support-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  padding: 34px;
+  border-radius: 34px;
+  text-align: left;
+
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,249,255,0.9));
+  border: 1px solid rgba(25,50,175,0.12);
+
+  box-shadow: 0 30px 80px rgba(10,15,44,0.08);
+
+  transition: all 0.35s ease;
+}
+
+/* glow subtil pe hover */
+.support-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(25,50,175,0.18), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.support-card:hover::after {
+  opacity: 1;
+}
+
+/* linie accent premium */
+.support-card::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #1932af, #b6d8fc);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.support-card:hover::before {
+  width: 60%;
+}
+
+/* hover mai elegant */
+.support-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 100px rgba(25,50,175,0.15);
+}
+
+    .support-card-title {
+      position: relative;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      color: #0a0f2c;
+      margin-bottom: 12px;
+    }
+
+    .support-card-desc {
+      position: relative;
+      color: rgba(10,15,44,0.58);
+      font-size: 15px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .support-card {
+        min-height: auto;
+        padding: 30px 26px;
+      }
+
+      .support-card:hover {
+        transform: none;
+      }
+    }
+  `}</style>
+</section>
     </>
   )
 }
