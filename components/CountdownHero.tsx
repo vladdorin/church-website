@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 
-const FULL_TEXT = 'Construim o comunitate vie, autentică și plină de dragoste în inima Albei Iulia.\nPentru gloria lui Dumnezeu.'
+const FULL_TEXT = 'Construim o comunitate vie, autentică și plină de dragoste în inima orașului Alba Iulia. Pentru gloria lui Dumnezeu.'
 
 function useTypewriter(text: string, speed = 38) {
   const [displayed, setDisplayed] = useState('')
@@ -132,17 +132,10 @@ export default function CountdownHero() {
         padding: '60px 32px 24px',
       }}>
         {/* Label */}
-        <p style={{
-          fontFamily: "'Climate Crisis', sans-serif",
-          fontSize: 'clamp(1rem, 2.2vw, 2rem)',
-          letterSpacing: '0.04em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.5)',
-          textAlign: 'center',
-          marginBottom: 40,
-        }}>
-          Lansarea oficială · Prima duminică
-        </p>
+        <p className="hero-launch-title">
+  <span>Lansarea oficială</span>
+  <span>Prima duminică</span>
+</p>
 
         {/* ── NUMERE — colonul centrat vertical ── */}
         <div style={{
@@ -171,7 +164,7 @@ export default function CountdownHero() {
       {/* ── BOTTOM ROW ── */}
       <div style={{ position: 'relative', zIndex: 1, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
         <div className="wrap-wide hero-launch-meta" style={{
-          paddingTop: '24px', paddingBottom: '36px',
+          paddingTop: '32px', paddingBottom: '36px',
           display: 'flex', alignItems: 'center',
           justifyContent: 'space-between', flexWrap: 'wrap', gap: 20,
         }}>
@@ -198,7 +191,7 @@ export default function CountdownHero() {
               }} />
             )}
           </p>
-          <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+          <div className="hero-actions">
             <Link href="/join" className="btn btn-navy">Alătură-te</Link>
             <Link href="/about" className="btn btn-outline-white">Povestea noastră</Link>
           </div>

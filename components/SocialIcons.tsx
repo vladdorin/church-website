@@ -6,9 +6,9 @@ export default function SocialIcons({ dark = false }) {
     <div style={{display:'flex', gap:12}}>
       {[
         { href:'https://facebook.com/bisericamomentum', icon:<FaFacebookF /> },
-        { href:'https://instagram.com/bisericamomentum', icon:<FaInstagram /> },
+        { href:'https://instagram.com/biserica.momentum', icon:<FaInstagram /> },
         { href:'https://youtube.com/@bisericamomentum', icon:<FaYoutube /> },
-        { href:'https://wa.me/40700000000', icon:<FaWhatsapp /> },
+        { href:'https://whatsapp.com/channel/0029Vb6aUifIyPtZ3wzObi0l', icon:<FaWhatsapp /> },
       ].map(({ href, icon }) => (
         <a
           key={href}

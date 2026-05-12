@@ -243,7 +243,7 @@ export default function HomePage() {
             </div>
 
             {/* Buton mobile — după poză, ascuns pe desktop */}
-            <div className="btn-mobile-after">
+            <div className="btn-mobile-after section-01-button">
               <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
             </div>
 
@@ -330,73 +330,83 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="btn-mobile-after join-mobile-button">
-                  <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
-                </div>
-              </RevealSection>
+                </RevealSection>
             </div>
           </div>
 
           {/* Carduri — rămân vizibile cât timp scrollezi prin secțiune */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
-            <div className="wrap-wide">
-              <StackedCards />
-            </div>
-          </div>
+<div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+  <div className="wrap-wide">
+    <StackedCards />
+
+    <div className="join-bottom-cta">
+      <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+    </div>
+  </div>
+</div>
+
 
         </div>
       </section>
 
       {/* ═══════════ 04 — RUGĂCIUNE ═══════════ */}
-      <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="04" />
-        <div className="wrap-wide">
-          <RevealSection style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+<section className="page-section prayer-section-home" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
+  <GhostNum num="04" />
+  <div className="wrap-wide">
+    <RevealSection
+      className="prayer-home-grid"
+      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}
+    >
 
-            {/* Left: poza */}
-            <div className="sr sr-left sr-d1">
-              <div style={{
-                aspectRatio: '4/5', maxHeight: 500,
-                borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
-                position: 'relative', overflow: 'hidden',
-              }}>
-                <Image
-                  src="/rugaciune.jpg"
-                  alt="Rugăciune"
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                />
-              </div>
-            </div>
-
-            {/* Right: text aliniat dreapta */}
-            <div style={{ textAlign: 'right' }}>
-              <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-                AI NEVOIE<br />DE<br />RUGĂCIUNE?
-              </h2>
-              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-                Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
-              </p>
-              <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Link href="/pray" className="btn btn-dark">Stai alături</Link>
-              </div>
-            </div>
-
-          </RevealSection>
+      {/* Left: poza */}
+      <div className="sr sr-left sr-d1 prayer-home-image">
+        <div style={{
+          aspectRatio: '4/5',
+          maxHeight: 500,
+          borderRadius: 0,
+          clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          <Image
+            src="/rugaciune.jpg"
+            alt="Rugăciune"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
         </div>
-      </section>
+      </div>
+
+      {/* Right: text */}
+      <div className="prayer-home-text" style={{ textAlign: 'right' }}>
+        <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
+          AI NEVOIE<br />DE<br />RUGĂCIUNE?
+        </h2>
+
+        <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
+          Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
+        </p>
+
+        <div className="sr sr-up sr-d3 prayer-home-button" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Link href="/pray" className="btn btn-dark">Stai alături</Link>
+        </div>
+      </div>
+
+    </RevealSection>
+  </div>
+</section>
 
       {/* ═══════════ 05 — DONAȚII ═══════════ */}
       <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="05" light />
         <div className="wrap-wide">
-          <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+          <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
               <p className="sr sr-up label-light">SUSȚINE LANSAREA</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
                 DEVINO<br />PARTENER.
               </h2>
-              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 36 }}>
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 20 }}>
                 Fiecare donație pe care o faci va fi dublată de ARC până la $50.000.
               </p>
               {/* Buton desktop — ascuns pe mobile */}
@@ -404,9 +414,9 @@ export default function HomePage() {
                 <Link href="/give" className="btn btn-white">Donează</Link>
               </div>
             </div>
-            <div className="sr sr-right sr-d1">
-              <FundraiserCompact variant="side" />
-            </div>
+            <div className="sr sr-right sr-d1 donation-progress-mobile">
+  <FundraiserCompact variant="side" />
+</div>
             {/* Buton mobile — după progress bar, ascuns pe desktop */}
             <div className="btn-mobile-after">
               <Link href="/give" className="btn btn-white">Donează</Link>

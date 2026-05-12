@@ -30,11 +30,11 @@ const WhatsAppIcon = () => (
 
 export default function Footer() {
   const socials: [string, string, React.FC][] = [
-    ['https://facebook.com/bisericamomentum', 'Facebook', FacebookIcon],
-    ['https://instagram.com/bisericamomentum', 'Instagram', InstagramIcon],
-    ['https://youtube.com/@bisericamomentum', 'YouTube', YoutubeIcon],
-    ['https://wa.me/40700000000', 'WhatsApp', WhatsAppIcon],
-  ]
+  ['https://facebook.com/bisericamomentum', 'Facebook', FacebookIcon],
+  ['https://instagram.com/biserica.momentum', 'Instagram', InstagramIcon],
+  ['https://youtube.com/@bisericamomentum', 'YouTube', YoutubeIcon],
+  ['https://whatsapp.com/channel/0029Vb6aUifIyPtZ3wzObi0l', 'WhatsApp', WhatsAppIcon],
+]
 
   return (
     <footer style={{ background:'#0a0f2c', color:'white', marginTop:'auto', position:'relative', overflow:'hidden' }}>

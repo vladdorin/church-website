@@ -1,8 +1,14 @@
 'use client'
 
 import { useState, Suspense } from 'react'
+import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import { useSearchParams } from 'next/navigation'
 import { FundraiserFull } from '@/components/FundraiserBar'
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+)
 
 const PRESET_AMOUNTS = [25, 50, 100, 250]
 
@@ -11,6 +17,7 @@ function GiveForm() {
   const success = searchParams.get('success')
   const canceled = searchParams.get('canceled')
 
+  const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [selected, setSelected] = useState<number | null>(100)
   const [custom, setCustom] = useState('')
   const [donationReason, setDonationReason] = useState('Fond lansare Momentum')
@@ -19,18 +26,27 @@ function GiveForm() {
   const [coverFees, setCoverFees] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [currency, setCurrency] = useState<'ron' | 'eur' | 'usd'>('ron')
 
   const effectiveAmount = custom ? parseFloat(custom) : selected
   const finalReason = donationReason === 'Alt motiv' ? customReason.trim() : donationReason
-const finalAmount = effectiveAmount
-  ? coverFees
-    ? Math.ceil(effectiveAmount * 1.03 + 1)
-    : effectiveAmount
-  : null
+  const currencyLabel = currency.toUpperCase()
+
+  function calculateGrossAmount(amount: number, currency: 'ron' | 'eur' | 'usd') {
+    const fixedFee = { ron: 1, eur: 0.25, usd: 0.3 }[currency]
+    const percentageFee = 0.029
+    return Math.ceil((amount + fixedFee) / (1 - percentageFee))
+  }
+
+  const finalAmount = effectiveAmount
+    ? coverFees
+      ? calculateGrossAmount(effectiveAmount, currency)
+      : effectiveAmount
+    : null
 
   async function handleDonate() {
     if (!effectiveAmount || effectiveAmount < 5) {
-      setError('Suma minimă este de 5 RON.')
+      setError('Suma minimă este de 5.')
       return
     }
 
@@ -47,18 +63,20 @@ const finalAmount = effectiveAmount
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-  amount: finalAmount,
-  originalAmount: effectiveAmount,
-  reason: finalReason,
-  donationType,
-  coverFees,
-}),
+          amount: finalAmount,
+          originalAmount: effectiveAmount,
+          reason: finalReason,
+          donationType,
+          coverFees,
+          currency,
+        }),
       })
 
       const data = await res.json()
 
-      if (data.url) {
-        window.location.href = data.url
+      if (data.clientSecret) {
+        setClientSecret(data.clientSecret)
+        setLoading(false)
       } else {
         setError(data.error ?? 'A apărut o eroare. Încearcă din nou.')
         setLoading(false)
@@ -71,16 +89,56 @@ const finalAmount = effectiveAmount
 
   if (success) {
     return (
-      <section className="section" style={{ background: 'white' }}>
+      <section
+        style={{
+          minHeight: '70vh',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '72px 0',
+          background:
+            'radial-gradient(circle at top left, rgba(182,216,252,0.24), transparent 34%), radial-gradient(circle at bottom right, rgba(25,50,175,0.22), transparent 32%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
+        }}
+      >
         <div className="wrap" style={{ display: 'flex', justifyContent: 'center' }}>
-          <div className="card" style={{ maxWidth: 480, width: '100%', textAlign: 'center', padding: 56 }}>
-            <h2 className="display" style={{ fontSize: 36, color: '#0a0f2c', marginBottom: 12 }}>
+          <div
+            className="card"
+            style={{
+              maxWidth: 560,
+              width: '100%',
+              textAlign: 'center',
+              padding: 56,
+              background: 'rgba(255,255,255,0.92)',
+              backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
+              border: '1px solid rgba(255,255,255,0.45)',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
+            }}
+          >
+            <div style={{
+              width: 64,
+              height: 64,
+              borderRadius: 999,
+              background: '#16a34a',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 24px',
+              fontSize: 30,
+              fontWeight: 900,
+            }}>
+              ✓
+            </div>
+
+            <h2 className="display" style={{ fontSize: 38, color: '#0a0f2c', marginBottom: 16, lineHeight: 1.05 }}>
               MULȚUMIM DIN INIMĂ!
             </h2>
-            <p style={{ color: 'rgba(10,15,44,0.6)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
-              Donația ta face o diferență reală în Alba Iulia. Fiecare donație pe care o faci va fi dublată de ARC —
+
+            <p style={{ color: 'rgba(10,15,44,0.62)', lineHeight: 1.85, fontWeight: 300, marginBottom: 32 }}>
+              Donația ta face o diferență reală în Alba Iulia. Fiecare donație pe care o faci va fi dublată de ARC -
               impactul tău este de două ori mai mare!
             </p>
+
             <a href="/give" className="btn btn-blue">Donează din nou</a>
           </div>
         </div>
@@ -106,249 +164,367 @@ const finalAmount = effectiveAmount
     )
   }
 
-  return (
-  <section
-    className="section"
-    style={{
-      background:
-        'radial-gradient(circle at top left, rgba(182,216,252,0.22), transparent 35%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
-    }}
-  >
-      <div className="wrap">
-        <div style={{ maxWidth: 560, margin: '0 auto' }}>
+  if (clientSecret) {
+    return (
+      <section
+        style={{
+          minHeight: '80vh',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '64px 0',
+          background:
+            'radial-gradient(circle at top left, rgba(182,216,252,0.22), transparent 35%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
+        }}
+      >
+        <div className="wrap">
           <div
-  className="card"
-  style={{
-    padding: 40,
-    background: 'rgba(255,255,255,0.92)',
-    backdropFilter: 'blur(18px)',
-    WebkitBackdropFilter: 'blur(18px)',
-    border: '1px solid rgba(255,255,255,0.45)',
-    boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
-  }}
->
-            <h2 className="display" style={{ fontSize: 32, color: '#0a0f2c', textAlign: 'center', marginBottom: 8 }}>
-              ALEGE SUMA
-            </h2>
+            style={{
+              maxWidth: 640,
+              margin: '0 auto',
+              padding: 22,
+              borderRadius: 32,
+              background: 'rgba(255,255,255,0.96)',
+              boxShadow: '0 40px 120px rgba(0,0,0,0.45)',
+            }}
+          >
+            <EmbeddedCheckoutProvider
+              stripe={stripePromise}
+              options={{ clientSecret }}
+            >
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
-            <p style={{ color: 'rgba(10,15,44,0.5)', textAlign: 'center', fontSize: 14, marginBottom: 28, fontWeight: 300 }}>
-              Donația ta este procesată securizat prin Stripe.
-            </p>
+  return (
+    <section
+      style={{
+        padding: '48px 0',
+        background:
+          'radial-gradient(circle at top left, rgba(182,216,252,0.22), transparent 35%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
+      }}
+    >
+      <div className="wrap">
+        <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+          <div
+            className="card donation-card"
+            style={{
+              padding: 30,
+              background: 'rgba(255,255,255,0.92)',
+              backdropFilter: 'blur(18px)',
+              WebkitBackdropFilter: 'blur(18px)',
+              border: '1px solid rgba(255,255,255,0.45)',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
+            }}
+          >
+            <div style={{ gridColumn: '1 / -1', textAlign: 'center' }}>
+              <h2 className="display" style={{ fontSize: 60, color: '#0a0f2c', marginBottom: 6 }}>
+                ALEGE SUMA
+              </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16 }}>
-              {PRESET_AMOUNTS.map((amt) => (
-                <button
-                  key={amt}
-                  onClick={() => {
-                    setSelected(amt)
-                    setCustom('')
-                  }}
-                  style={{
-                    padding: '16px 8px',
-                    borderRadius: 14,
-                    fontWeight: 700,
-                    fontSize: 18,
-                    cursor: 'pointer',
-                    border: selected === amt && !custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
-                    background: selected === amt && !custom ? '#1932af' : 'white',
-                    color: selected === amt && !custom ? 'white' : '#0a0f2c',
-                    transition: 'all 0.15s ease',
-                    transform: selected === amt && !custom ? 'scale(1.05)' : 'scale(1)',
-                  }}
-                >
-                  {amt} <span style={{ fontSize: 12, fontWeight: 400 }}>RON</span>
-                </button>
-              ))}
+              <p style={{ color: 'rgba(10,15,44,0.5)', fontSize: 13, marginBottom: 18, fontWeight: 300 }}>
+                              </p>
             </div>
 
-            <div style={{ marginBottom: 20 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#0a0f2c', marginBottom: 6 }}>
-                Sau introdu altă sumă (RON)
-              </label>
-
-              <div style={{ position: 'relative' }}>
-                <input
-                  type="number"
-                  min="5"
-                  max="50000"
-                  value={custom}
-                  onChange={(e) => {
-                    setCustom(e.target.value)
-                    setSelected(null)
-                  }}
-                  style={{
-                    width: '100%',
-                    border: custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
-                    borderRadius: 14,
-                    padding: '14px 52px 14px 16px',
-                    fontSize: 18,
-                    outline: 'none',
-                    fontFamily: 'Inter,sans-serif',
-                    transition: 'border-color 0.15s ease',
-                  }}
-                  placeholder="ex: 150"
-                />
-                <span style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', color: 'rgba(10,15,44,0.4)', fontWeight: 600 }}>
-                  RON
-                </span>
+            <div className="donation-left">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 14 }}>
+                {PRESET_AMOUNTS.map((amt) => (
+                  <button
+                    key={amt}
+                    onClick={() => {
+                      setSelected(amt)
+                      setCustom('')
+                    }}
+                    style={{
+                      padding: '12px 8px',
+                      borderRadius: 14,
+                      fontWeight: 700,
+                      fontSize: 16,
+                      cursor: 'pointer',
+                      border: selected === amt && !custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                      background: selected === amt && !custom ? '#1932af' : 'white',
+                      color: selected === amt && !custom ? 'white' : '#0a0f2c',
+                    }}
+                  >
+                    {amt} <span style={{ fontSize: 11, fontWeight: 400 }}>{currencyLabel}</span>
+                  </button>
+                ))}
               </div>
-            </div>
 
-            <div style={{ marginBottom: 20 }}>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#0a0f2c', marginBottom: 6 }}>
-                Motivul donației
-              </label>
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0a0f2c', marginBottom: 6 }}>
+                  Sau introdu altă sumă ({currencyLabel})
+                </label>
 
-              <select
-                value={donationReason}
-                onChange={(e) => setDonationReason(e.target.value)}
-                style={{
-                  width: '100%',
-                  border: '2px solid rgba(10,15,44,0.12)',
-                  borderRadius: 14,
-                  padding: '14px 16px',
-                  fontSize: 15,
-                  outline: 'none',
-                  fontFamily: 'Inter,sans-serif',
-                  background: 'white',
-                  marginBottom: donationReason === 'Alt motiv' ? 10 : 0,
-                }}
-              >
-                <option>Fond lansare Momentum</option>
-                <option>Echipamente & logistică</option>
-                <option>Evenimente & outreach</option>
-                <option>Dărnicie / Zeciuială</option>
-                <option>Alt motiv</option>
-              </select>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="number"
+                    min="5"
+                    max="50000"
+                    value={custom}
+                    onChange={(e) => {
+                      setCustom(e.target.value)
+                      setSelected(null)
+                    }}
+                    style={{
+                      width: '100%',
+                      border: custom ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                      borderRadius: 14,
+                      padding: '12px 52px 12px 14px',
+                      fontSize: 16,
+                      outline: 'none',
+                      fontFamily: 'Inter,sans-serif',
+                    }}
+                    placeholder="ex: 150"
+                  />
+                  <span style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', color: 'rgba(10,15,44,0.4)', fontWeight: 700 }}>
+                    {currencyLabel}
+                  </span>
+                </div>
+              </div>
 
-              {donationReason === 'Alt motiv' && (
-                <input
-                  type="text"
-                  value={customReason}
-                  onChange={(e) => setCustomReason(e.target.value)}
-                  placeholder="Scrie motivul donației"
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0a0f2c', marginBottom: 6 }}>
+                  Motivul donației
+                </label>
+
+                <select
+                  value={donationReason}
+                  onChange={(e) => setDonationReason(e.target.value)}
                   style={{
                     width: '100%',
                     border: '2px solid rgba(10,15,44,0.12)',
                     borderRadius: 14,
-                    padding: '14px 16px',
+                    padding: '12px 14px',
                     fontSize: 15,
                     outline: 'none',
                     fontFamily: 'Inter,sans-serif',
+                    background: 'white',
+                    marginBottom: donationReason === 'Alt motiv' ? 8 : 0,
                   }}
-                />
-              )}
-            </div>
+                >
+                  <option>Fond lansare Momentum</option>
+                  <option>Echipamente & logistică</option>
+                  <option>Evenimente & outreach</option>
+                  <option>Dărnicie / Zeciuială</option>
+                  <option>Alt motiv</option>
+                </select>
 
-<div style={{marginBottom:20}}>
-  <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:8}}>
-    Tipul donației
-  </label>
-
-  <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:10}}>
-    <button
-      type="button"
-      onClick={() => setDonationType('once')}
-      style={{
-        padding:'14px 12px',
-        borderRadius:14,
-        border: donationType === 'once' ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
-        background: donationType === 'once' ? '#1932af' : 'white',
-        color: donationType === 'once' ? 'white' : '#0a0f2c',
-        fontWeight:700,
-        cursor:'pointer',
-      }}
-    >
-      O singură dată
-    </button>
-
-    <button
-      type="button"
-      onClick={() => setDonationType('monthly')}
-      style={{
-        padding:'14px 12px',
-        borderRadius:14,
-        border: donationType === 'monthly' ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
-        background: donationType === 'monthly' ? '#1932af' : 'white',
-        color: donationType === 'monthly' ? 'white' : '#0a0f2c',
-        fontWeight:700,
-        cursor:'pointer',
-      }}
-    >
-      Lunar
-    </button>
-  </div>
-</div>
-
-<label
-  style={{
-    display:'flex',
-    alignItems:'flex-start',
-    gap:10,
-    fontSize:13,
-    color:'rgba(10,15,44,0.65)',
-    lineHeight:1.5,
-    cursor:'pointer',
-    marginBottom:20,
-  }}
->
-  <input
-    type="checkbox"
-    checked={coverFees}
-    onChange={(e) => setCoverFees(e.target.checked)}
-    style={{
-      marginTop:3,
-      width:16,
-      height:16,
-      accentColor:'#1932af',
-      flexShrink:0,
-    }}
-  />
-  <span>
-    Vreau să acopăr și taxele de procesare.
-  </span>
-</label>
-
-            {error && (
-              <div style={{ background: '#fff1f1', border: '1px solid #fecaca', color: '#dc2626', borderRadius: 12, padding: '12px 16px', fontSize: 14, marginBottom: 16 }}>
-                {error}
+                {donationReason === 'Alt motiv' && (
+                  <input
+                    type="text"
+                    value={customReason}
+                    onChange={(e) => setCustomReason(e.target.value)}
+                    placeholder="Scrie motivul donației"
+                    style={{
+                      width: '100%',
+                      border: '2px solid rgba(10,15,44,0.12)',
+                      borderRadius: 14,
+                      padding: '12px 14px',
+                      fontSize: 15,
+                      outline: 'none',
+                      fontFamily: 'Inter,sans-serif',
+                    }}
+                  />
+                )}
               </div>
-            )}
 
-            <div style={{ background: '#f8f9ff', borderRadius: 14, padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ color: 'rgba(10,15,44,0.6)', fontWeight: 500 }}>Donația ta</span>
-              <span className="display" style={{ fontSize: 28, color: '#0a0f2c' }}>
-                {finalAmount ? `${finalAmount} RON` : '—'}
-              </span>
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0a0f2c', marginBottom: 6 }}>
+                  Tipul donației
+                </label>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                  <button
+                    type="button"
+                    onClick={() => setDonationType('once')}
+                    style={{
+                      padding: '12px 12px',
+                      borderRadius: 14,
+                      border: donationType === 'once' ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                      background: donationType === 'once' ? '#1932af' : 'white',
+                      color: donationType === 'once' ? 'white' : '#0a0f2c',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    O singură dată
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setDonationType('monthly')}
+                    style={{
+                      padding: '12px 12px',
+                      borderRadius: 14,
+                      border: donationType === 'monthly' ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                      background: donationType === 'monthly' ? '#1932af' : 'white',
+                      color: donationType === 'monthly' ? 'white' : '#0a0f2c',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Lunar
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0a0f2c', marginBottom: 6 }}>
+                  Moneda donației
+                </label>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+                  {[
+                    { value: 'ron', label: 'RON' },
+                    { value: 'eur', label: 'EUR' },
+                    { value: 'usd', label: 'USD' },
+                  ].map((item) => (
+                    <button
+                      key={item.value}
+                      type="button"
+                      onClick={() => setCurrency(item.value as 'ron' | 'eur' | 'usd')}
+                      style={{
+                        padding: '12px 12px',
+                        borderRadius: 14,
+                        border: currency === item.value ? '2px solid #1932af' : '2px solid rgba(10,15,44,0.12)',
+                        background: currency === item.value ? '#1932af' : 'white',
+                        color: currency === item.value ? 'white' : '#0a0f2c',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 14, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-              <span style={{ color: '#16a34a', fontWeight: 500, fontSize: 13 }}>+ Matched de ARC (până la $50K total)</span>
-              <span style={{ color: '#16a34a', fontWeight: 700 }}>×2 impact</span>
+            <div className="donation-right">
+              <div>
+                {error && (
+                  <div style={{ background: '#fff1f1', border: '1px solid #fecaca', color: '#dc2626', borderRadius: 12, padding: '10px 14px', fontSize: 14, marginBottom: 12 }}>
+                    {error}
+                  </div>
+                )}
+
+                <div style={{ background: '#f8f9ff', borderRadius: 20, padding: '24px 26px', marginBottom: 14 }}>
+                  <span style={{ color: 'rgba(10,15,44,0.6)', fontWeight: 500, display: 'block', marginBottom: 8 }}>
+                    Donația ta
+                  </span>
+                  <span className="display" style={{ fontSize: 38, color: '#0a0f2c' }}>
+                    {finalAmount ? `${finalAmount} ${currencyLabel}` : '—'}
+                  </span>
+                </div>
+
+                <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 18, padding: '16px 20px', marginBottom: 14 }}>
+                  <div style={{ color: '#16a34a', fontWeight: 800, fontSize: 15, marginBottom: 4 }}>
+                    ×2 impact
+                  </div>
+                  <div style={{ color: '#16a34a', fontWeight: 500, fontSize: 13, lineHeight: 1.5 }}>
+                    Dublat de ARC până la $50K total.
+                  </div>
+                </div>
+
+                <label
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    fontSize: 13,
+                    color: 'rgba(10,15,44,0.65)',
+                    lineHeight: 1.5,
+                    cursor: 'pointer',
+                    marginBottom: 14,
+                    padding: '12px 14px',
+                    borderRadius: 14,
+                    background: 'rgba(255,255,255,0.72)',
+                    border: '1px solid rgba(10,15,44,0.08)',
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={coverFees}
+                    onChange={(e) => setCoverFees(e.target.checked)}
+                    style={{
+                      width: 16,
+                      height: 16,
+                      accentColor: '#1932af',
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span>Vreau să acopăr și taxele de procesare Stripe</span>
+                </label>
+              </div>
+
+              <div>
+                <button
+                  onClick={handleDonate}
+                  disabled={loading || !effectiveAmount}
+                  className="btn btn-blue"
+                  style={{
+                    width: '100%',
+                    fontSize: 15,
+                    padding: '14px 28px',
+                    justifyContent: 'center',
+                    opacity: loading || !effectiveAmount ? 0.5 : 1,
+                    cursor: loading || !effectiveAmount ? 'not-allowed' : 'pointer',
+                    marginBottom: 10,
+                  }}
+                >
+                  {loading ? '⏳ Se procesează...' : `Donează ${finalAmount ? `${finalAmount} ${currencyLabel}` : ''}`}
+                </button>
+
+                
+
+{!clientSecret && (
+  <p style={{ fontSize: 12, textAlign: 'center', color: 'rgba(10,15,44,0.35)' }}>
+    🔒 Plată securizată prin Stripe · Cardul tău nu este stocat de noi
+  </p>
+)}
+              </div>
             </div>
-
-            <button
-              onClick={handleDonate}
-              disabled={loading || !effectiveAmount}
-              className="btn btn-blue"
-              style={{
-                width: '100%',
-                fontSize: 16,
-                padding: '16px 32px',
-                justifyContent: 'center',
-                opacity: loading || !effectiveAmount ? 0.5 : 1,
-                cursor: loading || !effectiveAmount ? 'not-allowed' : 'pointer',
-              }}
-            >
-              {loading ? '⏳ Se procesează...' : `Donează ${finalAmount ? finalAmount + ' RON' : ''}`}
-            </button>
-
-            <p style={{ fontSize: 12, textAlign: 'center', color: 'rgba(10,15,44,0.35)', marginTop: 12 }}>
-              🔒 Plată securizată prin Stripe · Cardul tău nu este stocat de noi
-            </p>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .donation-card {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+          align-items: stretch;
+        }
+
+        .donation-left,
+        .donation-right {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .donation-left {
+          justify-content: flex-start;
+        }
+
+        .donation-right {
+          justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+          .donation-card {
+            display: block;
+          }
+
+          .donation-right {
+            margin-top: 20px;
+            gap: 18px;
+          }
+        }
+      `}</style>
     </section>
   )
 }
@@ -395,7 +571,7 @@ export default function GivePage() {
       }>
         <GiveForm />
       </Suspense>
-
+      
       <section className="section support-section">
   <div className="wrap" style={{ textAlign: 'center' }}>
 

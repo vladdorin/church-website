@@ -284,8 +284,6 @@ html {
   /* ── PAGE SECTIONS ── */
   .page-section { padding: 64px 0 !important; }
 
-  /* ── GHOST NUMBERS — ascunse pe mobile ── */
-  .ghost-num { display: none !important; }
 
   /* ── 3-coloane → 1 coloană ── */
   [style*="repeat(3"] { grid-template-columns: 1fr !important; }
@@ -320,8 +318,7 @@ html {
   /* ── CTA FINAL — butonul și textul stivuite ── */
   .cta-row { flex-direction: column !important; align-items: flex-start !important; }
 
-  /* ── GHOST TEXT "MOMENTUM" ascuns pe mobile ── */
-  .cta-ghost { display: none !important; }
+
 
   /* ── COUNTDOWN bottom row — stivuit ── */
   .countdown-bottom { flex-direction: column !important; gap: 24px !important; }
@@ -931,5 +928,276 @@ html {
     align-items: center !important;
     line-height: 1 !important;
     transform: translateY(-16px);
+  }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 768px) {
+  .hero-actions {
+    width: 100%;
+    gap: 10px;
+    margin-top: 24px;
+    margin-bottom: 34px;
+  }
+
+  .hero-actions a {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+  }
+}
+
+.hero-launch-title {
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  margin-bottom: 40px;
+  white-space: nowrap;
+}
+
+.hero-launch-title span {
+  display: inline;
+}
+
+.hero-launch-title span + span::before {
+  content: ' · ';
+}
+
+@media (max-width: 768px) {
+  /* HOME 01 — proporții corecte */
+  .photo-card-wrap {
+    width: 78% !important;
+    max-width: 280px !important;
+    aspect-ratio: 4 / 5 !important;
+    margin-top: -80px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .section-01-button {
+    margin-top: -4px !important;
+  }
+}
+
+ /* ── 03: POZA ALINIATĂ CORECT ── */
+@media (max-width: 768px) {
+
+  /* ── GRID ── */
+  .join-mobile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* ── TEXT ── */
+  .join-text-col {
+    order: 1;
+  }
+
+  /* ── POZĂ ── */
+  .join-image-col {
+    order: 2;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: -30px;
+  }
+
+  .join-image-col .join-photo-wrap {
+    width: 80% !important;
+    max-width: 450px !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+
+  /* ── SCOATEM BUTONUL VECHI ── */
+  .join-mobile-button {
+    display: none !important;
+  }
+
+  /* ── STICKY FIX ── */
+  .join-sticky {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding-bottom: 64px !important;
+  }
+
+  /* ── CARDURI ── */
+  .join-sticky .wrap-wide {
+    padding-bottom: 12px !important;
+    margin-top: 30px;
+  }
+
+  /* ── BUTON NOU SUB CARDURI ── */
+  .join-bottom-cta {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+
+  .join-bottom-cta a {
+    width: fit-content;
+  }
+}
+/* desktop */
+.join-bottom-cta {
+  display: none;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .join-bottom-cta {
+    display: flex !important;
+    justify-content: flex-start;
+    margin-top: 40px;
+  }
+
+  .join-bottom-cta a {
+    width: fit-content;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .prayer-home-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .prayer-home-text {
+    text-align: right !important;
+  }
+
+  .prayer-home-text p {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .prayer-home-button {
+    justify-content: flex-end !important;
+  }
+
+  .prayer-home-image {
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+
+  .prayer-home-image > div {
+    width: 76% !important;
+    max-width: 270px !important;
+    max-height: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .donation-progress-mobile {
+    margin-top: -50px !important;
+  }
+}
+
+/* ── MOBILE PREMIUM BACKGROUND NUMBERS ── */
+@media (max-width: 768px) {
+  .ghost-num {
+    display: block !important;
+    position: absolute !important;
+    right: -18px !important;
+    top: 24px !important;
+    transform: none !important;
+    font-size: clamp(5rem, 26vw, 8rem) !important;
+    line-height: 1 !important;
+    opacity: 1 !important;
+    color: rgba(25, 50, 175, 0.055) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  section[style*="#080c1e"] .ghost-num,
+  section[style*="#0b1628"] .ghost-num {
+    color: rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .page-section > .wrap-wide {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-ghost {
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 28px !important;
+    transform: translateX(-50%) !important;
+    font-size: clamp(3.4rem, 18vw, 6rem) !important;
+    color: rgba(255,255,255,0.045) !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    z-index: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .prayer-section-home .ghost-num {
+    left: -18px !important;
+    right: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-launch-title {
+    width: 100% !important;
+    max-width: 340px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    font-size: clamp(1rem, 4.4vw, 1.35rem) !important;
+    line-height: 1.15 !important;
+    margin: 0 auto 28px !important;
+  }
+
+  .hero-launch-title span {
+    display: block !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-launch-title span + span::before {
+    content: '' !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-launch-meta {
+    padding-top: 20px !important;
+  }
+}
+
+/* ── STRIPE EMBEDDED CHECKOUT ── */
+.stripe-shell {
+  max-width: 460px;
+  margin: 18px auto 0;
+  padding: 18px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffffff, #f4f6ff);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.22);
+}
+
+@media (max-width: 768px) {
+  .stripe-shell {
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 22px;
+    margin-top: 18px;
   }
 }

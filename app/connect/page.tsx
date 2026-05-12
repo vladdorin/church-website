@@ -240,7 +240,7 @@ export default function ConnectPage() {
   <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
     {[
       { icon: <FaFacebookF />, label: 'Facebook', handle: 'Biserica Momentum', href: 'https://facebook.com/bisericamomentum' },
-      { icon: <FaInstagram />, label: 'Instagram', handle: '@biserica.momentum', href: 'https://instagram.com/bisericamomentum' },
+      { icon: <FaInstagram />, label: 'Instagram', handle: '@biserica.momentum', href: 'https://instagram.com/biserica.momentum' },
       { icon: <FaYoutube />, label: 'YouTube', handle: 'Canalul Bisericii Momentum', href: 'https://youtube.com/@bisericamomentum' },
       { icon: <FaWhatsapp />, label: 'WhatsApp', handle: 'Canal Info WhatsApp', href: 'https://whatsapp.com/channel/0029Vb6aUifIyPtZ3wzObi0l' },
     ].map(({ icon, label, handle, href }) => (
