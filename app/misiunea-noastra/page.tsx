@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Misiunea noastră | Momentum · Alba Iulia',
+  title: 'Misiunea noastră · Momentum | Alba Iulia',
   description: 'De ce Alba Iulia, ce vedem în acest oraș și care este misiunea Momentum Church.',
 }
 

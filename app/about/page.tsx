@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: 'Despre noi | Momentum · Alba Iulia',
-  description: 'Povestea lui John și Voichi Dura și a Bisericii Momentum din Alba Iulia.',
+  title: 'Cine suntem · Momentum | Alba Iulia',
+  description: 'Povestea Bisericii Momentum din Alba Iulia.',
 }
 
 export default function AboutPage() {

@@ -116,7 +116,7 @@ export default function CountdownHero() {
           Alba Iulia, România
         </p>
         <p className="hero-launch-date" style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
-  <span>4 Octombrie 2026 ·</span> <span>10:00</span>
+  <span>4 Octombrie 2026 </span>
 </p>
       </div>
 
