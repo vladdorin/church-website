@@ -572,6 +572,230 @@ export default function GivePage() {
         <GiveForm />
       </Suspense>
       
+<section className="bank-transfer-section">
+  <div className="wrap">
+    <div className="bank-transfer-card">
+      <div className="bank-transfer-header">
+
+        <h2 className="display bank-transfer-title">
+          DONEAZĂ PRIN TRANSFER BANCAR
+        </h2>
+
+        <p className="bank-transfer-subtitle">
+         Poți susține Biserica Momentum și prin transfer bancar
+          direct în conturile asociației.
+        </p>
+      </div>
+
+      <div className="bank-transfer-info">
+        <div className="bank-info-box">
+          <span>Denumire beneficiar</span>
+          <strong>ASOCIATIA CRESTINA VIATA NOUA</strong>
+        </div>
+
+        <div className="bank-info-box">
+          <span>Detalii plată</span>
+          <strong>Donație Momentum</strong>
+        </div>
+      </div>
+
+      <div className="bank-accounts-grid">
+        {[
+          {
+            currency: 'RON',
+            iban: 'RO51 BTRL RONC RT0C Y785 5702',
+          },
+          {
+            currency: 'EUR',
+            iban: 'RO25 BTRL EURC RT0C Y785 5701',
+          },
+          {
+            currency: 'USD',
+            iban: 'RO37 BTRL USDC RT0C Y785 5701',
+          },
+        ].map(({ currency, iban }) => (
+          <div key={currency} className="bank-account-card">
+            <div className="bank-account-currency">{currency}</div>
+
+            <p>Cont {currency}</p>
+
+            <strong>{iban}</strong>
+          </div>
+        ))}
+      </div>
+
+      
+    </div>
+  </div>
+
+  <style jsx>{`
+    .bank-transfer-section {
+  background: #ffffff;
+  padding: 88px 0;
+}
+
+    .bank-transfer-card {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 42px;
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at top right, rgba(182,216,252,0.16), transparent 34%),
+    linear-gradient(135deg, #0f1052 0%, #080818 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 34px 90px rgba(10,15,44,0.28);
+}
+
+
+    .bank-transfer-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+
+    .bank-transfer-label {
+      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1932af;
+    }
+
+    .bank-transfer-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #ffffff;
+  margin-bottom: 14px;
+  line-height: 0.95;
+}
+
+.bank-transfer-subtitle {
+  color: rgba(255,255,255,0.62);
+  font-weight: 300;
+  line-height: 1.7;
+  margin: 0;
+}
+
+    .bank-transfer-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+.bank-info-box {
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+    .bank-info-box span,
+.bank-account-card p {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.42);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+    .bank-info-box strong {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+    .bank-accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .bank-account-card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.04);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.bank-account-card:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255,255,255,0.07);
+
+  border-color: rgba(182,216,252,0.25);
+}
+
+.bank-account-currency {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(182,216,252,0.12);
+
+  color: #b6d8fc;
+
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+    .bank-account-card strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  word-break: break-word;
+
+  font-family: 'JetBrains Mono', monospace;
+
+  letter-spacing: 0.06em;
+}
+
+    .bank-transfer-note {
+      margin: 24px 0 0;
+      text-align: center;
+      color: rgba(10,15,44,0.48);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .bank-transfer-section {
+        padding: 56px 0;
+      }
+
+      .bank-transfer-card {
+        padding: 30px 22px;
+        border-radius: 28px;
+      }
+
+      .bank-transfer-info,
+      .bank-accounts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  `}</style>
+</section>
+
       <section className="section support-section">
   <div className="wrap" style={{ textAlign: 'center' }}>
 

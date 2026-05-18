@@ -77,8 +77,8 @@ function StackedCards() {
       const el = ref.current; if (!el) return
       const rect = el.getBoundingClientRect()
       const vh   = window.innerHeight
-      const start = vh * 0.9
-      const end   = vh * 0.55
+      const start = vh * 0.95
+      const end   = vh * 0.65
       const raw   = (start - rect.top) / (start - end)
       setP(Math.min(1, Math.max(0, raw)))
     }
@@ -282,8 +282,8 @@ export default function HomePage() {
 
         {/* Un singur container sticky — prinde header + carduri împreună */}
         <div className="join-sticky" style={{
-          position: 'sticky', top: 88,
-          height: 'calc(100vh - 88px)',
+          position: 'sticky', top: 80,
+          height: 'calc(100vh - 260px)',
           overflow: 'hidden',
           display: 'flex', flexDirection: 'column',
           background: '#ffffff',

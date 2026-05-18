@@ -63,15 +63,65 @@ export default function Footer() {
 
       {/* ── Conținut ── */}
       <div className="wrap-wide" style={{ paddingTop:'72px', paddingBottom:'48px', position:'relative', zIndex:1 }}>
-        <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
+        <div className="footer-grid" style={{ display:'grid', gridTemplateColumns:'1.2fr 1fr 1fr', gap:48, paddingBottom:48, borderBottom:'1px solid rgba(255,255,255,0.08)' }}>
 
           {/* Brand */}
-          <div className="footer-brand" style={{ gridColumn:'span 2' }}>
-            <p style={{ color:'rgba(255,255,255,0.45)', fontSize:14, lineHeight:1.7, maxWidth:420 }}>
-              O comunitate condusă de Duhul Sfânt,<br/>
-              în mișcare, pentru gloria lui Dumnezeu.
-            </p>
-          </div>
+<div className="footer-brand">
+  
+<p
+  style={{
+    fontSize:11,
+    fontWeight:700,
+    letterSpacing:'0.18em',
+    textTransform:'uppercase',
+    color:'rgba(255,255,255,0.3)',
+    marginBottom:20
+  }}
+>
+  Politici
+</p>
+
+  <div
+    style={{
+      display:'flex',
+      flexDirection:'column',
+      gap:10,
+    }}
+  >
+    <Link
+      href="/politica-de-confidentialitate"
+      style={{
+        color:'rgba(255,255,255,0.55)',
+        fontSize:14,
+        textDecoration:'none',
+      }}
+    >
+      Politică de Confidențialitate
+    </Link>
+
+    <Link
+      href="/termeni-si-conditii"
+      style={{
+        color:'rgba(255,255,255,0.55)',
+        fontSize:14,
+        textDecoration:'none',
+      }}
+    >
+      Termeni și Condiții
+    </Link>
+
+    <Link
+      href="/politica-cookies"
+      style={{
+        color:'rgba(255,255,255,0.55)',
+        fontSize:14,
+        textDecoration:'none',
+      }}
+    >
+      Politica Cookies
+    </Link>
+  </div>
+</div>
 
           {/* Pagini */}
           <div>
@@ -122,3 +172,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+
