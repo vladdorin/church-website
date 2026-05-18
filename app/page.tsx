@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CountdownHero from '@/components/CountdownHero'
 import { FundraiserCompact } from '@/components/FundraiserBar'
+import PhotoCarousel from '@/components/PhotoCarousel'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
 function RevealSection({ children, style, className }: {
@@ -172,6 +173,7 @@ const T9: CSSProperties = {
   letterSpacing: '0.01em', lineHeight: 0.92, margin: '20px 0 32px',
 }
 
+
 /* ═══════════════════════════════════════════════════════════ */
 export default function HomePage() {
   return (
@@ -214,34 +216,96 @@ export default function HomePage() {
             </div>
 
             {/* Right: photo card */}
-            <div className="sr sr-right sr-d1">
-              <div className="photo-card-wrap" style={{
-                aspectRatio: '4/5', maxHeight: 500,
-                background: 'linear-gradient(160deg,#1932af 0%,#080c1e 100%)',
-                borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', position: 'relative', overflow: 'hidden',
-              }}>
-                <Image
-                  src="/john-voichi.jpg"
-                  alt="John și Voichi Dura"
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
-                />
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0,
-                  background: 'linear-gradient(to top, rgba(8,12,30,0.9), transparent)',
-                  padding: '32px 28px',
-                }}>
-                  <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                    <div style={{ width: 32, height: 2, background: 'rgba(255,255,255,0.5)', flexShrink: 0 }} />
-                    <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>
-                      Pastori · Biserica Momentum
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div className="sr sr-right sr-d1">
+  <div
+    className="photo-card-wrap"
+    style={{
+      aspectRatio: '4/5',
+      maxHeight: 500,
 
+      background:
+        'linear-gradient(160deg,#1932af 0%,#080c1e 100%)',
+
+      borderRadius: 28,
+
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+      position: 'relative',
+      overflow: 'hidden',
+
+      boxShadow:
+        '0 40px 120px rgba(8,12,30,0.22)',
+    }}
+  >
+    <Image
+      src="/john-voichi.jpg"
+      alt="John și Voichi Dura"
+      fill
+      style={{
+        objectFit: 'cover',
+        objectPosition: 'center top',
+      }}
+    />
+
+    {/* subtle cinematic overlay */}
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+
+        background:
+          'linear-gradient(135deg, rgba(255,255,255,0.08), transparent 32%)',
+
+        pointerEvents: 'none',
+      }}
+    />
+
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+
+        background:
+          'linear-gradient(to top, rgba(8,12,30,0.9), transparent)',
+
+        padding: '32px 28px',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          gap: 12,
+          alignItems: 'center',
+        }}
+      >
+        <div
+          style={{
+            width: 32,
+            height: 2,
+            background: 'rgba(255,255,255,0.5)',
+            flexShrink: 0,
+          }}
+        />
+
+        <p
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.45)',
+          }}
+        >
+          Pastori · Biserica Momentum
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
             {/* Buton mobile — după poză, ascuns pe desktop */}
             <div className="btn-mobile-after section-01-button">
               <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
@@ -250,7 +314,10 @@ export default function HomePage() {
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#080c1e" />
+
+<PhotoCarousel />
+
+
 
       {/* ═══════════ 02 — MISIUNEA NOASTRĂ ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
@@ -324,11 +391,39 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="sr sr-right sr-d1 join-image-col" style={{ display: 'flex', alignItems: 'center' }}>
-                  <div className="join-photo-wrap" style={{ width: '100%', maxWidth: 380, aspectRatio: '7/5', borderRadius: 0, clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)', overflow: 'hidden', position: 'relative' }}>
-                    <Image src="/echipa.jpg" alt="Echipa Momentum" fill style={{ objectFit: 'cover', objectPosition: 'center' }} />
-                  </div>
-                </div>
+                <div
+  className="sr sr-right sr-d1 join-image-col"
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+  }}
+>
+  <div
+    className="join-photo-wrap"
+    style={{
+      width: '100%',
+      maxWidth: 380,
+      aspectRatio: '7/5',
+
+      borderRadius: 28,
+
+      overflow: 'hidden',
+      position: 'relative',
+
+      boxShadow: '0 40px 120px rgba(8,12,30,0.18)',
+    }}
+  >
+    <Image
+      src="/echipa.jpg"
+      alt="Echipa Momentum"
+      fill
+      style={{
+        objectFit: 'cover',
+        objectPosition: 'center',
+      }}
+    />
+  </div>
+</div>
 
                 </RevealSection>
             </div>
@@ -358,24 +453,33 @@ export default function HomePage() {
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}
     >
 
-      {/* Left: poza */}
-      <div className="sr sr-left sr-d1 prayer-home-image">
-        <div style={{
-          aspectRatio: '4/5',
-          maxHeight: 500,
-          borderRadius: 0,
-          clipPath: 'polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%)',
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          <Image
-            src="/rugaciune.jpg"
-            alt="Rugăciune"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-        </div>
-      </div>
+     {/* Left: poza */}
+<div className="sr sr-left sr-d1 prayer-home-image">
+  <div
+    style={{
+      aspectRatio: '4/5',
+      maxHeight: 500,
+
+      borderRadius: 28,
+
+      position: 'relative',
+      overflow: 'hidden',
+
+      boxShadow:
+        '0 40px 120px rgba(8,12,30,0.18)',
+    }}
+  >
+    <Image
+      src="/rugaciune.jpg"
+      alt="Rugăciune"
+      fill
+      style={{
+        objectFit: 'cover',
+        objectPosition: 'center',
+      }}
+    />
+  </div>
+</div>
 
       {/* Right: text */}
       <div className="prayer-home-text" style={{ textAlign: 'right' }}>

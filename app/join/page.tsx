@@ -6,6 +6,21 @@ import { useState } from 'react'
 export default function JoinPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
+const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
+
+const getInputStyle = (field: string) => ({
+  width: '100%',
+  border: fieldErrors[field]
+    ? '1.5px solid #dc2626'
+    : '1.5px solid rgba(10,15,44,0.15)',
+  borderRadius: 12,
+  padding: '12px 16px',
+  fontSize: 15,
+  outline: 'none',
+  fontFamily: 'Inter,sans-serif',
+  boxSizing: 'border-box' as const,
+})
+
   return (
     <>
       {/* HERO */}
@@ -108,172 +123,241 @@ export default function JoinPage() {
             </div>
 
             <form
-              className="card"
-              style={{padding:40}}
-              onSubmit={async (e) => {
-                e.preventDefault()
-                if (submitStatus === 'loading') return
+  noValidate
+  className="card"
+  style={{ padding: 40 }}
+  onSubmit={async (e) => {
+    e.preventDefault()
+    if (submitStatus === 'loading') return
 
-                setSubmitStatus('loading')
+    setSubmitStatus('loading')
 
-                const form = e.currentTarget
-                const formData = new FormData(form)
+    const form = e.currentTarget
+    const formData = new FormData(form)
 
-                try {
-  const request = fetch('/api/form', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      formType: 'Alătură-te',
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      subject: formData.get('implicare'),
-      message: formData.get('message'),
-      extra: {
-        sursa: formData.get('sursa'),
-        privacy: formData.get('privacy') === 'on',
-      },
-    }),
-  })
+    const errors: Record<string, string> = {}
 
-  setTimeout(() => {
-    form.reset()
-    setSubmitStatus('success')
-  }, 700)
+    if (!formData.get('name')) {
+      errors.name = 'Te rugăm să completezi numele.'
+    }
 
-  const res = await request
+    if (!formData.get('email')) {
+      errors.email = 'Te rugăm să completezi adresa de email.'
+    }
 
-  if (!res.ok) {
-    setSubmitStatus('error')
-    return
-  }
+    if (formData.get('privacy') !== 'on') {
+      errors.privacy = 'Trebuie să accepți politica de confidențialitate.'
+    }
 
-  setTimeout(() => setSubmitStatus('idle'), 3000)
-} catch {
-  setSubmitStatus('error')
-  setTimeout(() => setSubmitStatus('idle'), 3000)
-}
-              }}
-            >
-              <div style={{marginBottom:16}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Nume *</label>
-                <input type="text" name="name" required
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif'}}
-                  placeholder="Ion Ionescu" />
-              </div>
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      setSubmitStatus('idle')
+      return
+    }
 
-              <div style={{marginBottom:16}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Email *</label>
-                <input type="email" name="email" required
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif'}}
-                  placeholder="ion@exemplu.ro" />
-              </div>
+    setFieldErrors({})
 
-              <div style={{marginBottom:16}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Telefon</label>
-                <input type="tel" name="phone"
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif'}}
-                  placeholder="07xx xxx xxx" />
-              </div>
+    try {
+      const request = fetch('/api/form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'Alătură-te',
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          subject: formData.get('implicare'),
+          message: formData.get('message'),
+          extra: {
+            sursa: formData.get('sursa'),
+            privacy: formData.get('privacy') === 'on',
+          },
+        }),
+      })
 
-              <div style={{marginBottom:16}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Cum vrei să te implici?</label>
-                <select name="implicare"
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', background:'white'}}>
-                  <option>Vreau să beau o cafea, am întrebări</option>
-		  <option>Vreau să vin la prima întâlnire</option>
-                  <option>Vreau să mă implic în echipă</option>
-                  <option>Vreau să susțin financiar</option>
-                </select>
-              </div>
+      setTimeout(() => {
+        form.reset()
+        setSubmitStatus('success')
+      }, 700)
 
-              <div style={{marginBottom:16}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Cum ai auzit de Momentum?</label>
-                <select name="sursa"
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', background:'white'}}>
-                  <option>Instagram / Facebook</option>
-                  <option>Un prieten mi-a recomandat</option>
-                  <option>Am căutat pe Google</option>
-                  <option>Altele</option>
-                </select>
-              </div>
+      const res = await request
 
-              <div style={{marginBottom:24}}>
-                <label style={{display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6}}>Mesaj (opțional)</label>
-                <textarea name="message" rows={3}
-                  style={{width:'100%', border:'1.5px solid rgba(10,15,44,0.15)', borderRadius:12, padding:'12px 16px', fontSize:15, outline:'none', fontFamily:'Inter,sans-serif', resize:'none'}}
-                  placeholder="Spune-ne ceva despre tine..." />
-              </div>
+      if (!res.ok) {
+        setSubmitStatus('error')
+        return
+      }
 
-<div style={{marginBottom:24}}>
-  <label
+      setTimeout(() => setSubmitStatus('idle'), 3000)
+    } catch {
+      setSubmitStatus('error')
+      setTimeout(() => setSubmitStatus('idle'), 3000)
+    }
+  }}
+>
+  <div style={{ marginBottom: 16 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Nume *
+    </label>
+    <input
+      type="text"
+      name="name"
+      style={getInputStyle('name')}
+      placeholder="Ion Ionescu"
+    />
+    {fieldErrors.name && (
+      <p className="form-error">{fieldErrors.name}</p>
+    )}
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Email *
+    </label>
+    <input
+      type="email"
+      name="email"
+      style={getInputStyle('email')}
+      placeholder="ion@exemplu.ro"
+    />
+    {fieldErrors.email && (
+      <p className="form-error">{fieldErrors.email}</p>
+    )}
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Telefon
+    </label>
+    <input
+      type="tel"
+      name="phone"
+      style={getInputStyle('phone')}
+      placeholder="07xx xxx xxx"
+    />
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Cum vrei să te implici?
+    </label>
+    <select
+      name="implicare"
+      style={{
+        ...getInputStyle('implicare'),
+        background: 'white',
+      }}
+    >
+      <option>Vreau să beau o cafea, am întrebări</option>
+      <option>Vreau să vin la prima întâlnire</option>
+      <option>Vreau să mă implic în echipă</option>
+      <option>Vreau să susțin financiar</option>
+    </select>
+  </div>
+
+  <div style={{ marginBottom: 16 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Cum ai auzit de Momentum?
+    </label>
+    <select
+      name="sursa"
+      style={{
+        ...getInputStyle('sursa'),
+        background: 'white',
+      }}
+    >
+      <option>Instagram / Facebook</option>
+      <option>Un prieten mi-a recomandat</option>
+      <option>Am căutat pe Google</option>
+      <option>Altele</option>
+    </select>
+  </div>
+
+  <div style={{ marginBottom: 24 }}>
+    <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
+      Mesaj opțional
+    </label>
+    <textarea
+      name="message"
+      rows={3}
+      style={{
+        ...getInputStyle('message'),
+        resize: 'none',
+      }}
+      placeholder="Spune-ne ceva despre tine..."
+    />
+  </div>
+
+  <div style={{ marginBottom: 24 }}>
+    <label
+      style={{
+        display:'flex',
+        alignItems:'flex-start',
+        gap:10,
+        fontSize:13,
+        color:'rgba(10,15,44,0.65)',
+        lineHeight:1.5,
+        cursor:'pointer',
+      }}
+    >
+      <input
+        type="checkbox"
+        name="privacy"
+        style={{
+          marginTop:3,
+          width:16,
+          height:16,
+          accentColor:'#1932af',
+          flexShrink: 0,
+        }}
+      />
+      <span>
+        Sunt de acord cu{' '}
+        <Link
+          href="/politica-de-confidentialitate"
+          style={{ color:'#1932af', fontWeight:600, textDecoration:'underline' }}
+        >
+          Politica de confidențialitate
+        </Link>
+        .
+      </span>
+    </label>
+
+    {fieldErrors.privacy && (
+      <p className="form-error">{fieldErrors.privacy}</p>
+    )}
+  </div>
+
+  <button
+    type="submit"
+    className="btn btn-blue"
+    disabled={submitStatus === 'loading'}
     style={{
-      display:'flex',
-      alignItems:'flex-start',
-      gap:10,
-      fontSize:13,
-      color:'rgba(10,15,44,0.65)',
-      lineHeight:1.5,
-      cursor:'pointer'
+      width:'100%',
+      fontSize:16,
+      padding:'16px 32px',
+      justifyContent:'center',
+      transition:'all 0.25s ease',
+      background:
+        submitStatus === 'success'
+          ? '#16a34a'
+          : submitStatus === 'error'
+          ? '#dc2626'
+          : submitStatus === 'loading'
+          ? '#64748b'
+          : undefined,
+      transform: submitStatus === 'success' ? 'scale(1.03)' : 'scale(1)',
+      opacity: submitStatus === 'loading' ? 0.85 : 1,
     }}
   >
-    <input
-      type="checkbox"
-      name="privacy"
-      required
-      style={{
-        marginTop:3,
-        width:16,
-        height:16,
-        accentColor:'#1932af'
-      }}
-    />
-    <span>
-      Sunt de acord cu{' '}
-      <Link
-        href="/politica-de-confidentialitate"
-        style={{color:'#1932af', fontWeight:600, textDecoration:'underline'}}
-      >
-        Politica de confidențialitate
-      </Link>
-      .
-    </span>
-  </label>
-</div>
-
-              <button
-                type="submit"
-                className="btn btn-blue"
-                disabled={submitStatus === 'loading'}
-                style={{
-                  width:'100%',
-                  fontSize:16,
-                  padding:'16px 32px',
-                  justifyContent:'center',
-                  transition:'all 0.25s ease',
-                  background:
-                    submitStatus === 'success'
-                      ? '#16a34a'
-                      : submitStatus === 'error'
-                      ? '#dc2626'
-                      : submitStatus === 'loading'
-                      ? '#64748b'
-                      : undefined,
-                  transform: submitStatus === 'success' ? 'scale(1.03)' : 'scale(1)',
-                  opacity: submitStatus === 'loading' ? 0.85 : 1,
-                }}
-              >
-                {submitStatus === 'loading'
-                  ? 'Se trimite...'
-                  : submitStatus === 'success'
-                  ? 'Trimis ✓'
-                  : submitStatus === 'error'
-                  ? 'Eroare ❌'
-                  : 'Trimite cardul de conectare'}
-              </button>
-
-            </form>
+    {submitStatus === 'loading'
+      ? 'Se trimite...'
+      : submitStatus === 'success'
+      ? 'Trimis ✓'
+      : submitStatus === 'error'
+      ? 'Eroare ❌'
+      : 'Trimite cardul de conectare'}
+  </button>
+</form>
           </div>
         </div>
       </section>
@@ -330,6 +414,14 @@ export default function JoinPage() {
   .timeline-highlight .timeline-desc {
     opacity: 0.75;
   }
+
+.form-error {
+  margin-top: 7px;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
 
   @media (max-width: 768px) {
     .timeline-mobile {
