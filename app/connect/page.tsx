@@ -49,7 +49,8 @@ export default function ConnectPage() {
                   fontSize: 'clamp(2rem, 2.2vw, 3rem)',
                   color: '#0a0f2c',
                   marginBottom: 32,
-                  whiteSpace: 'nowrap',
+                  whiteSpace: 'normal',
+		  lineHeight: 0.95,
                 }}
               >
                 LASĂ-NE UN MESAJ
@@ -268,7 +269,8 @@ export default function ConnectPage() {
                     fontSize: 'clamp(2rem, 2.2vw, 3rem)',
                     color: '#0a0f2c',
                     marginBottom: 24,
-                    whiteSpace: 'nowrap',
+                    whiteSpace: 'normal',
+		    lineHeight: 0.95,
                   }}
                 >
                   UNDE NE GĂSEȘTI

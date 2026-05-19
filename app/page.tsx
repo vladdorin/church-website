@@ -350,7 +350,7 @@ export default function HomePage() {
         {/* Un singur container sticky — prinde header + carduri împreună */}
         <div className="join-sticky" style={{
           position: 'sticky', top: 80,
-          height: 'calc(100vh - 260px)',
+          height: 'calc(100vh - 160px)',
           overflow: 'hidden',
           display: 'flex', flexDirection: 'column',
           background: '#ffffff',

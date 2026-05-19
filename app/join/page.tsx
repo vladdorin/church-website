@@ -26,7 +26,16 @@ const getInputStyle = (field: string) => ({
       {/* HERO */}
       <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
         <div className="wrap" style={{textAlign:'center'}}>
-          <h1 className="display" style={{fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24}}>
+          <h1
+  className="display"
+  style={{
+    fontSize: 'clamp(2.6rem, 13vw, 7rem)',
+    color: 'white',
+    marginBottom: 24,
+    lineHeight: 0.9,
+    maxWidth: '100%',
+  }}
+>
             EȘTI<br /><span style={{color:'#b6d8fc'}}>BINEVENIT</span>
           </h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
@@ -355,7 +364,7 @@ const getInputStyle = (field: string) => ({
       ? 'Trimis ✓'
       : submitStatus === 'error'
       ? 'Eroare ❌'
-      : 'Trimite cardul de conectare'}
+      : 'Trimite cardul'}
   </button>
 </form>
           </div>
