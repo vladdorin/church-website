@@ -49,15 +49,16 @@ const getInputStyle = (field: string) => ({
 >
   EȘTI<br />
   <span
-    style={{
-      color: '#b6d8fc',
-      display: 'block',
-      fontSize: 'clamp(3.2rem, 16vw, 7rem)',
-      maxWidth: '100%',
-    }}
-  >
-    BINEVENIT
-  </span>
+  style={{
+    color: '#b6d8fc',
+    display: 'block',
+    fontSize: 'clamp(2.4rem, 13vw, 7rem)',
+    maxWidth: '100%',
+    whiteSpace: 'nowrap',
+  }}
+>
+  BINEVENIT
+</span>
 </h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             Există un loc pentru tine în Momentum. Conectează-te, implică-te, crește.
