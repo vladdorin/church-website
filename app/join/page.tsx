@@ -37,7 +37,7 @@ const getInputStyle = (field: string) => ({
           <h1
   className="display"
   style={{
-    fontSize: 'clamp(3rem, 18vw, 7rem)',
+    fontSize: 'clamp(3rem, 5vw, 7rem)',
     lineHeight: 0.85,
     color: 'white',
     marginBottom: 24,
@@ -52,8 +52,8 @@ const getInputStyle = (field: string) => ({
   style={{
     color: '#b6d8fc',
     display: 'block',
-    fontSize: 'clamp(2.4rem, 13vw, 7rem)',
-    maxWidth: '100%',
+    fontSize: 'clamp(3rem, 5vw, 7rem)',
+    lineHeight: 0.9,
     whiteSpace: 'nowrap',
   }}
 >
