@@ -74,7 +74,7 @@ export default function MisiuneaNoastraPage() {
 
             <div className="mission-image-frame">
               <Image
-                src="/misiunea.jpeg"
+                src="/misiunea.jpg"
                 alt="Misiunea Momentum"
                 fill
                 style={{ objectFit:'cover' }}
