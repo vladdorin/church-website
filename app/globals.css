@@ -325,61 +325,6 @@ html {
 }
 
 
-/* ── SECTION 03 RESPONSIVE FIX ── */
-@media (min-width: 768px) {
-  .join-mobile-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  .join-image-col {
-    display: flex !important;
-  }
-
-  .join-mobile-button {
-    display: none !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .join-sticky {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-
-  .join-mobile-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-  }
-
-  .join-text-col {
-    order: 1;
-  }
-
-  .join-image-col {
-    order: 2;
-    display: flex !important;
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
-  .join-image-col .join-photo-wrap {
-    width: 85% !important;
-    max-width: 320px !important;
-    aspect-ratio: 7 / 5 !important;
-    margin: 0 auto !important;
-  }
-
-  .join-mobile-button {
-    order: 3;
-    display: block !important;
-    margin-top: 0 !important;
-  }
-}
-
 .social-card {
   transition: all 0.25s ease;
 }
@@ -1214,8 +1159,59 @@ body {
 }
 
 img,
-video,
-section,
-div {
+video {
   max-width: 100%;
+}
+
+/* ── LANDSCAPE MOBILE FIX — SECTION 03 ── */
+@media (max-width: 950px) and (orientation: landscape) {
+
+  .join-sticky {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding-bottom: 80px !important;
+  }
+
+  .join-mobile-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+    align-items: center !important;
+  }
+
+  .join-text-col {
+    order: 1;
+  }
+
+  .join-image-col {
+    order: 2;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+  }
+
+  .join-image-col .join-photo-wrap {
+    width: 100% !important;
+    max-width: 430px !important;
+    max-height: 280px !important;
+    aspect-ratio: 7 / 5 !important;
+    margin: 0 !important;
+  }
+
+  .join-bottom-cta {
+    display: flex !important;
+    justify-content: flex-start !important;
+    margin-top: 24px !important;
+    position: relative !important;
+    z-index: 5 !important;
+  }
+
+  .join-bottom-cta a {
+    width: fit-content;
+  }
 }
