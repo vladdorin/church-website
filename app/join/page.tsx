@@ -24,20 +24,41 @@ const getInputStyle = (field: string) => ({
   return (
     <>
       {/* HERO */}
-      <section style={{background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px'}}>
+      <section
+  style={{
+    background: 'linear-gradient(135deg,#0f1052 0%,#080818 100%)',
+    color: 'white',
+    padding: '100px 0 80px',
+    overflow: 'hidden',
+    maxWidth: '100vw',
+  }}
+>
         <div className="wrap" style={{textAlign:'center'}}>
           <h1
   className="display"
   style={{
-    fontSize: 'clamp(2.6rem, 13vw, 7rem)',
+    fontSize: 'clamp(3rem, 18vw, 7rem)',
+    lineHeight: 0.85,
     color: 'white',
     marginBottom: 24,
-    lineHeight: 0.9,
     maxWidth: '100%',
+    overflowWrap: 'break-word',
+    wordBreak: 'break-word',
+    textAlign: 'center',
   }}
 >
-            EȘTI<br /><span style={{color:'#b6d8fc'}}>BINEVENIT</span>
-          </h1>
+  EȘTI<br />
+  <span
+    style={{
+      color: '#b6d8fc',
+      display: 'block',
+      fontSize: 'clamp(3.2rem, 16vw, 7rem)',
+      maxWidth: '100%',
+    }}
+  >
+    BINEVENIT
+  </span>
+</h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             Există un loc pentru tine în Momentum. Conectează-te, implică-te, crește.
           </p>
