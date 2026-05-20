@@ -192,7 +192,6 @@ export default function MisiuneaNoastraPage() {
       <section className="mission-final-cta">
         <div className="wrap">
           <div className="mission-cta-box">
-            <span>Momentum Church</span>
 
             <h2 className="display">
               POVESTEA TA CONTEAZĂ

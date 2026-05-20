@@ -194,7 +194,7 @@ export default function AboutPage() {
           </p>
           <div style={{display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center'}}>
             <Link href="/join" className="btn btn-blue">Alătură-te</Link>
-            <Link href="/give" className="btn btn-outline-blue">Susține financiar</Link>
+            
           </div>
         </div>
       </section>
