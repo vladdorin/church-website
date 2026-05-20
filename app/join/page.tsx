@@ -105,7 +105,7 @@ const getInputStyle = (field: string) => ({
       </section>
 
       {/* TIMELINE */}
-<section className="section" style={{background:'#f8f9ff'}}>
+<section className="timeline-premium-section timeline-section-large">
   <div className="wrap" style={{textAlign:'center'}}>
     <p className="label" style={{fontSize:'clamp(2.5rem,2vw,4rem)'}}>Timeline</p>
     <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
