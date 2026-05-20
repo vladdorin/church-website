@@ -204,10 +204,10 @@ export default function HomePage() {
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.6)', fontWeight: 300, maxWidth: 420, marginBottom: 12 }}>
-                Biserica Momentum a fost fondată de John și Voichi Dura. Ei poartă o chemare pentru generația tânără a Albei Iulia și au decis să facă ceva în privința asta.
+                Biserica Momentum a început dintr-o chemare pentru generația tânără din Alba Iulia și din dorința de a construi o comunitate unde oamenii să-L cunoască pe Dumnezeu și să se simtă acasă.
               </p>
               <p className="sr sr-up sr-d2" style={{ fontSize: 15, lineHeight: 1.9, color: 'rgba(8,12,30,0.45)', fontWeight: 300, maxWidth: 420, marginBottom: 36, fontStyle: 'italic' }}>
-                „Nu am vrut să construim o altă biserică tradițională. Am vrut să construim o comunitate în care fiecare să se simtă acasă."
+                „Nu construim doar o biserică. Construim un loc pe care oamenii să îl poată numi acasă."
               </p>
               {/* Buton desktop — ascuns pe mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">

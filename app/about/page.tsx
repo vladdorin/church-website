@@ -29,19 +29,16 @@ export default function AboutPage() {
                 JOHN &amp;<br />VOICHI DURA
               </h2>
               <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, marginBottom:16, fontWeight:300, fontSize:16}}>
-                Biserica Momentum a fost fondată de John și Voichi Dura, care, împreună
-                cu un grup pasionat de tineri, au pus bazele unei comunități de credință
-                în creștere în Alba Iulia.
-              </p>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, marginBottom:16, fontWeight:300, fontSize:16}}>
-                Nu am vrut doar să construim o biserică — am vrut să construim un acasă.
-                Un loc unde oamenii pot cu adevărat să-L întâlnească pe Dumnezeu, să găsească
-                apartenența și să trăiască o transformare reală.
-              </p>
-              <p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, fontSize:16}}>
-                Credem cu toată inima că Alba Iulia are nevoie de o comunitate autentică,
-                relevantă și plină de viață — și suntem determinați să o construim.
-              </p>
+  Comunitatea Momentum a fost fondată de John și Voichi Dura, care, împreună cu un grup pasionat de tineri,  au pus bazele unei biserici noi în Alba Iulia. Suntem o biserică creștină și credem că fiecare persoană merită oportunitatea de a-L cunoaște și de a-L urma pe Isus Hristos, Fiul Lui Dumnezeu, Mantuitorul tuturor.
+</p>
+
+<p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, marginBottom:16, fontWeight:300, fontSize:16}}>
+    Încă de la început, dorința noastră a fost mai mult decât construirea unei biserici. Ne-am dorit un loc în care oamenii să se simtă primiți, iubiți și aproape de Dumnezeu, un loc pe care să îl poată numi acasă și să trăiască o transformare reală.
+</p>
+
+<p style={{color:'rgba(10,15,44,0.65)', lineHeight:1.8, fontWeight:300, fontSize:16}}>
+    Credem din toată inima că Dumnezeu ne-a chemat să fim pentru Alba Iulia o comunitate autentică, relevantă și plină de viață, iar asta este ceea ce ne dorim să construim zi de zi, împreună.
+</p>
             </div>
             <div style={{position:'relative'}}>
               <div style={{
@@ -79,8 +76,8 @@ export default function AboutPage() {
       <section style={{background:'#0a0f2c', padding:'80px 0'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <p className="display" style={{fontSize:'clamp(1.4rem,3.5vw,2.8rem)', color:'white', maxWidth:800, margin:'0 auto', lineHeight:1.2}}>
-            „NU VREM DOAR SĂ CONSTRUIM O BISERICĂ.
-            <span style={{color:'#b6d8fc'}}> VREM SĂ CONSTRUIM UN LOC UNDE TOATĂ LUMEA SE SIMTE ACASĂ."</span>
+            „NU CONSTRUIM DOAR O BISERICĂ.
+            <span style={{color:'#b6d8fc'}}> CONSTRUIM UN LOC PE CARE OAMENII SĂ ÎL POATĂ NUMI ACASĂ."</span>
           </p>
           <p style={{color:'rgba(255,255,255,0.4)', marginTop:24, fontSize:14, fontWeight:500, letterSpacing:'0.1em'}}>
             — John Dura, Pastor
