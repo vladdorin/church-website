@@ -130,7 +130,7 @@ function GiveForm() {
               ✓
             </div>
 
-            <h2 className="display" style={{ fontSize: 38, color: '#0a0f2c', marginBottom: 16, lineHeight: 1.05 }}>
+            <h2 className="display" style={{ fontSize: 'clamp(1.8rem, 7vw, 2.4rem)', color: '#0a0f2c', marginBottom: 16, lineHeight: 1.05 }}>
               THANK YOU SO MUCH!
             </h2>
 
@@ -151,7 +151,7 @@ function GiveForm() {
       <section className="section" style={{ background: 'white' }}>
         <div className="wrap" style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="card" style={{ maxWidth: 480, width: '100%', textAlign: 'center', padding: 56 }}>
-            <h2 className="display" style={{ fontSize: 36, color: '#0a0f2c', marginBottom: 12 }}>
+            <h2 className="display" style={{ fontSize: 'clamp(1.8rem, 7vw, 2.25rem)', color: '#0a0f2c', marginBottom: 12 }}>
               NO PROBLEM!
             </h2>
             <p style={{ color: 'rgba(10,15,44,0.6)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
@@ -221,7 +221,7 @@ function GiveForm() {
             }}
           >
             <div style={{ gridColumn: '1 / -1', textAlign: 'center' }}>
-              <h2 className="display" style={{ fontSize: 60, color: '#0a0f2c', marginBottom: 6 }}>
+              <h2 className="display" style={{ fontSize: 'clamp(2rem, 8vw, 3.75rem)', color: '#0a0f2c', marginBottom: 6 }}>
                 CHOOSE AMOUNT
               </h2>
 
