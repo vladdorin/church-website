@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function CookieBanner() {
+  const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export default function CookieBanner() {
       }}
     >
       <p style={{ fontWeight: 700, fontSize: 16, marginBottom: 8 }}>
-        Folosim cookie-uri
+        {isEnglish ? 'We use cookies' : 'Folosim cookie-uri'}
       </p>
 
       <p
@@ -53,18 +56,18 @@ export default function CookieBanner() {
           marginBottom: 18,
         }}
       >
-         Folosim cookie-uri pentru funcționarea corectă a site-ului și pentru a vă
-  oferi o experiență cât mai bună în timpul navigării. Puteți afla mai multe
-  în{' '}
+         {isEnglish
+  ? 'We use cookies for the proper functioning of the website and to provide you with the best possible browsing experience. You can learn more in '
+  : 'Folosim cookie-uri pentru funcționarea corectă a site-ului și pentru a vă oferi o experiență cât mai bună în timpul navigării. Puteți afla mai multe în '}
         <Link
-          href="/politica-cookies"
+          href={isEnglish ? '/en/politica-cookies' : '/politica-cookies'}
           style={{
             color: '#b6d8fc',
             fontWeight: 600,
             textDecoration: 'underline',
           }}
         >
-          Politica Cookies
+          {isEnglish ? 'Cookie Policy' : 'Politica Cookies'}
         </Link>
         .
       </p>
@@ -89,7 +92,7 @@ export default function CookieBanner() {
             cursor: 'pointer',
           }}
         >
-          Refuz
+          {isEnglish ? 'Decline' : 'Refuză'}
         </button>
 
         <button
@@ -104,7 +107,7 @@ export default function CookieBanner() {
             cursor: 'pointer',
           }}
         >
-          Accept
+          {isEnglish ? 'Accept' : 'Acceptă'}
         </button>
       </div>
     </div>

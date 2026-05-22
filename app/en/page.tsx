@@ -48,9 +48,9 @@ function GhostNum({ num, light }: { num: string; light?: boolean }) {
 
 /* ── Stacked → spread cards (fan-out, completes while header is visible) ── */
 const STACK_CARDS = [
-  { titlu: 'Conectează-te', desc: 'Distribuie vestea și aduce-ți prietenii. Fiecare persoană contează pentru Alba Iulia.',        bg: '#7b9aff', col: '#080c1e' },
-  { titlu: 'Roagă-te',      desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.',   bg: '#080c1e', col: '#f4f2ee' },
-  { titlu: 'Implică-te',    desc: 'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.',         bg: '#f0ede8', col: '#080c1e' },
+  { titlu: 'Connect',      desc: 'Share the message and bring your friends. Every person matters in Alba Iulia.',        bg: '#7b9aff', col: '#080c1e' },
+  { titlu: 'Pray',         desc: 'Stand with us in prayer for this city and for the launch in October 2026.',   bg: '#080c1e', col: '#f4f2ee' },
+  { titlu: 'Get Involved', desc: 'Use your gifts and talents to help build this community from the ground up.',         bg: '#f0ede8', col: '#080c1e' },
 ]
 
 // Initial stacked offsets for each card
@@ -91,7 +91,7 @@ function StackedCards() {
   const ep   = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2
   const lerp = (a: number, b: number) => a + (b - a) * ep
 
-  // ── MOBILE: carduri stivuite vertical, fiecare vizibil complet ──
+  // ── MOBILE: cards stacked vertically, each fully visible ──
   if (isMobile) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -126,7 +126,7 @@ function StackedCards() {
     )
   }
 
-  // ── DESKTOP: animatie fan-out, carduri compacte ──
+  // ── DESKTOP: fan-out animation, compact cards ──
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, borderRadius: 24, overflow: 'hidden' }}>
       {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => {
@@ -185,13 +185,13 @@ export default function HomePage() {
         <div style={{ display: 'flex', animation: 'ticker 20s linear infinite', whiteSpace: 'nowrap' }}>
           {Array(10).fill(null).map((_, i) => (
             <span key={i} style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', flexShrink: 0 }}>
-              &nbsp;·&nbsp; O biserică în Alba Iulia pentru toată lumea &nbsp;·&nbsp; Ești binevenit așa cum ești
+              &nbsp;·&nbsp; A church in Alba Iulia for everyone &nbsp;·&nbsp; You are welcome just as you are
             </span>
           ))}
         </div>
       </div>
 
-      {/* ═══════════ 01 — CINE SUNTEM ═══════════ */}
+      {/* ═══════════ 01 — WHO WE ARE ═══════════ */}
       <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="01" />
         <div className="wrap-wide">
@@ -199,19 +199,19 @@ export default function HomePage() {
 
             {/* Left: text */}
             <div>
-              <p className="sr sr-up label">CINE SUNTEM?</p>
+              <p className="sr sr-up label">WHO ARE WE?</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.6)', fontWeight: 300, maxWidth: 420, marginBottom: 12 }}>
-                Biserica Momentum a început dintr-o chemare pentru generația tânără din Alba Iulia și din dorința de a construi o comunitate unde oamenii să-L cunoască pe Dumnezeu și să se simtă acasă.
+                Momentum Church began from a calling for the young generation of Alba Iulia and from the desire to build a community where people can know God and feel at home.
               </p>
               <p className="sr sr-up sr-d2" style={{ fontSize: 15, lineHeight: 1.9, color: 'rgba(8,12,30,0.45)', fontWeight: 300, maxWidth: 420, marginBottom: 36, fontStyle: 'italic' }}>
-                „Nu construim doar o biserică. Construim un loc pe care oamenii să îl poată numi acasă."
+                "We&apos;re not just building a church. We&apos;re building a place people can call home."
               </p>
-              {/* Buton desktop — ascuns pe mobile */}
+              {/* Desktop button — hidden on mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">
-                <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
+                <Link href="/about" className="btn btn-dark">Meet Us</Link>
               </div>
             </div>
 
@@ -241,7 +241,7 @@ export default function HomePage() {
   >
     <Image
       src="/john-voichi.jpg"
-      alt="John și Voichi Dura"
+      alt="John and Voichi Dura"
       fill
       style={{
         objectFit: 'cover',
@@ -300,15 +300,15 @@ export default function HomePage() {
             color: 'rgba(255,255,255,0.45)',
           }}
         >
-          Pastori · Biserica Momentum
+          Pastors · Momentum Church
         </p>
       </div>
     </div>
   </div>
 </div>
-            {/* Buton mobile — după poză, ascuns pe desktop */}
+            {/* Mobile button — after photo, hidden on desktop */}
             <div className="btn-mobile-after section-01-button">
-              <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
+              <Link href="/about" className="btn btn-dark">Meet Us</Link>
             </div>
 
           </RevealSection>
@@ -319,7 +319,7 @@ export default function HomePage() {
 
 
 
-      {/* ═══════════ 02 — MISIUNEA NOASTRĂ ═══════════ */}
+      {/* ═══════════ 02 — OUR MISSION ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <div className="ghost-num" style={{
   	position: 'absolute', left: '-3%', top: '50%', transform: 'translateY(-50%)',
@@ -330,24 +330,24 @@ export default function HomePage() {
 	}}>02</div>
         <div className="wrap-wide">
           <RevealSection style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
-            <p className="sr sr-up label-light">MISIUNEA NOASTRĂ</p>
+            <p className="sr sr-up label-light">OUR MISSION</p>
             <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-              DE CE EXISTĂ<br />MOMENTUM?
+              WHY DOES<br />MOMENTUM EXIST?
             </h2>
             <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-              Existăm pentru a construi o comunitate dătătoare de viață în Alba Iulia, un loc unde oamenii Îl întâlnesc pe Dumnezeu, cresc în comunitate autentică și trăiesc scopul dat de El.
+              We exist to build a life-giving community in Alba Iulia, a place where people meet God, grow in authentic community, and live out the purpose He has given them.
             </p>
             <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Link href="/misiunea-noastra" className="btn btn-white">Descoperă misiunea</Link>
+              <Link href="/misiunea-noastra" className="btn btn-white">Discover the Mission</Link>
             </div>
           </RevealSection>
         </div>
       </section>
 
-{/* ═══════════ 03 — VINO CU NOI ═══════════ */}
+{/* ═══════════ 03 — JOIN US ═══════════ */}
       <section style={{ background: '#ffffff', position: 'relative' }}>
 
-        {/* Un singur container sticky — prinde header + carduri împreună */}
+        {/* Single sticky container — locks header + cards together */}
         <div className="join-sticky" style={{
           position: 'sticky', top: 80,
           height: 'calc(100vh - 160px)',
@@ -381,13 +381,13 @@ export default function HomePage() {
               >
                 <div className="join-text-col">
                   <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e', whiteSpace: 'nowrap' }}>
-                    VINO CU NOI.
+                    JOIN US.
                   </h2>
                   <p className="sr sr-up sr-d1" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, marginBottom: 36, maxWidth: 420 }}>
-                    Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
+                    You are welcome exactly as you are. We need your talent, energy, and heart to build this community.
                   </p>
                   <div className="sr sr-up sr-d2 btn-desktop">
-                    <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+                    <Link href="/join" className="btn btn-dark">Join the Team</Link>
                   </div>
                 </div>
 
@@ -415,7 +415,7 @@ export default function HomePage() {
   >
     <Image
       src="/echipa.jpg"
-      alt="Echipa Momentum"
+      alt="Momentum Team"
       fill
       style={{
         objectFit: 'cover',
@@ -429,13 +429,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Carduri — rămân vizibile cât timp scrollezi prin secțiune */}
+          {/* Cards — remain visible while scrolling through the section */}
 <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
   <div className="wrap-wide">
     <StackedCards />
 
     <div className="join-bottom-cta">
-      <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+      <Link href="/join" className="btn btn-dark">Join the Team</Link>
     </div>
   </div>
 </div>
@@ -444,7 +444,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════ 04 — RUGĂCIUNE ═══════════ */}
+      {/* ═══════════ 04 — PRAYER ═══════════ */}
 <section className="page-section prayer-section-home" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
   <GhostNum num="04" />
   <div className="wrap-wide">
@@ -453,7 +453,7 @@ export default function HomePage() {
       style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}
     >
 
-     {/* Left: poza */}
+     {/* Left: photo */}
 <div className="sr sr-left sr-d1 prayer-home-image">
   <div
     style={{
@@ -471,7 +471,7 @@ export default function HomePage() {
   >
     <Image
       src="/rugaciune.jpg"
-      alt="Rugăciune"
+      alt="Prayer"
       fill
       style={{
         objectFit: 'cover',
@@ -484,15 +484,15 @@ export default function HomePage() {
       {/* Right: text */}
       <div className="prayer-home-text" style={{ textAlign: 'right' }}>
         <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-          AI NEVOIE<br />DE<br />RUGĂCIUNE?
+          DO YOU NEED<br />PRAYER?
         </h2>
 
         <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-          Echipa noastră se roagă zilnic pentru Alba Iulia și pentru oamenii din ea. Trimite-ne cererea ta.
+          Our team prays daily for Alba Iulia and the people in it. Send us your request.
         </p>
 
         <div className="sr sr-up sr-d3 prayer-home-button" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Link href="/pray" className="btn btn-dark">Stai alături</Link>
+          <Link href="/pray" className="btn btn-dark">Stand With Us</Link>
         </div>
       </div>
 
@@ -500,37 +500,37 @@ export default function HomePage() {
   </div>
 </section>
 
-      {/* ═══════════ 05 — DONAȚII ═══════════ */}
+      {/* ═══════════ 05 — DONATIONS ═══════════ */}
       <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <GhostNum num="05" light />
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <p className="sr sr-up label-light">SUSȚINE LANSAREA</p>
+              <p className="sr sr-up label-light">SUPPORT THE LAUNCH</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-                DEVINO<br />PARTENER.
+                BECOME A<br />PARTNER.
               </h2>
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 20 }}>
-                Fiecare donație pe care o faci va fi dublată de ARC până la $50.000.
+                Every donation you make will be matched by ARC up to $50,000.
               </p>
-              {/* Buton desktop — ascuns pe mobile */}
+              {/* Desktop button — hidden on mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">
-                <Link href="/give" className="btn btn-white">Donează</Link>
+                <Link href="/give" className="btn btn-white">Give</Link>
               </div>
             </div>
             <div className="sr sr-right sr-d1 donation-progress-mobile">
   <FundraiserCompact variant="side" />
 </div>
-            {/* Buton mobile — după progress bar, ascuns pe desktop */}
+            {/* Mobile button — after progress bar, hidden on desktop */}
             <div className="btn-mobile-after">
-              <Link href="/give" className="btn btn-white">Donează</Link>
+              <Link href="/give" className="btn btn-white">Give</Link>
             </div>
           </RevealSection>
         </div>
       </section>
       <Diagonal to="#080c1e" />
 
-      {/* ═══════════ CTA FINAL ═══════════ */}
+      {/* ═══════════ FINAL CTA ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '112px 0', position: 'relative', overflow: 'hidden' }}>
         <div className="cta-ghost" style={{
           position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
@@ -541,14 +541,14 @@ export default function HomePage() {
         <div className="wrap-wide" style={{ position: 'relative', zIndex: 1 }}>
           <RevealSection>
             <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2.5rem,7vw,7rem)', color: 'white', marginBottom: 48 }}>
-              MOMENTUL<br />
-              <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>E ACUM.</span>
+              THE MOMENT<br />
+              <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>IS NOW.</span>
             </h2>
             <p className="sr sr-up sr-d2" style={{ fontSize: 17, color: 'rgba(255,255,255,0.45)', maxWidth: 420, lineHeight: 1.8, fontWeight: 300, marginBottom: 36 }}>
-              Fie că vrei să ne cunoști, să te implici, să susții financiar, există un loc pentru tine în Momentum.
+              Whether you want to come, pray, get involved or donate, there is a place for you in Momentum.
             </p>
             <div className="sr sr-up sr-d3">
-              <Link href="/connect" className="btn btn-navy">Contactează-ne</Link>
+              <Link href="/connect" className="btn btn-navy">Contact Us</Link>
             </div>
           </RevealSection>
         </div>

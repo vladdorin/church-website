@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-const links = [
+const roLinks = [
   { href: '/about',            label: 'Cine suntem?' },
   { href: '/misiunea-noastra', label: 'Misiunea noastră' },
   { href: '/pray',             label: 'Rugăciune' },
@@ -12,10 +12,34 @@ const links = [
   { href: '/connect',          label: 'Contact' },
 ]
 
+const enLinks = [
+  { href: '/en/about',            label: 'Who we are?' },
+  { href: '/en/misiunea-noastra', label: 'Our mission' },
+  { href: '/en/pray',             label: 'Prayer' },
+  { href: '/en/join',             label: 'Join us' },
+  { href: '/en/connect',          label: 'Contact' },
+]
+
 export default function Navigation() {
   const [open, setOpen]       = useState(false)
   const [mobile, setMobile]   = useState(false)
   const pathname              = usePathname()
+
+  const isEnglish = pathname.startsWith('/en')
+
+  const links = isEnglish ? enLinks : roLinks
+
+  const homeHref = isEnglish ? '/en' : '/'
+
+  const giveHref = isEnglish ? '/en/give' : '/give'
+
+  const donateLabel = isEnglish ? 'Give' : 'Donează'
+
+  const switchHref = isEnglish
+    ? pathname.replace('/en', '') || '/'
+    : `/en${pathname}`
+
+  const switchLabel = isEnglish ? 'RO' : 'EN'
 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 900)
@@ -24,7 +48,6 @@ export default function Navigation() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  // Închide meniul când schimbă pagina
   useEffect(() => { setOpen(false) }, [pathname])
 
   return (
@@ -40,15 +63,19 @@ export default function Navigation() {
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 88,
- 	padding: '0 32px',
+        padding: '0 32px',
       }}>
 
         {/* ── LOGO ── */}
-        <Link href="/" style={{display:'flex', alignItems:'center', flexShrink:0, marginLeft: -15}}>
+        <Link
+          href={homeHref}
+          style={{display:'flex', alignItems:'center', flexShrink:0, marginLeft: -15}}
+        >
           <Image
             src="/logo-horizontal.png"
             alt="Momentum"
-            width={260} height={60}
+            width={260}
+            height={60}
             style={{height:260, width:'auto'}}
             priority
           />
@@ -58,13 +85,21 @@ export default function Navigation() {
         {!mobile && (
           <nav style={{display:'flex', alignItems:'center', gap:4}}>
             {links.map(({ href, label }) => (
-              <Link key={href} href={href}
-                className={`nav-link${pathname === href ? ' active' : ''}`}>
+              <Link
+                key={href}
+                href={href}
+                className={`nav-link${pathname === href ? ' active' : ''}`}
+              >
                 {label}
               </Link>
             ))}
-            <Link href="/give" className="btn-donate">
-              <span>Donează</span>
+
+            <Link href={switchHref} className="nav-link">
+              {switchLabel}
+            </Link>
+
+            <Link href={giveHref} className="btn-donate">
+              <span>{donateLabel}</span>
               <span className="donate-arrow">→</span>
             </Link>
           </nav>
@@ -76,24 +111,40 @@ export default function Navigation() {
             onClick={() => setOpen(o => !o)}
             aria-label="Meniu"
             style={{
-              background:'transparent', border:'none',
-              cursor:'pointer', padding:10,
-              display:'flex', flexDirection:'column',
-              gap:5, alignItems:'center', justifyContent:'center',
+              background:'transparent',
+              border:'none',
+              cursor:'pointer',
+              padding:10,
+              display:'flex',
+              flexDirection:'column',
+              gap:5,
+              alignItems:'center',
+              justifyContent:'center',
             }}
           >
             <span style={{
-              display:'block', width:24, height:2, background:'white',
+              display:'block',
+              width:24,
+              height:2,
+              background:'white',
               transition:'all 0.25s ease',
               transform: open ? 'rotate(45deg) translate(5px, 5px)' : 'none',
             }} />
+
             <span style={{
-              display:'block', width:24, height:2, background:'white',
+              display:'block',
+              width:24,
+              height:2,
+              background:'white',
               transition:'all 0.25s ease',
               opacity: open ? 0 : 1,
             }} />
+
             <span style={{
-              display:'block', width:24, height:2, background:'white',
+              display:'block',
+              width:24,
+              height:2,
+              background:'white',
               transition:'all 0.25s ease',
               transform: open ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
             }} />
@@ -108,34 +159,66 @@ export default function Navigation() {
           borderTop:'1px solid rgba(255,255,255,0.07)',
           padding:'16px 24px 24px',
         }}>
+
           {links.map(({ href, label }) => (
-            <Link key={href} href={href}
+            <Link
+              key={href}
+              href={href}
               onClick={() => setOpen(false)}
               style={{
                 display:'block',
                 fontFamily:"'Montserrat', sans-serif",
-                fontSize:16, fontWeight:600,
+                fontSize:16,
+                fontWeight:600,
                 color: pathname === href ? 'white' : 'rgba(255,255,255,0.7)',
                 padding:'14px 16px',
                 borderRadius:10,
                 textDecoration:'none',
                 borderBottom:'1px solid rgba(255,255,255,0.05)',
-              }}>
+              }}
+            >
               {label}
             </Link>
           ))}
-          <Link href="/give" onClick={() => setOpen(false)}
+
+          <Link
+            href={switchHref}
+            onClick={() => setOpen(false)}
             style={{
-              display:'block', marginTop:16,
-              background:'#1932af', color:'white',
+              display:'block',
+              fontFamily:"'Montserrat', sans-serif",
+              fontSize:16,
+              fontWeight:600,
+              color:'rgba(255,255,255,0.7)',
+              padding:'14px 16px',
+              borderRadius:10,
+              textDecoration:'none',
+              borderBottom:'1px solid rgba(255,255,255,0.05)',
+            }}
+          >
+            {switchLabel}
+          </Link>
+
+          <Link
+            href={giveHref}
+            onClick={() => setOpen(false)}
+            style={{
+              display:'block',
+              marginTop:16,
+              background:'#1932af',
+              color:'white',
               textAlign:'center',
               fontFamily:"'Montserrat', sans-serif",
-              fontSize:14, fontWeight:700,
-              letterSpacing:'0.08em', textTransform:'uppercase',
-              padding:'15px 24px', borderRadius:999,
+              fontSize:14,
+              fontWeight:700,
+              letterSpacing:'0.08em',
+              textTransform:'uppercase',
+              padding:'15px 24px',
+              borderRadius:999,
               textDecoration:'none',
-            }}>
-            Donează →
+            }}
+          >
+            {donateLabel} →
           </Link>
         </div>
       )}

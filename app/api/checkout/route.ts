@@ -15,14 +15,14 @@ export async function POST(request: Request) {
 
     if (!allowedCurrencies.includes(currency)) {
       return Response.json(
-        { error: 'Monedă invalidă.' },
+        { error: 'Invalid currency.' },
         { status: 400 }
       )
     }
 
     if (!amount || amount < 5 || amount > 50000) {
       return Response.json(
-        { error: 'Suma invalidă. Minim 5, maxim 50.000.' },
+        { error: 'Invalid amount. Minimum 5, maximum 50,000.' },
         { status: 400 }
       )
     }
@@ -37,6 +37,17 @@ export async function POST(request: Request) {
       process.env.NEXT_PUBLIC_URL ??
       'http://localhost:3000'
 
+    // Detect which language version the request came from,
+    // so Stripe redirects back to the correct page after payment.
+    const referer = request.headers.get('referer') ?? ''
+    let returnPath = '/give'
+    try {
+      const refererUrl = new URL(referer)
+      returnPath = refererUrl.pathname // e.g. '/give' or '/en/give'
+    } catch {
+      returnPath = '/give'
+    }
+
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
       mode: 'payment',
@@ -47,8 +58,8 @@ export async function POST(request: Request) {
           price_data: {
             currency,
             product_data: {
-              name: 'Donație – Biserica Momentum',
-              description: 'Mulțumim! Donația ta ajută la construirea comunității.',
+              name: 'Donation – Momentum Church',
+              description: 'Thank you! Your donation helps build the community.',
             },
             unit_amount: Math.round(amount * 100),
           },
@@ -56,11 +67,11 @@ export async function POST(request: Request) {
         },
       ],
 
-      return_url: `${origin}/give?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${origin}${returnPath}?success=true&session_id={CHECKOUT_SESSION_ID}`,
 
       payment_intent_data: {
         metadata: {
-          church: 'Biserica Momentum',
+          church: 'Momentum Church',
           amount: amount.toString(),
           currency,
         },
@@ -71,7 +82,7 @@ export async function POST(request: Request) {
       clientSecret: session.client_secret,
     })
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Eroare internă'
+    const message = err instanceof Error ? err.message : 'Internal error'
     console.error('[Stripe error]', message)
     return Response.json({ error: message }, { status: 500 })
   }

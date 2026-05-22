@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 const FacebookIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -29,6 +32,8 @@ const WhatsAppIcon = () => (
 )
 
 export default function Footer() {
+  const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
   const socials: [string, string, React.FC][] = [
   ['https://facebook.com/bisericamomentum', 'Facebook', FacebookIcon],
   ['https://instagram.com/biserica.momentum', 'Instagram', InstagramIcon],
@@ -67,7 +72,7 @@ export default function Footer() {
 
           {/* Brand */}
 <div className="footer-brand">
-  
+
 <p
   style={{
     fontSize:11,
@@ -78,7 +83,7 @@ export default function Footer() {
     marginBottom:20
   }}
 >
-  Politici
+  {isEnglish ? 'Policies' : 'Politici'}
 </p>
 
   <div
@@ -89,45 +94,63 @@ export default function Footer() {
     }}
   >
     <Link
-      href="/politica-de-confidentialitate"
+      href={isEnglish ? '/en/privacy-policy' : '/politica-de-confidentialitate'}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
         textDecoration:'none',
       }}
     >
-      Politică de Confidențialitate
+      {isEnglish ? 'Privacy Policy' : 'Politică de Confidențialitate'}
     </Link>
 
     <Link
-      href="/termeni-si-conditii"
+      href={isEnglish ? '/en/terms-and-conditions' : '/termeni-si-conditii'}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
         textDecoration:'none',
       }}
     >
-      Termeni și Condiții
+      {isEnglish ? 'Terms & Conditions' : 'Termeni și Condiții'}
     </Link>
 
     <Link
-      href="/politica-cookies"
+      href={isEnglish ? '/en/cookie-policy' : '/politica-cookies'}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
         textDecoration:'none',
       }}
     >
-      Politica Cookies
+      {isEnglish ? 'Cookie Policy' : 'Politica Cookies'}
     </Link>
   </div>
 </div>
 
           {/* Pagini */}
           <div>
-            <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>Pagini</p>
+            <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>{isEnglish ? 'Pages' : 'Pagini'}</p>
             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-              {[['/about','Cine suntem?'],['/misiunea-noastra','Misiunea noastră'],['/pray','Rugăciune'],['/join','Alătură-te'],['/give','Donează'],['/connect','Contact']].map(([href, label]) => (
+              {(
+  isEnglish
+    ? [
+        ['/en/about','Who we are?'],
+        ['/en/misiunea-noastra','Our mission'],
+        ['/en/pray','Prayer'],
+        ['/en/join','Join us'],
+        ['/en/give','Give'],
+        ['/en/connect','Contact']
+      ]
+    : [
+        ['/about','Cine suntem?'],
+        ['/misiunea-noastra','Misiunea noastră'],
+        ['/pray','Rugăciune'],
+        ['/join','Alătură-te'],
+        ['/give','Donează'],
+        ['/connect','Contact']
+      ]
+).map(([href, label]) => (
                 <Link key={href} href={href} style={{ color:'rgba(255,255,255,0.55)', fontSize:14, textDecoration:'none' }}>
                   {label}
                 </Link>
@@ -137,7 +160,7 @@ export default function Footer() {
 
           {/* Contact + Social */}
           <div>
-            <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>Contact</p>
+            <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>{isEnglish ? 'Contact' : 'Contact'}</p>
             <div style={{ display:'flex', flexDirection:'column', gap:12, fontSize:14, color:'rgba(255,255,255,0.55)' }}>
               <a
   href="https://www.google.com/maps/search/?api=1&query=Alba+Iulia+Romania"
@@ -145,7 +168,7 @@ export default function Footer() {
   rel="noopener noreferrer"
   style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}
 >
-  Alba Iulia, România
+  {isEnglish ? 'Alba Iulia, Romania' : 'Alba Iulia, România'}
 </a>
               <a href="mailto:biserica.momentum@gmail.com" style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}>
                 biserica.momentum@gmail.com
@@ -164,13 +187,17 @@ export default function Footer() {
         </div>
 
         <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:12, paddingTop:32, fontSize:12, color:'rgba(255,255,255,0.25)' }}>
-          <span>© {new Date().getFullYear()} Biserica Momentum · Alba Iulia, România</span>
-          <span>Tot ce facem este pentru gloria lui Dumnezeu.</span>
+          <span>
+  © {new Date().getFullYear()} Momentum Church · {isEnglish ? 'Alba Iulia, Romania' : 'Alba Iulia, România'}
+</span>
+          <span>
+  {isEnglish
+    ? 'Everything we do is for the glory of God.'
+    : 'Tot ce facem este pentru gloria lui Dumnezeu.'}
+</span>
         </div>
       </div>
 
     </footer>
   )
 }
-
-

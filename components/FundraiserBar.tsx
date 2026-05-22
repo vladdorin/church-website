@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { FUNDRAISER } from '@/lib/fundraiser'
+import { usePathname } from 'next/navigation'
 
 /* ── Helpers ─────────────────────────────────────────────── */
 function fmt(n: number) {
@@ -32,6 +33,8 @@ function useAnimatedPct(target: number, delay = 350) {
 export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | 'side' }) {
   const rawPct   = Math.min((FUNDRAISER.raised / FUNDRAISER.goal) * 100, 100)
   const animPct  = useAnimatedPct(rawPct)
+  const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
 
   return (
     <div style={variant === 'side' ? {
@@ -48,7 +51,7 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 12 }}>
         <div>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 5 }}>
-            Strânse până acum
+            {isEnglish ? 'Raised so far' : 'Strânse până acum'}
           </p>
           <p style={{
             fontFamily: "'Climate Crisis',sans-serif",
@@ -60,7 +63,7 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
         </div>
         <div style={{ textAlign: 'right' }}>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 5 }}>
-            Obiectiv
+            {isEnglish ? 'Goal' : 'Obiectiv'}
           </p>
           <p style={{
             fontFamily: "'Montserrat',sans-serif",
@@ -88,7 +91,9 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
       {/* Meta row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
-          {FUNDRAISER.donors} susținători · fiecare $1 dublat de ARC
+          {isEnglish
+  ? `${FUNDRAISER.donors} donors · every $1 matched by ARC`
+  : `${FUNDRAISER.donors} susținători · fiecare $1 dublat de ARC`}
         </p>
         <p style={{
           fontFamily: "'Montserrat',sans-serif",
@@ -108,12 +113,26 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
 export function FundraiserFull() {
   const rawPct  = Math.min((FUNDRAISER.raised / FUNDRAISER.goal) * 100, 100)
   const animPct = useAnimatedPct(rawPct, 500)
+  const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
 
   const stats = [
-    { label: 'Strânse până acum', value: fmt(FUNDRAISER.raised), accent: true  },
-    { label: 'Obiectiv',          value: fmt(FUNDRAISER.goal),   accent: false },
-    { label: 'Susținători',       value: String(FUNDRAISER.donors), accent: false },
-  ]
+  {
+    label: isEnglish ? 'Raised so far' : 'Strânse până acum',
+    value: fmt(FUNDRAISER.raised),
+    accent: true
+  },
+  {
+    label: isEnglish ? 'Goal' : 'Obiectiv',
+    value: fmt(FUNDRAISER.goal),
+    accent: false
+  },
+  {
+    label: isEnglish ? 'Supporters' : 'Susținători',
+    value: String(FUNDRAISER.donors),
+    accent: false
+  },
+]
 
   return (
     <div style={{
@@ -168,7 +187,7 @@ export function FundraiserFull() {
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.25)',
           marginTop: 6,
-        }}>din obiectiv atins</p>
+        }}>{isEnglish ? 'of goal reached' : 'din obiectiv atins'}</p>
       </div>
 
       {/* ── Progress bar ── */}
@@ -217,8 +236,31 @@ export function FundraiserFull() {
           fontSize: 14, flexShrink: 0,
         }}>✦</div>
         <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', fontWeight: 300, lineHeight: 1.6 }}>
-          Cu parteneriatul <strong style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>ARC</strong>, fiecare $1 donat este dublat —
-          obiectivul tău de {fmt(FUNDRAISER.goal)} devine <strong style={{ color: 'white', fontWeight: 700 }}>{fmt(FUNDRAISER.goal * 2)} impact total</strong>.
+          {isEnglish ? (
+  <>
+    With the partnership of{' '}
+    <strong style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>
+      ARC
+    </strong>
+    , every $1 donated is matched —
+    your goal of {fmt(FUNDRAISER.goal)} becomes{' '}
+    <strong style={{ color: 'white', fontWeight: 700 }}>
+      {fmt(FUNDRAISER.goal * 2)} total impact
+    </strong>.
+  </>
+) : (
+  <>
+    Cu parteneriatul{' '}
+    <strong style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>
+      ARC
+    </strong>
+    , fiecare $1 donat este dublat —
+    obiectivul tău de {fmt(FUNDRAISER.goal)} devine{' '}
+    <strong style={{ color: 'white', fontWeight: 700 }}>
+      {fmt(FUNDRAISER.goal * 2)} impact total
+    </strong>.
+  </>
+)}
         </p>
       </div>
 

@@ -1,8 +1,11 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-const FULL_TEXT = 'Construim o comunitate vie, autentică și plină de dragoste în inima orașului Alba Iulia. Pentru gloria lui Dumnezeu.'
+const FULL_TEXT_RO = 'Construim o comunitate vie, autentică și plină de dragoste în inima orașului Alba Iulia. Pentru gloria lui Dumnezeu.'
+const FULL_TEXT_EN = `We are building a living, authentic, and loving community in the heart of Alba Iulia.
+For the glory of God.`
 
 function useTypewriter(text: string, speed = 38) {
   const [displayed, setDisplayed] = useState('')
@@ -38,8 +41,15 @@ function getTimeLeft() {
 }
 
 export default function CountdownHero() {
+  const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
+
+  const fullText = isEnglish ? FULL_TEXT_EN : FULL_TEXT_RO
+  const joinHref = isEnglish ? '/en/join' : '/join'
+  const aboutHref = isEnglish ? '/en/about' : '/about'
+
   const [t, setT] = useState({ zile: 0, ore: 0, min: 0 })
-  const { displayed, done } = useTypewriter(FULL_TEXT, 38)
+  const { displayed, done } = useTypewriter(fullText, 38)
 
   useEffect(() => {
     setT(getTimeLeft())
@@ -113,10 +123,10 @@ export default function CountdownHero() {
   	alignItems: 'center',
       }}>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
-          Alba Iulia, România
+          {isEnglish ? 'Alba Iulia, Romania' : 'Alba Iulia, România'}
         </p>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
-          4 Octombrie 2026
+          {isEnglish ? 'October 4, 2026' : '4 Octombrie 2026'}
         </p>
       </div>
 
@@ -133,8 +143,8 @@ export default function CountdownHero() {
       }}>
         {/* Label */}
         <p className="hero-launch-title">
-  <span>Lansarea oficială</span>
-  <span>Prima duminică</span>
+  <span>{isEnglish ? 'Official Launch' : 'Lansarea oficială'}</span>
+  <span>{isEnglish ? 'First Sunday' : 'Prima duminică'}</span>
 </p>
 
         {/* ── NUMERE — colonul centrat vertical ── */}
@@ -146,17 +156,17 @@ export default function CountdownHero() {
         }}>
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{t.zile}</span>
-            <span style={UNIT_LABEL}>Zile</span>
+            <span style={UNIT_LABEL}>{isEnglish ? 'Days' : 'Zile'}</span>
           </div>
           <span className="count-separator" style={COLON}>:</span>
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.ore).padStart(2,'0')}</span>
-            <span style={UNIT_LABEL}>Ore</span>
+            <span style={UNIT_LABEL}>{isEnglish ? 'Hours' : 'Ore'}</span>
           </div>
           <span className="count-separator" style={COLON}>:</span>
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
             <span style={NUM}>{String(t.min).padStart(2,'0')}</span>
-            <span style={UNIT_LABEL}>Minute</span>
+            <span style={UNIT_LABEL}>{isEnglish ? 'Minutes' : 'Minute'}</span>
           </div>
         </div>
       </div>
@@ -177,8 +187,8 @@ export default function CountdownHero() {
             lineHeight: 1.9,
             letterSpacing: '0.01em',
             whiteSpace: 'pre-line',
-          }}>
-            {displayed}
+	}}>
+  		{displayed}
             {!done && (
               <span style={{
                 display: 'inline-block',
@@ -192,8 +202,8 @@ export default function CountdownHero() {
             )}
           </p>
           <div className="hero-actions">
-            <Link href="/join" className="btn btn-navy">Alătură-te</Link>
-            <Link href="/about" className="btn btn-outline-white">Povestea noastră</Link>
+            <Link href={joinHref} className="btn btn-navy">{isEnglish ? 'Join Us' : 'Alătură-te'}</Link>
+            <Link href={aboutHref} className="btn btn-outline-white">{isEnglish ? 'Our Story' : 'Povestea noastră'}</Link>
           </div>
         </div>
       </div>
