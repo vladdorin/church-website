@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from 'react'
-import Link from 'next/link'
+import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 import CountdownHero from '@/components/CountdownHero'
 import { FundraiserCompact } from '@/components/FundraiserBar'
@@ -211,7 +211,7 @@ export default function HomePage() {
               </p>
               {/* Desktop button — hidden on mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">
-                <Link href="/about" className="btn btn-dark">Meet Us</Link>
+                <LocalizedLink href="/about" className="btn btn-dark">Meet Us</LocalizedLink>
               </div>
             </div>
 
@@ -308,7 +308,7 @@ export default function HomePage() {
 </div>
             {/* Mobile button — after photo, hidden on desktop */}
             <div className="btn-mobile-after section-01-button">
-              <Link href="/about" className="btn btn-dark">Meet Us</Link>
+              <LocalizedLink href="/about" className="btn btn-dark">Meet Us</LocalizedLink>
             </div>
 
           </RevealSection>
@@ -338,7 +338,7 @@ export default function HomePage() {
               We exist to build a life-giving community in Alba Iulia, a place where people meet God, grow in authentic community, and live out the purpose He has given them.
             </p>
             <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Link href="/misiunea-noastra" className="btn btn-white">Discover the Mission</Link>
+              <LocalizedLink href="/misiunea-noastra" className="btn btn-white">Discover the Mission</LocalizedLink>
             </div>
           </RevealSection>
         </div>
@@ -387,7 +387,7 @@ export default function HomePage() {
                     You are welcome exactly as you are. We need your talent, energy, and heart to build this community.
                   </p>
                   <div className="sr sr-up sr-d2 btn-desktop">
-                    <Link href="/join" className="btn btn-dark">Join the Team</Link>
+                    <LocalizedLink href="/join" className="btn btn-dark">Join the Team</LocalizedLink>
                   </div>
                 </div>
 
@@ -435,7 +435,7 @@ export default function HomePage() {
     <StackedCards />
 
     <div className="join-bottom-cta">
-      <Link href="/join" className="btn btn-dark">Join the Team</Link>
+      <LocalizedLink href="/join" className="btn btn-dark">Join the Team</LocalizedLink>
     </div>
   </div>
 </div>
@@ -492,7 +492,7 @@ export default function HomePage() {
         </p>
 
         <div className="sr sr-up sr-d3 prayer-home-button" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Link href="/pray" className="btn btn-dark">Stand With Us</Link>
+          <LocalizedLink href="/pray" className="btn btn-dark">Stand With Us</LocalizedLink>
         </div>
       </div>
 
@@ -515,7 +515,7 @@ export default function HomePage() {
               </p>
               {/* Desktop button — hidden on mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">
-                <Link href="/give" className="btn btn-white">Give</Link>
+                <LocalizedLink href="/give" className="btn btn-white">Give</LocalizedLink>
               </div>
             </div>
             <div className="sr sr-right sr-d1 donation-progress-mobile">
@@ -523,7 +523,7 @@ export default function HomePage() {
 </div>
             {/* Mobile button — after progress bar, hidden on desktop */}
             <div className="btn-mobile-after">
-              <Link href="/give" className="btn btn-white">Give</Link>
+              <LocalizedLink href="/give" className="btn btn-white">Give</LocalizedLink>
             </div>
           </RevealSection>
         </div>
@@ -548,7 +548,7 @@ export default function HomePage() {
               Whether you want to come, pray, get involved or donate, there is a place for you in Momentum.
             </p>
             <div className="sr sr-up sr-d3">
-              <Link href="/connect" className="btn btn-navy">Contact Us</Link>
+              <LocalizedLink href="/connect" className="btn btn-navy">Contact Us</LocalizedLink>
             </div>
           </RevealSection>
         </div>

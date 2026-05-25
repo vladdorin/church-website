@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
@@ -202,8 +202,8 @@ export default function MisiuneaNoastraPage() {
             </p>
 
             <div>
-              <Link href="/join" className="btn btn-white">Join the Team</Link>
-              <Link href="/give" className="btn btn-outline-white">Give Financially</Link>
+              <LocalizedLink href="/join" className="btn btn-white">Join the Team</LocalizedLink>
+              <LocalizedLink href="/give" className="btn btn-outline-white">Give Financially</LocalizedLink>
             </div>
           </div>
         </div>

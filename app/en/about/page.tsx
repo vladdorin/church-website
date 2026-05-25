@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
@@ -175,9 +175,9 @@ export default function AboutPage() {
             <p style={{color:'#b6d8fc', fontWeight:700, fontSize:16, marginBottom:32}}>
               ✦ Every donation you make will be matched by ARC up to $50,000 ✦
             </p>
-            <Link href="/give" className="arc-btn">
+            <LocalizedLink href="/give" className="arc-btn">
   <span>Support the Launch</span>
-</Link>
+</LocalizedLink>
           </div>
         </div>
       </section>
@@ -193,7 +193,7 @@ export default function AboutPage() {
             We are just getting started. Now is the perfect time to join.
           </p>
           <div style={{display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center'}}>
-            <Link href="/join" className="btn btn-blue">Join Us</Link>
+            <LocalizedLink href="/join" className="btn btn-blue">Join Us</LocalizedLink>
 
           </div>
         </div>

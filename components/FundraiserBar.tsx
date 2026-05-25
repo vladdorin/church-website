@@ -31,7 +31,14 @@ function useAnimatedPct(target: number, delay = 350) {
    variant="side" → in right column, no top border
    ══════════════════════════════════════════════════════════ */
 export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | 'side' }) {
-  const rawPct   = Math.min((FUNDRAISER.raised / FUNDRAISER.goal) * 100, 100)
+  const [data, setData] = useState({ raised: 0, donors: 0 })
+useEffect(() => {
+  fetch('/api/fundraiser')
+    .then(r => r.json())
+    .then(setData)
+    .catch(console.error)
+}, [])
+  const rawPct   = Math.min((data.raised / FUNDRAISER.goal) * 100, 100)
   const animPct  = useAnimatedPct(rawPct)
   const pathname = usePathname()
   const isEnglish = pathname.startsWith('/en')
@@ -58,7 +65,7 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
             fontSize: 'clamp(1.4rem,2vw,1.9rem)',
             color: 'white', lineHeight: 1,
           }}>
-            {fmt(FUNDRAISER.raised)}
+            {fmt(data.raised)}
           </p>
         </div>
         <div style={{ textAlign: 'right' }}>
@@ -92,8 +99,8 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
           {isEnglish
-  ? `${FUNDRAISER.donors} donors · every $1 matched by ARC`
-  : `${FUNDRAISER.donors} susținători · fiecare $1 dublat de ARC`}
+  ? `${data.donors} donors · every $1 matched by ARC`
+  : `${data.donors} susținători · fiecare $1 dublat de ARC`}
         </p>
         <p style={{
           fontFamily: "'Montserrat',sans-serif",
@@ -111,7 +118,14 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
    FULL — give page (replaces static goal block)
    ══════════════════════════════════════════════════════════ */
 export function FundraiserFull() {
-  const rawPct  = Math.min((FUNDRAISER.raised / FUNDRAISER.goal) * 100, 100)
+  const [data, setData] = useState({ raised: 0, donors: 0 })
+useEffect(() => {
+  fetch('/api/fundraiser')
+    .then(r => r.json())
+    .then(setData)
+    .catch(console.error)
+}, [])
+  const rawPct  = Math.min((data.raised / FUNDRAISER.goal) * 100, 100)
   const animPct = useAnimatedPct(rawPct, 500)
   const pathname = usePathname()
   const isEnglish = pathname.startsWith('/en')
@@ -119,7 +133,7 @@ export function FundraiserFull() {
   const stats = [
   {
     label: isEnglish ? 'Raised so far' : 'Strânse până acum',
-    value: fmt(FUNDRAISER.raised),
+    value: fmt(data.raised),
     accent: true
   },
   {
@@ -128,8 +142,8 @@ export function FundraiserFull() {
     accent: false
   },
   {
-    label: isEnglish ? 'Supporters' : 'Susținători',
-    value: String(FUNDRAISER.donors),
+    label: isEnglish ? 'Donors' : 'Susținători',
+    value: String(data.donors),
     accent: false
   },
 ]

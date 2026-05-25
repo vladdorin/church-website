@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-
+import LocalizedLink from '@/components/LocalizedLink'
 export const metadata: Metadata = {
   title: 'Prayer · Momentum | Alba Iulia',
   description: 'Stand with us in prayer for Alba Iulia and for the launch of Momentum Church.',
@@ -61,7 +60,7 @@ export default function PrayPage() {
           <p style={{color:'rgba(255,255,255,0.55)', maxWidth:380, margin:'0 auto 40px', fontWeight:300, lineHeight:1.8}}>
             Our team will personally pray for you. You are not alone.
           </p>
-          <Link href="/connect" className="btn btn-white">Send Your Request</Link>
+          <LocalizedLink href="/connect" className="btn btn-white">Send Your Request</LocalizedLink >
         </div>
       </section>
 

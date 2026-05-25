@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { useSearchParams } from 'next/navigation'
@@ -16,6 +16,23 @@ function GiveForm() {
   const searchParams = useSearchParams()
   const success = searchParams.get('success')
   const canceled = searchParams.get('canceled')
+
+  useEffect(() => {
+    if (!success) return
+    const sessionId = searchParams.get('session_id')
+    if (!sessionId) return
+
+    fetch('/api/log-donation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId }),
+    }).catch(console.error)
+  }, [success])
+
+  useEffect(() => {
+    if (!success) return
+    document.getElementById('success-message')?.scrollIntoView({ behavior: 'smooth' })
+  }, [success])
 
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [selected, setSelected] = useState<number | null>(100)
@@ -90,6 +107,7 @@ function GiveForm() {
   if (success) {
     return (
       <section
+	 id="success-message"
         style={{
           minHeight: '70vh',
           display: 'flex',
