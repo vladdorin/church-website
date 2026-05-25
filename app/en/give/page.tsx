@@ -109,7 +109,8 @@ function GiveForm() {
       <section
 	 id="success-message"
         style={{
-          minHeight: '70vh',
+          minHeight: 'auto',
+	  padding: '40px 16px',
           display: 'flex',
           alignItems: 'center',
           padding: '72px 0',
