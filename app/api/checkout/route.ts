@@ -1,5 +1,4 @@
 export const runtime = 'edge'
-
 import Stripe from 'stripe'
 
 type CheckoutBody = {
@@ -7,14 +6,12 @@ type CheckoutBody = {
   currency?: 'ron' | 'eur' | 'usd'
   reason?: string
   notes?: string
+  donationType?: 'once' | 'monthly'
 }
-
-// Rate aproximative către USD
-const TO_USD: Record<string, number> = { usd: 1, eur: 1.08, ron: 0.22 }
 
 export async function POST(request: Request) {
   try {
-    const { amount, currency = 'ron', reason = '', notes = '' } =
+    const { amount, currency = 'ron', reason = '', notes = '', donationType = 'once' } =
       await request.json() as CheckoutBody
 
     const allowedCurrencies = ['ron', 'eur', 'usd']
@@ -46,28 +43,56 @@ export async function POST(request: Request) {
       returnPath = '/give'
     }
 
+    const isMonthly = donationType === 'monthly'
+
     const session = await stripe.checkout.sessions.create({
       ui_mode: 'embedded',
-      mode: 'payment',
+      mode: isMonthly ? 'subscription' : 'payment',
       payment_method_types: ['card'],
+
       line_items: [{
-        price_data: {
+        price_data: isMonthly ? {
+          currency,
+          product: process.env.STRIPE_MONTHLY_PRODUCT_ID!,
+          unit_amount: Math.round(amount * 100),
+          recurring: { interval: 'month' },
+        } : {
           currency,
           product_data: {
-            name: 'Donation – Momentum Church',
-            description: 'Thank you! Your donation helps build the community.',
+            name: 'Donație – Biserica Momentum',
+            description: reason || 'Îți mulțumim! Donația ta ajută la construirea comunității.',
           },
           unit_amount: Math.round(amount * 100),
         },
         quantity: 1,
       }],
+
       return_url: `${origin}${returnPath}?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      payment_intent_data: {
-        metadata: { church: 'Momentum Church', amount: amount.toString(), currency, reason },
-      },
+
+      ...(isMonthly ? {
+        subscription_data: {
+          description: reason,
+          metadata: {
+            church: 'Momentum Church',
+            amount: amount.toString(),
+            currency,
+            reason,
+          },
+        },
+      } : {
+        payment_intent_data: {
+          description: reason,
+          metadata: {
+            church: 'Momentum Church',
+            amount: amount.toString(),
+            currency,
+            reason,
+          },
+        },
+      }),
     })
 
-        return Response.json({ clientSecret: session.client_secret })
+    return Response.json({ clientSecret: session.client_secret })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal error'
     console.error('[Stripe error]', message)
