@@ -113,7 +113,6 @@ function GiveForm() {
 	  padding: '40px 16px',
           display: 'flex',
           alignItems: 'center',
-          padding: '72px 0',
           background:
             'radial-gradient(circle at top left, rgba(182,216,252,0.24), transparent 34%), radial-gradient(circle at bottom right, rgba(25,50,175,0.22), transparent 32%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
         }}
