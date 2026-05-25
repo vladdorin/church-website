@@ -60,7 +60,7 @@ export default function CookieBanner() {
   ? 'We use cookies for the proper functioning of the website and to provide you with the best possible browsing experience. You can learn more in '
   : 'Folosim cookie-uri pentru funcționarea corectă a site-ului și pentru a vă oferi o experiență cât mai bună în timpul navigării. Puteți afla mai multe în '}
         <Link
-          href={isEnglish ? '/en/politica-cookies' : '/politica-cookies'}
+          href={isEnglish ? '/en/cookie-policy' : '/politica-cookies'}
           style={{
             color: '#b6d8fc',
             fontWeight: 600,
