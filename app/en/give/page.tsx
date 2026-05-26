@@ -550,7 +550,7 @@ export default function GivePage() {
     <>
       <section style={{ background: 'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color: 'white', padding: '100px 0 80px' }}>
         <div className="wrap" style={{ textAlign: 'center' }}>
-          <h1 className="display" style={{ fontSize: 'clamp(2rem,5vw,7rem)', color: 'white', marginBottom: 24, lineHeight: 0.93 }}>
+          <h1 className="display" style={{ fontSize: 'clamp(2.5rem,5vw,7rem)', color: 'white', marginBottom: 24, lineHeight: 0.93 }}>
             BE PART OF<br /><span style={{ color: '#b6d8fc' }}>SOMETHING<br />ETERNAL</span>
           </h1>
 
