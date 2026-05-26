@@ -170,8 +170,8 @@ export default function Footer() {
 >
   {isEnglish ? 'Alba Iulia, Romania' : 'Alba Iulia, România'}
 </a>
-              <a href="mailto:biserica.momentum@gmail.com" style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}>
-                biserica.momentum@gmail.com
+              <a href="mailto:contact@bisericamomentum.ro" style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}>
+               contact@bisericamomentum.ro
               </a>
             </div>
             <div style={{ display:'flex', gap:10, marginTop:24 }}>

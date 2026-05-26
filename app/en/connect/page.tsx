@@ -290,8 +290,8 @@ export default function ConnectPage() {
                     {
                       icon: <HiOutlineMail />,
                       title: 'Email',
-                      text: 'biserica.momentum@gmail.com',
-                      href: 'mailto:biserica.momentum@gmail.com',
+                      text: 'contact@bisericamomentum.ro',
+                      href: 'mailto:contact@bisericamomentum.ro',
                     },
                   ].map(({ icon, title, text, href }) => (
                     <a

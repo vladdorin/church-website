@@ -117,7 +117,7 @@ function GiveForm() {
             'radial-gradient(circle at top left, rgba(182,216,252,0.24), transparent 34%), radial-gradient(circle at bottom right, rgba(25,50,175,0.22), transparent 32%), linear-gradient(135deg,#0f1052 0%,#080818 100%)',
         }}
       >
-        <div className="wrap" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="wrap" style={{ display: 'flex', justifyContent: 'center', padding: '0 16px'}}>
           <div
             className="card"
             style={{
@@ -167,10 +167,10 @@ function GiveForm() {
   if (canceled) {
     return (
       <section className="section" style={{ background: 'white' }}>
-        <div className="wrap" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="wrap" style={{ display: 'flex', justifyContent: 'center', padding: '0 16px'}}>
           <div className="card" style={{ maxWidth: 480, width: '100%', textAlign: 'center', padding: 56 }}>
             <h2 className="display" style={{ fontSize: 36, color: '#0a0f2c', marginBottom: 12 }}>
-              NICIO PROBLEMĂ!
+              NICI-O PROBLEMĂ!
             </h2>
             <p style={{ color: 'rgba(10,15,44,0.6)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
               Plata a fost anulată. Poți reveni oricând ești pregătit(ă).
