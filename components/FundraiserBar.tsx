@@ -35,7 +35,12 @@ export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | '
 useEffect(() => {
   fetch('/api/fundraiser')
     .then(r => r.json())
-    .then(setData)
+    .then(apiData => {
+  setData({
+    raised: apiData.raised ?? 0,
+    partners: apiData.partners ?? apiData.donors ?? 0,
+  })
+})
     .catch(console.error)
 }, [])
   const rawPct   = Math.min((data.raised / FUNDRAISER.goal) * 100, 100)
@@ -122,7 +127,12 @@ export function FundraiserFull() {
 useEffect(() => {
   fetch('/api/fundraiser')
     .then(r => r.json())
-    .then(setData)
+    .then(apiData => {
+  setData({
+    raised: apiData.raised ?? 0,
+    partners: apiData.partners ?? apiData.donors ?? 0,
+  })
+})
     .catch(console.error)
 }, [])
   const rawPct  = Math.min((data.raised / FUNDRAISER.goal) * 100, 100)
