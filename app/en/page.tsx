@@ -48,9 +48,27 @@ function GhostNum({ num, light }: { num: string; light?: boolean }) {
 
 /* ── Stacked → spread cards (fan-out, completes while header is visible) ── */
 const STACK_CARDS = [
-  { titlu: 'Connect',      desc: 'Share the message and bring your friends. Every person matters in Alba Iulia.',        bg: '#7b9aff', col: '#080c1e' },
-  { titlu: 'Pray',         desc: 'Stand with us in prayer for this city and for the launch in October 2026.',   bg: '#080c1e', col: '#f4f2ee' },
-  { titlu: 'Get Involved', desc: 'Use your gifts and talents to help build this community from the ground up.',         bg: '#f0ede8', col: '#080c1e' },
+  {
+    titlu: 'Connect',
+    desc: 'Share the message and bring your friends. Every person matters in Alba Iulia.',
+    bg: '#7b9aff',
+    col: '#080c1e',
+    textCol: '#080c1e',
+  },
+  {
+    titlu: 'Pray',
+    desc: 'Stand with us in prayer for this city and for the launch in October 2026.',
+    bg: '#080c1e',
+    col: '#ffffff',
+    textCol: '#ffffff',
+  },
+  {
+    titlu: 'Get Involved',
+    desc: 'Use your gifts and talents to help build this community from the ground up.',
+    bg: '#f0ede8',
+    col: '#080c1e',
+    textCol: '#080c1e',
+  },
 ]
 
 // Initial stacked offsets for each card
@@ -95,7 +113,7 @@ function StackedCards() {
   if (isMobile) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => (
+        {STACK_CARDS.map(({ titlu, desc, bg, col, textCol }, i) => (
           <div key={i} style={{
             background: bg,
             padding: '28px 28px 32px',
@@ -116,10 +134,15 @@ function StackedCards() {
               position: 'relative', zIndex: 1, margin: 0,
             }}>{titlu.toUpperCase()}</h3>
             <p style={{
-              fontSize: 14, color: col, opacity: 0.6,
-              fontWeight: 300, lineHeight: 1.75, margin: 0,
-              position: 'relative', zIndex: 1,
-            }}>{desc}</p>
+  fontSize: 14,
+  color: textCol,
+  opacity: 0.9,
+  fontWeight: 600,
+  lineHeight: 1.75,
+  margin: 0,
+  position: 'relative',
+  zIndex: 1,
+}}>{desc}</p>
           </div>
         ))}
       </div>
@@ -129,7 +152,7 @@ function StackedCards() {
   // ── DESKTOP: fan-out animation, compact cards ──
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, borderRadius: 24, overflow: 'hidden' }}>
-      {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => {
+      {STACK_CARDS.map(({ titlu, desc, bg, col, textCol }, i) => {
         const { tx, rot, sc, z } = STACK_INIT[i]
         return (
           <div key={i} style={{
@@ -151,16 +174,26 @@ function StackedCards() {
               pointerEvents: 'none', userSelect: 'none',
             }}>{titlu[0]}</div>
             <h3 style={{
-              fontFamily: "'Climate Crisis',sans-serif",
-              fontSize: 'clamp(1rem,1.5vw,1.5rem)',
-              color: col, lineHeight: 1.1, position: 'relative', zIndex: 1,
-              whiteSpace: 'nowrap',
-            }}>{titlu.toUpperCase()}</h3>
+  fontFamily: "'Climate Crisis',sans-serif",
+  fontSize: 'clamp(1rem,1.5vw,1.5rem)',
+  color: col,
+  lineHeight: 1.1,
+  position: 'relative',
+  zIndex: 1,
+  whiteSpace: 'nowrap',
+  fontWeight: 900,
+  letterSpacing: '0.04em',
+}}>{titlu.toUpperCase()}</h3>
             <p style={{
-              fontSize: 14, color: col, opacity: 0.58,
-              fontWeight: 300, lineHeight: 1.85, maxWidth: 240,
-              position: 'relative', zIndex: 1,
-            }}>{desc}</p>
+  fontSize: 14,
+  color: textCol,
+  opacity: 0.9,
+  fontWeight: 600,
+  lineHeight: 1.85,
+  maxWidth: 240,
+  position: 'relative',
+  zIndex: 1,
+}}>{desc}</p>
           </div>
         )
       })}
@@ -204,7 +237,7 @@ export default function HomePage() {
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
               <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.6)', fontWeight: 300, maxWidth: 420, marginBottom: 12 }}>
-                Momentum Church began from a calling for the young generation of Alba Iulia and from the desire to build a community where people can know God and feel at home.
+                Momentum Church was born from a calling for the young generation of Alba Iulia and from the desire to build a community where people can encounter God and feel at home.
               </p>
               <p className="sr sr-up sr-d2" style={{ fontSize: 15, lineHeight: 1.9, color: 'rgba(8,12,30,0.45)', fontWeight: 300, maxWidth: 420, marginBottom: 36, fontStyle: 'italic' }}>
                 "We&apos;re not just building a church. We&apos;re building a place people can call home."
@@ -335,7 +368,7 @@ export default function HomePage() {
               WHY DOES<br />MOMENTUM EXIST?
             </h2>
             <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-              We exist to build a life-giving community in Alba Iulia, a place where people meet God, grow in authentic community, and live out the purpose He has given them.
+              We exist to build a life-giving community in Alba Iulia, a place where people encounter God, grow in authentic community, and live out the purpose He has given them.
             </p>
             <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <LocalizedLink href="/misiunea-noastra" className="btn btn-white">Discover the Mission</LocalizedLink>
@@ -484,11 +517,11 @@ export default function HomePage() {
       {/* Right: text */}
       <div className="prayer-home-text" style={{ textAlign: 'right' }}>
         <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
-          DO YOU NEED<br />PRAYER?
+          HOW CAN WE<br />PRAY FOR YOU?
         </h2>
 
         <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(8,12,30,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-          Our team prays daily for Alba Iulia and the people in it. Send us your request.
+          Our team stands in pray daily for Alba Iulia and the people in it. Send us your request.
         </p>
 
         <div className="sr sr-up sr-d3 prayer-home-button" style={{ display: 'flex', justifyContent: 'flex-end' }}>

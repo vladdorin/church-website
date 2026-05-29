@@ -31,7 +31,7 @@ function useAnimatedPct(target: number, delay = 350) {
    variant="side" → in right column, no top border
    ══════════════════════════════════════════════════════════ */
 export function FundraiserCompact({ variant = 'below' }: { variant?: 'below' | 'side' }) {
-  const [data, setData] = useState({ raised: 0, donors: 0 })
+  const [data, setData] = useState({ raised: 0, partners: 0 })
 useEffect(() => {
   fetch('/api/fundraiser')
     .then(r => r.json())
@@ -99,8 +99,8 @@ useEffect(() => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
           {isEnglish
-  ? `${data.donors} donors · every $1 matched by ARC`
-  : `${data.donors} susținători · fiecare $1 dublat de ARC`}
+  ? `${data.donors} partners · every $1 matched by ARC`
+  : `${data.donors} parteneri · fiecare $1 dublat de ARC`}
         </p>
         <p style={{
           fontFamily: "'Montserrat',sans-serif",
@@ -118,7 +118,7 @@ useEffect(() => {
    FULL — give page (replaces static goal block)
    ══════════════════════════════════════════════════════════ */
 export function FundraiserFull() {
-  const [data, setData] = useState({ raised: 0, donors: 0 })
+  const [data, setData] = useState({ raised: 0, partners: 0 })
 useEffect(() => {
   fetch('/api/fundraiser')
     .then(r => r.json())
@@ -142,7 +142,7 @@ useEffect(() => {
     accent: false
   },
   {
-    label: isEnglish ? 'Donors' : 'Susținători',
+    label: isEnglish ? 'Partners' : 'Parteneri',
     value: String(data.donors),
     accent: false
   },

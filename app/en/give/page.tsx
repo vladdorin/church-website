@@ -826,7 +826,7 @@ export default function GivePage() {
       {[
         { nr: '01', titlu: 'Pray',         desc: 'Your prayer is the most valuable contribution to the Momentum launch.' },
         { nr: '02', titlu: 'Spread the word', desc: 'Talk about Momentum Church within your circle of friends and family.' },
-        { nr: '03', titlu: 'Get involved',  desc: 'Join the team and contribute your talents to building the community.' },
+        { nr: '03', titlu: 'Get involved',  desc: 'oin the team and be part of building a Christ-centered community.' },
       ].map(({ nr, titlu, desc }) => (
         <div key={titlu} className="support-card">
           <div className="support-number">{nr}</div>

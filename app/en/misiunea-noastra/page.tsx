@@ -24,7 +24,7 @@ const cards = [
 
 const values = [
   'Clear and encouraging messages',
-  'An atmosphere welcoming to young people and families',
+  'A welcoming culture to young people and families',
   'Authentic and meaningful relationships',
   'Real opportunities for involvement and service',
 ]
@@ -37,11 +37,11 @@ export default function MisiuneaNoastraPage() {
         <div className="wrap" style={{textAlign:'center'}}>
           <h1 className="display" style={{fontSize:'clamp(2.4rem,5vw,6.5rem)', color:'white', marginBottom:24, lineHeight:1}}>
             A PLACE WHERE<br />
-            <span style={{color:'#b6d8fc'}}>PEOPLE MEET<br />GOD</span>
+            <span style={{color:'#b6d8fc'}}>PEOPLE ENCOUNTER<br />GOD</span>
           </h1>
 
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.65)', maxWidth:930, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
-            Our mission is to create a space and a community where every person is welcomed, can know God, and discover the purpose for which He brought them into existence.
+            Our mission is to create a space and a community where every person is welcomed, can encounter God, and discover the purpose for which He brought them into existence.
           </p>
         </div>
       </section>
@@ -134,7 +134,7 @@ export default function MisiuneaNoastraPage() {
                   Messages are simple, clear, and full of encouragement, so that people can understand who God is and what it means to follow Jesus.
                 </p>
                 <p>
-                  The music, relationships, and atmosphere are designed for a generation that needs a living, authentic faith that is close to their reality.
+                  Through music, meaningful relationships, and a welcoming culture, we create space for a living faith that connects with the realities of today's generation.
                 </p>
                 <p>
                   Involvement is one of our core values, because we believe that church is not just a place you attend, but a family you belong to.
@@ -203,7 +203,7 @@ export default function MisiuneaNoastraPage() {
 
             <div>
               <LocalizedLink href="/join" className="btn btn-white">Join the Team</LocalizedLink>
-              <LocalizedLink href="/give" className="btn btn-outline-white">Give Financially</LocalizedLink>
+              <LocalizedLink href="/give" className="btn btn-outline-white">Make a donation</LocalizedLink>
             </div>
           </div>
         </div>

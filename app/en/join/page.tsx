@@ -281,7 +281,7 @@ const getInputStyle = (field: string) => ({
       <option>I&apos;d love to grab a coffee, I have questions</option>
       <option>I want to come to the first meeting</option>
       <option>I want to join the team</option>
-      <option>I want to give financially</option>
+      <option>I want to know more about Momentum</option>
     </select>
   </div>
 

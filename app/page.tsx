@@ -48,11 +48,28 @@ function GhostNum({ num, light }: { num: string; light?: boolean }) {
 
 /* ── Stacked → spread cards (fan-out, completes while header is visible) ── */
 const STACK_CARDS = [
-  { titlu: 'Conectează-te', desc: 'Distribuie vestea și aduce-ți prietenii. Fiecare persoană contează pentru Alba Iulia.',        bg: '#7b9aff', col: '#080c1e' },
-  { titlu: 'Roagă-te',      desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.',   bg: '#080c1e', col: '#f4f2ee' },
-  { titlu: 'Implică-te',    desc: 'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.',         bg: '#f0ede8', col: '#080c1e' },
+  {
+    titlu: 'Conectează-te',
+    desc: 'Distribuie vestea și aduce-ți prietenii. Fiecare persoană contează pentru Alba Iulia.',
+    bg: '#7b9aff',
+    col: '#080c1e',
+    textCol: '#080c1e',
+  },
+  {
+    titlu: 'Roagă-te',
+    desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.',
+    bg: '#080c1e',
+    col: '#ffffff',
+    textCol: '#ffffff',
+  },
+  {
+    titlu: 'Implică-te',
+    desc: 'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.',
+    bg: '#f0ede8',
+    col: '#080c1e',
+    textCol: '#080c1e',
+  },
 ]
-
 // Initial stacked offsets for each card
 const STACK_INIT = [
   { tx: 100, rot: -5, sc: 0.90, z: 1 },
@@ -95,7 +112,7 @@ function StackedCards() {
   if (isMobile) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => (
+        {STACK_CARDS.map(({ titlu, desc, bg, col, textCol }, i) => (
           <div key={i} style={{
             background: bg,
             padding: '28px 28px 32px',
@@ -116,10 +133,15 @@ function StackedCards() {
               position: 'relative', zIndex: 1, margin: 0,
             }}>{titlu.toUpperCase()}</h3>
             <p style={{
-              fontSize: 14, color: col, opacity: 0.6,
-              fontWeight: 300, lineHeight: 1.75, margin: 0,
-              position: 'relative', zIndex: 1,
-            }}>{desc}</p>
+  fontSize: 14,
+  color: textCol,
+  opacity: 0.9,
+  fontWeight: 600,
+  lineHeight: 1.75,
+  margin: 0,
+  position: 'relative',
+  zIndex: 1,
+}}>{desc}</p>
           </div>
         ))}
       </div>
@@ -129,7 +151,7 @@ function StackedCards() {
   // ── DESKTOP: animatie fan-out, carduri compacte ──
   return (
     <div ref={ref} style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, borderRadius: 24, overflow: 'hidden' }}>
-      {STACK_CARDS.map(({ titlu, desc, bg, col }, i) => {
+      {STACK_CARDS.map(({ titlu, desc, bg, col, textCol }, i) => {
         const { tx, rot, sc, z } = STACK_INIT[i]
         return (
           <div key={i} style={{
@@ -155,12 +177,19 @@ function StackedCards() {
               fontSize: 'clamp(1rem,1.5vw,1.5rem)',
               color: col, lineHeight: 1.1, position: 'relative', zIndex: 1,
               whiteSpace: 'nowrap',
+	      fontWeight: 900,
+	      letterSpacing: '0.04em',
             }}>{titlu.toUpperCase()}</h3>
             <p style={{
-              fontSize: 14, color: col, opacity: 0.58,
-              fontWeight: 300, lineHeight: 1.85, maxWidth: 240,
-              position: 'relative', zIndex: 1,
-            }}>{desc}</p>
+  fontSize: 14,
+  color: textCol,
+  opacity: 0.9,
+  fontWeight: 600,
+  lineHeight: 1.85,
+  maxWidth: 240,
+  position: 'relative',
+  zIndex: 1,
+}}>{desc}</p>
           </div>
         )
       })}

@@ -3,16 +3,25 @@ import Stripe from 'stripe'
 
 type CheckoutBody = {
   amount: number
+  originalAmount?: number
   currency?: 'ron' | 'eur' | 'usd'
   reason?: string
   notes?: string
   donationType?: 'once' | 'monthly'
+  coverFees?: boolean
 }
 
 export async function POST(request: Request) {
   try {
-    const { amount, currency = 'ron', reason = '', notes = '', donationType = 'once' } =
-      await request.json() as CheckoutBody
+    const {
+  amount,
+  originalAmount,
+  currency = 'ron',
+  reason = '',
+  notes = '',
+  donationType = 'once',
+  coverFees = false,
+} = await request.json() as CheckoutBody
 
     const allowedCurrencies = ['ron', 'eur', 'usd']
     if (!allowedCurrencies.includes(currency)) {
@@ -73,21 +82,25 @@ export async function POST(request: Request) {
         subscription_data: {
           description: reason,
           metadata: {
-            church: 'Momentum Church',
-            amount: amount.toString(),
-            currency,
-            reason,
-          },
+  church: 'Momentum Church',
+  amount_paid: amount.toString(),
+  original_amount: (originalAmount ?? amount).toString(),
+  cover_fees: coverFees ? 'true' : 'false',
+  currency,
+  reason,
+},
         },
       } : {
         payment_intent_data: {
           description: reason,
           metadata: {
-            church: 'Momentum Church',
-            amount: amount.toString(),
-            currency,
-            reason,
-          },
+  church: 'Momentum Church',
+  amount_paid: amount.toString(),
+  original_amount: (originalAmount ?? amount).toString(),
+  cover_fees: coverFees ? 'true' : 'false',
+  currency,
+  reason,
+},
         },
       }),
     })

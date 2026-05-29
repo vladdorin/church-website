@@ -24,7 +24,7 @@ const cards = [
 
 const values = [
   'Mesaje clare și pline de încurajare',
-  'O atmosferă potrivită pentru tineri și familii',
+  'O comunitate primitoare pentru tineri și familii',
   'Relații autentice și apropiate',
   'Oportunități reale de implicare și slujire',
 ]
@@ -37,7 +37,7 @@ export default function MisiuneaNoastraPage() {
         <div className="wrap" style={{textAlign:'center'}}>
           <h1 className="display" style={{fontSize:'clamp(2.4rem,5vw,6.5rem)', color:'white', marginBottom:24, lineHeight:1}}>
             UN LOC UNDE<br />
-            <span style={{color:'#b6d8fc'}}>OAMENII ÎL CUNOSC<br />PE DUMNEZEU</span>
+            <span style={{color:'#b6d8fc'}}>OAMENII ÎL ÎNTÂLNESC<br />PE DUMNEZEU</span>
           </h1>
 
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.65)', maxWidth:930, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
@@ -134,7 +134,7 @@ export default function MisiuneaNoastraPage() {
                   Mesajele sunt simple, clare și pline de încurajare, pentru ca oamenii să poată înțelege cine este Dumnezeu și ce înseamnă să-L urmeze pe Isus.
                 </p>
                 <p>
-                  Muzica, relațiile și atmosfera sunt gândite pentru o generație care are nevoie de credință vie, autentică și aproape de realitatea ei.
+                  Prin muzică, relații semnificative și o cultură primitoare, ne dorim să creăm un spațiu în care oamenii să poată experimenta o credință autentică, vie și relevantă pentru viața lor.
                 </p>
                 <p>
                   Implicarea este una dintre valorile noastre importante, pentru că noi credem că biserica nu este doar un loc în care vii, ci o familie din care faci parte.
