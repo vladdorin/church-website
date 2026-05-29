@@ -99,8 +99,8 @@ useEffect(() => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.28)', fontWeight: 300 }}>
           {isEnglish
-  ? `${data.donors} partners · every $1 matched by ARC`
-  : `${data.donors} parteneri · fiecare $1 dublat de ARC`}
+  ? `${data.partners} partners · every $1 matched by ARC`
+  : `${data.partners} parteneri · fiecare $1 dublat de ARC`}
         </p>
         <p style={{
           fontFamily: "'Montserrat',sans-serif",
@@ -143,7 +143,7 @@ useEffect(() => {
   },
   {
     label: isEnglish ? 'Partners' : 'Parteneri',
-    value: String(data.donors),
+    value: String(data.partners),
     accent: false
   },
 ]
