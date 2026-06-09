@@ -587,10 +587,10 @@ html {
     linear-gradient(135deg, #0a0f2c 0%, #121a4a 50%, #0f1052 100%);
 }
 
-/* glow subtil în spate */
 .arc-section::before {
   content: '';
   position: absolute;
+  pointer-events: none;
   width: 500px;
   height: 500px;
   top: -120px;
@@ -599,10 +599,10 @@ html {
   filter: blur(60px);
 }
 
-/* glow secundar */
 .arc-section::after {
   content: '';
   position: absolute;
+  pointer-events: none;
   width: 400px;
   height: 400px;
   bottom: -120px;
@@ -611,8 +611,14 @@ html {
   filter: blur(60px);
 }
 
-/* cardul din interior - upgrade */
+.arc-section .wrap {
+  position: relative;
+  z-index: 2;
+}
+
 .arc-section .wrap > div {
+  position: relative;
+  z-index: 3;
   background: rgba(255,255,255,0.06) !important;
   border: 1px solid rgba(255,255,255,0.12) !important;
   backdrop-filter: blur(18px);
@@ -620,19 +626,19 @@ html {
   transition: all 0.35s ease;
 }
 
-/* hover subtil */
 .arc-section .wrap > div:hover {
   transform: translateY(-6px);
   box-shadow: 0 50px 140px rgba(25,50,175,0.35);
 }
 
-/* text highlight */
 .arc-section p {
   letter-spacing: 0.02em;
 }
 
 .arc-btn {
   position: relative;
+  z-index: 10;
+  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -655,17 +661,15 @@ html {
 
   overflow: hidden;
   transition: all 0.3s ease;
-
   cursor: pointer;
-  z-index: 10;
   -webkit-tap-highlight-color: transparent;
 }
 
-.arc-btn * {
+.arc-btn *,
+.arc-btn::before {
   pointer-events: none;
 }
 
-/* glow layer */
 .arc-btn::before {
   content: '';
   position: absolute;
@@ -675,7 +679,6 @@ html {
   transition: opacity 0.3s ease;
 }
 
-/* hover */
 .arc-btn:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow:
@@ -687,11 +690,9 @@ html {
   opacity: 1;
 }
 
-/* click */
 .arc-btn:active {
   transform: scale(0.97);
 }
-
 .identity-section {
   position: relative;
   overflow: hidden;
