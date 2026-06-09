@@ -386,7 +386,7 @@ const getInputStyle = (field: string) => ({
       ? 'Trimis ✓'
       : submitStatus === 'error'
       ? 'Eroare ❌'
-      : 'Trimite cardul'}
+      : 'Trimite'}
   </button>
 </form>
           </div>
