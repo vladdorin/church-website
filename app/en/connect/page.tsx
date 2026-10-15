@@ -1,7 +1,7 @@
 'use client'
 
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa'
-import { HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi'
+import { HiOutlineClock, HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -282,10 +282,16 @@ export default function ConnectPage() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {[
                     {
+                      icon: <HiOutlineClock />,
+                      title: 'Sundays',
+                      text: '9:30 Fellowship · 10:30 Service',
+                      href: undefined,
+                    },
+                    {
                       icon: <HiOutlineLocationMarker />,
                       title: 'Location',
-                      text: 'Alba Iulia, Romania',
-                      href: 'https://www.google.com/maps/search/?api=1&query=Alba+Iulia+Romania',
+                      text: 'Calea Moților nr. 258, Alba Iulia',
+                      href: 'https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia',
                     },
                     {
                       icon: <HiOutlineMail />,
@@ -293,8 +299,10 @@ export default function ConnectPage() {
                       text: 'contact@bisericamomentum.ro',
                       href: 'mailto:contact@bisericamomentum.ro',
                     },
-                  ].map(({ icon, title, text, href }) => (
-                    <a
+                  ].map(({ icon, title, text, href }) => {
+                    const Tag = href ? 'a' : 'div'
+                    return (
+                    <Tag
                       key={title}
                       href={href}
                       target={title === 'Location' ? '_blank' : undefined}
@@ -320,8 +328,9 @@ export default function ConnectPage() {
                           {text}
                         </div>
                       </div>
-                    </a>
-                  ))}
+                    </Tag>
+                    )
+                  })}
                 </div>
               </div>
 

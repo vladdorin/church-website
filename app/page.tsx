@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import CountdownHero from '@/components/CountdownHero'
-import { FundraiserCompact } from '@/components/FundraiserBar'
+import WelcomeHero from '@/components/WelcomeHero'
+import GivingImpact from '@/components/GivingImpact'
 import PhotoCarousel from '@/components/PhotoCarousel'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
@@ -57,7 +57,7 @@ const STACK_CARDS = [
   },
   {
     titlu: 'Roagă-te',
-    desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru lansarea din octombrie 2026.',
+    desc: 'Stai alături de noi în rugăciune pentru acest oraș și pentru oamenii din el.',
     bg: '#080c1e',
     col: '#ffffff',
     textCol: '#ffffff',
@@ -207,7 +207,7 @@ const T9: CSSProperties = {
 export default function HomePage() {
   return (
     <>
-      <CountdownHero />
+      <WelcomeHero />
 
       {/* ── TICKER ── */}
       <div style={{ background: '#1932af', padding: '14px 0', overflow: 'hidden' }}>
@@ -374,16 +374,10 @@ export default function HomePage() {
       </section>
 
 {/* ═══════════ 03 — VINO CU NOI ═══════════ */}
-      <section style={{ background: '#ffffff', position: 'relative' }}>
+      <section style={{ background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
 
         {/* Un singur container sticky — prinde header + carduri împreună */}
-        <div className="join-sticky" style={{
-          position: 'sticky', top: 80,
-          height: 'calc(100vh - 160px)',
-          overflow: 'hidden',
-          display: 'flex', flexDirection: 'column',
-          background: '#ffffff',
-        }}>
+        <div className="join-sticky" style={{ position: 'relative', padding: '96px 0' }}>
 
           {/* Ghost 03 */}
           <div className="ghost-num" style={{
@@ -395,7 +389,7 @@ export default function HomePage() {
           }}>03</div>
 
           {/* Header content */}
-          <div style={{ paddingTop: 48, paddingBottom: 40, position: 'relative', zIndex: 1 }}>
+          <div style={{ paddingBottom: 48, position: 'relative', zIndex: 1 }}>
             <div className="wrap-wide">
               <RevealSection
                 className="grid-2col join-mobile-grid"
@@ -459,7 +453,7 @@ export default function HomePage() {
           </div>
 
           {/* Carduri — rămân vizibile cât timp scrollezi prin secțiune */}
-<div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+<div style={{ position: 'relative', zIndex: 1 }}>
   <div className="wrap-wide">
     <StackedCards />
 
@@ -535,25 +529,21 @@ export default function HomePage() {
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <p className="sr sr-up label-light">SUSȚINE LANSAREA</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-                DEVINO<br />PARTENER.
+                FII PARTE<br />DIN LUCRARE.
               </h2>
-              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 20 }}>
-                Fiecare donație pe care o faci va fi dublată de ARC până la $50.000.
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 440, marginBottom: 32 }}>
+                Darurile tale susțin tot ce facem în fiecare săptămână, de la duminicile petrecute împreună până la oamenii din Alba Iulia la care ajungem.
               </p>
-              {/* Buton desktop — ascuns pe mobile */}
-              <div className="sr sr-up sr-d3 btn-desktop">
+              <div className="sr sr-up sr-d3">
                 <Link href="/give" className="btn btn-white">Donează</Link>
               </div>
             </div>
-            <div className="sr sr-right sr-d1 donation-progress-mobile">
-  <FundraiserCompact variant="side" />
-</div>
-            {/* Buton mobile — după progress bar, ascuns pe desktop */}
-            <div className="btn-mobile-after">
-              <Link href="/give" className="btn btn-white">Donează</Link>
-            </div>
+            <GivingImpact items={[
+              ['Duminici', 'Un loc cald și primitor pentru oricine intră pe ușă.'],
+              ['Comunitate', 'Prietenii și oameni care cresc împreună în credință.'],
+              ['Orașul', 'Să fim o binecuvântare reală pentru Alba Iulia.'],
+            ]} />
           </RevealSection>
         </div>
       </section>

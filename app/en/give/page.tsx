@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react'
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { useSearchParams } from 'next/navigation'
-import { FundraiserFull } from '@/components/FundraiserBar'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -37,7 +36,7 @@ function GiveForm() {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [selected, setSelected] = useState<number | null>(100)
   const [custom, setCustom] = useState('')
-  const [donationReason, setDonationReason] = useState('Momentum Launch Fund')
+  const [donationReason, setDonationReason] = useState('General support')
   const [customReason, setCustomReason] = useState('')
   const [donationType, setDonationType] = useState<'once' | 'monthly'>('once')
   const [coverFees, setCoverFees] = useState(false)
@@ -153,8 +152,7 @@ function GiveForm() {
             </h2>
 
             <p style={{ color: 'rgba(10,15,44,0.62)', lineHeight: 1.85, fontWeight: 300, marginBottom: 32 }}>
-              Your donation makes a real difference in Alba Iulia. Every donation you make is matched by ARC —
-              your impact is twice as great!
+              Your donation makes a real difference in Alba Iulia. Thank you for your generosity!
             </p>
 
             <a href="/give" className="btn btn-blue">Give again</a>
@@ -324,7 +322,7 @@ function GiveForm() {
                     marginBottom: donationReason === 'Other' ? 8 : 0,
                   }}
                 >
-                  <option>Momentum Launch Fund</option>
+                  <option>General support</option>
                   <option>Equipment &amp; Logistics</option>
                   <option>Events &amp; Outreach</option>
                   <option>Generosity / Tithe</option>
@@ -439,15 +437,6 @@ function GiveForm() {
                   </span>
                 </div>
 
-                <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 18, padding: '16px 20px', marginBottom: 14 }}>
-                  <div style={{ color: '#16a34a', fontWeight: 800, fontSize: 15, marginBottom: 4 }}>
-                    ×2 impact
-                  </div>
-                  <div style={{ color: '#16a34a', fontWeight: 500, fontSize: 13, lineHeight: 1.5 }}>
-                    Matched by ARC up to $50K total.
-                  </div>
-                </div>
-
                 <label
                   style={{
                     display: 'flex',
@@ -554,29 +543,9 @@ export default function GivePage() {
             BE PART OF<br /><span style={{ color: '#b6d8fc' }}>SOMETHING<br />ETERNAL</span>
           </h1>
 
-          <p style={{ fontSize: 'clamp(1rem,2.5vw,1.25rem)', color: 'rgba(255,255,255,0.6)', maxWidth: 600, margin: '0 auto 16px', fontWeight: 300, lineHeight: 1.7 }}>
+          <p style={{ fontSize: 'clamp(1rem,2.5vw,1.25rem)', color: 'rgba(255,255,255,0.6)', maxWidth: 600, margin: '0 auto', fontWeight: 300, lineHeight: 1.7 }}>
             Help build the Momentum community in Alba Iulia.
           </p>
-
-          <p style={{ color: '#b6d8fc', fontWeight: 700, fontSize: 16 }}>
-            ✦ Every $1 donated is matched by ARC — your impact is 2× greater ✦
-          </p>
-        </div>
-      </section>
-
-      <section className="section" style={{ background: '#f8f9ff' }}>
-        <div className="wrap">
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <h2 className="display" style={{ fontSize: 'clamp(2rem,5vw,4rem)', color: '#0a0f2c', marginBottom: 12 }}>
-              OUR PROGRESS
-            </h2>
-
-            <p style={{ color: 'rgba(10,15,44,0.5)', maxWidth: 750, margin: '0 auto', fontWeight: 300 }}>
-              Track in real time how much we have raised together for the official Momentum launch.
-            </p>
-          </div>
-
-          <FundraiserFull />
         </div>
       </section>
 
@@ -824,9 +793,9 @@ export default function GivePage() {
 
     <div className="support-grid">
       {[
-        { nr: '01', titlu: 'Pray',         desc: 'Your prayer is the most valuable contribution to the Momentum launch.' },
+        { nr: '01', titlu: 'Pray',         desc: 'Your prayer is the most valuable contribution to Momentum Church.' },
         { nr: '02', titlu: 'Spread the word', desc: 'Talk about Momentum Church within your circle of friends and family.' },
-        { nr: '03', titlu: 'Get involved',  desc: 'oin the team and be part of building a Christ-centered community.' },
+        { nr: '03', titlu: 'Get involved',  desc: 'Join the team and be part of building a Christ-centered community.' },
       ].map(({ nr, titlu, desc }) => (
         <div key={titlu} className="support-card">
           <div className="support-number">{nr}</div>

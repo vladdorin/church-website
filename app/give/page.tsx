@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react'
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { useSearchParams } from 'next/navigation'
-import { FundraiserFull } from '@/components/FundraiserBar'
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -37,7 +36,7 @@ function GiveForm() {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [selected, setSelected] = useState<number | null>(100)
   const [custom, setCustom] = useState('')
-  const [donationReason, setDonationReason] = useState('Momentum Launch Fund')
+  const [donationReason, setDonationReason] = useState('Susținerea bisericii')
   const [customReason, setCustomReason] = useState('')
   const [donationType, setDonationType] = useState<'once' | 'monthly'>('once')
   const [coverFees, setCoverFees] = useState(false)
@@ -153,8 +152,7 @@ function GiveForm() {
             </h2>
 
             <p style={{ color: 'rgba(10,15,44,0.62)', lineHeight: 1.85, fontWeight: 300, marginBottom: 32 }}>
-              Donația ta face o diferență reală în Alba Iulia. Fiecare donație pe care o faci va fi dublată de ARC -
-              impactul tău este de două ori mai mare!
+              Donația ta face o diferență reală în Alba Iulia. Îți mulțumim pentru generozitatea ta!
             </p>
 
             <a href="/give" className="btn btn-blue">Donează din nou</a>
@@ -324,7 +322,7 @@ function GiveForm() {
                     marginBottom: donationReason === 'Alt motiv' ? 8 : 0,
                   }}
                 >
-                  <option>Fond lansare Momentum</option>
+                  <option>Susținerea bisericii</option>
                   <option>Echipamente & logistică</option>
                   <option>Evenimente & outreach</option>
                   <option>Dărnicie / Zeciuială</option>
@@ -439,15 +437,6 @@ function GiveForm() {
                   </span>
                 </div>
 
-                <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 18, padding: '16px 20px', marginBottom: 14 }}>
-                  <div style={{ color: '#16a34a', fontWeight: 800, fontSize: 15, marginBottom: 4 }}>
-                    ×2 impact
-                  </div>
-                  <div style={{ color: '#16a34a', fontWeight: 500, fontSize: 13, lineHeight: 1.5 }}>
-                    Dublat de ARC până la $50K total.
-                  </div>
-                </div>
-
                 <label
                   style={{
                     display: 'flex',
@@ -556,29 +545,9 @@ export default function GivePage() {
             FII PARTE<br /><span style={{ color: '#b6d8fc' }}>DIN CEVA ETERN</span>
           </h1>
 
-          <p style={{ fontSize: 'clamp(1rem,2.5vw,1.25rem)', color: 'rgba(255,255,255,0.6)', maxWidth: 600, margin: '0 auto 16px', fontWeight: 300, lineHeight: 1.7 }}>
+          <p style={{ fontSize: 'clamp(1rem,2.5vw,1.25rem)', color: 'rgba(255,255,255,0.6)', maxWidth: 600, margin: '0 auto', fontWeight: 300, lineHeight: 1.7 }}>
             Ajută la construirea comunității Momentum în Alba Iulia.
           </p>
-
-          <p style={{ color: '#b6d8fc', fontWeight: 700, fontSize: 16 }}>
-            ✦ Fiecare $1 donat este dublat de ARC - impactul tău este de 2× mai mare ✦
-          </p>
-        </div>
-      </section>
-
-      <section className="section" style={{ background: '#f8f9ff' }}>
-        <div className="wrap">
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <h2 className="display" style={{ fontSize: 'clamp(2rem,5vw,4rem)', color: '#0a0f2c', marginBottom: 12 }}>
-              PROGRESUL NOSTRU
-            </h2>
-
-            <p style={{ color: 'rgba(10,15,44,0.5)', maxWidth: 750, margin: '0 auto', fontWeight: 300 }}>
-              Urmărește în timp real cât am strâns împreună pentru lansarea oficială Momentum.
-            </p>
-          </div>
-
-          <FundraiserFull />
         </div>
       </section>
 
@@ -827,7 +796,7 @@ export default function GivePage() {
 
     <div className="support-grid">
       {[
-        { nr: '01', titlu: 'Roagă-te', desc: 'Rugăciunea ta este cea mai valoroasă contribuție pentru lansarea Momentum.' },
+        { nr: '01', titlu: 'Roagă-te', desc: 'Rugăciunea ta este cea mai valoroasă contribuție pentru Biserica Momentum.' },
         { nr: '02', titlu: 'Spune altora', desc: 'Vorbește despre Biserica Momentum în cercul tău de prieteni și familie.' },
         { nr: '03', titlu: 'Implică-te', desc: 'Vino în echipă și contribuie cu talentele tale la construirea comunității.' },
       ].map(({ nr, titlu, desc }) => (

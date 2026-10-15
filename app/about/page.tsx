@@ -167,16 +167,13 @@ export default function AboutPage() {
             <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,2.8rem)', color:'white', marginBottom:16}}>
               SUNTEM PARTENERI CU ARC
             </h2>
-            <p style={{color:'rgba(255,255,255,0.55)', maxWidth:640, margin:'0 auto 24px', lineHeight:1.8, fontWeight:300}}>
+            <p style={{color:'rgba(255,255,255,0.55)', maxWidth:640, margin:'0 auto 32px', lineHeight:1.8, fontWeight:300}}>
               The Association of Related Churches (ARC) este o organizație globală care a ajutat
               la lansarea a peste 1.000 de biserici în întreaga lume. Ei cred în viziunea Momentum
               și sunt alături de noi prin formare, ghidare strategică și parteneriat financiar.
             </p>
-            <p style={{color:'#b6d8fc', fontWeight:700, fontSize:16, marginBottom:32}}>
-              ✦ Fiecare donație pe care o faci va fi dublată de ARC până la $50.000 ✦
-            </p>
             <Link href="/give" className="arc-btn">
-  <span>Susține lansarea</span>
+  <span>Susține biserica</span>
 </Link>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Rugăciune · Momentum | Alba Iulia',
-  description: 'Stai alături de noi în rugăciune pentru Alba Iulia și pentru lansarea Momentum Church.',
+  description: 'Stai alături de noi în rugăciune pentru Alba Iulia și pentru Biserica Momentum.',
 }
 
 export default function PrayPage() {
@@ -36,7 +36,7 @@ export default function PrayPage() {
             {[
               { nr:'01', titlu:'O generație cu scop', desc:'Ne rugăm ca tinerii din Alba Iulia să descopere scopul dat de Dumnezeu și să trăiască o credință autentică.' },
               { nr:'02', titlu:'Familii restaurate', desc:'Ne rugăm ca familiile să găsească valori sănătoase și să crească împreună în credință și iubire.' },
-              { nr:'03', titlu:'Lansarea Momentum', desc:'Ne rugăm ca Dumnezeu să pregătească inimile oamenilor și să aducă la noi exact pe cine trebuie în octombrie 2026.' },
+              { nr:'03', titlu:'Biserica Momentum', desc:'Ne rugăm ca Dumnezeu să pregătească inimile oamenilor și să aducă la noi exact pe cine trebuie, duminică de duminică.' },
               { nr:'04', titlu:'Resurse și susținători', desc:'Ne rugăm pentru parteneri care să creadă în viziune și să susțină financiar construirea acestei comunități.' },
             ].map(({ nr, titlu, desc }) => (
               <div key={nr} className="prayer-card">

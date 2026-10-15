@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import LocalizedLink from '@/components/LocalizedLink'
 export const metadata: Metadata = {
   title: 'Prayer · Momentum | Alba Iulia',
-  description: 'Stand with us in prayer for Alba Iulia and for the launch of Momentum Church.',
+  description: 'Stand with us in prayer for Alba Iulia and for Momentum Church.',
 }
 
 export default function PrayPage() {
@@ -35,7 +35,7 @@ export default function PrayPage() {
             {[
               { nr:'01', titlu:'A generation with purpose', desc:'We pray that the young people of Alba Iulia would discover God-given purpose and live out an authentic faith.' },
               { nr:'02', titlu:'Restored families', desc:'We pray that families would find healthy values and grow together in faith and love.' },
-              { nr:'03', titlu:'The Momentum launch', desc:'We pray that God would prepare hearts and bring exactly the people He wants to be part of our launch in October 2026.' },
+              { nr:'03', titlu:'Momentum Church', desc:'We pray that God would prepare hearts and bring exactly the people He wants to be part of our church, Sunday after Sunday.' },
               { nr:'04', titlu:'Resources and supporters', desc:'We pray for partners who believe in the vision and will financially support the building of this community.' },
             ].map(({ nr, titlu, desc }) => (
               <div key={nr} className="prayer-card">

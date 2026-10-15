@@ -167,16 +167,13 @@ export default function AboutPage() {
             <h2 className="display" style={{fontSize:'clamp(1.5rem,3.5vw,2.8rem)', color:'white', marginBottom:16}}>
               WE ARE PARTNERS WITH ARC
             </h2>
-            <p style={{color:'rgba(255,255,255,0.55)', maxWidth:640, margin:'0 auto 24px', lineHeight:1.8, fontWeight:300}}>
+            <p style={{color:'rgba(255,255,255,0.55)', maxWidth:640, margin:'0 auto 32px', lineHeight:1.8, fontWeight:300}}>
               The Association of Related Churches (ARC) is a global organization that has helped
               launch over 1,000 churches around the world. They believe in the Momentum vision
               and stand with us through training, strategic guidance, and financial partnership.
             </p>
-            <p style={{color:'#b6d8fc', fontWeight:700, fontSize:16, marginBottom:32}}>
-              ✦ Every donation you make will be matched by ARC up to $50,000 ✦
-            </p>
             <LocalizedLink href="/give" className="arc-btn">
-  <span>Support the Launch</span>
+  <span>Support the church</span>
 </LocalizedLink>
           </div>
         </div>

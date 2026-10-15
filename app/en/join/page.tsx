@@ -78,9 +78,9 @@ const getInputStyle = (field: string) => ({
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:20}}>
             {[
               { titlu:'Connect',      desc:'Help us reach people in Alba Iulia, spread the word, and bring your friends.' },
-              { titlu:'Pray',         desc:'Stand with us in prayer for this city and for the launch in October 2026.' },
+              { titlu:'Pray',         desc:'Stand with us in prayer for this city and the people in it.' },
               { titlu:'Get Involved', desc:'Use your gifts and talents to build this community from the ground up.' },
-              { titlu:'Give',         desc:'Be part of building something eternal. Every contribution is matched by ARC.' },
+              { titlu:'Give',         desc:'Be part of building something eternal.' },
             ].map(({ titlu, desc }, index) => (
              <div
   key={titlu}
@@ -104,44 +104,8 @@ const getInputStyle = (field: string) => ({
         </div>
       </section>
 
-      {/* TIMELINE */}
-<section className="timeline-premium-section timeline-section-large">
-  <div className="wrap" style={{textAlign:'center'}}>
-    <p className="label" style={{fontSize:'clamp(2.5rem,2vw,4rem)'}}>Timeline</p>
-    <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
-      LAUNCH 4 OCT 2026
-    </h2>
-    <p style={{color:'rgba(10,15,44,0.5)', maxWidth:800, margin:'0 auto 48px', fontWeight:400}}>
-      We don&apos;t just want to plan a launch day — we want to build a lasting community.
-    </p>
-
-    <div className="timeline-mobile">
-      {[
-        { luna:'May–Jun', act:'PREPARATION', desc:'Brand & awareness',             highlight:false },
-        { luna:'Jul–Aug', act:'EQUIPPING',   desc:'Team, contacts, outreach',      highlight:false },
-        { luna:'Sep',     act:'ENGAGEMENT',  desc:'Trainings & prayer',            highlight:false },
-        { luna:'Oct',     act:'LAUNCH',      desc:'First Sunday',                  highlight:true  },
-        { luna:'Nov+',    act:'GROWTH',      desc:'A strong and vibrant community', highlight:false },
-      ].map(({ luna, act, desc, highlight }, index) => (
-        <div
-          key={luna}
-          className={`timeline-item ${highlight ? 'timeline-highlight' : ''}`}
-          style={{ animationDelay: `${index * 120}ms` }}
-        >
-          <div className="timeline-dot" />
-          <div className="timeline-card">
-            <div className="timeline-month">{luna} 2026</div>
-            <div className="display timeline-title">{act}</div>
-            <div className="timeline-desc">{desc}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
       {/* CONNECTION CARD */}
-      <section className="section" style={{background:'white'}}>
+      <section className="join-connect-section">
         <div className="wrap">
           <div style={{maxWidth:640, margin:'0 auto'}}>
             <div style={{textAlign:'center', marginBottom:40}}>
@@ -269,7 +233,7 @@ const getInputStyle = (field: string) => ({
 
   <div style={{ marginBottom: 16 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      How would you like to get involved?
+      What would you like to do next?
     </label>
     <select
       name="implicare"
@@ -279,7 +243,7 @@ const getInputStyle = (field: string) => ({
       }}
     >
       <option>I&apos;d love to grab a coffee, I have questions</option>
-      <option>I want to come to the first meeting</option>
+      <option>I&apos;d like to visit on a Sunday</option>
       <option>I want to join the team</option>
       <option>I want to know more about Momentum</option>
     </select>
@@ -399,59 +363,6 @@ const getInputStyle = (field: string) => ({
         </div>
       </section>
 <style jsx>{`
-  .timeline-mobile {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-  }
-
-  .timeline-item {
-    position: relative;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .timeline-card {
-    background: white;
-    color: #0a0f2c;
-    border-radius: 20px;
-    padding: 24px 16px;
-    border: 1px solid rgba(10,15,44,0.1);
-  }
-
-  .timeline-highlight .timeline-card {
-    background: #1932af;
-    color: white;
-    border: 2px solid #1932af;
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(25,50,175,0.35);
-  }
-
-  .timeline-month {
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    opacity: 0.45;
-  }
-
-  .timeline-highlight .timeline-month {
-    opacity: 0.7;
-  }
-
-  .timeline-title {
-    font-size: 18px;
-    margin-bottom: 6px;
-  }
-
-  .timeline-desc {
-    font-size: 12px;
-    opacity: 0.55;
-    font-weight: 300;
-  }
-
-  .timeline-highlight .timeline-desc {
-    opacity: 0.75;
-  }
-
 .form-error {
   margin-top: 7px;
   color: #dc2626;
@@ -460,69 +371,6 @@ const getInputStyle = (field: string) => ({
   line-height: 1.4;
 }
 
-  @media (max-width: 768px) {
-    .timeline-mobile {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: relative;
-      text-align: left;
-      padding-left: 22px;
-    }
-
-    .timeline-mobile::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, rgba(25,50,175,0.15), #1932af, rgba(25,50,175,0.15));
-      border-radius: 999px;
-    }
-
-    .timeline-item {
-      padding-left: 18px;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -20px;
-      top: 28px;
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: white;
-      border: 3px solid #1932af;
-      box-shadow: 0 0 0 6px rgba(25,50,175,0.08);
-    }
-
-    .timeline-card {
-      padding: 22px 20px;
-      transform: none !important;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .timeline-card:active {
-      transform: scale(0.98) !important;
-    }
-
-    .timeline-highlight .timeline-card {
-      transform: none !important;
-      box-shadow: 0 18px 34px rgba(25,50,175,0.28);
-    }
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 .involve-card {
   position: relative;
   overflow: hidden;

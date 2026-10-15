@@ -876,13 +876,6 @@ html {
   .hero-launch-date span {
     display: block;
   }
-
-  .count-separator {
-    display: inline-flex !important;
-    align-items: center !important;
-    line-height: 1 !important;
-    transform: translateY(-16px);
-  }
 }
 
 .hero-actions {
@@ -910,23 +903,160 @@ html {
   }
 }
 
-.hero-launch-title {
+/* ── HOME 05 — GENEROZITATE ── */
+.giving-impact-item {
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.giving-impact-item:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.giving-impact-num {
   font-family: 'Climate Crisis', sans-serif;
-  font-size: clamp(1.2rem, 2vw, 2rem);
-  letter-spacing: 0.04em;
+  font-size: 14px;
+  color: #b6d8fc;
+  flex-shrink: 0;
+  width: 34px;
+}
+
+.giving-impact-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.giving-impact-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
   color: rgba(255,255,255,0.55);
+}
+
+@media (max-width: 768px) {
+  .giving-impact-item {
+    gap: 18px;
+    padding: 20px 0;
+  }
+}
+
+/* ── HOME HERO — BINE AI VENIT ── */
+.hero-welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+  padding: 72px 32px 48px;
+}
+
+.hero-welcome-title {
+  font-family: 'Climate Crisis', sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6.4vw, 6.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: white;
+  margin: 0 0 32px;
+}
+
+.hero-welcome-title span {
+  display: block;
   white-space: nowrap;
 }
 
-.hero-launch-title span {
-  display: inline;
+.hero-welcome-sub {
+  font-size: clamp(15px, 1.35vw, 19px);
+  font-weight: 500;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  max-width: 760px;
+  margin: 0 auto 36px;
 }
 
-.hero-launch-title span + span::before {
-  content: ' · ';
+.hero-welcome-sub span {
+  display: block;
+  text-wrap: balance;
+}
+
+.hero-welcome-sub-accent {
+  color: white;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.hero-welcome-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+}
+
+.hero-welcome-times {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.hero-welcome-time strong {
+  color: white;
+  font-weight: 800;
+  margin-right: 4px;
+}
+
+.hero-welcome-time + .hero-welcome-time::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  margin-right: 18px;
+  vertical-align: middle;
+}
+
+.hero-welcome-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hero-welcome-address svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.hero-welcome-address:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.4);
 }
 
 @media (max-width: 768px) {
@@ -981,13 +1111,8 @@ html {
     display: none !important;
   }
 
-  /* ── STICKY FIX ── */
   .join-sticky {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    overflow: visible !important;
-    padding-bottom: 64px !important;
+    padding: 64px 0 !important;
   }
 
   /* ── CARDURI ── */
@@ -1057,12 +1182,6 @@ html {
   }
 }
 
-@media (max-width: 768px) {
-  .donation-progress-mobile {
-    margin-top: -50px !important;
-  }
-}
-
 /* ── MOBILE PREMIUM BACKGROUND NUMBERS ── */
 @media (max-width: 768px) {
   .ghost-num {
@@ -1111,23 +1230,45 @@ html {
 }
 
 @media (max-width: 768px) {
-  .hero-launch-title {
-    width: 100% !important;
-    max-width: 340px !important;
-    white-space: normal !important;
-    text-align: center !important;
-    font-size: clamp(1rem, 4.4vw, 1.35rem) !important;
-    line-height: 1.15 !important;
-    margin: 0 auto 28px !important;
+  .hero-welcome {
+    padding: 56px 20px 40px;
   }
 
-  .hero-launch-title span {
-    display: block !important;
-    white-space: nowrap !important;
+  .hero-welcome-title {
+    font-size: clamp(1.5rem, 8vw, 3rem);
+    margin-bottom: 24px;
   }
 
-  .hero-launch-title span + span::before {
-    content: '' !important;
+  .hero-welcome-sub {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .hero-welcome-info {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .hero-welcome-times {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 11px;
+    gap: 8px 14px;
+  }
+
+  .hero-welcome-time {
+    white-space: nowrap;
+  }
+
+  .hero-welcome-time + .hero-welcome-time::before {
+    margin-right: 14px;
+  }
+
+  .hero-welcome-address {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    max-width: 100%;
   }
 }
 
@@ -1176,12 +1317,7 @@ video {
 @media (max-width: 950px) and (orientation: landscape) {
 
   .join-sticky {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-    padding-bottom: 80px !important;
+    padding: 56px 0 80px !important;
   }
 
   .join-mobile-grid {
@@ -1737,12 +1873,12 @@ video {
   }
 }
 
-/* ── TIMELINE PREMIUM SECTION ── */
+/* ── JOIN — CARD DE CONECTARE (fundal deschis cu grilă) ── */
 
-.timeline-premium-section {
+.join-connect-section {
   position: relative;
   overflow: hidden;
-  padding: 150px 0 170px;
+  padding: 120px 0 140px;
 
   background:
     radial-gradient(circle at 15% 18%, rgba(182,216,252,0.34), transparent 34%),
@@ -1750,7 +1886,7 @@ video {
     linear-gradient(135deg, #fbfdff 0%, #eef5ff 46%, #f7f9ff 100%);
 }
 
-.timeline-premium-section::before {
+.join-connect-section::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1765,7 +1901,7 @@ video {
   pointer-events: none;
 }
 
-.timeline-premium-section::after {
+.join-connect-section::after {
   content: '';
   position: absolute;
 
@@ -1785,4 +1921,20 @@ video {
   filter: blur(95px);
 
   pointer-events: none;
+}
+
+.join-connect-section > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .join-connect-section {
+    padding: 72px 0 88px;
+  }
+
+  .join-connect-section::after {
+    width: 520px;
+    height: 520px;
+  }
 }

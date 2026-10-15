@@ -162,13 +162,21 @@ export default function Footer() {
           <div>
             <p style={{ fontSize:11, fontWeight:700, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(255,255,255,0.3)', marginBottom:20 }}>{isEnglish ? 'Contact' : 'Contact'}</p>
             <div style={{ display:'flex', flexDirection:'column', gap:12, fontSize:14, color:'rgba(255,255,255,0.55)' }}>
+              <div style={{ lineHeight:1.6 }}>
+                <span style={{ display:'block', color:'rgba(255,255,255,0.85)', fontWeight:600 }}>
+                  {isEnglish ? 'Every Sunday' : 'În fiecare duminică'}
+                </span>
+                <span style={{ display:'block' }}>
+                  {isEnglish ? '9:30 Fellowship · 10:30 Service' : '9:30 Socializare · 10:30 Program'}
+                </span>
+              </div>
               <a
-  href="https://www.google.com/maps/search/?api=1&query=Alba+Iulia+Romania"
+  href="https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia"
   target="_blank"
   rel="noopener noreferrer"
   style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}
 >
-  {isEnglish ? 'Alba Iulia, Romania' : 'Alba Iulia, România'}
+  Calea Moților nr. 258, Alba Iulia
 </a>
               <a href="mailto:contact@bisericamomentum.ro" style={{ color:'rgba(255,255,255,0.55)', textDecoration:'none' }}>
                contact@bisericamomentum.ro

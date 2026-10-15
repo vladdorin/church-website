@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState, ReactNode, CSSProperties } from 'react'
 import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
-import CountdownHero from '@/components/CountdownHero'
-import { FundraiserCompact } from '@/components/FundraiserBar'
+import WelcomeHero from '@/components/WelcomeHero'
+import GivingImpact from '@/components/GivingImpact'
 import PhotoCarousel from '@/components/PhotoCarousel'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
@@ -57,7 +57,7 @@ const STACK_CARDS = [
   },
   {
     titlu: 'Pray',
-    desc: 'Stand with us in prayer for this city and for the launch in October 2026.',
+    desc: 'Stand with us in prayer for this city and the people in it.',
     bg: '#080c1e',
     col: '#ffffff',
     textCol: '#ffffff',
@@ -211,7 +211,7 @@ const T9: CSSProperties = {
 export default function HomePage() {
   return (
     <>
-      <CountdownHero />
+      <WelcomeHero />
 
       {/* ── TICKER ── */}
       <div style={{ background: '#1932af', padding: '14px 0', overflow: 'hidden' }}>
@@ -378,16 +378,10 @@ export default function HomePage() {
       </section>
 
 {/* ═══════════ 03 — JOIN US ═══════════ */}
-      <section style={{ background: '#ffffff', position: 'relative' }}>
+      <section style={{ background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
 
         {/* Single sticky container — locks header + cards together */}
-        <div className="join-sticky" style={{
-          position: 'sticky', top: 80,
-          height: 'calc(100vh - 160px)',
-          overflow: 'hidden',
-          display: 'flex', flexDirection: 'column',
-          background: '#ffffff',
-        }}>
+        <div className="join-sticky" style={{ position: 'relative', padding: '96px 0' }}>
 
           {/* Ghost 03 */}
           <div className="ghost-num" style={{
@@ -399,7 +393,7 @@ export default function HomePage() {
           }}>03</div>
 
           {/* Header content */}
-          <div style={{ paddingTop: 48, paddingBottom: 40, position: 'relative', zIndex: 1 }}>
+          <div style={{ paddingBottom: 48, position: 'relative', zIndex: 1 }}>
             <div className="wrap-wide">
               <RevealSection
                 className="grid-2col join-mobile-grid"
@@ -463,7 +457,7 @@ export default function HomePage() {
           </div>
 
           {/* Cards — remain visible while scrolling through the section */}
-<div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+<div style={{ position: 'relative', zIndex: 1 }}>
   <div className="wrap-wide">
     <StackedCards />
 
@@ -539,25 +533,21 @@ export default function HomePage() {
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <p className="sr sr-up label-light">SUPPORT THE LAUNCH</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-                BECOME A<br />PARTNER.
+                BE PART OF<br />THE MINISTRY.
               </h2>
-              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 420, marginBottom: 20 }}>
-                Every donation you make will be matched by ARC up to $50,000.
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 440, marginBottom: 32 }}>
+                Your generosity fuels everything we do each week, from our Sundays together to the people we reach across Alba Iulia.
               </p>
-              {/* Desktop button — hidden on mobile */}
-              <div className="sr sr-up sr-d3 btn-desktop">
+              <div className="sr sr-up sr-d3">
                 <LocalizedLink href="/give" className="btn btn-white">Give</LocalizedLink>
               </div>
             </div>
-            <div className="sr sr-right sr-d1 donation-progress-mobile">
-  <FundraiserCompact variant="side" />
-</div>
-            {/* Mobile button — after progress bar, hidden on desktop */}
-            <div className="btn-mobile-after">
-              <LocalizedLink href="/give" className="btn btn-white">Give</LocalizedLink>
-            </div>
+            <GivingImpact items={[
+              ['Sundays', 'A warm, welcoming place for anyone who walks through the door.'],
+              ['Community', 'Friendships and people growing together in faith.'],
+              ['The city', 'Being a real blessing to Alba Iulia.'],
+            ]} />
           </RevealSection>
         </div>
       </section>
