@@ -31,6 +31,16 @@ Mesaj: ${data.message || '-'}
       }),
     ])
 
+    // Trimite persoana și în Momentum Admin (lista „De contactat”).
+    // Dacă adminul nu e configurat sau nu răspunde, formularul merge în continuare normal.
+    if (process.env.ADMIN_INGEST_URL && process.env.ADMIN_INGEST_SECRET) {
+      await fetch(process.env.ADMIN_INGEST_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-ingest-secret': process.env.ADMIN_INGEST_SECRET },
+        body: JSON.stringify(data),
+      }).catch(err => console.error('[form → admin]', err))
+    }
+
     return Response.json({ success: true })
   } catch (error) {
     console.error(error)
