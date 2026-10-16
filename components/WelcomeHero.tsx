@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { isEnglishPath, routeFor } from '@/lib/routes'
 
 const FULL_TEXT_RO = 'Construim o comunitate vie, autentică și plină de dragoste în inima orașului Alba Iulia. Pentru gloria lui Dumnezeu.'
 const FULL_TEXT_EN = `We are building a living, authentic, and loving community in the heart of Alba Iulia.
@@ -31,11 +32,10 @@ function useTypewriter(text: string, speed = 38) {
 
 export default function WelcomeHero() {
   const pathname = usePathname()
-  const isEnglish = pathname.startsWith('/en')
+  const isEnglish = isEnglishPath(pathname)
 
   const fullText = isEnglish ? FULL_TEXT_EN : FULL_TEXT_RO
-  const joinHref = isEnglish ? '/en/join' : '/join'
-  const aboutHref = isEnglish ? '/en/about' : '/about'
+  const newHref = routeFor('new', isEnglish)
 
   const { displayed, done } = useTypewriter(fullText, 38)
 
@@ -133,8 +133,7 @@ export default function WelcomeHero() {
             )}
           </p>
           <div className="hero-actions">
-            <Link href={joinHref} className="btn btn-navy">{isEnglish ? 'Join Us' : 'Alătură-te'}</Link>
-            <Link href={aboutHref} className="btn btn-outline-white">{isEnglish ? 'Our Story' : 'Povestea noastră'}</Link>
+            <Link href={newHref} className="btn btn-navy">{isEnglish ? "It's my first time" : 'Sunt pentru prima dată'}</Link>
           </div>
         </div>
       </div>

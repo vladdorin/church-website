@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Terms & Conditions · Momentum | Alba Iulia',
+  description: 'Terms & Conditions — Momentum Church, Alba Iulia.',
+}
+
 export default function TermsPage() {
   return (
     <main className="bg-black text-white min-h-screen">

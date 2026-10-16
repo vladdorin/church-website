@@ -1,3 +1,9 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Politica cookies · Momentum | Alba Iulia',
+}
+
 export default function CookiesPage() {
   return (
     <main className="bg-black text-white min-h-screen">

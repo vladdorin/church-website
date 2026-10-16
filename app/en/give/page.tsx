@@ -155,7 +155,7 @@ function GiveForm() {
               Your donation makes a real difference in Alba Iulia. Thank you for your generosity!
             </p>
 
-            <a href="/give" className="btn btn-blue">Give again</a>
+            <a href="/en/give" className="btn btn-blue">Give again</a>
           </div>
         </div>
       </section>
@@ -173,7 +173,7 @@ function GiveForm() {
             <p style={{ color: 'rgba(10,15,44,0.6)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
               The payment was cancelled. You can come back whenever you&apos;re ready.
             </p>
-            <a href="/give" className="btn btn-blue">Try again</a>
+            <a href="/en/give" className="btn btn-blue">Try again</a>
           </div>
         </div>
       </section>

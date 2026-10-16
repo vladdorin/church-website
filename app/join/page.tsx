@@ -47,7 +47,7 @@ const getInputStyle = (field: string) => ({
     textAlign: 'center',
   }}
 >
-  EȘTI<br />
+  YOU ARE<br />
   <span
   style={{
     color: '#b6d8fc',
@@ -57,38 +57,38 @@ const getInputStyle = (field: string) => ({
     whiteSpace: 'nowrap',
   }}
 >
-  BINEVENIT
+  WELCOME
 </span>
 </h1>
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
-            Există un loc pentru tine în Momentum. Conectează-te, implică-te, crește.
+            There is a place for you in Momentum. Connect, get involved, grow.
           </p>
         </div>
       </section>
 
-      {/* CUM TE POȚI IMPLICA */}
+      {/* HOW YOU CAN GET INVOLVED */}
       <section className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
-            CUM TE POȚI IMPLICA
+            HOW YOU CAN GET INVOLVED
           </h2>
           <p style={{color:'rgba(10,15,44,0.5)', maxWidth:480, margin:'0 auto 48px', fontWeight:400}}>
-            4 moduri prin care poți face parte din Biserica Momentum.
+            4 ways you can be part of Momentum Church.
           </p>
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:20}}>
             {[
-              { titlu:'Conectează-te', desc:'Ajută-ne să ajungem la oameni din Alba Iulia, distribuie vestea și adu-ți prietenii.' },
-              { titlu:'Roagă-te', desc:'Stai alături de noi în rugăciune pentru acest oraș și pentru oamenii din el.' },
-              { titlu:'Implică-te', desc:'Folosește-ți darurile și talentele pentru a construi această comunitate din temelii.' },
-              { titlu:'Donează', desc:'Fii parte din construirea a ceva etern.' },
-            ].map(({ titlu, desc }) => (
+              { titlu:'Connect',      desc:'Help us reach people in Alba Iulia, spread the word, and bring your friends.' },
+              { titlu:'Pray',         desc:'Stand with us in prayer for this city and the people in it.' },
+              { titlu:'Get Involved', desc:'Use your gifts and talents to build this community from the ground up.' },
+              { titlu:'Give',         desc:'Be part of building something eternal.' },
+            ].map(({ titlu, desc }, index) => (
              <div
   key={titlu}
   className="involve-card"
 >
   <div className="involve-glow" />
   <div className="involve-number">
-    {String(['Conectează-te', 'Roagă-te', 'Implică-te', 'Donează'].indexOf(titlu) + 1).padStart(2, '0')}
+    {String(index + 1).padStart(2, '0')}
   </div>
 
   <h3 className="display involve-title">
@@ -104,16 +104,16 @@ const getInputStyle = (field: string) => ({
         </div>
       </section>
 
-      {/* CARD DE CONECTARE */}
+      {/* CONNECTION CARD */}
       <section className="join-connect-section">
         <div className="wrap">
           <div style={{maxWidth:640, margin:'0 auto'}}>
             <div style={{textAlign:'center', marginBottom:40}}>
               <h2 className="display" style={{fontSize:'clamp(2rem,5vw,3.5rem)', color:'#0a0f2c', marginBottom:12}}>
-                CARD DE CONECTARE
+                CONNECTION CARD
               </h2>
               <p style={{color:'rgba(10,15,44,0.55)', fontWeight:300}}>
-                Completează formularul și vom lua legătura cu tine în cel mai scurt timp.
+                Fill in the form and we will get back to you as soon as possible.
               </p>
             </div>
 
@@ -133,15 +133,15 @@ const getInputStyle = (field: string) => ({
     const errors: Record<string, string> = {}
 
     if (!formData.get('name')) {
-      errors.name = 'Te rugăm să completezi numele.'
+      errors.name = 'Please enter your name.'
     }
 
     if (!formData.get('email')) {
-      errors.email = 'Te rugăm să completezi adresa de email.'
+      errors.email = 'Please enter your email address.'
     }
 
     if (formData.get('privacy') !== 'on') {
-      errors.privacy = 'Trebuie să accepți politica de confidențialitate.'
+      errors.privacy = 'You must accept the privacy policy.'
     }
 
     if (Object.keys(errors).length > 0) {
@@ -157,7 +157,7 @@ const getInputStyle = (field: string) => ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          formType: 'Alătură-te',
+          formType: 'Join',
           name: formData.get('name'),
           email: formData.get('email'),
           phone: formData.get('phone'),
@@ -191,13 +191,13 @@ const getInputStyle = (field: string) => ({
 >
   <div style={{ marginBottom: 16 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      Nume *
+      Name *
     </label>
     <input
       type="text"
       name="name"
       style={getInputStyle('name')}
-      placeholder="Ion Ionescu"
+      placeholder="John Smith"
     />
     {fieldErrors.name && (
       <p className="form-error">{fieldErrors.name}</p>
@@ -212,7 +212,7 @@ const getInputStyle = (field: string) => ({
       type="email"
       name="email"
       style={getInputStyle('email')}
-      placeholder="ion@exemplu.ro"
+      placeholder="john@example.com"
     />
     {fieldErrors.email && (
       <p className="form-error">{fieldErrors.email}</p>
@@ -221,19 +221,19 @@ const getInputStyle = (field: string) => ({
 
   <div style={{ marginBottom: 16 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      Telefon
+      Phone
     </label>
     <input
       type="tel"
       name="phone"
       style={getInputStyle('phone')}
-      placeholder="07xx xxx xxx"
+      placeholder="+40 7xx xxx xxx"
     />
   </div>
 
   <div style={{ marginBottom: 16 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      Ce ți-ar plăcea să faci mai departe?
+      What would you like to do next?
     </label>
     <select
       name="implicare"
@@ -242,16 +242,16 @@ const getInputStyle = (field: string) => ({
         background: 'white',
       }}
     >
-      <option>Vreau să beau o cafea, am întrebări</option>
-      <option>Vreau să vin duminică la biserică</option>
-      <option>Vreau să mă implic în echipă</option>
-      <option>Vreau să aflu mai multe despre Momentum</option>
+      <option>I&apos;d love to grab a coffee, I have questions</option>
+      <option>I&apos;d like to visit on a Sunday</option>
+      <option>I want to join the team</option>
+      <option>I want to know more about Momentum</option>
     </select>
   </div>
 
   <div style={{ marginBottom: 16 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      Cum ai auzit de Momentum?
+      How did you hear about Momentum?
     </label>
     <select
       name="sursa"
@@ -261,15 +261,15 @@ const getInputStyle = (field: string) => ({
       }}
     >
       <option>Instagram / Facebook</option>
-      <option>Un prieten mi-a recomandat</option>
-      <option>Am căutat pe Google</option>
-      <option>Altele</option>
+      <option>A friend recommended it</option>
+      <option>I searched on Google</option>
+      <option>Other</option>
     </select>
   </div>
 
   <div style={{ marginBottom: 24 }}>
     <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-      Mesaj opțional
+      Optional message
     </label>
     <textarea
       name="message"
@@ -278,7 +278,7 @@ const getInputStyle = (field: string) => ({
         ...getInputStyle('message'),
         resize: 'none',
       }}
-      placeholder="Spune-ne ceva despre tine..."
+      placeholder="Tell us something about yourself..."
     />
   </div>
 
@@ -306,14 +306,20 @@ const getInputStyle = (field: string) => ({
         }}
       />
       <span>
-        Sunt de acord cu{' '}
+        I agree to the Privacy Policy —{' '}
+        <Link
+          href="/privacy-policy"
+          style={{ color:'#1932af', fontWeight:600, textDecoration:'underline' }}
+        >
+          English
+        </Link>
+        {' / '}
         <Link
           href="/politica-de-confidentialitate"
           style={{ color:'#1932af', fontWeight:600, textDecoration:'underline' }}
         >
-          Politica de confidențialitate
+          Română
         </Link>
-        .
       </span>
     </label>
 
@@ -345,12 +351,12 @@ const getInputStyle = (field: string) => ({
     }}
   >
     {submitStatus === 'loading'
-      ? 'Se trimite...'
+      ? 'Sending...'
       : submitStatus === 'success'
-      ? 'Trimis ✓'
+      ? 'Sent ✓'
       : submitStatus === 'error'
-      ? 'Eroare ❌'
-      : 'Trimite'}
+      ? 'Error ❌'
+      : 'Submit'}
   </button>
 </form>
           </div>

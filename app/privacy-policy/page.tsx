@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy · Momentum | Alba Iulia',
+  description: 'Privacy Policy — Momentum Church, Alba Iulia.',
+}
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="bg-black text-white min-h-screen">

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'De ce Alba Iulia? | Momentum',
+  title: 'De ce Alba Iulia? · Momentum | Alba Iulia',
   description: 'De ce am ales Alba Iulia și ce vedem în acest oraș special.',
 }
 
@@ -148,7 +148,7 @@ export default function WhyThisCityPage() {
             Suntem la început. Fiecare persoană aduce ceva unic în această comunitate.
           </p>
           <div style={{display:'flex', flexWrap:'wrap', gap:16, justifyContent:'center'}}>
-            <Link href="/join" className="btn btn-blue">Alătură-te echipei</Link>
+            <Link href="/alatura-te" className="btn btn-blue">Alătură-te echipei</Link>
             <Link href="/give" className="btn btn-outline-blue">Susține financiar</Link>
           </div>
         </div>

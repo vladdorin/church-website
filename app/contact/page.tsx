@@ -28,10 +28,10 @@ export default function ConnectPage() {
       <section style={{ background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px' }}>
         <div className="wrap" style={{ textAlign:'center' }}>
           <h1 className="display" style={{ fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24 }}>
-            LET&apos;S<br /><span style={{ color:'#b6d8fc' }}>CONNECT</span>
+            HAI SĂ<br /><span style={{ color:'#b6d8fc' }}>NE CONECTĂM</span>
           </h1>
           <p style={{ fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7 }}>
-            We&apos;d love to get to know you.
+            Suntem bucuroși să te cunoaștem.
           </p>
         </div>
       </section>
@@ -41,7 +41,7 @@ export default function ConnectPage() {
         <div className="wrap">
           <div className="connect-grid" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'start' }}>
 
-            {/* FORM */}
+            {/* FORMULAR */}
             <div>
               <h2
                 className="display"
@@ -53,7 +53,7 @@ export default function ConnectPage() {
 		  lineHeight: 0.95,
                 }}
               >
-                SEND US A MESSAGE
+                LASĂ-NE UN MESAJ
               </h2>
 
               <form
@@ -76,19 +76,19 @@ export default function ConnectPage() {
                   const errors: Record<string, string> = {}
 
                   if (!formData.get('name')) {
-                    errors.name = 'Please enter your name.'
+                    errors.name = 'Te rugăm să completezi numele.'
                   }
 
                   if (!formData.get('email')) {
-                    errors.email = 'Please enter your email address.'
+                    errors.email = 'Te rugăm să completezi adresa de email.'
                   }
 
                   if (!formData.get('message')) {
-                    errors.message = 'Please write a message.'
+                    errors.message = 'Te rugăm să scrii un mesaj.'
                   }
 
                   if (formData.get('privacy') !== 'on') {
-                    errors.privacy = 'You must accept the privacy policy.'
+                    errors.privacy = 'Trebuie să accepți politica de confidențialitate.'
                   }
 
                   if (Object.keys(errors).length > 0) {
@@ -137,13 +137,13 @@ export default function ConnectPage() {
               >
                 <div>
                   <label style={{ display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-                    Name *
+                    Nume *
                   </label>
                   <input
                     type="text"
                     name="name"
                     style={getInputStyle('name')}
-                    placeholder="John Smith"
+                    placeholder="Ion Ionescu"
                   />
                   {fieldErrors.name && (
                     <p className="form-error">{fieldErrors.name}</p>
@@ -158,7 +158,7 @@ export default function ConnectPage() {
                     type="email"
                     name="email"
                     style={getInputStyle('email')}
-                    placeholder="john@example.com"
+                    placeholder="ion@exemplu.ro"
                   />
                   {fieldErrors.email && (
                     <p className="form-error">{fieldErrors.email}</p>
@@ -167,7 +167,7 @@ export default function ConnectPage() {
 
                 <div>
                   <label style={{ display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-                    Subject
+                    Subiect
                   </label>
                   <select
                     name="subject"
@@ -176,17 +176,17 @@ export default function ConnectPage() {
                       background: 'white',
                     }}
                   >
-                    <option>I want to join the team</option>
-                    <option>I have a prayer request</option>
-                    <option>I want to give financially</option>
-                    <option>I&apos;m interested in a partnership / collaboration</option>
-                    <option>Other question</option>
+                    <option>Vreau să mă alătur echipei</option>
+                    <option>Am un motiv de rugăciune</option>
+                    <option>Vreau să susțin financiar</option>
+                    <option>Sunt interesat de un parteneriat / colaborare</option>
+                    <option>Altă întrebare</option>
                   </select>
                 </div>
 
                 <div>
                   <label style={{ display:'block', fontSize:15, fontWeight:600, color:'#0a0f2c', marginBottom:6 }}>
-                    Message *
+                    Mesaj *
                   </label>
                   <textarea
                     name="message"
@@ -195,7 +195,7 @@ export default function ConnectPage() {
                       ...getInputStyle('message'),
                       resize: 'none',
                     }}
-                    placeholder="Write your message here..."
+                    placeholder="Scrie mesajul tău aici..."
                   />
                   {fieldErrors.message && (
                     <p className="form-error">{fieldErrors.message}</p>
@@ -216,14 +216,11 @@ export default function ConnectPage() {
                       }}
                     />
                     <span>
-                      I agree to the Privacy Policy —{' '}
-                      <Link href="/en/privacy-policy" style={{ color:'#1932af', fontWeight:600, textDecoration:'underline' }}>
-                        English
-                      </Link>
-                      {' / '}
+                      Sunt de acord cu{' '}
                       <Link href="/politica-de-confidentialitate" style={{ color:'#1932af', fontWeight:600, textDecoration:'underline' }}>
-                        Română
+                        Politica de confidențialitate
                       </Link>
+                      .
                     </span>
                   </label>
 
@@ -253,12 +250,12 @@ export default function ConnectPage() {
                   }}
                 >
                   {submitStatus === 'loading'
-                    ? 'Sending...'
+                    ? 'Se trimite...'
                     : submitStatus === 'success'
-                    ? 'Message sent ✓'
+                    ? 'Mesaj trimis ✓'
                     : submitStatus === 'error'
-                    ? 'Error. Please try again'
-                    : 'Send message'}
+                    ? 'Eroare. Încearcă din nou'
+                    : 'Trimite mesajul'}
                 </button>
               </form>
             </div>
@@ -276,20 +273,20 @@ export default function ConnectPage() {
 		    lineHeight: 0.95,
                   }}
                 >
-                  WHERE TO FIND US
+                  UNDE NE GĂSEȘTI
                 </h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {[
                     {
                       icon: <HiOutlineClock />,
-                      title: 'Sundays',
-                      text: '9:30 Fellowship · 10:30 Service',
+                      title: 'Duminica',
+                      text: '9:30 Socializare · 10:30 Program',
                       href: undefined,
                     },
                     {
                       icon: <HiOutlineLocationMarker />,
-                      title: 'Location',
+                      title: 'Locație',
                       text: 'Calea Moților nr. 258, Alba Iulia',
                       href: 'https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia',
                     },
@@ -305,8 +302,8 @@ export default function ConnectPage() {
                     <Tag
                       key={title}
                       href={href}
-                      target={title === 'Location' ? '_blank' : undefined}
-                      rel={title === 'Location' ? 'noopener noreferrer' : undefined}
+                      target={title === 'Locație' ? '_blank' : undefined}
+                      rel={title === 'Locație' ? 'noopener noreferrer' : undefined}
                       className="card contact-info-card"
                       style={{
                         display: 'flex',
@@ -339,10 +336,10 @@ export default function ConnectPage() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {[
-                    { icon: <FaFacebookF />, label: 'Facebook',  handle: 'Biserica Momentum',           href: 'https://facebook.com/bisericamomentum' },
-                    { icon: <FaInstagram />, label: 'Instagram', handle: '@biserica.momentum',           href: 'https://instagram.com/biserica.momentum' },
-                    { icon: <FaYoutube />,   label: 'YouTube',   handle: 'Momentum Church Channel',     href: 'https://youtube.com/@bisericamomentum' },
-                    { icon: <FaWhatsapp />,  label: 'WhatsApp',  handle: 'WhatsApp Info Channel',       href: 'https://whatsapp.com/channel/0029Vb6aUifIyPtZ3wzObi0l' },
+                    { icon: <FaFacebookF />, label: 'Facebook', handle: 'Biserica Momentum', href: 'https://facebook.com/bisericamomentum' },
+                    { icon: <FaInstagram />, label: 'Instagram', handle: '@biserica.momentum', href: 'https://instagram.com/biserica.momentum' },
+                    { icon: <FaYoutube />, label: 'YouTube', handle: 'Canalul Bisericii Momentum', href: 'https://youtube.com/@bisericamomentum' },
+                    { icon: <FaWhatsapp />, label: 'WhatsApp', handle: 'Canal Info WhatsApp', href: 'https://whatsapp.com/channel/0029Vb6aUifIyPtZ3wzObi0l' },
                   ].map(({ icon, label, handle, href }) => (
                     <a
                       key={label}
@@ -379,14 +376,14 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* CTA FINAL */}
       <section style={{ background:'#0a0f2c', padding:'64px 0' }}>
         <div className="wrap" style={{ textAlign:'center' }}>
           <p className="display" style={{ fontSize:'clamp(1.5rem,4vw,3rem)', color:'white', marginBottom:8 }}>
-            YOU ARE NOT ALONE.
+            NU EȘTI SINGUR.
           </p>
           <p style={{ color:'rgba(255,255,255,0.45)', fontWeight:300, marginBottom:32 }}>
-            The Momentum community is waiting for you.
+            Comunitatea Momentum te așteaptă.
           </p>
         </div>
       </section>

@@ -64,14 +64,9 @@ export default function PhotoCarousel() {
         const edge = Math.pow(t, 2.1)
 
         const scale = 1 + edge * 0.16
-const lift = edge * 8
-const shade = 1 - edge * 0.12
+        const lift = edge * 8
 
-card.style.transform = `
-  translateY(${lift}px)
-  scale(${scale})
-`
-        card.style.opacity = `${shade}`
+        card.style.transform = `translateY(${lift}px) scale(${scale})`
       })
 
       frame = requestAnimationFrame(animate)
@@ -150,17 +145,28 @@ card.style.transform = `
       </div>
 
       <style jsx>{`
+        /* Trecere de la secțiunea de deasupra (#080c1e) la cea de dedesubt (#f4f2ee).
+           Începe și se termină exact cu culorile lor, ca să nu existe margini vizibile.
+           Stopurile urmează o curbă ease-in-out (smoothstep) și sunt amestecate în OKLab,
+           ca trecerea să fie lină și să nu treacă printr-un gri murdar. */
         .photo-section {
           position: relative;
-          background:
-  radial-gradient(
-    circle at top center,
-    rgba(25,50,175,0.08),
-    transparent 42%
-  ),
-  #f4f2ee;
-          padding: 78px 0 112px;
           overflow: hidden;
+          background: linear-gradient(to bottom, #080c1e 12%, #f4f2ee 90%);
+          background: linear-gradient(
+            in oklab to bottom,
+            #080c1e 0%,
+            #080c1e 12%,
+            color-mix(in oklab, #080c1e, #f4f2ee 4.3%) 21.75%,
+            color-mix(in oklab, #080c1e, #f4f2ee 15.6%) 31.5%,
+            color-mix(in oklab, #080c1e, #f4f2ee 31.6%) 41.25%,
+            color-mix(in oklab, #080c1e, #f4f2ee 50%) 51%,
+            color-mix(in oklab, #080c1e, #f4f2ee 68.4%) 60.75%,
+            color-mix(in oklab, #080c1e, #f4f2ee 84.4%) 70.5%,
+            color-mix(in oklab, #080c1e, #f4f2ee 95.7%) 80.25%,
+            #f4f2ee 90%,
+            #f4f2ee 100%
+          );
         }
 
         .photo-viewport {
@@ -180,7 +186,8 @@ card.style.transform = `
           align-items: center;
           gap: 20px;
           width: max-content;
-          padding: 52px 0 68px;
+          /* sus și jos spațiu pentru gradient și pentru umbra pozelor */
+          padding: 56px 0 96px;
           will-change: transform;
         }
 
@@ -189,13 +196,11 @@ card.style.transform = `
           flex: 0 0 auto;
           width: clamp(190px, 16vw, 270px);
           aspect-ratio: 3 / 4;
-	  border-radius: 18px;
+          border-radius: 18px;
           overflow: hidden;
           background: #101010;
-          box-shadow:
-            0 30px 90px rgba(0, 0, 0, 0),
-            0 0 0 1px rgba(255,255,255,0.08);
-          will-change: transform, opacity;
+          box-shadow: 0 22px 44px -22px rgba(8, 12, 30, 0.5);
+          will-change: transform;
           transform-origin: center center;
         }
 
@@ -203,35 +208,11 @@ card.style.transform = `
           content: '';
           position: absolute;
           inset: 0;
-          background:
-            linear-gradient(
-              to top,
-              rgba(8,12,30,0.16),
-              transparent 54%
-            );
+          border-radius: inherit;
+          box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+          background: linear-gradient(to top, rgba(8, 12, 30, 0.16), transparent 54%);
           pointer-events: none;
         }
-
-.photo-section::after {
-  content: '';
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: 180px;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(244,242,238,0),
-      #080c1e 100%
-    );
-
-  pointer-events: none;
-}
 
         .photo-card :global(img) {
           pointer-events: none;
@@ -240,21 +221,9 @@ card.style.transform = `
         }
 
         @media (max-width: 768px) {
-          .photo-section {
-            padding: 48px 0 78px;
-	    position: relative;
-            background:
-              linear-gradient(
-                180deg,
-                #f4f2ee 0%,
-                #10174a 34%,
-                #080c1e 100%
-              );
-          }
-
           .photo-track {
             gap: 14px;
-            padding: 42px 0 54px;
+            padding: 40px 0 72px;
           }
 
           .photo-card {

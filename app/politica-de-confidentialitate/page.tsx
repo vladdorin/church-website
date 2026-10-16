@@ -1,3 +1,9 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Politica de confidențialitate · Momentum | Alba Iulia',
+}
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="bg-black text-white min-h-screen">

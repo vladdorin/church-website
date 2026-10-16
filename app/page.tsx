@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import WelcomeHero from '@/components/WelcomeHero'
 import GivingImpact from '@/components/GivingImpact'
+import { ValuesHome } from '@/components/ValuesSection'
+import EventsSection from '@/components/EventsSection'
 import PhotoCarousel from '@/components/PhotoCarousel'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
@@ -24,15 +26,18 @@ function RevealSection({ children, style, className }: {
 }
 
 /* ── Diagonal colour transition ────────────────────────────── */
-function Diagonal({ to, flip }: { to: string; flip?: boolean }) {
+// `from` = culoarea secțiunii de deasupra (altfel, în colțul tăiat s-ar vedea fundalul alb al paginii).
+// Sub diagonală fundalul e deja `to`, ca marginea de jos să nu lase o linie deschisă.
+function Diagonal({ from, to, flip }: { from: string; to: string; flip?: boolean }) {
   return (
-    <div style={{
-      height: 72, background: to, marginTop: -1,
-      clipPath: flip ? 'polygon(0 0, 100% 52px, 100% 100%, 0 100%)' : 'polygon(0 52px, 100% 0, 100% 100%, 0 100%)',
-    }} />
+    <div style={{ background: `linear-gradient(${from} 0 52px, ${to} 52px)`, marginTop: -1 }}>
+      <div style={{
+        height: 72, background: to,
+        clipPath: flip ? 'polygon(0 0, 100% 52px, 100% 100%, 0 100%)' : 'polygon(0 52px, 100% 0, 100% 100%, 0 100%)',
+      }} />
+    </div>
   )
 }
-
 /* ── Ghost number ───────────────────────────────────────────── */
 function GhostNum({ num, light }: { num: string; light?: boolean }) {
   return (
@@ -220,15 +225,19 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ═══════════ 01 — CINE SUNTEM ═══════════ */}
+      {/* ═══════════ 01 — VALORILE NOASTRE ═══════════ */}
+      <ValuesHome lang="ro" />
+
+<PhotoCarousel />
+
+      {/* ═══════════ 02 — CUNOAȘTE PASTORII ═══════════ */}
       <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="01" />
+        <GhostNum num="02" />
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
 
             {/* Left: text */}
             <div>
-              <p className="sr sr-up label">CINE SUNTEM?</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
@@ -240,7 +249,7 @@ export default function HomePage() {
               </p>
               {/* Buton desktop — ascuns pe mobile */}
               <div className="sr sr-up sr-d3 btn-desktop">
-                <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
+                <Link href="/cine-suntem" className="btn btn-dark">Cunoaște-ne</Link>
               </div>
             </div>
 
@@ -337,18 +346,17 @@ export default function HomePage() {
 </div>
             {/* Buton mobile — după poză, ascuns pe desktop */}
             <div className="btn-mobile-after section-01-button">
-              <Link href="/about" className="btn btn-dark">Cunoaște-ne</Link>
+              <Link href="/cine-suntem" className="btn btn-dark">Cunoaște-ne</Link>
             </div>
 
           </RevealSection>
         </div>
       </section>
 
-<PhotoCarousel />
 
 
 
-      {/* ═══════════ 02 — MISIUNEA NOASTRĂ ═══════════ */}
+      {/* ═══════════ 03 — MISIUNEA NOASTRĂ ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <div className="ghost-num" style={{
   	position: 'absolute', left: '-3%', top: '50%', transform: 'translateY(-50%)',
@@ -356,7 +364,7 @@ export default function HomePage() {
   	fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
   	color: 'rgba(255,255,255,0.05)',
   	pointerEvents: 'none', userSelect: 'none',
-	}}>02</div>
+	}}>03</div>
         <div className="wrap-wide">
           <RevealSection style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
             <p className="sr sr-up label-light">MISIUNEA NOASTRĂ</p>
@@ -373,7 +381,7 @@ export default function HomePage() {
         </div>
       </section>
 
-{/* ═══════════ 03 — VINO CU NOI ═══════════ */}
+{/* ═══════════ 04 — VINO CU NOI ═══════════ */}
       <section style={{ background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
 
         {/* Un singur container sticky — prinde header + carduri împreună */}
@@ -386,7 +394,7 @@ export default function HomePage() {
             fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
             color: 'rgba(8,12,30,0.05)',
             pointerEvents: 'none', userSelect: 'none',
-          }}>03</div>
+          }}>04</div>
 
           {/* Header content */}
           <div style={{ paddingBottom: 48, position: 'relative', zIndex: 1 }}>
@@ -410,7 +418,7 @@ export default function HomePage() {
                     Ești binevenit exact așa cum ești. Avem nevoie de talentul, energia și inima ta pentru a construi această comunitate.
                   </p>
                   <div className="sr sr-up sr-d2 btn-desktop">
-                    <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+                    <Link href="/alatura-te" className="btn btn-dark">Alătură-te echipei</Link>
                   </div>
                 </div>
 
@@ -458,7 +466,7 @@ export default function HomePage() {
     <StackedCards />
 
     <div className="join-bottom-cta">
-      <Link href="/join" className="btn btn-dark">Alătură-te echipei</Link>
+      <Link href="/alatura-te" className="btn btn-dark">Alătură-te echipei</Link>
     </div>
   </div>
 </div>
@@ -467,9 +475,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════ 04 — RUGĂCIUNE ═══════════ */}
+      {/* ═══════════ 05 — RUGĂCIUNE ═══════════ */}
 <section className="page-section prayer-section-home" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-  <GhostNum num="04" />
+  <GhostNum num="05" />
   <div className="wrap-wide">
     <RevealSection
       className="prayer-home-grid"
@@ -515,7 +523,7 @@ export default function HomePage() {
         </p>
 
         <div className="sr sr-up sr-d3 prayer-home-button" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Link href="/pray" className="btn btn-dark">Stai alături</Link>
+          <Link href="/rugaciune" className="btn btn-dark">Stai alături</Link>
         </div>
       </div>
 
@@ -523,9 +531,9 @@ export default function HomePage() {
   </div>
 </section>
 
-      {/* ═══════════ 05 — DONAȚII ═══════════ */}
+      {/* ═══════════ 06 — DONAȚII ═══════════ */}
       <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="05" light />
+        <GhostNum num="06" light />
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
@@ -547,7 +555,11 @@ export default function HomePage() {
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#080c1e" />
+      <Diagonal from="#0b1628" to="#f4f2ee" />
+
+      {/* ═══════════ 07 — EVENIMENTE (din Google Calendar) ═══════════ */}
+      <EventsSection lang="ro" num="07" />
+      <Diagonal from="#f4f2ee" to="#080c1e" />
 
       {/* ═══════════ CTA FINAL ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '112px 0', position: 'relative', overflow: 'hidden' }}>
@@ -567,7 +579,7 @@ export default function HomePage() {
               Fie că vrei să ne cunoști, să te implici, să susții financiar, există un loc pentru tine în Momentum.
             </p>
             <div className="sr sr-up sr-d3">
-              <Link href="/connect" className="btn btn-navy">Contactează-ne</Link>
+              <Link href="/contact" className="btn btn-navy">Contactează-ne</Link>
             </div>
           </RevealSection>
         </div>

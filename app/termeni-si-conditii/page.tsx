@@ -1,3 +1,9 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Termeni și condiții · Momentum | Alba Iulia',
+}
+
 export default function TermsPage() {
   return (
     <main className="bg-black text-white min-h-screen">

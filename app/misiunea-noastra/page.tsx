@@ -202,7 +202,7 @@ export default function MisiuneaNoastraPage() {
             </p>
 
             <div>
-              <Link href="/join" className="btn btn-white">Alătură-te echipei</Link>
+              <Link href="/alatura-te" className="btn btn-white">Alătură-te echipei</Link>
               <Link href="/give" className="btn btn-outline-white">Susține financiar</Link>
             </div>
           </div>

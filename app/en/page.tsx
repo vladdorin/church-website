@@ -4,6 +4,8 @@ import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 import WelcomeHero from '@/components/WelcomeHero'
 import GivingImpact from '@/components/GivingImpact'
+import { ValuesHome } from '@/components/ValuesSection'
+import EventsSection from '@/components/EventsSection'
 import PhotoCarousel from '@/components/PhotoCarousel'
 
 /* ── Scroll reveal wrapper ─────────────────────────────────── */
@@ -24,15 +26,18 @@ function RevealSection({ children, style, className }: {
 }
 
 /* ── Diagonal colour transition ────────────────────────────── */
-function Diagonal({ to, flip }: { to: string; flip?: boolean }) {
+// `from` = culoarea secțiunii de deasupra (altfel, în colțul tăiat s-ar vedea fundalul alb al paginii).
+// Sub diagonală fundalul e deja `to`, ca marginea de jos să nu lase o linie deschisă.
+function Diagonal({ from, to, flip }: { from: string; to: string; flip?: boolean }) {
   return (
-    <div style={{
-      height: 72, background: to, marginTop: -1,
-      clipPath: flip ? 'polygon(0 0, 100% 52px, 100% 100%, 0 100%)' : 'polygon(0 52px, 100% 0, 100% 100%, 0 100%)',
-    }} />
+    <div style={{ background: `linear-gradient(${from} 0 52px, ${to} 52px)`, marginTop: -1 }}>
+      <div style={{
+        height: 72, background: to,
+        clipPath: flip ? 'polygon(0 0, 100% 52px, 100% 100%, 0 100%)' : 'polygon(0 52px, 100% 0, 100% 100%, 0 100%)',
+      }} />
+    </div>
   )
 }
-
 /* ── Ghost number ───────────────────────────────────────────── */
 function GhostNum({ num, light }: { num: string; light?: boolean }) {
   return (
@@ -224,15 +229,19 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ═══════════ 01 — WHO WE ARE ═══════════ */}
+      {/* ═══════════ 01 — OUR VALUES ═══════════ */}
+      <ValuesHome lang="en" />
+
+<PhotoCarousel />
+
+      {/* ═══════════ 02 — MEET OUR PASTORS ═══════════ */}
       <section className="page-section" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="01" />
+        <GhostNum num="02" />
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
 
             {/* Left: text */}
             <div>
-              <p className="sr sr-up label">WHO ARE WE?</p>
               <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: '#080c1e' }}>
                 JOHN &amp;<br />VOICHI<br />DURA.
               </h2>
@@ -348,11 +357,10 @@ export default function HomePage() {
         </div>
       </section>
 
-<PhotoCarousel />
 
 
 
-      {/* ═══════════ 02 — OUR MISSION ═══════════ */}
+      {/* ═══════════ 03 — OUR MISSION ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
         <div className="ghost-num" style={{
   	position: 'absolute', left: '-3%', top: '50%', transform: 'translateY(-50%)',
@@ -360,7 +368,7 @@ export default function HomePage() {
   	fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
   	color: 'rgba(255,255,255,0.05)',
   	pointerEvents: 'none', userSelect: 'none',
-	}}>02</div>
+	}}>03</div>
         <div className="wrap-wide">
           <RevealSection style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
             <p className="sr sr-up label-light">OUR MISSION</p>
@@ -371,13 +379,13 @@ export default function HomePage() {
               We exist to build a life-giving community in Alba Iulia, a place where people encounter God, grow in authentic community, and live out the purpose He has given them.
             </p>
             <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <LocalizedLink href="/misiunea-noastra" className="btn btn-white">Discover the Mission</LocalizedLink>
+              <LocalizedLink href="/our-mission" className="btn btn-white">Discover the Mission</LocalizedLink>
             </div>
           </RevealSection>
         </div>
       </section>
 
-{/* ═══════════ 03 — JOIN US ═══════════ */}
+{/* ═══════════ 04 — JOIN US ═══════════ */}
       <section style={{ background: '#ffffff', position: 'relative', overflow: 'hidden' }}>
 
         {/* Single sticky container — locks header + cards together */}
@@ -390,7 +398,7 @@ export default function HomePage() {
             fontSize: 'clamp(12rem,30vw,28rem)', lineHeight: 1, letterSpacing: '-0.05em',
             color: 'rgba(8,12,30,0.05)',
             pointerEvents: 'none', userSelect: 'none',
-          }}>03</div>
+          }}>04</div>
 
           {/* Header content */}
           <div style={{ paddingBottom: 48, position: 'relative', zIndex: 1 }}>
@@ -471,9 +479,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════ 04 — PRAYER ═══════════ */}
+      {/* ═══════════ 05 — PRAYER ═══════════ */}
 <section className="page-section prayer-section-home" style={{ background: '#f4f2ee', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-  <GhostNum num="04" />
+  <GhostNum num="05" />
   <div className="wrap-wide">
     <RevealSection
       className="prayer-home-grid"
@@ -527,9 +535,9 @@ export default function HomePage() {
   </div>
 </section>
 
-      {/* ═══════════ 05 — DONATIONS ═══════════ */}
+      {/* ═══════════ 06 — DONATIONS ═══════════ */}
       <section className="page-section" style={{ background: '#0b1628', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-        <GhostNum num="05" light />
+        <GhostNum num="06" light />
         <div className="wrap-wide">
           <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
@@ -551,7 +559,11 @@ export default function HomePage() {
           </RevealSection>
         </div>
       </section>
-      <Diagonal to="#080c1e" />
+      <Diagonal from="#0b1628" to="#f4f2ee" />
+
+      {/* ═══════════ 07 — EVENTS (din Google Calendar) ═══════════ */}
+      <EventsSection lang="en" num="07" />
+      <Diagonal from="#f4f2ee" to="#080c1e" />
 
       {/* ═══════════ FINAL CTA ═══════════ */}
       <section className="page-section" style={{ background: '#080c1e', padding: '112px 0', position: 'relative', overflow: 'hidden' }}>

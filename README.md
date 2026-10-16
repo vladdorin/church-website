@@ -10,21 +10,26 @@ Site-ul oficial al Bisericii Momentum din Alba Iulia. Construit cu Next.js 14 + 
 
 ## Pagini
 
-Site-ul este bilingv. Fiecare pagină are o variantă în română și una în engleză (sub `/en`).
+Site-ul este bilingv. Paginile în română au adrese în română, cele în engleză au adrese în engleză. Doar pagina principală și donațiile au prefixul `/en` în engleză, pentru că adresa e aceeași în ambele limbi.
 
 | Pagină | RO | EN |
 |--------|----|----|
 | Acasă | `/` | `/en` |
-| Cine suntem | `/about` | `/en/about` |
-| Misiunea noastră | `/misiunea-noastra` | `/en/misiunea-noastra` |
-| De ce Alba Iulia | `/why-this-city` | `/en/why-this-city` |
-| Rugăciune | `/pray` | `/en/pray` |
-| Alătură-te (card de conectare) | `/join` | `/en/join` |
+| Cine suntem | `/cine-suntem` | `/about` |
+| Misiunea noastră | `/misiunea-noastra` | `/our-mission` |
+| De ce Alba Iulia | `/de-ce-alba-iulia` | `/why-this-city` |
+| Rugăciune | `/rugaciune` | `/pray` |
+| Alătură-te (card de conectare) | `/alatura-te` | `/join` |
 | Donează (Stripe + transfer bancar) | `/give` | `/en/give` |
-| Contact | `/connect` | `/en/connect` |
-| Politici (confidențialitate, termeni, cookies) | `/politica-de-confidentialitate`, `/termeni-si-conditii`, `/politica-cookies` | `/en/privacy-policy`, `/en/terms-and-conditions`, `/en/cookie-policy` |
+| Contact | `/contact` | `/connect` |
+| Politici | `/politica-de-confidentialitate`, `/termeni-si-conditii`, `/politica-cookies` | `/privacy-policy`, `/terms-and-conditions`, `/cookie-policy` |
 
-> **Important:** când modifici un text, modifică-l în ambele variante (de ex. `app/give/page.tsx` **și** `app/en/give/page.tsx`). Componentele din `components/` sunt comune și aleg singure limba după URL.
+> **`/give` nu se schimbă niciodată** — e în QR code-ul pentru donații.
+
+- Toate adresele sunt definite într-un singur loc: `lib/routes.ts`. De acolo le iau meniul, footer-ul, butonul RO/EN și detectarea limbii.
+- Dacă redenumești o pagină: mută folderul din `app/`, actualizează `lib/routes.ts` și adaugă un redirect de la adresa veche în `next.config.mjs`.
+- Când modifici un text, modifică-l în ambele variante (de ex. `app/contact/page.tsx` **și** `app/connect/page.tsx`).
+- Fiecare pagină are titlul din tab-ul browserului setat prin `metadata` (în `page.tsx` sau, pentru paginile cu `'use client'`, într-un `layout.tsx` alături).
 
 ---
 
@@ -35,7 +40,8 @@ Site-ul este bilingv. Fiecare pagină are o variantă în română și una în e
 | Hero-ul de pe prima pagină (Bine ai venit, program, adresă) | `components/WelcomeHero.tsx` |
 | Footer (program, adresă, email, social media) | `components/Footer.tsx` |
 | Meniul de navigare | `components/Navigation.tsx` |
-| Program și adresă pe pagina de contact | `app/connect/page.tsx`, `app/en/connect/page.tsx` |
+| Program și adresă pe pagina de contact | `app/contact/page.tsx`, `app/connect/page.tsx` |
+| Video-ul de pe Cine suntem | `app/cine-suntem/page.tsx`, `app/about/page.tsx` + `components/YouTubeVideo.tsx` |
 | Secțiunea de donații de pe prima pagină | `app/page.tsx`, `app/en/page.tsx` + `components/GivingImpact.tsx` |
 | Conturile bancare (IBAN) | `app/give/page.tsx`, `app/en/give/page.tsx` |
 | Stiluri globale (inclusiv mobil) | `app/globals.css` |
@@ -78,6 +84,10 @@ Copiază `.env.local.example` în `.env.local` pentru rulare locală. În produc
 | `EMAIL_TO` | Adresa care primește formularele |
 | `GOOGLE_SCRIPT_URL` | Salvarea formularelor în Google Sheets |
 | `GOOGLE_SCRIPT_DONATIONS_URL` | Salvarea donațiilor în Google Sheets |
+| `GOOGLE_CALENDAR_ID` | ID-ul Google Calendar-ului bisericii (calendarul trebuie să fie public) |
+| `GOOGLE_CALENDAR_API_KEY` | Cheia API Google (Calendar API) pentru secțiunea „Ce urmează” de pe prima pagină |
+
+Evenimentele din secțiunea „Ce urmează” vin automat din Google Calendar (`app/api/events/route.ts`). Ce adaugi în calendar apare pe site în maxim 5 minute. Dacă variabilele lipsesc, secțiunea nu apare.
 
 ---
 
@@ -99,8 +109,9 @@ Secretele necesare în GitHub Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOU
 church-website/
 ├── app/
 │   ├── page.tsx               ← Acasă (RO)
-│   ├── about/ give/ join/ …   ← Celelalte pagini (RO)
-│   ├── en/                    ← Toate paginile în engleză
+│   ├── cine-suntem/ contact/ … ← Paginile în română
+│   ├── about/ connect/ …      ← Paginile în engleză
+│   ├── en/                    ← Acasă (/en) și Donează (/en/give) în engleză
 │   ├── api/                   ← Backend: checkout Stripe, formulare, log donații
 │   ├── layout.tsx             ← Layout global (nav + footer + cookie banner)
 │   └── globals.css            ← Stiluri globale

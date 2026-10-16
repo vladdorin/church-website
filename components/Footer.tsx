@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { ROUTES, isEnglishPath, routeFor } from '@/lib/routes'
 
 const FacebookIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -33,7 +34,7 @@ const WhatsAppIcon = () => (
 
 export default function Footer() {
   const pathname = usePathname()
-  const isEnglish = pathname.startsWith('/en')
+  const isEnglish = isEnglishPath(pathname)
   const socials: [string, string, React.FC][] = [
   ['https://facebook.com/bisericamomentum', 'Facebook', FacebookIcon],
   ['https://instagram.com/biserica.momentum', 'Instagram', InstagramIcon],
@@ -94,7 +95,7 @@ export default function Footer() {
     }}
   >
     <Link
-      href={isEnglish ? '/en/privacy-policy' : '/politica-de-confidentialitate'}
+      href={routeFor('privacy', isEnglish)}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
@@ -105,7 +106,7 @@ export default function Footer() {
     </Link>
 
     <Link
-      href={isEnglish ? '/en/terms-and-conditions' : '/termeni-si-conditii'}
+      href={routeFor('terms', isEnglish)}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
@@ -116,7 +117,7 @@ export default function Footer() {
     </Link>
 
     <Link
-      href={isEnglish ? '/en/cookie-policy' : '/politica-cookies'}
+      href={routeFor('cookies', isEnglish)}
       style={{
         color:'rgba(255,255,255,0.55)',
         fontSize:14,
@@ -135,20 +136,22 @@ export default function Footer() {
               {(
   isEnglish
     ? [
-        ['/en/about','Who we are?'],
-        ['/en/misiunea-noastra','Our mission'],
-        ['/en/pray','Prayer'],
-        ['/en/join','Join us'],
-        ['/en/give','Give'],
-        ['/en/connect','Contact']
+        [ROUTES.new.en,"I'm new"],
+        [ROUTES.about.en,'Who we are?'],
+        [ROUTES.mission.en,'Our mission'],
+        [ROUTES.pray.en,'Prayer'],
+        [ROUTES.join.en,'Join us'],
+        [ROUTES.give.en,'Give'],
+        [ROUTES.contact.en,'Contact']
       ]
     : [
-        ['/about','Cine suntem?'],
-        ['/misiunea-noastra','Misiunea noastră'],
-        ['/pray','Rugăciune'],
-        ['/join','Alătură-te'],
-        ['/give','Donează'],
-        ['/connect','Contact']
+        [ROUTES.new.ro,'Sunt nou'],
+        [ROUTES.about.ro,'Cine suntem?'],
+        [ROUTES.mission.ro,'Misiunea noastră'],
+        [ROUTES.pray.ro,'Rugăciune'],
+        [ROUTES.join.ro,'Alătură-te'],
+        [ROUTES.give.ro,'Donează'],
+        [ROUTES.contact.ro,'Contact']
       ]
 ).map(([href, label]) => (
                 <Link key={href} href={href} style={{ color:'rgba(255,255,255,0.55)', fontSize:14, textDecoration:'none' }}>

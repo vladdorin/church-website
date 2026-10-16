@@ -1,23 +1,26 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { ROUTES, isEnglishPath, switchLanguagePath } from '@/lib/routes'
 
 const roLinks = [
-  { href: '/about',            label: 'Cine suntem?' },
-  { href: '/misiunea-noastra', label: 'Misiunea noastră' },
-  { href: '/pray',             label: 'Rugăciune' },
-  { href: '/join',             label: 'Alătură-te' },
-  { href: '/connect',          label: 'Contact' },
+  { href: ROUTES.new.ro,     label: 'Sunt nou' },
+  { href: ROUTES.about.ro,   label: 'Cine suntem?' },
+  { href: ROUTES.mission.ro, label: 'Misiunea noastră' },
+  { href: ROUTES.pray.ro,    label: 'Rugăciune' },
+  { href: ROUTES.join.ro,    label: 'Alătură-te' },
+  { href: ROUTES.contact.ro, label: 'Contact' },
 ]
 
 const enLinks = [
-  { href: '/en/about',            label: 'Who we are?' },
-  { href: '/en/misiunea-noastra', label: 'Our mission' },
-  { href: '/en/pray',             label: 'Prayer' },
-  { href: '/en/join',             label: 'Join us' },
-  { href: '/en/connect',          label: 'Contact' },
+  { href: ROUTES.new.en,     label: "I'm new" },
+  { href: ROUTES.about.en,   label: 'Who we are?' },
+  { href: ROUTES.mission.en, label: 'Our mission' },
+  { href: ROUTES.pray.en,    label: 'Prayer' },
+  { href: ROUTES.join.en,    label: 'Join us' },
+  { href: ROUTES.contact.en, label: 'Contact' },
 ]
 
 export default function Navigation() {
@@ -26,28 +29,38 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const pathname              = usePathname()
 
-  const isEnglish = pathname.startsWith('/en')
+  const isEnglish = isEnglishPath(pathname)
 
   const links = isEnglish ? enLinks : roLinks
 
-  const homeHref = isEnglish ? '/en' : '/'
+  const homeHref = isEnglish ? ROUTES.home.en : ROUTES.home.ro
 
-  const giveHref = isEnglish ? '/en/give' : '/give'
+  const giveHref = isEnglish ? ROUTES.give.en : ROUTES.give.ro
 
   const donateLabel = isEnglish ? 'Give' : 'Donează'
 
-  const switchHref = isEnglish
-    ? pathname.replace('/en', '') || '/'
-    : `/en${pathname}`
+  const switchHref = switchLanguagePath(pathname)
 
   const switchLabel = isEnglish ? 'RO' : 'EN'
 
+  // Meniul trece pe varianta de mobil (hamburger) când linkurile nu mai încap pe un rând.
+  // Lățimea necesară se măsoară pe o copie invizibilă a meniului, deci rămâne corectă
+  // și dacă se schimbă textele sau limba.
+  const logoRef = useRef<HTMLAnchorElement>(null)
+  const measureRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    const check = () => setMobile(window.innerWidth < 900)
+    const check = () => {
+      const logo = logoRef.current, measure = measureRef.current
+      if (!logo || !measure) return
+      const needed = logo.offsetWidth + measure.offsetWidth + 64 /* padding */ + 40 /* spațiu minim */
+      setMobile(window.innerWidth < Math.max(needed, 900))
+    }
     check()
+    document.fonts?.ready.then(check)
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
-  }, [])
+  }, [isEnglish])
 
   useEffect(() => { setOpen(false) }, [pathname])
 
@@ -86,6 +99,7 @@ export default function Navigation() {
 
           {/* ── LOGO ── */}
           <Link
+            ref={logoRef}
             href={homeHref}
             style={{display:'flex', alignItems:'center', flexShrink:0, marginLeft: -15}}
           >
@@ -98,6 +112,17 @@ export default function Navigation() {
               priority
             />
           </Link>
+
+          {/* Copie invizibilă a meniului desktop, doar pentru măsurarea lățimii */}
+          <div
+            ref={measureRef}
+            aria-hidden
+            style={{ position:'absolute', left:0, top:0, height:0, overflow:'hidden', visibility:'hidden', pointerEvents:'none', display:'flex', alignItems:'center', gap:4 }}
+          >
+            {links.map(({ href, label }) => <span key={href} className="nav-link">{label}</span>)}
+            <span className="nav-link">{switchLabel}</span>
+            <span className="btn-donate"><span>{donateLabel}</span><span className="donate-arrow">→</span></span>
+          </div>
 
           {/* ── DESKTOP NAV ── */}
           {!mobile && (
