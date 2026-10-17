@@ -42,7 +42,8 @@ a, a *, button, button *, .btn, .btn *,
 [role="button"], [role="button"] *,
 select, input, textarea, label,
 nav a, nav a * {
-  cursor: url('/cursor-pointer.png') 16 16, pointer !important;
+  /* mânuță albă cu contur negru, ca să se vadă pe orice fundal; 12 2 = vârful degetului */
+  cursor: url('/cursor-hand.png') 12 2, pointer !important;
 }
 
 body {
