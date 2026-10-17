@@ -2,7 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { useDrivePhotos } from '@/lib/useDrivePhotos'
 
+// Pozele vin din folderul de Google Drive (app/api/photos/route.ts).
+// Lista de mai jos e rezerva: se folosește dacă Drive nu e configurat sau nu răspunde.
 const IMAGES = [
   '/carousel-1.jpg',
   '/carousel-2.jpg',
@@ -19,6 +22,7 @@ const IMAGES = [
 ]
 
 export default function PhotoCarousel() {
+  const photos = useDrivePhotos('carousel', IMAGES)
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
 
@@ -124,7 +128,9 @@ export default function PhotoCarousel() {
     }
   }, [])
 
-  const loopImages = [...IMAGES, ...IMAGES]
+  // Cât se încarcă lista, cardurile apar goale (fundal închis), ca să nu sară pagina.
+  const list: (string | null)[] = photos ?? IMAGES.map(() => null)
+  const loopImages = [...list, ...list]
 
   return (
     <section className="photo-section">
@@ -132,13 +138,16 @@ export default function PhotoCarousel() {
         <div ref={trackRef} className="photo-track">
           {loopImages.map((src, i) => (
             <div key={i} className="photo-card">
-              <Image
-                src={src}
-                alt="Momentum"
-                fill
-                draggable={false}
-                style={{ objectFit: 'cover' }}
-              />
+              {src && (
+                <Image
+                  src={src}
+                  alt="Momentum"
+                  fill
+                  draggable={false}
+                  unoptimized={src.startsWith('/api/')}   // pozele din Drive vin deja micșorate
+                  style={{ objectFit: 'cover' }}
+                />
+              )}
             </div>
           ))}
         </div>

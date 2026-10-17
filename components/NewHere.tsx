@@ -1,11 +1,36 @@
 import Link from 'next/link'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
-import Accordion from '@/components/Accordion'
+import { PiBaseballCap, PiCoffee, PiCompass, PiShieldCheck, PiSparkle, PiStairs, PiTShirt } from 'react-icons/pi'
+import FaqExplorer from '@/components/FaqExplorer'
 import StackGallery from '@/components/StackGallery'
 import { routeFor } from '@/lib/routes'
 
 const MAPS_HREF = 'https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia'
 const WAZE_HREF = 'https://waze.com/ul?q=Biserica%20Momentum%20Alba%20Iulia&navigate=yes'
+
+// Desene decorative pentru cardurile grupelor de copii.
+function StarsArt() {
+  const star = 'M12 0l3.1 8.4L24 9.2l-6.9 5.8L19.4 24 12 19.1 4.6 24l2.3-9L0 9.2l8.9-.8z'
+  return (
+    <svg className="nh-group-art" viewBox="0 0 200 160" aria-hidden>
+      <path d={star} transform="translate(120 20) scale(2.6) rotate(12)" fill="#fff" opacity=".55" />
+      <path d={star} transform="translate(40 70) scale(1.4) rotate(-14)" fill="#fff" opacity=".45" />
+      <path d={star} transform="translate(150 105) scale(1.1)" fill="#ff7a59" opacity=".7" />
+      <circle cx="30" cy="30" r="6" fill="#fff" opacity=".5" />
+      <circle cx="100" cy="135" r="4" fill="#fff" opacity=".6" />
+    </svg>
+  )
+}
+
+function TrailArt() {
+  return (
+    <svg className="nh-group-art" viewBox="0 0 200 160" aria-hidden>
+      <path d="M10 140 C 50 100, 40 60, 90 70 S 150 40, 160 20" fill="none" stroke="#fff" strokeWidth="4" strokeDasharray="2 12" strokeLinecap="round" opacity=".55" />
+      <path d="M160 6c-9 0-16 7-16 16 0 12 16 28 16 28s16-16 16-28c0-9-7-16-16-16zm0 22a6 6 0 110-12 6 6 0 010 12z" fill="#ffd166" />
+      <circle cx="10" cy="140" r="7" fill="#fff" opacity=".7" />
+    </svg>
+  )
+}
 
 /* Pagina „Sunt nou” / „I'm new” — aceeași structură în ambele limbi. */
 export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
@@ -22,7 +47,7 @@ export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
         </> },
         { title: 'Where do I park?', content: <p>We have a spacious courtyard with room for everyone. Volunteers will be waiting at the courtyard entrance to show you where to park.</p> },
         { title: 'What should I wear?', content: <p>We don’t have a dress code or rules about clothing. We do value modesty: come in the style that reflects who you are and honours God.</p> },
-        { title: 'Is the building accessible?', content: <p>The main hall where the Sunday service takes place is at ground level, with no stairs, so it’s easy to get to and enter. Momentum Café is upstairs and, unfortunately, can only be reached by stairs.</p> },
+        { title: 'Is the building accessible for people with limited mobility?', content: <p>Yes, the main hall where the Sunday service takes place is at ground level, with no stairs, so it’s easy to get in with a wheelchair or a stroller. Momentum Café is upstairs and, unfortunately, can only be reached by stairs.</p> },
         { title: 'Do I need to know anyone or anything beforehand?', content: <p>Not at all. Everyone is welcome, wherever you come from and whatever you believe. You can simply come, listen and see what it’s like.</p> },
         { title: 'What about my kids?', content: <p>We have two groups: Luminițele (ages 4–8) and Exploratorii (ages 9–14). See the <a href={`#${id.kids}`}>parents section</a> for how check-in works.</p> },
         { title: 'How can I get involved?', content: <p>After your first visit, fill in the connect card on the <Link href={routeFor('join', true)}>Join us</Link> page and we’ll get in touch.</p> },
@@ -34,7 +59,7 @@ export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
         </> },
         { title: 'Unde parchez?', content: <p>Avem o curte spațioasă, în care încape toată lumea. La intrarea în curte te așteaptă voluntari care te îndrumă unde să parchezi.</p> },
         { title: 'Cum mă îmbrac?', content: <p>Nu avem un cod vestimentar și nu punem restricții legate de haine. Apreciem decența: vino în stilul care te reprezintă și prin care Îl onorezi pe Dumnezeu.</p> },
-        { title: 'Clădirea este accesibilă?', content: <p>Sala mare, unde are loc programul de duminică, este la nivelul solului, fără scări, deci poți ajunge și intra ușor. Momentum Café este la etaj și, din păcate, se poate ajunge acolo doar pe scări.</p> },
+        { title: 'Clădirea este accesibilă pentru persoanele cu mobilitate redusă?', content: <p>Da, sala mare, unde are loc programul de duminică, este la nivelul solului, fără scări, așa că se poate intra ușor și cu un scaun cu rotile sau cu un cărucior. Momentum Café este la etaj și, din păcate, se poate ajunge acolo doar pe scări.</p> },
         { title: 'Trebuie să cunosc pe cineva sau să știu ceva dinainte?', content: <p>Deloc. Oricine e binevenit, indiferent de unde vii sau ce crezi. Poți doar să vii, să asculți și să vezi cum e.</p> },
         { title: 'Ce fac cu copiii?', content: <p>Avem două grupe: Luminițele (4–8 ani) și Exploratorii (9–14 ani). Vezi <a href={`#${id.kids}`}>secțiunea pentru părinți</a> ca să afli cum funcționează check-in-ul.</p> },
         { title: 'Cum mă pot implica?', content: <p>După prima vizită, completează cardul de conectare de pe pagina <Link href={routeFor('join', false)}>Alătură-te</Link> și te contactăm noi.</p> },
@@ -49,7 +74,7 @@ export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
     : [
         { t: 'Vino cu câteva minute mai devreme', d: 'La prima vizită te ajutăm să îți înregistrezi copilul. Durează doar un minut.' },
         { t: 'Faci check-in-ul', d: 'Îți înregistrezi copilul la stația de check-in și primești o etichetă cu numele lui și un cod de siguranță.' },
-        { t: 'Îl iei pe baza codului', d: 'La finalul programului îți iei copilul pe baza codului de pe etichetă. Doar tu îl poți prelua.' },
+        { t: 'Preiei copilul cu codul primit', d: 'La finalul programului arăți codul de pe etichetă și îți preiei copilul. Doar tu îl poți lua acasă.' },
       ]
 
   return (
@@ -126,30 +151,46 @@ export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
           </div>
 
           <div className="nh-groups">
-            <article className="nh-group nh-group--blue">
-              <span className="nh-group-age">{en ? 'Ages 4–8' : '4–8 ani'}</span>
+            <article className="nh-group nh-group--sun">
+              <div className="nh-group-top">
+                <span className="nh-group-age">{en ? 'Ages 4–8' : '4–8 ani'}</span>
+                <span className="nh-group-icon"><PiSparkle aria-hidden /></span>
+              </div>
               <h3 className="nh-group-name">Luminițele</h3>
               <p>{en
                 ? 'For the little ones: Bible stories, games and songs, in a way they understand.'
                 : 'Pentru cei mici: povești biblice, jocuri și cântări, pe înțelesul lor.'}</p>
+              <ul className="nh-group-tags">
+                {(en ? ['Bible stories', 'Games', 'Songs'] : ['Povești biblice', 'Jocuri', 'Cântări']).map(x => <li key={x}>{x}</li>)}
+              </ul>
+              <StarsArt />
             </article>
-            <article className="nh-group nh-group--navy">
-              <span className="nh-group-age">{en ? 'Ages 9–14' : '9–14 ani'}</span>
+            <article className="nh-group nh-group--explore">
+              <div className="nh-group-top">
+                <span className="nh-group-age">{en ? 'Ages 9–14' : '9–14 ani'}</span>
+                <span className="nh-group-icon"><PiCompass aria-hidden /></span>
+              </div>
               <h3 className="nh-group-name">Exploratorii</h3>
               <p>{en
                 ? 'For older kids: discovering the Bible, asking questions and growing in faith together.'
                 : 'Pentru copiii mai mari: descoperă Biblia, pun întrebări și cresc împreună în credință.'}</p>
+              <ul className="nh-group-tags">
+                {(en ? ['The Bible', 'Big questions', 'Friends'] : ['Biblia', 'Întrebări', 'Prieteni']).map(x => <li key={x}>{x}</li>)}
+              </ul>
+              <TrailArt />
             </article>
           </div>
 
           <div className="nh-checkin">
             <div className="nh-checkin-head">
+              <span className="nh-checkin-badge"><PiShieldCheck aria-hidden /></span>
               <h3>{en ? 'Quick, safe check-in' : 'Check-in rapid și sigur'}</h3>
+              <p>{en ? 'Three simple steps, so you can enjoy the service with peace of mind.' : 'Trei pași simpli, ca să te bucuri liniștit de program.'}</p>
             </div>
             <ol className="nh-steps">
               {steps.map((s, i) => (
                 <li key={s.t}>
-                  <span className="nh-step-num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="nh-step-num">{i + 1}</span>
                   <h4>{s.t}</h4>
                   <p>{s.d}</p>
                 </li>
@@ -161,42 +202,68 @@ export default function NewHere({ lang }: { lang: 'ro' | 'en' }) {
 
       {/* MOMENTUM CAFÉ */}
       <section id={id.cafe} className="nh-section nh-cafe">
-        <div className="nh-cafe-ghost" aria-hidden>CAFÉ</div>
         <div className="wrap-wide nh-cafe-grid">
           <div>
-            <p className="nh-kicker nh-kicker--light">{en ? 'Upstairs' : 'La etaj'}</p>
-            <h2 className="nh-title nh-title--light">MOMENTUM<br /><span>CAFÉ.</span></h2>
-          </div>
-          <div>
-            <p className="nh-lead nh-lead--light">
+            <p className="nh-kicker nh-kicker--cafe"><PiStairs aria-hidden /> {en ? 'Upstairs' : 'La etaj'}</p>
+            <h2 className="nh-title nh-cafe-title">MOMENTUM<br /><span>CAFÉ.</span></h2>
+            <p className="nh-lead nh-cafe-lead">
               {en
                 ? 'Head upstairs to Momentum Café. From 9:30 we meet here for coffee, a snack and a good conversation before the service. It’s the best place to meet new people.'
                 : 'Urcă la etaj, în Momentum Café. De la 9:30 ne întâlnim aici la o cafea, o gustare și o discuție bună, înainte de program. E cel mai bun loc să cunoști oameni noi.'}
             </p>
-            <p className="nh-cafe-time">
+            <div className="nh-cafe-hours">
+              <span>{en ? 'Open on Sundays' : 'Deschis duminica'}</span>
               <strong>9:30–10:15</strong>
-              {en ? 'Then we head down to the main hall for the 10:30 service.' : 'Apoi coborâm în sala mare, unde programul începe la 10:30.'}
-            </p>
-            <p className="nh-cafe-merch">
-              <strong>Momentum merch</strong>
-              {en
-                ? 'In the café you’ll also find our Momentum merch: T-shirts, caps and mugs you can take home. Ask the café team.'
-                : 'În cafenea găsești și merch Momentum: tricouri, șepci și căni pe care le poți lua acasă. Întreabă echipa de la cafenea.'}
-            </p>
+              <small>{en ? 'Then we head down to the main hall for the 10:30 service.' : 'Apoi coborâm în sala mare, unde programul începe la 10:30.'}</small>
+            </div>
+          </div>
+
+          {/* „Meniul” e decorativ: spune ce găsești în cafenea, fără prețuri */}
+          <div className="nh-cafe-menu">
+            <div className="nh-cafe-menu-head">
+              <PiCoffee aria-hidden />
+              <span>{en ? 'Sunday menu' : 'Meniul de duminică'}</span>
+            </div>
+            <ul>
+              {(en
+                ? [['Coffee', 'fresh'], ['A snack', 'something good'], ['Conversation', 'plenty'], ['New people', 'always welcome']]
+                : [['Cafea', 'proaspătă'], ['Gustare', 'ceva bun'], ['Socializare', 'din belșug'], ['Oameni noi', 'mereu bineveniți']]
+              ).map(([item, note]) => (
+                <li key={item}><span>{item}</span><i aria-hidden /><em>{note}</em></li>
+              ))}
+            </ul>
+            <p className="nh-cafe-menu-foot">{en ? 'Served with love · from 9:30' : 'Servit cu drag · de la 9:30'}</p>
+          </div>
+        </div>
+
+        <div className="wrap-wide">
+          <div className="nh-merch">
+            <div className="nh-merch-text">
+              <span className="nh-merch-tag">Momentum merch</span>
+              <h3>{en ? 'Take a piece of Momentum home' : 'Ia acasă o bucată din Momentum'}</h3>
+              <p>{en
+                ? 'In the café you’ll also find T-shirts, caps and mugs. Ask the café team.'
+                : 'În cafenea găsești și tricouri, șepci și căni Momentum. Întreabă echipa de la cafenea.'}</p>
+            </div>
+            <ul className="nh-merch-items">
+              <li><PiTShirt aria-hidden /><span>{en ? 'T-shirts' : 'Tricouri'}</span></li>
+              <li><PiBaseballCap aria-hidden /><span>{en ? 'Caps' : 'Șepci'}</span></li>
+              <li><PiCoffee aria-hidden /><span>{en ? 'Mugs' : 'Căni'}</span></li>
+            </ul>
           </div>
         </div>
       </section>
 
       {/* ÎNTREBĂRI FRECVENTE */}
-      <section id={id.faq} className="nh-section nh-faq">
-        <div className="wrap-wide nh-faq-grid">
-          <h2 className="nh-title">{en ? <>GOOD<br />QUESTIONS.</> : <>ÎNTREBĂRI<br />FRECVENTE.</>}</h2>
-          <Accordion items={faq} idPrefix="faq" tone="light" />
-        </div>
-      </section>
+      <FaqExplorer
+        id={id.faq}
+        title={en ? 'COMMON QUESTIONS.' : 'ÎNTREBĂRI FRECVENTE.'}
+        sub={en ? 'Everything people usually ask before their first Sunday.' : 'Tot ce ne întreabă oamenii de obicei înainte de prima duminică.'}
+        items={faq.map(({ title, content }) => ({ q: title, a: content }))}
+      />
 
       {/* GALERIE — pozele cad în teanc, apoi se răsfiră */}
-      <StackGallery />
+      <StackGallery lang={lang} />
 
       {/* CTA */}
       <section className="nh-section nh-cta">

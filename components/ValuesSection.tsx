@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { VALUES } from '@/lib/values'
 import Accordion from '@/components/Accordion'
 
@@ -20,7 +21,7 @@ function useReveal<T extends HTMLElement>() {
 const num = (i: number) => String(i + 1).padStart(2, '0')
 
 /* ── Prima pagină: 01 — Valorile noastre ──
-   Stânga: titlul mare. Dreapta: acordeonul cu cele 5 valori (prima deschisă implicit). */
+   Stânga: titlul mare și o poză pătrată. Dreapta: acordeonul cu cele 5 valori (prima deschisă implicit). */
 export function ValuesHome({ lang }: { lang: 'ro' | 'en' }) {
   const ref = useReveal<HTMLElement>()
   const en = lang === 'en'
@@ -34,6 +35,10 @@ export function ValuesHome({ lang }: { lang: 'ro' | 'en' }) {
           <h2 className="values-home-title">
             {en ? <>OUR<br />VALUES.</> : <>VALORILE<br />NOASTRE.</>}
           </h2>
+          {/* poza e deja decupată pătrat, din mijlocul originalului */}
+          <div className="values-home-photo">
+            <Image src="/valori.jpg" alt="" fill sizes="(max-width: 900px) 90vw, 420px" style={{ objectFit: 'cover' }} />
+          </div>
         </div>
 
         <Accordion

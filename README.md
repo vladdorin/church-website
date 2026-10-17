@@ -43,7 +43,7 @@ Site-ul este bilingv. Paginile în română au adrese în română, cele în eng
 | Program și adresă pe pagina de contact | `app/contact/page.tsx`, `app/connect/page.tsx` |
 | Video-ul de pe Cine suntem | `app/cine-suntem/page.tsx`, `app/about/page.tsx` + `components/YouTubeVideo.tsx` |
 | Secțiunea de donații de pe prima pagină | `app/page.tsx`, `app/en/page.tsx` + `components/GivingImpact.tsx` |
-| Conturile bancare (IBAN) | `app/give/page.tsx`, `app/en/give/page.tsx` |
+| Pagina Donează (texte RO + EN, IBAN-uri, CIF, link Formular 230, întrebări frecvente) | `components/GiveContent.tsx` (sus în fișier) |
 | Stiluri globale (inclusiv mobil) | `app/globals.css` |
 | Imagini | folderul `public/` |
 
@@ -88,6 +88,8 @@ Copiază `.env.local.example` în `.env.local` pentru rulare locală. În produc
 | `GOOGLE_CALENDAR_API_KEY` | Cheia API Google (Calendar API) pentru secțiunea „Ce urmează” de pe prima pagină |
 
 Evenimentele din secțiunea „Ce urmează” vin automat din Google Calendar (`app/api/events/route.ts`). Ce adaugi în calendar apare pe site în maxim 5 minute. Dacă variabilele lipsesc, secțiunea nu apare.
+
+Un clic pe eveniment deschide o fereastră cu detalii (`components/EventModal.tsx`): data, ora, locul (cu link spre Google Maps), descrierea din calendar și butonul „Adaugă în calendar” (Google Calendar sau fișier .ics pentru Apple/Outlook). Pentru o poză în fereastră, atașează o imagine evenimentului în Google Calendar (din Drive) și partajeaz-o în Drive cu „Oricine are linkul”. Fără poză, fereastra are un antet albastru-închis.
 
 ---
 

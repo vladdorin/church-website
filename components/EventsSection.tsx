@@ -1,41 +1,28 @@
 'use client'
 import { useEffect, useState } from 'react'
 import type { CalendarEvent } from '@/app/api/events/route'
+import { TZ, fmt, shortLocation, toDate } from '@/lib/events'
+import EventModal from './EventModal'
 
-// Notă: textul evenimentelor (titlu, locație) vine din calendar, în limba în care e scris acolo.
+// Notă: textul evenimentelor (titlu, locație, descriere) vine din calendar, în limba în care e scris acolo.
 
 type State =
   | { status: 'loading' }
   | { status: 'hidden' }                                   // neconfigurat sau eroare: secțiunea nu apare
   | { status: 'ready'; events: CalendarEvent[]; calendarId: string }
 
-const TZ = 'Europe/Bucharest'
-
 const RECURRENCE = {
   ro: { weekly: 'În fiecare săptămână', monthly: 'Lunar', repeat: 'Recurent' },
   en: { weekly: 'Every week', monthly: 'Monthly', repeat: 'Recurring' },
 } as const
 
-// Evenimentele pe toată ziua vin ca YYYY-MM-DD; le tratăm ca dată fixă (fără fus orar).
-function toDate(e: CalendarEvent) {
-  return e.allDay ? new Date(`${e.start}T12:00:00Z`) : new Date(e.start)
-}
-
-// „Biserica Momentum, Calea Moților 258, 510001 Alba Iulia, Romania” → primele două părți
-function shortLocation(loc: string) {
-  return loc.split(',').slice(0, 2).map(s => s.trim()).join(', ')
-}
-
-function fmt(d: Date, locale: string, opts: Intl.DateTimeFormatOptions, allDay: boolean) {
-  return new Intl.DateTimeFormat(locale, { ...opts, timeZone: allDay ? 'UTC' : TZ }).format(d)
-}
-
 /* Secțiunea „Evenimente” de pe prima pagină — evenimentele viitoare din Google Calendar,
-   actualizate automat (vezi app/api/events/route.ts). */
+   actualizate automat (vezi app/api/events/route.ts). Un clic pe eveniment deschide detaliile (EventModal). */
 export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: string }) {
   const en = lang === 'en'
   const locale = en ? 'en-GB' : 'ro-RO'
   const [state, setState] = useState<State>({ status: 'loading' })
+  const [selected, setSelected] = useState<CalendarEvent | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -97,13 +84,9 @@ export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: s
                 const time = e.allDay
                   ? (en ? 'All day' : 'Toată ziua')
                   : `${fmt(d, locale, { hour: '2-digit', minute: '2-digit' }, false)}${end ? ` – ${fmt(end, locale, { hour: '2-digit', minute: '2-digit' }, false)}` : ''}`
-                const Row = e.link ? 'a' : 'div'
                 return (
                   <li key={e.id}>
-                    <Row
-                      className="event-row"
-                      {...(e.link ? { href: e.link, target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    >
+                    <button type="button" className="event-row" aria-haspopup="dialog" onClick={() => setSelected(e)}>
                       <div className="event-date">
                         <span className="event-day">{fmt(d, locale, { day: '2-digit' }, e.allDay)}</span>
                         <span className="event-month">{fmt(d, locale, { month: 'short' }, e.allDay).replace('.', '')}</span>
@@ -112,14 +95,14 @@ export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: s
                         <span className="event-meta">
                           {fmt(d, locale, { weekday: 'long' }, e.allDay)} · {time}
                         </span>
-                        <h3 className="event-name">
+                        <span className="event-name">
                           {e.title}
                           {e.recurrence && <span className="event-badge">{RECURRENCE[lang][e.recurrence]}</span>}
-                        </h3>
+                        </span>
                         {e.location && <span className="event-location">{shortLocation(e.location)}</span>}
                       </div>
-                      {e.link && <span className="event-arrow" aria-hidden>→</span>}
-                    </Row>
+                      <span className="event-arrow" aria-hidden>→</span>
+                    </button>
                   </li>
                 )
               })}
@@ -127,6 +110,8 @@ export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: s
           )}
         </div>
       </div>
+
+      {selected && <EventModal event={selected} lang={lang} onClose={() => setSelected(null)} />}
     </section>
   )
 }

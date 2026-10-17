@@ -13,16 +13,22 @@ export type CalendarEvent = {
   end: string
   allDay: boolean
   location: string | null
+  description: string | null   // text simplu (descrierea din calendar e HTML)
+  image: string | null         // prima poză atașată evenimentului (fișier Drive public)
   link: string | null
   recurrence: Recurrence
+  rrule: string | null         // ex. „RRULE:FREQ=WEEKLY;BYDAY=SU”, pentru „Adaugă în calendar”
 }
 
 type GoogleEvent = {
   id: string
   recurringEventId?: string
   summary?: string
+  description?: string
   location?: string
   htmlLink?: string
+  attachments?: { fileId?: string; mimeType?: string }[]
+  recurrence?: string[]
   start: { dateTime?: string; date?: string }
   end: { dateTime?: string; date?: string }
 }
@@ -40,6 +46,28 @@ function recurrenceOf(occurrences: GoogleEvent[]): Recurrence {
   if (days === 7) return 'weekly'
   if (days >= 28 && days <= 31) return 'monthly'
   return 'repeat'
+}
+
+const ENTITIES: Record<string, string> = { nbsp: ' ', amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" }
+
+// Descrierea din Google Calendar e HTML (<p>, <br>, <a>, <b>…) → text simplu cu rânduri noi.
+function htmlToText(html: string) {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|li|h\d)>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '• ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&(nbsp|amp|lt|gt|quot|#39);/g, (_, k) => ENTITIES[k])
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+// Poza se adaugă în Google Calendar ca atașament (din Drive) și trebuie partajată „Oricine are linkul”.
+// Se încarcă prin app/api/photo/route.ts, nu direct de pe Drive.
+function imageOf(e: GoogleEvent) {
+  const img = e.attachments?.find(a => a.fileId && a.mimeType?.startsWith('image/'))
+  return img ? `/api/photo?id=${encodeURIComponent(img.fileId!)}&w=1200` : null
 }
 
 export async function GET() {
@@ -78,24 +106,43 @@ export async function GET() {
     }
 
     const seen = new Set<string>()
-    const events: CalendarEvent[] = []
+    const picked: GoogleEvent[] = []
     for (const e of items) {
       if (e.recurringEventId) {
         if (seen.has(e.recurringEventId)) continue
         seen.add(e.recurringEventId)
       }
-      events.push({
-        id: e.id,
-        title: e.summary?.trim() || 'Eveniment',
-        start: e.start.dateTime ?? e.start.date ?? '',
-        end: e.end.dateTime ?? e.end.date ?? '',
-        allDay: !e.start.dateTime,
-        location: e.location?.trim() || null,
-        link: e.htmlLink ?? null,
-        recurrence: e.recurringEventId ? recurrenceOf(series.get(e.recurringEventId)!) : null,
-      })
-      if (events.length === MAX_EVENTS) break
+      picked.push(e)
+      if (picked.length === MAX_EVENTS) break
     }
+
+    // Regula de repetare (RRULE) e doar pe evenimentul „părinte” al seriei, așa că o cerem separat.
+    const rrules = new Map(await Promise.all(Array.from(seen, async id => {
+      try {
+        const r = await fetch(
+          `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events/${encodeURIComponent(id)}?key=${apiKey}`,
+          { next: { revalidate: CACHE_SECONDS } },
+        )
+        const parent: GoogleEvent | null = r.ok ? await r.json() : null
+        return [id, parent?.recurrence?.find(l => l.startsWith('RRULE:')) ?? null] as const
+      } catch {
+        return [id, null] as const
+      }
+    })))
+
+    const events: CalendarEvent[] = picked.map(e => ({
+      id: e.id,
+      title: e.summary?.trim() || 'Eveniment',
+      start: e.start.dateTime ?? e.start.date ?? '',
+      end: e.end.dateTime ?? e.end.date ?? '',
+      allDay: !e.start.dateTime,
+      location: e.location?.trim() || null,
+      description: e.description ? htmlToText(e.description) || null : null,
+      image: imageOf(e),
+      link: e.htmlLink ?? null,
+      recurrence: e.recurringEventId ? recurrenceOf(series.get(e.recurringEventId)!) : null,
+      rrule: e.recurringEventId ? rrules.get(e.recurringEventId) ?? null : null,
+    }))
 
     return Response.json(
       { configured: true, calendarId, events },

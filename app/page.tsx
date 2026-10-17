@@ -366,16 +366,22 @@ export default function HomePage() {
   	pointerEvents: 'none', userSelect: 'none',
 	}}>03</div>
         <div className="wrap-wide">
-          <RevealSection style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
-            <p className="sr sr-up label-light">MISIUNEA NOASTRĂ</p>
-            <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
-              DE CE EXISTĂ<br />MOMENTUM?
-            </h2>
-            <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
-              Existăm pentru a construi o comunitate dătătoare de viață în Alba Iulia, un loc unde oamenii Îl întâlnesc pe Dumnezeu, cresc în comunitate autentică și trăiesc scopul dat de El.
-            </p>
-            <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Link href="/misiunea-noastra" className="btn btn-white">Descoperă misiunea</Link>
+          {/* Poza în stânga, textul în dreapta; pe telefon (grid-2col) poza ajunge deasupra */}
+          <RevealSection className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 80, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+            <div className="sr sr-left mission-home-photo">
+              <Image src="/misiunea-2.jpg" alt="Momentum" fill sizes="(max-width: 767px) 90vw, 32vw" style={{ objectFit: 'cover', objectPosition: 'center 48%' }} />
+            </div>
+            <div style={{ maxWidth: 680, marginLeft: 'auto', textAlign: 'right' }}>
+              <p className="sr sr-up label-light">MISIUNEA NOASTRĂ</p>
+              <h2 className="sr sr-left sr-d1" style={{ ...T9, fontSize: 'clamp(2rem,4vw,4.5rem)', color: 'white' }}>
+                DE CE EXISTĂ<br />MOMENTUM?
+              </h2>
+              <p className="sr sr-up sr-d2" style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(255,255,255,0.55)', fontWeight: 300, maxWidth: 520, marginBottom: 36, marginLeft: 'auto' }}>
+                Existăm pentru a construi o comunitate dătătoare de viață în Alba Iulia, un loc unde oamenii Îl întâlnesc pe Dumnezeu, cresc în comunitate autentică și trăiesc scopul dat de El.
+              </p>
+              <div className="sr sr-up sr-d3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Link href="/misiunea-noastra" className="btn btn-white">Descoperă misiunea</Link>
+              </div>
             </div>
           </RevealSection>
         </div>
@@ -445,12 +451,12 @@ export default function HomePage() {
     }}
   >
     <Image
-      src="/echipa.jpg"
+      src="/vino-cu-noi.jpg"
       alt="Echipa Momentum"
       fill
       style={{
         objectFit: 'cover',
-        objectPosition: 'center',
+        objectPosition: 'center 48%',   // poza e verticală: se văd fața și „NE VEDEM DUMINICA”
       }}
     />
   </div>
@@ -501,12 +507,12 @@ export default function HomePage() {
     }}
   >
     <Image
-      src="/rugaciune.jpg"
+      src="/rugaciune-2.jpg"
       alt="Rugăciune"
       fill
       style={{
         objectFit: 'cover',
-        objectPosition: 'center',
+        objectPosition: 'center 30%',   // oamenii care se roagă sunt în partea de sus a pozei
       }}
     />
   </div>
