@@ -9,9 +9,12 @@ export const runtime = 'edge'
 
 const REFRESH_SECONDS = 86_400   // pozele noi din folder apar pe site în maxim o zi
 
+// .trim(): o valoare copiată cu un rând nou la final ar face ca Drive să nu găsească folderul
+const env = (name: string) => process.env[name]?.trim() || undefined
+
 const SETS = {
-  carousel: { folder: () => process.env.GOOGLE_DRIVE_CAROUSEL_FOLDER_ID, max: 24, width: 800 },
-  gallery:  { folder: () => process.env.GOOGLE_DRIVE_GALLERY_FOLDER_ID ?? process.env.GOOGLE_DRIVE_CAROUSEL_FOLDER_ID, max: 18, width: 400 },
+  carousel: { folder: () => env('GOOGLE_DRIVE_CAROUSEL_FOLDER_ID'), max: 24, width: 800 },
+  gallery:  { folder: () => env('GOOGLE_DRIVE_GALLERY_FOLDER_ID') ?? env('GOOGLE_DRIVE_CAROUSEL_FOLDER_ID'), max: 18, width: 400 },
 } as const
 
 type DriveFile = { id: string; name: string }
@@ -37,7 +40,7 @@ export async function GET(req: Request) {
   if (!set) return Response.json({ error: 'Unknown set' }, { status: 400 })
 
   const folder = set.folder()
-  const apiKey = process.env.GOOGLE_DRIVE_API_KEY ?? process.env.GOOGLE_CALENDAR_API_KEY
+  const apiKey = env('GOOGLE_DRIVE_API_KEY') ?? env('GOOGLE_CALENDAR_API_KEY')
   if (!folder || !apiKey) return Response.json({ configured: false, photos: [] })
 
   try {
