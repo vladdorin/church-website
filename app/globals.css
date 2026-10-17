@@ -42,8 +42,8 @@ a, a *, button, button *, .btn, .btn *,
 [role="button"], [role="button"] *,
 select, input, textarea, label,
 nav a, nav a * {
-  /* simbolul Momentum (ca cursorul obișnuit), alb cu contur negru, ca să se vadă pe orice fundal */
-  cursor: url('/cursor-click.png') 16 16, pointer !important;
+  /* cerc alb cu contur negru și simbolul Momentum: se vede pe orice fundal și se deosebește de cursorul obișnuit */
+  cursor: url('/cursor-link.png') 16 16, pointer !important;
 }
 
 body {
