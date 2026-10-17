@@ -99,9 +99,9 @@ Publicarea e automată:
 
 1. Faci modificările și le verifici local (`npm run dev`).
 2. Faci commit și `git push` pe branch-ul `main`.
-3. GitHub Actions (`.github/workflows/deploy.yml`) construiește site-ul și îl publică pe Cloudflare Pages. Durează câteva minute.
+3. Cloudflare Pages e conectat direct la GitHub: la fiecare push pe `main` construiește site-ul (`npm run pages:build`) și îl publică. Durează 2–3 minute. Starea se vede în Cloudflare → Workers & Pages → church-website → Deployments.
 
-Secretele necesare în GitHub Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `NEXT_PUBLIC_URL`.
+Variabilele (inclusiv Stripe și `GOOGLE_DRIVE_CAROUSEL_FOLDER_ID`) se setează în Cloudflare Pages → Settings → Variables and Secrets. Dacă le setezi din terminal, ai grijă să nu rămână un rând nou la finalul valorii.
 
 ---
 
