@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import JumpNav from '@/components/JumpNav'
 import { useState } from 'react'
 
 export default function JoinPage() {
@@ -63,11 +64,12 @@ const getInputStyle = (field: string) => ({
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             Există un loc pentru tine în Momentum. Conectează-te, implică-te, crește.
           </p>
+          <JumpNav label="Pe această pagină" links={[['cum-te-implici', 'Cum te poți implica'], ['card-de-conectare', 'Card de conectare']]} />
         </div>
       </section>
 
       {/* CUM TE POȚI IMPLICA */}
-      <section className="section" style={{background:'white'}}>
+      <section id="cum-te-implici" className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
             CUM TE POȚI IMPLICA
@@ -105,7 +107,7 @@ const getInputStyle = (field: string) => ({
       </section>
 
       {/* CARD DE CONECTARE */}
-      <section className="join-connect-section">
+      <section id="card-de-conectare" className="join-connect-section">
         <div className="wrap">
           <div style={{maxWidth:640, margin:'0 auto'}}>
             <div style={{textAlign:'center', marginBottom:40}}>

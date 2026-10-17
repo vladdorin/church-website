@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import JumpNav from '@/components/JumpNav'
 import { useState } from 'react'
 
 export default function JoinPage() {
@@ -63,11 +64,12 @@ const getInputStyle = (field: string) => ({
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             There is a place for you in Momentum. Connect, get involved, grow.
           </p>
+          <JumpNav label="On this page" links={[['get-involved', 'How to get involved'], ['connection-card', 'Connection card']]} />
         </div>
       </section>
 
       {/* HOW YOU CAN GET INVOLVED */}
-      <section className="section" style={{background:'white'}}>
+      <section id="get-involved" className="section" style={{background:'white'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
             HOW YOU CAN GET INVOLVED
@@ -105,7 +107,7 @@ const getInputStyle = (field: string) => ({
       </section>
 
       {/* CONNECTION CARD */}
-      <section className="join-connect-section">
+      <section id="connection-card" className="join-connect-section">
         <div className="wrap">
           <div style={{maxWidth:640, margin:'0 auto'}}>
             <div style={{textAlign:'center', marginBottom:40}}>

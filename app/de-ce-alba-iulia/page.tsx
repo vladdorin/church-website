@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import JumpNav from '@/components/JumpNav'
 
 export const metadata: Metadata = {
   title: 'De ce Alba Iulia? · Momentum | Alba Iulia',
@@ -20,11 +21,14 @@ export default function WhyThisCityPage() {
             Alba Iulia e un loc bogat în identitate și semnificație națională.
             Trecutul este onorat — dar viitorul este încă în formare.
           </p>
+          <JumpNav label="Pe această pagină" links={[
+            ['orasul', 'Orașul'], ['istoria', 'Istoria'], ['nevoia', 'Nevoia'], ['de-ce-acum', 'De ce acum'],
+          ]} />
         </div>
       </section>
 
       {/* DESPRE ORAȘ */}
-      <section className="section" style={{background:'white'}}>
+      <section id="orasul" className="section" style={{background:'white'}}>
         <div className="wrap">
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}}>
             <div>
@@ -63,7 +67,7 @@ export default function WhyThisCityPage() {
       </section>
 
       {/* SEMNIFICAȚIE ISTORICĂ */}
-      <section style={{background:'#0a0f2c', padding:'80px 0'}}>
+      <section id="istoria" style={{background:'#0a0f2c', padding:'80px 0'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <p className="label" style={{color:'#b6d8fc'}}>Semnificație</p>
           <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'white', marginBottom:32}}>
@@ -89,7 +93,7 @@ export default function WhyThisCityPage() {
       </section>
 
       {/* NEVOIA */}
-      <section className="section" style={{background:'#f8f9ff'}}>
+      <section id="nevoia" className="section" style={{background:'#f8f9ff'}}>
         <div className="wrap" style={{textAlign:'center'}}>
           <p className="label">Nevoia reală</p>
           <h2 className="display" style={{fontSize:'clamp(2rem,5vw,4rem)', color:'#0a0f2c', marginBottom:12}}>
@@ -115,7 +119,7 @@ export default function WhyThisCityPage() {
       </section>
 
       {/* DE CE ACUM */}
-      <section className="section" style={{background:'white'}}>
+      <section id="de-ce-acum" className="section" style={{background:'white'}}>
         <div className="wrap">
           <div style={{
             background:'linear-gradient(135deg,#0f1052,#1932af)',

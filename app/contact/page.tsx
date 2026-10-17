@@ -27,8 +27,9 @@ export default function ConnectPage() {
       {/* HERO */}
       <section style={{ background:'linear-gradient(135deg,#0f1052 0%,#080818 100%)', color:'white', padding:'100px 0 80px' }}>
         <div className="wrap" style={{ textAlign:'center' }}>
-          <h1 className="display" style={{ fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24 }}>
-            HAI SĂ<br /><span style={{ color:'#b6d8fc' }}>NE CONECTĂM</span>
+          {/* pe telefon mărimea scade cu ecranul (6.6vw), ca „NE CONECTĂM” să încapă pe un rând */}
+          <h1 className="display" style={{ fontSize:'min(clamp(3rem,5vw,7rem), 6.6vw)', color:'white', marginBottom:24 }}>
+            HAI SĂ<br /><span style={{ color:'#b6d8fc', whiteSpace:'nowrap' }}>NE CONECTĂM</span>
           </h1>
           <p style={{ fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto', fontWeight:300, lineHeight:1.7 }}>
             Suntem bucuroși să te cunoaștem.

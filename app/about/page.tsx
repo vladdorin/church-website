@@ -3,6 +3,7 @@ import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 import YouTubeVideo from '@/components/YouTubeVideo'
 import { ValuesFull } from '@/components/ValuesSection'
+import JumpNav from '@/components/JumpNav'
 
 export const metadata: Metadata = {
   title: 'Who We Are · Momentum | Alba Iulia',
@@ -18,11 +19,15 @@ export default function AboutPage() {
           <h1 className="display" style={{fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24}}>
             OUR<br /><span style={{color:'#b6d8fc'}}>STORY</span>
           </h1>
+          <JumpNav label="On this page" links={[
+            ['pastors', 'Our pastors'], ['story', 'Our story'], ['values', 'Values'],
+            ['identity', 'Identity'], ['vision', 'Vision'],
+          ]} />
         </div>
       </section>
 
       {/* PASTORS */}
-      <section className="section" style={{background:'white'}}>
+      <section id="pastors" className="section" style={{background:'white'}}>
         <div className="wrap">
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}} className="grid-1col-md-2col">
             <div>
@@ -75,7 +80,7 @@ export default function AboutPage() {
       </section>
 
       {/* VIDEO + QUOTE */}
-      <section className="about-story-section">
+      <section id="story" className="about-story-section">
         <div className="wrap">
           <YouTubeVideo id="NtwZBL7NiSc" title="The Story of Momentum Church" playLabel="Play video" />
 
@@ -95,7 +100,7 @@ export default function AboutPage() {
       <ValuesFull lang="en" />
 
 {/* OUR IDENTITY */}
-<section className="identity-section">
+<section id="identity" className="identity-section">
   <div className="wrap">
     <div className="identity-layout">
       <div>
@@ -131,7 +136,7 @@ export default function AboutPage() {
 </section>
 
       {/* VISION */}
-      <section className="section" style={{background:'white'}}>
+      <section id="vision" className="section" style={{background:'white'}}>
         <div className="wrap">
           <p className="label" style={{textAlign:'center'}}>Our Vision</p>
           <h2 className="display vision-title">

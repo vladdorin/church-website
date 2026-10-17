@@ -2535,6 +2535,16 @@ video {
   border-color: rgba(255,255,255,0.4);
 }
 
+/* Aceleași butoane pe celelalte pagini (components/JumpNav.tsx) */
+.page-jump {
+  margin-top: 36px;
+}
+
+/* La clic pe un buton, secțiunea nu ajunge sub meniul fix de sus */
+section[id] {
+  scroll-margin-top: 88px;
+}
+
 /* Program + locație */
 .nh-times { background: #ffffff; }
 

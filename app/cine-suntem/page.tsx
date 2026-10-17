@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import YouTubeVideo from '@/components/YouTubeVideo'
 import { ValuesFull } from '@/components/ValuesSection'
+import JumpNav from '@/components/JumpNav'
 
 export const metadata: Metadata = {
   title: 'Cine suntem · Momentum | Alba Iulia',
@@ -18,11 +19,15 @@ export default function AboutPage() {
           <h1 className="display" style={{fontSize:'clamp(3rem,5vw,7rem)', color:'white', marginBottom:24}}>
             POVESTEA<br /><span style={{color:'#b6d8fc'}}>NOASTRĂ</span>
           </h1>
+          <JumpNav label="Pe această pagină" links={[
+            ['pastori', 'Pastorii noștri'], ['povestea', 'Povestea'], ['valori', 'Valorile'],
+            ['identitate', 'Identitatea'], ['viziune', 'Viziunea'],
+          ]} />
         </div>
       </section>
 
       {/* PASTORII */}
-      <section className="section" style={{background:'white'}}>
+      <section id="pastori" className="section" style={{background:'white'}}>
         <div className="wrap">
           <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center'}} className="grid-1col-md-2col">
             <div>
@@ -75,7 +80,7 @@ export default function AboutPage() {
       </section>
 
       {/* VIDEO + CITAT */}
-      <section className="about-story-section">
+      <section id="povestea" className="about-story-section">
         <div className="wrap">
           <YouTubeVideo id="NtwZBL7NiSc" title="Povestea Bisericii Momentum" playLabel="Pornește video-ul" />
 
@@ -95,7 +100,7 @@ export default function AboutPage() {
       <ValuesFull lang="ro" />
 
 {/* NE DORIM O BISERICĂ */}
-<section className="identity-section">
+<section id="identitate" className="identity-section">
   <div className="wrap">
     <div className="identity-layout">
       <div>
@@ -131,7 +136,7 @@ export default function AboutPage() {
 </section>
 
       {/* VIZIUNEA */}
-      <section className="section" style={{background:'white'}}>
+      <section id="viziune" className="section" style={{background:'white'}}>
         <div className="wrap">
           <p className="label" style={{textAlign:'center'}}>Viziunea Noastră</p>
           <h2 className="display vision-title">

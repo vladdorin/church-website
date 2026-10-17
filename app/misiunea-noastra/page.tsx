@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import JumpNav from '@/components/JumpNav'
 
 export const metadata: Metadata = {
   title: 'Misiunea noastră · Momentum | Alba Iulia',
@@ -43,11 +44,15 @@ export default function MisiuneaNoastraPage() {
           <p style={{fontSize:'clamp(1rem,2.5vw,1.25rem)', color:'rgba(255,255,255,0.65)', maxWidth:930, margin:'0 auto', fontWeight:300, lineHeight:1.7}}>
             Misiunea noastră este să creăm un spațiu și o comunitate în care fiecare om să fie binevenit, să-L cunoască pe Dumnezeu și să descopere scopul pentru care El l-a adus în existență.
           </p>
+          <JumpNav label="Pe această pagină" links={[
+            ['misiunea', 'Misiunea'], ['cui-ne-adresam', 'Cui ne adresăm'],
+            ['cum-traim-misiunea', 'Cum trăim misiunea?'], ['de-ce-alba-iulia', 'De ce Alba Iulia'],
+          ]} />
         </div>
       </section>
 
       {/* MISIUNEA */}
-      <section className="mission-premium-section mission-white">
+      <section id="misiunea" className="mission-premium-section mission-white">
         <div className="mission-glow mission-glow-blue" />
         <div className="wrap">
           <div className="mission-split">
@@ -85,7 +90,7 @@ export default function MisiuneaNoastraPage() {
       </section>
 
       {/* PENTRU CINE */}
-      <section className="mission-premium-section mission-warm-people">
+      <section id="cui-ne-adresam"className="mission-premium-section mission-warm-people">
         <div className="wrap">
           <div className="mission-center" style={{position:'relative'}}>
   <span className="mission-number" style={{
@@ -117,7 +122,7 @@ export default function MisiuneaNoastraPage() {
       </section>
 
       {/* CUM TRĂIM MISIUNEA */}
-      <section className="mission-premium-section mission-dark">
+      <section id="cum-traim-misiunea"className="mission-premium-section mission-dark">
         <div className="mission-glow mission-glow-light" />
         <div className="wrap">
           <div className="mission-split">
@@ -155,7 +160,7 @@ export default function MisiuneaNoastraPage() {
       </section>
 
       {/* DE CE ALBA IULIA */}
-      <section className="mission-premium-section mission-cream">
+      <section id="de-ce-alba-iulia" className="mission-premium-section mission-cream">
         <div className="wrap">
           <div className="mission-split reverse-mobile">
             <div className="mission-copy">
