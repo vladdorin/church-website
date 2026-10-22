@@ -3,6 +3,7 @@
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa'
 import { HiOutlineClock, HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi'
 import Link from 'next/link'
+import BotGuard from '@/components/BotGuard'
 import { useState } from 'react'
 
 export default function ConnectPage() {
@@ -111,6 +112,8 @@ export default function ConnectPage() {
                         phone: formData.get('phone'),
                         subject: formData.get('subject'),
                         message: formData.get('message'),
+                        website: formData.get('website'),
+                        turnstile: formData.get('cf-turnstile-response'),
                         extra: {
                           privacy: formData.get('privacy') === 'on',
                         },
@@ -232,6 +235,8 @@ export default function ConnectPage() {
                     <p className="form-error">{fieldErrors.privacy}</p>
                   )}
                 </div>
+
+                <BotGuard />
 
                 <button
                   type="submit"

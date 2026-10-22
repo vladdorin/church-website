@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import BotGuard from '@/components/BotGuard'
 import JumpNav from '@/components/JumpNav'
 import { useState } from 'react'
 
@@ -165,6 +166,8 @@ const getInputStyle = (field: string) => ({
           phone: formData.get('phone'),
           subject: formData.get('implicare'),
           message: formData.get('message'),
+          website: formData.get('website'),
+          turnstile: formData.get('cf-turnstile-response'),
           extra: {
             sursa: formData.get('sursa'),
             privacy: formData.get('privacy') === 'on',
@@ -323,6 +326,8 @@ const getInputStyle = (field: string) => ({
       <p className="form-error">{fieldErrors.privacy}</p>
     )}
   </div>
+
+  <BotGuard />
 
   <button
     type="submit"

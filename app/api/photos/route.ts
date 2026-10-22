@@ -7,6 +7,8 @@ export const runtime = 'edge'
 // altfel GOOGLE_CALENDAR_API_KEY). Folderul trebuie partajat cu „Oricine are linkul”.
 // Dacă ceva lipsește sau nu merge, componentele folosesc pozele din /public.
 
+import { photoUrl } from '@/lib/photoSign'
+
 const REFRESH_SECONDS = 86_400   // pozele noi din folder apar pe site în maxim o zi
 
 // .trim(): o valoare copiată cu un rând nou la final ar face ca Drive să nu găsească folderul
@@ -60,7 +62,7 @@ export async function GET(req: Request) {
     }
 
     const files: DriveFile[] = (await res.json()).files ?? []
-    const photos = spread(files).map(f => `/api/photo?id=${encodeURIComponent(f.id)}&w=${set.width}`)
+    const photos = await Promise.all(spread(files).map(f => photoUrl(f.id, set.width)))
 
     return Response.json(
       { configured: true, photos },

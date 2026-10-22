@@ -4,6 +4,8 @@ export const runtime = 'edge'
 // Necesită variabilele GOOGLE_CALENDAR_ID și GOOGLE_CALENDAR_API_KEY (calendarul trebuie să fie public).
 // Răspunsul e păstrat în cache 5 minute, deci schimbările din calendar apar pe site în maxim 5 minute.
 
+import { photoUrl } from '@/lib/photoSign'
+
 export type Recurrence = 'weekly' | 'monthly' | 'repeat' | null
 
 export type CalendarEvent = {
@@ -67,7 +69,7 @@ function htmlToText(html: string) {
 // Se încarcă prin app/api/photo/route.ts, nu direct de pe Drive.
 function imageOf(e: GoogleEvent) {
   const img = e.attachments?.find(a => a.fileId && a.mimeType?.startsWith('image/'))
-  return img ? `/api/photo?id=${encodeURIComponent(img.fileId!)}&w=1200` : null
+  return img ? photoUrl(img.fileId!, 1200) : null
 }
 
 export async function GET() {
@@ -130,7 +132,7 @@ export async function GET() {
       }
     })))
 
-    const events: CalendarEvent[] = picked.map(e => ({
+    const events: CalendarEvent[] = await Promise.all(picked.map(async e => ({
       id: e.id,
       title: e.summary?.trim() || 'Eveniment',
       start: e.start.dateTime ?? e.start.date ?? '',
@@ -138,11 +140,11 @@ export async function GET() {
       allDay: !e.start.dateTime,
       location: e.location?.trim() || null,
       description: e.description ? htmlToText(e.description) || null : null,
-      image: imageOf(e),
+      image: await imageOf(e),
       link: e.htmlLink ?? null,
       recurrence: e.recurringEventId ? recurrenceOf(series.get(e.recurringEventId)!) : null,
       rrule: e.recurringEventId ? rrules.get(e.recurringEventId) ?? null : null,
-    }))
+    })))
 
     return Response.json(
       { configured: true, calendarId, events },

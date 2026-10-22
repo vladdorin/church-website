@@ -13,12 +13,12 @@ type CheckoutBody = {
 
 export async function POST(request: Request) {
   try {
-    const {
+    // eslint-disable-next-line prefer-const -- reason / originalAmount sunt curățate mai jos
+    let {
   amount,
   originalAmount,
   currency = 'ron',
   reason = '',
-  notes = '',
   donationType = 'once',
   coverFees = false,
 } = await request.json() as CheckoutBody
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (!allowedCurrencies.includes(currency)) {
       return Response.json({ error: 'Invalid currency.' }, { status: 400 })
     }
-    if (!amount || amount < 5 || amount > 50000) {
+    if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 5 || amount > 50000) {
       return Response.json(
         { error: 'Invalid amount. Minimum 5, maximum 50,000.' },
         { status: 400 }
@@ -39,18 +39,23 @@ export async function POST(request: Request) {
       httpClient: Stripe.createFetchHttpClient(),
     })
 
-    const origin =
-      request.headers.get('origin') ??
-      process.env.NEXT_PUBLIC_URL ??
-      'http://localhost:3000'
+    // Întoarcerea după plată doar pe site-ul nostru (sau previzualizări / local), pe pagina de donații.
+    const requestOrigin = request.headers.get('origin') ?? ''
+    const origin = /^https:\/\/([\w-]+\.)*(bisericamomentum\.ro|pages\.dev)$|^http:\/\/localhost(:\d+)?$/.test(requestOrigin)
+      ? requestOrigin
+      : process.env.NEXT_PUBLIC_URL?.trim() || 'https://bisericamomentum.ro'
 
-    const referer = request.headers.get('referer') ?? ''
     let returnPath = '/give'
     try {
-      returnPath = new URL(referer).pathname
+      const path = new URL(request.headers.get('referer') ?? '').pathname
+      if (/^\/(en\/)?give\/?$/.test(path)) returnPath = path
     } catch {
       returnPath = '/give'
     }
+
+    // Texte libere: lungime limitată (Stripe acceptă maxim 500 de caractere în metadata).
+    reason = typeof reason === 'string' ? reason.slice(0, 200) : ''
+    if (typeof originalAmount !== 'number' || !Number.isFinite(originalAmount)) originalAmount = undefined
 
     const isMonthly = donationType === 'monthly'
 
@@ -107,8 +112,8 @@ export async function POST(request: Request) {
 
     return Response.json({ clientSecret: session.client_secret })
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : 'Internal error'
-    console.error('[Stripe error]', message)
-    return Response.json({ error: message }, { status: 500 })
+    // Detaliile (ex. configurarea Stripe) rămân în log, nu ajung în browser.
+    console.error('[Stripe error]', err instanceof Error ? err.message : err)
+    return Response.json({ error: 'Plata nu a putut fi pornită. Încearcă din nou.' }, { status: 500 })
   }
 }

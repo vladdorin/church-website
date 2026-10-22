@@ -23,5 +23,22 @@ const nextConfig = {
       { source: '/en/cookie-policy',        destination: '/cookie-policy',        permanent: true },
     ]
   },
+  // Antete de securitate pentru toate paginile: site-ul nu poate fi încadrat de alte site-uri
+  // (clickjacking), browserul nu „ghicește” tipul fișierelor, iar alte site-uri nu primesc adresa
+  // completă a paginii. Fără CSP strict, ca Stripe, YouTube și Turnstile să meargă în continuare.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ]
+  },
 }
 export default nextConfig
