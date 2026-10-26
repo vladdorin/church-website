@@ -101,7 +101,8 @@ export async function GET() {
       return Response.json({ configured: true, error: true, events: [] }, { status: 502 })
     }
 
-    const items: GoogleEvent[] = (await res.json()).items ?? []
+    // Evenimentele private (sau cu detaliile ascunse publicului) vin fără nume: nu le arătăm deloc.
+    const items: GoogleEvent[] = ((await res.json()).items ?? []).filter((e: GoogleEvent) => e.summary?.trim())
 
     // Un eveniment recurent apare o singură dată (următoarea apariție), cu eticheta de frecvență.
     const series = new Map<string, GoogleEvent[]>()
