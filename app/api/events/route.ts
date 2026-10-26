@@ -30,6 +30,7 @@ type GoogleEvent = {
   location?: string
   htmlLink?: string
   attachments?: { fileId?: string; mimeType?: string }[]
+  extendedProperties?: { shared?: Record<string, string> }
   recurrence?: string[]
   start: { dateTime?: string; date?: string }
   end: { dateTime?: string; date?: string }
@@ -67,7 +68,11 @@ function htmlToText(html: string) {
 
 // Poza se adaugă în Google Calendar ca atașament (din Drive) și trebuie partajată „Oricine are linkul”.
 // Se încarcă prin app/api/photo/route.ts, nu direct de pe Drive.
+// Poza încărcată din Admin → Calendar e un link public spre admin (extendedProperties.shared.photo) și are prioritate.
+const ADMIN_PHOTO = /^https:\/\/admin\.bisericamomentum\.ro\/api\/public\/photos\/[0-9a-f-]{36}\.(jpg|png|webp)$/
 function imageOf(e: GoogleEvent) {
+  const own = e.extendedProperties?.shared?.photo
+  if (own && ADMIN_PHOTO.test(own)) return own
   const img = e.attachments?.find(a => a.fileId && a.mimeType?.startsWith('image/'))
   return img ? photoUrl(img.fileId!, 1200) : null
 }
