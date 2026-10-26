@@ -89,6 +89,8 @@ Copiază `.env.local.example` în `.env.local` pentru rulare locală. În produc
 
 Evenimentele din secțiunea „Ce urmează” vin automat din Google Calendar (`app/api/events/route.ts`). Ce adaugi în calendar apare pe site în maxim 5 minute. Dacă variabilele lipsesc, secțiunea nu apare.
 
+„Adaugă tot calendarul” (`components/SubscribeCalendar.tsx`) abonează pe cineva la toate evenimentele: iPhone / Apple prin `webcal://…/calendar.ics`, Google după ID-ul calendarului, Outlook cu linkul. `/calendar.ics` (`app/calendar.ics/route.ts`) e feed-ul public .ics al Google Calendar-ului, cu numele „Biserica Momentum”; aplicațiile de calendar îl reîncarcă singure.
+
 Un clic pe eveniment deschide o fereastră cu detalii (`components/EventModal.tsx`): data, ora, locul (cu link spre Google Maps), descrierea din calendar și butonul „Adaugă în calendar” (Google Calendar sau fișier .ics pentru Apple/Outlook). Pentru o poză în fereastră, atașează o imagine evenimentului în Google Calendar (din Drive) și partajeaz-o în Drive cu „Oricine are linkul”. Fără poză, fereastra are un antet albastru-închis.
 
 ---

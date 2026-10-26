@@ -3916,6 +3916,40 @@ html.modal-open {
   color: #1932af;
 }
 
+/* „Adaugă tot calendarul” (SubscribeCalendar), lângă „Vezi tot calendarul”: meniul se deschide în jos. */
+.events-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cal-sub-menu {
+  top: calc(100% + 8px);
+  bottom: auto;
+}
+
+.cal-sub-hint {
+  padding: 8px 14px 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #5b6178;
+}
+
+@media (max-width: 600px) {
+  .events-actions .btn,
+  .events-actions .cal-sub {
+    flex: 1 1 100%;
+  }
+
+  .events-actions .cal-sub .btn {
+    width: 100%;
+  }
+
+  .cal-sub-menu {
+    right: 0;
+  }
+}
+
 .em-secondary {
   padding: 14px 26px;
   border: 0;

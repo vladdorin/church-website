@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import type { CalendarEvent } from '@/app/api/events/route'
 import { TZ, fmt, shortLocation, toDate } from '@/lib/events'
 import EventModal from './EventModal'
+import SubscribeCalendar from './SubscribeCalendar'
 
 // Notă: textul evenimentelor (titlu, locație, descriere) vine din calendar, în limba în care e scris acolo.
 
@@ -54,10 +55,13 @@ export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: s
               ? 'Upcoming events at Momentum. Come along and bring a friend.'
               : 'Evenimentele care urmează la Momentum. Vino și adu un prieten.'}
           </p>
-          {calendarUrl && (
-            <a href={calendarUrl} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
-              {en ? 'Full calendar' : 'Vezi tot calendarul'}
-            </a>
+          {state.status === 'ready' && calendarUrl && (
+            <div className="events-actions">
+              <a href={calendarUrl} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
+                {en ? 'Full calendar' : 'Vezi tot calendarul'}
+              </a>
+              <SubscribeCalendar lang={lang} calendarId={state.calendarId} />
+            </div>
           )}
         </div>
 
