@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'Our Mission · Momentum | Alba Iulia',
-  description: 'The mission of Momentum Church: a place where people know God, discover their purpose, and feel at home.',
-}
+export const metadata = pageMetadata("mission", "en", {
+  title: "Our Mission",
+  description: "The mission of Momentum Church in Alba Iulia: a place where people know God, discover their purpose and feel at home.",
+})
 
 const cards = [
   {

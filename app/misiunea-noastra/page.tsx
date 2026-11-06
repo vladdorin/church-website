@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import Image from 'next/image'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'Misiunea noastră · Momentum | Alba Iulia',
-  description: 'Misiunea Bisericii Momentum: un loc unde oamenii să-L cunoască pe Dumnezeu, să descopere scopul lor și să se simtă acasă.',
-}
+export const metadata = pageMetadata('mission', 'ro', {
+  title: 'Misiunea noastră',
+  description: 'Misiunea Bisericii Momentum din Alba Iulia: o comunitate unde oamenii să-L cunoască pe Dumnezeu, să-și descopere scopul și să se simtă acasă, prin muzică, relații și o cultură primitoare.',
+})
 
 const cards = [
   {

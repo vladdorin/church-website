@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'Why Alba Iulia? · Momentum | Alba Iulia',
-  description: 'Why we chose Alba Iulia and what we see in this special city.',
-}
+export const metadata = pageMetadata("why", "en", {
+  title: "Why Alba Iulia?",
+  description: "Why we planted Momentum Church in Alba Iulia and what we see for this special city.",
+})
 
 export default function WhyThisCityPage() {
   return (

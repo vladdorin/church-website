@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import LocalizedLink from '@/components/LocalizedLink'
-export const metadata: Metadata = {
-  title: 'Prayer · Momentum | Alba Iulia',
-  description: 'Stand with us in prayer for Alba Iulia and for Momentum Church.',
-}
+export const metadata = pageMetadata("pray", "en", {
+  title: "Prayer",
+  description: "Stand with us in prayer for Alba Iulia and for Momentum Church. Send us a prayer request.",
+})
 
 export default function PrayPage() {
   return (

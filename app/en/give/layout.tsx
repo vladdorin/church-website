@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Give · Momentum | Alba Iulia',
-  description: 'Support Momentum Church in Alba Iulia.',
-}
+export const metadata = pageMetadata("give", "en", {
+  title: "Give",
+  description: "Support the work of Momentum Church in Alba Iulia: give online by card or by bank transfer.",
+})
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return children

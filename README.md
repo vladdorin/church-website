@@ -29,7 +29,13 @@ Site-ul este bilingv. Paginile în română au adrese în română, cele în eng
 - Toate adresele sunt definite într-un singur loc: `lib/routes.ts`. De acolo le iau meniul, footer-ul, butonul RO/EN și detectarea limbii.
 - Dacă redenumești o pagină: mută folderul din `app/`, actualizează `lib/routes.ts` și adaugă un redirect de la adresa veche în `next.config.mjs`.
 - Când modifici un text, modifică-l în ambele variante (de ex. `app/contact/page.tsx` **și** `app/connect/page.tsx`).
-- Fiecare pagină are titlul din tab-ul browserului setat prin `metadata` (în `page.tsx` sau, pentru paginile cu `'use client'`, într-un `layout.tsx` alături).
+- Fiecare pagină are titlul și descrierea (ce apare în Google) setate cu `pageMetadata()` din `lib/seo.ts`, în `page.tsx` sau, pentru paginile cu `'use client'`, într-un `layout.tsx` alături. Tot de acolo vin adresa canonică, legătura RO ↔ EN (hreflang) și preview-ul pentru Facebook / WhatsApp (`public/og-image.jpg`).
+
+### SEO
+
+- `/sitemap.xml` (`app/sitemap.ts`) și `/robots.txt` (`app/robots.ts`) se generează automat din `lib/routes.ts`.
+- Datele structurate „Church” pentru Google (nume, adresă, email, rețele sociale) sunt în `lib/seo.ts`. Dacă se schimbă adresa sau programul, actualizează-le și acolo.
+- Pozele din `public/` se servesc exact cum sunt (pe Cloudflare, `next/image` nu le micșorează). Înainte să adaugi o poză nouă, micșoreaz-o la cel mult 1600 px pe latura lungă (ex. cu squoosh.app), ca să rămână sub ~300 KB.
 
 ---
 
@@ -42,7 +48,8 @@ Site-ul este bilingv. Paginile în română au adrese în română, cele în eng
 | Meniul de navigare | `components/Navigation.tsx` |
 | Program și adresă pe pagina de contact | `app/contact/page.tsx`, `app/connect/page.tsx` |
 | Video-ul de pe Cine suntem | `app/cine-suntem/page.tsx`, `app/about/page.tsx` + `components/YouTubeVideo.tsx` |
-| Secțiunea de donații de pe prima pagină | `app/page.tsx`, `app/en/page.tsx` + `components/GivingImpact.tsx` |
+| Prima pagină (conținut) | `components/HomeRo.tsx`, `components/HomeEn.tsx` (titlul și descrierea: `app/page.tsx`, `app/en/page.tsx`) |
+| Secțiunea de donații de pe prima pagină | `components/HomeRo.tsx`, `components/HomeEn.tsx` + `components/GivingImpact.tsx` |
 | Pagina Donează (texte RO + EN, IBAN-uri, CIF, link Formular 230, întrebări frecvente) | `components/GiveContent.tsx` (sus în fișier) |
 | Stiluri globale (inclusiv mobil) | `app/globals.css` |
 | Imagini | folderul `public/` |

@@ -1,14 +1,14 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import Image from 'next/image'
 import YouTubeVideo from '@/components/YouTubeVideo'
 import { ValuesFull } from '@/components/ValuesSection'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'Cine suntem · Momentum | Alba Iulia',
-  description: 'Povestea Bisericii Momentum din Alba Iulia.',
-}
+export const metadata = pageMetadata('about', 'ro', {
+  title: 'Cine suntem',
+  description: 'Biserica Momentum din Alba Iulia: o comunitate creștină pentru tineri și familii. Povestea noastră, pastorii John și Voichi Dura, valorile și parteneriatul cu ARC.',
+})
 
 export default function AboutPage() {
   return (

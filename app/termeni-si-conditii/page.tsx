@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Termeni și condiții · Momentum | Alba Iulia',
-}
+export const metadata = pageMetadata("terms", "ro", {
+  title: "Termeni și condiții",
+  description: "Termenii și condițiile site-ului Bisericii Momentum din Alba Iulia.",
+})
 
 export default function TermsPage() {
   return (

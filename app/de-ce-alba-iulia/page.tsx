@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'De ce Alba Iulia? · Momentum | Alba Iulia',
-  description: 'De ce am ales Alba Iulia și ce vedem în acest oraș special.',
-}
+export const metadata = pageMetadata('why', 'ro', {
+  title: 'De ce Alba Iulia?',
+  description: 'De ce am plantat Biserica Momentum în Alba Iulia: un oraș cu o comunitate în creștere de tineri și familii, și ce vedem pentru el.',
+})
 
 export default function WhyThisCityPage() {
   return (

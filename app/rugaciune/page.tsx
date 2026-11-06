@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 
-export const metadata: Metadata = {
-  title: 'Rugăciune · Momentum | Alba Iulia',
-  description: 'Stai alături de noi în rugăciune pentru Alba Iulia și pentru Biserica Momentum.',
-}
+export const metadata = pageMetadata('pray', 'ro', {
+  title: 'Rugăciune',
+  description: 'Stai alături de noi în rugăciune pentru Alba Iulia și pentru Biserica Momentum. Trimite-ne o cerere de rugăciune.',
+})
 
 export default function PrayPage() {
   return (

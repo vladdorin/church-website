@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Politica de confidențialitate · Momentum | Alba Iulia',
-}
+export const metadata = pageMetadata("privacy", "ro", {
+  title: "Politica de confidențialitate",
+  description: "Politica de confidențialitate a Bisericii Momentum din Alba Iulia.",
+})
 
 export default function PrivacyPolicyPage() {
   return (

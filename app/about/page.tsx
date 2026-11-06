@@ -1,14 +1,14 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import LocalizedLink from '@/components/LocalizedLink'
 import Image from 'next/image'
 import YouTubeVideo from '@/components/YouTubeVideo'
 import { ValuesFull } from '@/components/ValuesSection'
 import JumpNav from '@/components/JumpNav'
 
-export const metadata: Metadata = {
-  title: 'Who We Are · Momentum | Alba Iulia',
-  description: 'The story of Momentum Church in Alba Iulia.',
-}
+export const metadata = pageMetadata("about", "en", {
+  title: "Who We Are",
+  description: "Momentum Church in Alba Iulia, Romania: a Christian community for young people and families. Our story, pastors John and Voichi Dura, our values and our partnership with ARC.",
+})
 
 export default function AboutPage() {
   return (

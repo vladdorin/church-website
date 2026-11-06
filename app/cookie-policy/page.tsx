@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy · Momentum | Alba Iulia',
-  description: 'Cookie Policy — Momentum Church, Alba Iulia.',
-}
+export const metadata = pageMetadata("cookies", "en", {
+  title: "Cookie Policy",
+  description: "Cookie Policy of the Momentum Church website, Alba Iulia.",
+})
 
 export default function CookiesPage() {
   return (
