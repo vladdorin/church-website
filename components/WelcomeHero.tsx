@@ -72,6 +72,10 @@ export default function WelcomeHero() {
       {/* ── CENTRU ── */}
       <div className="hero-welcome">
         <h1 className="hero-welcome-title">
+          {/* Rândul mic de sus spune și lui Google ce e pagina: o biserică din Alba Iulia. */}
+          <span className="hero-welcome-eyebrow">
+            {isEnglish ? 'Momentum Church · Alba Iulia' : 'Biserica Momentum · Alba Iulia'}
+          </span>
           <span>{isEnglish ? 'Welcome' : 'Bine ai venit'}</span>
           <span>{isEnglish ? 'to church' : 'la biserică'}</span>
         </h1>

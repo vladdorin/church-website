@@ -44,6 +44,42 @@ export function pageMetadata(
   }
 }
 
+export const CHURCH_ADDRESS = {
+  '@type': 'PostalAddress',
+  streetAddress: 'Calea Moților nr. 258',
+  postalCode: '510001',
+  addressLocality: 'Alba Iulia',
+  addressRegion: 'Alba',
+  addressCountry: 'RO',
+}
+
+// Evenimentele din „Ce urmează” (Google Calendar), ca Google să le poată arăta în căutări.
+// Doar evenimentele publice ajung aici (cele private sunt filtrate în app/api/events/route.ts).
+export function eventsJsonLd(
+  events: { title: string; start: string; end: string; location: string | null; description: string | null; image: string | null }[],
+  pageUrl: string,
+) {
+  return events.map(e => ({
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: e.title,
+    startDate: e.start,
+    endDate: e.end,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    isAccessibleForFree: true,
+    location: {
+      '@type': 'Place',
+      name: e.location?.split(',')[0] || 'Biserica Momentum',
+      address: e.location || CHURCH_ADDRESS,
+    },
+    ...(e.description && { description: e.description }),
+    image: e.image ? `${SITE_URL}${e.image}` : `${SITE_URL}${OG_IMAGE.url}`,
+    url: pageUrl,
+    organizer: { '@type': 'Organization', name: 'Biserica Momentum', url: SITE_URL },
+  }))
+}
+
 // Date structurate pentru Google (schema.org): numele bisericii, adresa, contact, rețele sociale.
 // Ajută Google să arate biserica corect la căutări ca „biserica momentum” sau „biserică alba iulia”.
 // Dacă se schimbă adresa sau programul, actualizează și aici.
@@ -59,13 +95,12 @@ export const CHURCH_JSON_LD = {
   description:
     'Biserică creștină în Alba Iulia: o comunitate pentru tineri și familii, cu muzică de închinare, Momentum Café și grupe pentru copii. Duminica: 9:30 cafea și socializare, 10:30 programul.',
   email: 'contact@bisericamomentum.ro',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Calea Moților nr. 258',
-    addressLocality: 'Alba Iulia',
-    addressRegion: 'Alba',
-    addressCountry: 'RO',
-  },
+  address: CHURCH_ADDRESS,
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia',
+  // Duminica: 9:30 cafea și socializare, 10:30 programul, până la 12:00.
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday', opens: '09:30', closes: '12:00' },
+  ],
   areaServed: 'Alba Iulia',
   knowsLanguage: ['ro', 'en'],
   sameAs: [

@@ -1,5 +1,5 @@
-/* Montserrat + Climate Crisis pentru display — TREBUIE să fie primul @import */
-@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+/* Fonturile (Montserrat + Climate Crisis) se încarcă din app/layout.tsx, cu <link> în <head>:
+   e mai rapid decât un @import aici, pe care browserul îl descoperă abia după ce descarcă acest CSS. */
 
 @tailwind base;
 @tailwind components;
@@ -1468,6 +1468,18 @@ html {
 .hero-welcome-title span {
   display: block;
   white-space: nowrap;
+}
+
+/* „Biserica Momentum · Alba Iulia” deasupra titlului mare (face parte din H1) */
+.hero-welcome-title .hero-welcome-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(11px, 0.95vw, 14px);
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+  color: #b6d8fc;
+  margin-bottom: 18px;
+  white-space: normal;
 }
 
 .hero-welcome-sub {

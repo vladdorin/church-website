@@ -4,6 +4,8 @@ import type { CalendarEvent } from '@/app/api/events/route'
 import { TZ, fmt, shortLocation, toDate } from '@/lib/events'
 import EventModal from './EventModal'
 import SubscribeCalendar from './SubscribeCalendar'
+import { eventsJsonLd, SITE_URL } from '@/lib/seo'
+import { routeFor } from '@/lib/routes'
 
 // Notă: textul evenimentelor (titlu, locație, descriere) vine din calendar, în limba în care e scris acolo.
 
@@ -114,6 +116,15 @@ export default function EventsSection({ lang, num }: { lang: 'ro' | 'en'; num: s
           )}
         </div>
       </div>
+
+      {state.status === 'ready' && state.events.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(eventsJsonLd(state.events, SITE_URL + routeFor('home', en))).replace(/</g, '\\u003c'),
+          }}
+        />
+      )}
 
       {selected && <EventModal event={selected} lang={lang} onClose={() => setSelected(null)} />}
     </section>
