@@ -206,11 +206,6 @@ export default function Footer() {
     ? 'Everything we do is for the glory of God.'
     : 'Tot ce facem este pentru gloria lui Dumnezeu.'}
 </span>
-          {/* Cerut de GetSongBPM (tempoul cântărilor din Planning): link înapoi spre ei, vizibil, pe site-ul public. */}
-          <span>
-  {isEnglish ? 'Song tempo data by ' : 'Date tempo cântări: '}
-  <a href="https://getsongbpm.com" target="_blank" rel="noopener" style={{ color:'rgba(255,255,255,0.4)', textDecoration:'underline' }}>GetSongBPM</a>
-</span>
         </div>
       </div>
 
