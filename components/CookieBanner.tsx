@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { isEnglishPath, routeFor } from '@/lib/routes'
+import { isBarePath, isEnglishPath, routeFor } from '@/lib/routes'
 
 export default function CookieBanner() {
   const pathname = usePathname()
@@ -25,7 +25,7 @@ export default function CookieBanner() {
     setShow(false)
   }
 
-  if (!show) return null
+  if (!show || isBarePath(pathname)) return null
 
   return (
     <div

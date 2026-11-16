@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { ROUTES, isEnglishPath, switchLanguagePath } from '@/lib/routes'
+import { ROUTES, isBarePath, isEnglishPath, switchLanguagePath } from '@/lib/routes'
 
 const roLinks = [
   { href: ROUTES.new.ro,     label: 'Sunt nou' },
@@ -70,6 +70,8 @@ export default function Navigation() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  if (isBarePath(pathname)) return null
 
   return (
     <>

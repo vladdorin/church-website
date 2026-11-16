@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { ROUTES, isEnglishPath, routeFor } from '@/lib/routes'
+import { ROUTES, isBarePath, isEnglishPath, routeFor } from '@/lib/routes'
 
 const FacebookIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -35,6 +35,7 @@ const WhatsAppIcon = () => (
 export default function Footer() {
   const pathname = usePathname()
   const isEnglish = isEnglishPath(pathname)
+  if (isBarePath(pathname)) return null
   const socials: [string, string, React.FC][] = [
   ['https://facebook.com/bisericamomentum', 'Facebook', FacebookIcon],
   ['https://instagram.com/biserica.momentum', 'Instagram', InstagramIcon],

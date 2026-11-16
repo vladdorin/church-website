@@ -20,6 +20,12 @@ export const ROUTES = {
 
 export type RouteKey = keyof typeof ROUTES
 
+// Pagini ascunse (ex. landing-ul din QR code-ul de pe pahare): nu apar în meniu și în sitemap,
+// nu sunt indexate și se afișează fără meniu, footer și banner de cookie-uri.
+export const BARE_PATHS = new Set<string>(['/bun-venit'])
+export const isBarePath = (pathname: string) =>
+  BARE_PATHS.has(pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname)
+
 const normalize = (pathname: string) =>
   pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname
 
