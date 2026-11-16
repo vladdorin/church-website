@@ -5445,6 +5445,9 @@ html.modal-open {
 }
 .bv-visit p { display: flex; align-items: center; justify-content: center; gap: 8px; }
 .bv-visit p svg { flex-shrink: 0; color: #b6d8fc; }
+.bv-map { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: underline; text-decoration-color: rgba(182, 216, 252, 0.5); text-underline-offset: 3px; }
+.bv-map svg { flex-shrink: 0; color: #b6d8fc; }
+.bv-map:hover { color: var(--white); text-decoration-color: #b6d8fc; }
 .bv-visit-title { font-weight: var(--fw-extrabold); color: var(--white); font-size: 1.05rem; margin-bottom: 2px; }
 .bv-link { margin-top: 6px; color: #b6d8fc; font-weight: var(--fw-semibold); text-underline-offset: 3px; }
 .bv-socials { margin-top: 28px; display: flex; gap: 14px; }

@@ -47,8 +47,17 @@ export default function BunVenitPage() {
 
         <div className="bv-visit">
           <p className="bv-visit-title">Te așteptăm duminică</p>
-          <p><PiClock aria-hidden /> De la 9:30 la cafea, programul începe la 10:30</p>
-          <p><HiOutlineLocationMarker aria-hidden /> Calea Moților nr. 258, Alba Iulia</p>
+          <p><PiClock aria-hidden /> De la 9:30 socializare, programul începe la 10:30</p>
+          <p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bv-map"
+            >
+              <HiOutlineLocationMarker aria-hidden /> Calea Moților nr. 258, Alba Iulia
+            </a>
+          </p>
           <Link href={routeFor('new', false)} className="bv-link">Prima dată la noi? Vezi ce te așteaptă</Link>
         </div>
 
