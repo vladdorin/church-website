@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { HiOutlineLocationMarker } from 'react-icons/hi'
-import { PiClock } from 'react-icons/pi'
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa'
 import WelcomeVideo, { type WelcomeVideoSource } from '@/components/WelcomeVideo'
 import { routeFor } from '@/lib/routes'
@@ -47,17 +46,23 @@ export default function BunVenitPage() {
 
         <div className="bv-visit">
           <p className="bv-visit-title">Te așteptăm duminică</p>
-          <p><PiClock aria-hidden /> De la 9:30 socializare, programul începe la 10:30</p>
-          <p>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bv-map"
-            >
-              <HiOutlineLocationMarker aria-hidden /> Calea Moților nr. 258, Alba Iulia
-            </a>
-          </p>
+          <ul className="bv-times">
+            <li><span className="bv-time">9:30</span><span>Socializare</span></li>
+            <li><span className="bv-time">10:30</span><span>Începe programul</span></li>
+          </ul>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Biserica+Momentum+Alba+Iulia"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bv-map"
+          >
+            <span className="bv-map-icon"><HiOutlineLocationMarker aria-hidden /></span>
+            <span className="bv-map-text">
+              <span className="bv-map-addr">Calea Moților nr. 258</span>
+              <span className="bv-map-sub">Alba Iulia · Deschide în Google Maps</span>
+            </span>
+            <span className="bv-map-arrow" aria-hidden>→</span>
+          </a>
           <Link href={routeFor('new', false)} className="bv-link">Prima dată la noi? Vezi ce te așteaptă</Link>
         </div>
 
